@@ -27,3 +27,106 @@
     --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   }
 } 
+
+.p-stepper-nav {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 20px;
+}
+.p-stepper-nav .p-stepper-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+.p-datepicker {
+  min-width: auto !important;
+  margin-right: auto !important;
+  float: left;
+}
+.dropdownMagister  .p-inputtext {
+  padding: 6.8px 10px !important;
+  font-size: 14px;
+
+}
+
+
+/* Sidebar */
+.group\/head:first-child .group-first\/head\:first\:rounded-tl-lg:first-child {
+  border-top-left-radius: 0;
+}
+.numCul > span{
+  padding: 6px;
+  border-radius: 50%;
+  background-color: rgb(91, 187, 91);
+  color: white;
+  margin: 5px 10px;
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.custom-scrollbars__content {
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.custom-scrollbars__content::-webkit-scrollbar {
+  display: none;
+}
+.dark .ant-select-selection-placeholder, .dark  .ant-select-arrow{
+  color: #c6c6c6 !important
+}
+.dark .ant-select-selector {
+  background-color: #374151 !important;
+  border: 0
+}
+.dark .ant-select-dropdown-placement-bottomLeft {
+  background-color: #474f5c !important;
+}
+.dark .ant-select-item-option-content, .dark .ant-btn >span , .dark .ant-select-selection-item{
+  color: #fff !important
+}
+.dark .ant-input , .dark .ant-input::placeholder {
+  background-color: #374151;
+  color: #fff !important
+}
+.dark .ant-input::placeholder {
+  color: #c6c6c6 !important;
+}
+.dark .p-connected-overlay-enter-done , .dark .p-datepicker-header, .dark .day{
+  background-color: #374151;
+  color: #fff;
+}
+.dark td > span:hover {
+  background-color: #333;
+}
+.ant-select-selector {
+  margin: 0 auto !important;
+  width: 99% !important;
+  border: none;
+}
+.ant-select-selector:focus {
+border: 0;
+outline: none;
+}
+.dark .ant-select-dropdown {
+  background-color: #374151;
+}
+.dark :where(.css-dev-only-do-not-override-11lehqq).ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  
+  background-color: #2d3541 !important; 
+}
+.dark .react-datepicker, .dark .react-datepicker__time-box , .dark .react-datepicker__day-names, .dark .react-datepicker__day-names , .dark .react-datepicker__month-container{
+  background-color: #374151 !important;
+  color: #fff !important;
+}
+.dark .react-datepicker > div, .dark .react-datepicker__time-box > div , .dark .react-datepicker__day-names, .dark .react-datepicker__day-names , .dark .react-datepicker__month-container{
+ 
+  color: #fff !important;
+}
+:where(.css-dev-only-do-not-override-11lehqq).ant-select-multiple .ant-select-selection-overflow  {
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+} 

@@ -7,8 +7,35 @@ export const LineGraphData = {
       },
       title: {
         display: true,
-        text: "This is A graph first for me",
+        text: "This is a graph first for me",
       },
+      tooltip: {
+        enabled: true, // Tooltiplarni yoqish
+        mode: "index", // Bir nechta datasetlar uchun index bo'yicha
+        intersect: false, // Kursordan o'tkazganda barcha yaqin nuqtalar ko'rsatiladi
+      },
+    },
+    elements: {
+      line: {
+        borderColor: "rgba(255, 255, 255, 1)", // Dark mode uchun
+      },
+      point: {
+        borderColor: "rgba(255, 255, 255, 1)", // Dark mode uchun
+      },
+    },
+    scales: {
+      x: {
+        beginAtZero: true,
+        // grid: {
+        //   color: "rgba(255, 255, 255, 0.1)", // Dark mode uchun
+        // },
+      },
+      y: {
+        beginAtZero: true,
+      },
+      // grid: {
+      //   color: "rgba(255, 255, 255, 0.1)", // Dark mode uchun
+      // },
     },
   },
   data: {
@@ -16,7 +43,7 @@ export const LineGraphData = {
       "Monday",
       "Tuesday",
       "Wednesday",
-      "Turthday",
+      "Thursday",
       "Friday",
       "Saturday",
       "Sunday",
@@ -25,17 +52,22 @@ export const LineGraphData = {
       {
         label: "Steps by Nurzod",
         data: [3000, 5000, 4500, 6000, 8000, 7000, 9000],
-        borderColor: "rgba(75, 192, 192)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        tension: 0.4, // Chiziqlarni yumshoqroq qilish (spline)
+        fill: true, // Chiziq ostidagi maydonni to'ldirish
       },
       {
         label: "Steps by Abbos",
         data: [3000, 5000, 5500, 8000, 8000, 9000, 10000],
-        borderColor: "rgba(75, 192, 0)",
+        borderColor: "rgba(75, 192, 0, 1)",
+        backgroundColor: "rgba(75, 192, 0, 0.2)",
+        tension: 0.4, // Chiziqlarni yumshoqroq qilish (spline)
+        fill: true, // Chiziq ostidagi maydonni to'ldirish
       },
     ],
   },
 };
-
 export const BarGraphData = {
   options: {},
   data: {
@@ -51,11 +83,11 @@ export const BarGraphData = {
         Label: "Expenses",
         data: [1200, 300, 120, 180, 400],
         backgroundColor: [
-          "rgba(244, 99, 132, 0.4)",
-          "rgba(0, 99, 132, 0.4)",
-          "rgba(100, 99, 132, 0.4)",
-          "rgba(244, 99, 244, 0.4)",
-          "rgba(244, 233, 0, 0.4)",
+          "rgba(244, 99, 132, 0.9)",
+          "rgba(0, 99, 132, 0.9)",
+          "rgba(100, 99, 132, 0.9)",
+          "rgba(244, 99, 244, 0.9)",
+          "rgba(244, 233, 0, 0.9)",
         ],
         borderColor: ["rgba(54, 162, 132, 1)"],
         borderWidth: 1,
@@ -65,21 +97,17 @@ export const BarGraphData = {
 };
 
 export const PieGraphData = {
-  options: {},
+  options: { cutout: "70%" },
   data: {
-    labels: ["Instagram", "Telegram", "Twitter", "YouTube", "LinkedIn"],
+    labels: ["A", "B", "C", "D"],
     datasets: [
       {
-        Label: "Time Spent",
-        data: [12, 30, 12, 18, 40],
-        backgroundColor: [
-          "rgba(244, 99, 132, 0.6)",
-          "rgba(0, 99, 132, 0.6)",
-          "rgba(100, 99, 132, 0.6)",
-          "rgba(244, 99, 244, 0.6)",
-          "rgba(244, 233, 0, 0.6)",
-        ],
-        hoverOffset: 10,
+        label: "Sample Data",
+        data: [15, 30, 45, 10],
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"],
+        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"],
+        borderWidth: 1,
+        borderRadius: 5,
       },
     ],
   },

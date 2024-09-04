@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useEmployeeInfo } from "../../hooks/useEmployeeInfo.js";
 import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
@@ -8,11 +7,14 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
 // import { useTranslation } from "react-i18next";
 import "../../App.css";
+import { useEmployeeInfo } from "../../hooks/useEmployeeInfo";
 
-export default function Header() {
+export default function HeaderEmployee() {
   const [selectedLanguage, setSelectedLanguage] = useState("Uz");
   const [show, setShow] = useState(true);
   const menuRef = useRef(null);
+
+  const { data, error, isLoading, refetch } = useEmployeeInfo();
 
   // const { t, i18n } = useTranslation();
   // useEffect(() => {
@@ -37,12 +39,6 @@ export default function Header() {
     },
   ];
 
-  const menu = [
-    { title: "Oliy ta'lim", to: "oliy_talim" },
-    { title: "Personal ta'lim", to: "personal_talim" },
-    { title: "Qabul", to: "qabul" },
-  ];
-
   const handleLanguageChange = (langCode) => {
     setSelectedLanguage(langCode);
   };
@@ -50,7 +46,6 @@ export default function Header() {
   const handleShowMenu = () => {
     setShow(!show);
   };
-  const { data, error, isLoading, refetch } = useEmployeeInfo();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -66,33 +61,18 @@ export default function Header() {
     };
   }, [menuRef, refetch]);
 
-  // const { data, error, isLoading } = useEmployeeInfo();
-  // if (isLoading) return <div>Yuklanmoqda...</div>;
-  // if (error) return <div>Xato: {error.message}</div>;
-
   if (isLoading) return <div>Yuklanmoqda...</div>;
   if (error) return <div>Xato: {error.message}</div>;
 
-  console.log(data);
+  const base64Image = `data:image/png;base64,${data.user.base64}`;
+  console.log(base64Image);
 
-  console.log("name");
   return (
-    <div className="shadow-md dark:bg-gray-800 fixed top-0 bg-white w-full">
-      <div className="header-wrapper container md:max-w-10xl  mx-auto flex justify-between py-4 md:px-5  ">
+    <div className=" dark:bg-gray-800 fixed top-0 bg-slate-100 w-full z-10">
+      <div className="header-wrapper container md:max-w-[90%]  mx-auto flex justify-between py-4 md:px-5  ">
         <div className="logpSection flex gap-6 items-center ">
           <div className="logo md:max-w-[40px] max-w-[30px] md:h-[40px]">
             <img className="w-full" src={logo} alt="OTFIV logo" />
-          </div>
-          <div className="md:flex items-center gap-3 hidden">
-            {menu.map((item, index) => (
-              <Link
-                key={index}
-                to={item.to}
-                className="font-[500] dark:text-white hover:border-b"
-              >
-                {item.title}
-              </Link>
-            ))}
           </div>
         </div>
         <div className="loginSection flex items-center">
@@ -165,17 +145,6 @@ export default function Header() {
                   : "h-[167px] opacity-100 translate-y-[0] z-[90] "
               } absolute right-0 w-[120px] mt-3 shadow-md px-3 rounded-b-sm transition-all duration-150 bg-white dark:bg-gray-800`}
             >
-              <div className="flex items-start flex-col gap-0 mt-3 ">
-                {menu.map((item, index) => (
-                  <Link
-                    key={index}
-                    to={item.to}
-                    className="font-[500] dark:text-white text-[12px] py-1.5 w-full my-0.5"
-                  >
-                    {item.title}
-                  </Link>
-                ))}
-              </div>
               <div className="loginOrSignUp flex items-start mt-1 mb-3">
                 <Menu as="div" className="relative ml-3">
                   <div>
@@ -184,7 +153,7 @@ export default function Header() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         alt=""
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src={base64Image}
                         className="h-8 w-8 rounded-full"
                       />
                     </MenuButton>
@@ -230,7 +199,7 @@ export default function Header() {
                   <span className="sr-only">Open user menu</span>
                   <img
                     alt=""
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    src={base64Image}
                     className="h-8 w-8 rounded-full"
                   />
                 </MenuButton>
