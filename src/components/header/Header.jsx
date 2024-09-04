@@ -73,9 +73,6 @@ export default function Header() {
   if (isLoading) return <div>Yuklanmoqda...</div>;
   if (error) return <div>Xato: {error.message}</div>;
 
-  console.log(data);
-
-  console.log("name");
   return (
     <div className="shadow-md dark:bg-gray-800 fixed top-0 bg-white w-full">
       <div className="header-wrapper container md:max-w-10xl  mx-auto flex justify-between py-4 md:px-5  ">
