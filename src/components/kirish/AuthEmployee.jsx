@@ -78,26 +78,30 @@ export default function AuthEmployee() {
     });
   };
 
-  const deatilsInfo = useMutation(oavIV.detailInfo, {
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-      showSuccess();
-    },
-    onError: () => {
-      showError();
-      console.log("error mutation");
-    },
-  });
   const employeeInfo = useMutation(oavIV.employeeInfo, {
     onSuccess: () => {
       queryClient.invalidateQueries();
+    },
+    onError: () => {
+      console.log("error mutation employeeInfo");
+    },
+  });
+  const deatilsInfo = useMutation(oavIV.detailInfo, {
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+
+      showSuccess();
+      reset();
+    },
+    onError: () => {
+      showError();
+      console.log("error mutation detailInfo");
     },
   });
 
   const handleTakeUsersValue = async (data) => {
     deatilsInfo.mutate(data);
-    employeeInfo.mutate();
-    reset();
+    console.log(data);
 
     if (!file) {
       return;
@@ -110,11 +114,12 @@ export default function AuthEmployee() {
 
     try {
       const response = await fetch(
-        "http://192.168.3.33:8080/api/employee/settings/upload-photo",
+        "http://192.168.43.99:8080/api/employee/settings/upload-photo",
         {
           method: "POST",
           headers: {
             Authorization: `${token}`,
+            // "Content-type": "multipart/form-data",
           },
           body: formData,
         }
@@ -129,6 +134,8 @@ export default function AuthEmployee() {
     } catch (error) {
       console.error("Xatolik:", error);
     }
+
+    employeeInfo.mutate();
   };
   return (
     <div className="">

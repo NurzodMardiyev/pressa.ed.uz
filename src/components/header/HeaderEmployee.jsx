@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import logo from "../../images/logo.png";
+import logo from "../../images/pressa logo.png";
 import { Link } from "react-router-dom";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
@@ -8,13 +8,14 @@ import { IoCloseSharp } from "react-icons/io5";
 // import { useTranslation } from "react-i18next";
 import "../../App.css";
 import { useEmployeeInfo } from "../../hooks/useEmployeeInfo";
+import { Flex, Spin } from "antd";
 
 export default function HeaderEmployee() {
   const [selectedLanguage, setSelectedLanguage] = useState("Uz");
   const [show, setShow] = useState(true);
   const menuRef = useRef(null);
 
-  const { data, error, isLoading, refetch } = useEmployeeInfo();
+  const { data, error, isLoading } = useEmployeeInfo();
 
   // const { t, i18n } = useTranslation();
   // useEffect(() => {
@@ -53,26 +54,32 @@ export default function HeaderEmployee() {
         setShow(true);
       }
     };
-    refetch();
+    // refetch();
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [menuRef, refetch]);
+  }, [menuRef]);
 
-  if (isLoading) return <div>Yuklanmoqda...</div>;
+  if (isLoading)
+    return (
+      <div className="absolute w-full h-[100vh] top-0 left-0 flex items-center justify-center">
+        <Flex>
+          <Spin size="large" />
+        </Flex>
+      </div>
+    );
   if (error) return <div>Xato: {error.message}</div>;
 
-  const base64Image = `data:image/png;base64,${data.user.base64}`;
-  console.log(base64Image);
+  const base64Image = `data:image/png;base64,${data?.user.base64}`;
 
   return (
-    <div className=" dark:bg-gray-800 fixed top-0 bg-slate-100 w-full z-10">
-      <div className="header-wrapper container md:max-w-[90%]  mx-auto flex justify-between py-4 md:px-5  ">
+    <div className="dark:bg-gray-800 fixed top-0 bg-slate-100 w-full z-[999] ">
+      <div className="header-wrapper container lg:max-w-[2560px] md:max-w-[1600px]  mx-auto flex justify-between py-4 md:px-5  ">
         <div className="logpSection flex gap-6 items-center ">
-          <div className="logo md:max-w-[40px] max-w-[30px] md:h-[40px]">
-            <img className="w-full" src={logo} alt="OTFIV logo" />
+          <div className="logo h-[30px]  md:h-[40px]">
+            <img className="w-full h-full" src={logo} alt="OTFIV logo" />
           </div>
         </div>
         <div className="loginSection flex items-center">
@@ -210,7 +217,7 @@ export default function HeaderEmployee() {
               >
                 <MenuItem>
                   <Link
-                    to="/nurzodmardiyev"
+                    to="/profile"
                     className="block px-4 py-2 text-sm dark:text-white hover:dark:bg-gray-700 text-gray-700 data-[focus]:bg-gray-100 dark:data-[focus]:bg-gray-700"
                   >
                     Your Profile

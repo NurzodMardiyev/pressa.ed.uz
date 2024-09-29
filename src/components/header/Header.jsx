@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useEmployeeInfo } from "../../hooks/useEmployeeInfo.js";
-import logo from "../../images/logo.png";
+import logo from "../../images/pressa logo.png";
 import { Link } from "react-router-dom";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
@@ -38,8 +38,8 @@ export default function Header() {
   ];
 
   const menu = [
-    { title: "Oliy ta'lim", to: "oliy_talim" },
-    { title: "Personal ta'lim", to: "personal_talim" },
+    { title: "OAVni yoritilishi", to: "oliy_talim" },
+    { title: "Mediatadbirlar", to: "personal_talim" },
     { title: "Qabul", to: "qabul" },
   ];
 
@@ -70,29 +70,29 @@ export default function Header() {
   // if (isLoading) return <div>Yuklanmoqda...</div>;
   // if (error) return <div>Xato: {error.message}</div>;
 
-  if (isLoading) return <div>Yuklanmoqda...</div>;
-  if (error) return <div>Xato: {error.message}</div>;
+  // if (isLoading) return <div>Yuklanmoqda...</div>;
+  // if (error) return <div>Xato: {error.message}</div>;
 
   return (
-    <div className="shadow-md dark:bg-gray-800 fixed top-0 bg-white w-full">
+    <div className=" dark:bg-gray-800 fixed top-0 bg-white w-full">
       <div className="header-wrapper container md:max-w-10xl  mx-auto flex justify-between py-4 md:px-5  ">
         <div className="logpSection flex gap-6 items-center ">
-          <div className="logo md:max-w-[40px] max-w-[30px] md:h-[40px]">
-            <img className="w-full" src={logo} alt="OTFIV logo" />
+          <div className="logo  md:h-[40px] h-[30px]">
+            <img className="w-full h-full" src={logo} alt="OTFIV logo" />
           </div>
-          <div className="md:flex items-center gap-3 hidden">
+        </div>
+        <div className="loginSection flex items-center">
+          <div className="md:flex items-center gap-3 hidden md:me-8">
             {menu.map((item, index) => (
               <Link
                 key={index}
                 to={item.to}
-                className="font-[500] dark:text-white hover:border-b"
+                className="font-[500] dark:text-white hover:text-[#4CA852]"
               >
                 {item.title}
               </Link>
             ))}
           </div>
-        </div>
-        <div className="loginSection flex items-center">
           <div className="darkMode flex items-center">
             <Flowbite>
               <DarkThemeToggle />
@@ -173,95 +173,7 @@ export default function Header() {
                   </Link>
                 ))}
               </div>
-              <div className="loginOrSignUp flex items-start mt-1 mb-3">
-                <Menu as="div" className="relative ml-3">
-                  <div>
-                    <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="absolute -inset-1.5" />
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        alt=""
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        className="h-8 w-8 rounded-full"
-                      />
-                    </MenuButton>
-                  </div>
-                  <MenuItems
-                    transition
-                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
-                  >
-                    <MenuItem>
-                      <Link
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
-                      >
-                        Your Profile
-                      </Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <Link
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
-                      >
-                        Settings
-                      </Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <Link
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
-                      >
-                        Sign out
-                      </Link>
-                    </MenuItem>
-                  </MenuItems>
-                </Menu>
-              </div>
             </div>
-          </div>
-          <div className="loginOrSignUp md:flex items-center gap-2 hidden">
-            <Menu as="div" className="relative ml-3">
-              <div>
-                <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">Open user menu</span>
-                  <img
-                    alt=""
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    className="h-8 w-8 rounded-full"
-                  />
-                </MenuButton>
-              </div>
-              <MenuItems
-                transition
-                className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white dark:bg-gray-800  py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
-              >
-                <MenuItem>
-                  <Link
-                    to="/nurzodmardiyev"
-                    className="block px-4 py-2 text-sm dark:text-white hover:dark:bg-gray-700 text-gray-700 data-[focus]:bg-gray-100 dark:data-[focus]:bg-gray-700"
-                  >
-                    Your Profile
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link
-                    href="#"
-                    className="block px-4 py-2 text-sm dark:text-white hover:dark:bg-gray-700 text-gray-700 data-[focus]:bg-gray-100 dark:data-[focus]:bg-gray-700"
-                  >
-                    Settings
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link
-                    href="#"
-                    className="block px-4 py-2 text-sm dark:text-white hover:dark:bg-gray-700 text-gray-700 data-[focus]:bg-gray-100 dark:data-[focus]:bg-gray-700"
-                  >
-                    Sign out
-                  </Link>
-                </MenuItem>
-              </MenuItems>
-            </Menu>
           </div>
         </div>
       </div>
