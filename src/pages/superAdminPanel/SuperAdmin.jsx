@@ -16,7 +16,7 @@ export default function SuperAdmin() {
         <div className=" lg:max-w-[2560px] md:max-w-[1600px]  mx-auto flex z-10">
           {/* <SidebarJS className="z-10 " /> */}
           <SuperSideBar className="z-10" />
-          <div>
+          <div className="md:ms-[370px] ms-[50px] md:me-[20px] me-[10px]  flex-1">
             <Outlet />
           </div>
         </div>

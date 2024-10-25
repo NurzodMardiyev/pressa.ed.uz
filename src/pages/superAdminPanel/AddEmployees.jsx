@@ -1,34 +1,32 @@
-import React, { useRef } from "react";
-import { Button, Form, Input } from "antd";
-import { useMutation, useQueryClient } from "react-query";
+import React, { useEffect, useRef, useState } from "react";
+import { Button, Divider, Flex, Form, Input, Select, Space, Spin } from "antd";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { oavIV } from "../../feature/queryApi";
+import { PlusOutlined } from "@ant-design/icons";
+import { Toast } from "primereact/toast";
 
 export default function AddEmployees() {
   const toast = useRef(null);
   const navigate = useNavigate();
 
-  // const token = JSON.parse(localStorage.getItem("token"));
-
   const queryClient = useQueryClient();
   const token = JSON.parse(localStorage.getItem("token"));
-  const addPostInfografika = useMutation(
+
+  // Add Admin
+  const addAdmin = useMutation(
     (values) =>
-      oavIV.addPostInfografika(values, {
-        headers: { Authorization: `${token}` },
-      }),
+      oavIV.addAdmin(values, { headers: { Authorization: `${token}` } }),
     {
       onSuccess: () => {
         queryClient.invalidateQueries();
         showSuccess();
-        // reset();
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 300);
+        // setTimeout(() => {
+        //   navigate("/dashboard");
+        // }, 300);
       },
-      onError: () => {
-        showError();
-        console.log("error mutation");
+      onError: (error) => {
+        showError(error);
       },
     }
   );
@@ -37,11 +35,9 @@ export default function AddEmployees() {
   const onFinish = (fieldsValue) => {
     const values = {
       ...fieldsValue,
-      publishDate: fieldsValue["publishDate"],
-      materialType: "Video",
     };
+    addAdmin.mutate(fieldsValue);
     console.log("Received values of form: ", values);
-    addPostInfografika.mutate(values);
   };
 
   const showSuccess = () => {
@@ -49,33 +45,33 @@ export default function AddEmployees() {
       severity: "success",
       summary: "Success",
       detail: "Message Content",
-      life: 3000,
+      life: 0,
     });
   };
 
-  const showError = (data) => {
+  const showError = () => {
     toast.current.show({
       severity: "error",
-      summary: "Xato",
-      detail: `To'g'ri kiritganingizga e'tibor bering! `,
-      life: 3000,
+      summary: "Xato kiritdingiz",
+      detail: `Bunday foydalanuvchi bo'lishi mumkin! `,
+      life: 0,
     });
   };
 
   return (
-    <div className="flex">
-      <div className="md:ms-[370px] ms-[50px] md:me-[20px] me-[10px] md:pt-24 pt-14 flex-1 overflow-x-scroll">
+    <div className="flex ">
+      <div className=" md:pt-24 pt-14 w-full ">
         <div className=" w-full">
-          <div className="container w-[95%] mx-auto  ">
+          <div className="container w-full mx-auto   flex ">
             <Form
               name="time_related_controls"
               // {...formItemLayout}
               onFinish={onFinish}
               labelCol={{
-                span: 48,
+                span: 24,
               }}
               wrapperCol={{
-                span: 48,
+                span: 24,
               }}
               className="w-full"
             >
@@ -86,33 +82,33 @@ export default function AddEmployees() {
                     Xodimlarni Qo'shish
                   </h2>
                 </div>
-                <div className="md:mt-5 grid grid-cols-1 gap-x-6 md:gap-y-2 sm:gap-y-2 sm:grid-cols-6">
-                  <div className="sm:col-span-3 border">
+                <div className="md:mt-5 grid grid-cols-12 gap-x-6 md:gap-y-2 sm:gap-y-2 sm:grid-cols-12">
+                  <div className="sm:col-span-6 w-full">
                     <Form.Item
-                      name="showedUser"
-                      label="Eshittirish qatnashgan OTM vakili F.I.O"
+                      name="email"
+                      label="Xodimning emaili"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos Eshittirishga chiqishini kiriting!",
+                          message: "Iltimos qiymat kiriting!",
                         },
                       ]}
                     >
-                      <Input className="py-1.5" />
+                      <Input className="py-1.5 w-full flex" />
                     </Form.Item>
                   </div>
-                  <div className="sm:col-span-3">
+                  <div className="sm:col-span-6 w-full">
                     <Form.Item
-                      name="showedUser"
-                      label="Eshittirish qatnashgan OTM vakili F.I.O"
+                      name="password"
+                      label="Xodimning paroli"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos Eshittirishga chiqishini kiriting!",
+                          message: "Iltimos qiymat kiriting!",
                         },
                       ]}
                     >
-                      <Input className="py-1.5" />
+                      <Input className="py-1.5 w-full flex" />
                     </Form.Item>
                   </div>
                 </div>
@@ -122,7 +118,7 @@ export default function AddEmployees() {
 
               {/* form Steps */}
               <div className="md:mt-[30px] md:mb-[40px] mb-6">
-                {/* <Toast ref={toast} /> */}
+                <Toast ref={toast} />
                 <Button
                   htmlType="submit"
                   className="float-right px-10  py-6 rounded-full shadow-lg bg-[#4CA852] text-white text-[16px]"

@@ -40,6 +40,7 @@ export default function PressTur() {
   const [webSite, setWebSite] = useState([]);
   const [messanger, setMessanger] = useState([]);
   const navigate = useNavigate();
+  console.log(mediaItems);
 
   // const token = JSON.parse(localStorage.getItem("token"));
 
@@ -245,7 +246,7 @@ export default function PressTur() {
       severity: "success",
       summary: "Success",
       detail: "Message Content",
-      life: 3000,
+      life: 0,
     });
   };
 
@@ -254,7 +255,7 @@ export default function PressTur() {
       severity: "error",
       summary: "Xato",
       detail: `To'g'ri kiritganingizga e'tibor bering! `,
-      life: 3000,
+      life: 0,
     });
   };
 
@@ -333,7 +334,7 @@ export default function PressTur() {
                         }}
                         placeholder="Please select"
                         defaultValue={[]}
-                        options={mediaItems.map((item) => {
+                        options={mediaItems?.map((item) => {
                           let label, value;
                           if (item === "RECTOR") {
                             label = "Rektor";
@@ -359,6 +360,12 @@ export default function PressTur() {
                           } else if (item === "HEAD_OF_DEPARTMENT") {
                             label = "Kafedra mudiri";
                             value = "Kafedra mudiri";
+                          } else if (item === "MINISTER") {
+                            label = "Vazir";
+                            value = "Vazir";
+                          } else if (item === "DEPUTY_MINISTER") {
+                            label = "Vazir o'rin bosari";
+                            value = "Vazir o'rin bosari";
                           } else {
                             label = "boshqa";
                             value = "boshqa";

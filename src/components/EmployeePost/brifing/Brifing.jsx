@@ -53,9 +53,9 @@ export default function Brifing() {
         queryClient.invalidateQueries();
         showSuccess();
         // reset();
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 300);
+        // setTimeout(() => {
+        //   navigate("/dashboard");
+        // }, 300);
       },
       onError: () => {
         showError();
@@ -78,8 +78,6 @@ export default function Brifing() {
 
   useEffect(() => {
     if (data && dataAll) {
-      console.log(data);
-      console.log(dataAll);
       // Ma'lumotlarni o'rnatish
 
       const media = Array.isArray(data) ? data : [];
@@ -245,7 +243,7 @@ export default function Brifing() {
       severity: "success",
       summary: "Success",
       detail: "Message Content",
-      life: 3000,
+      life: 0,
     });
   };
 
@@ -254,7 +252,7 @@ export default function Brifing() {
       severity: "error",
       summary: "Xato",
       detail: `To'g'ri kiritganingizga e'tibor bering! `,
-      life: 3000,
+      life: 0,
     });
   };
 

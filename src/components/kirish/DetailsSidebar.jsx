@@ -49,7 +49,7 @@ export default function DetailsSidebar({ next, prev, current, setCurrent }) {
               onClick={() => handleStepClick(0)}
             >
               <IoPersonAdd className="text-[#4CA852] text-[20px]" />
-              <p className="font-[500]">Shaxsiy malumotlaringiz</p>
+              <p className="font-[500] text-black">Shaxsiy malumotlaringiz</p>
             </li>
             <li
               className={`flex items-center text-[18px] gap-2 py-2 px-4 my-3 ${
@@ -57,8 +57,8 @@ export default function DetailsSidebar({ next, prev, current, setCurrent }) {
               } transition-all duration-150 cursor-pointer rounded-lg`}
               onClick={() => handleStepClick(1)}
             >
-              <FaGoogleWallet className="text-[#4CA852] text-[20px]" />
-              <p className="font-[500]">Umumiy malumotlaringiz</p>
+              <FaGoogleWallet className="text-[#4CA852] text-[20px] " />
+              <p className="font-[500] text-black">Umumiy malumotlaringiz</p>
             </li>
             <li
               className=" flex items-center text-[18px] gap-2 py-2 px-4 my-3 hover:bg-green-100 transition-all duration-150 cursor-pointer rounded-lg"
@@ -68,7 +68,7 @@ export default function DetailsSidebar({ next, prev, current, setCurrent }) {
               }}
             >
               <IoLogOutSharp className="text-[#4CA852] text-[20px]" />
-              <p className="font-[500]">Chiqish</p>
+              <p className="font-[500] text-black">Chiqish</p>
             </li>
           </ul>
         </div>

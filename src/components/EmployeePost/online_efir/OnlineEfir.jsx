@@ -92,7 +92,7 @@ export default function OnlineEfir() {
       severity: "success",
       summary: "Success",
       detail: "Message Content",
-      life: 3000,
+      life: 0,
     });
   };
 
@@ -101,7 +101,7 @@ export default function OnlineEfir() {
       severity: "error",
       summary: "Xato",
       detail: `To'g'ri kiritganingizga e'tibor bering! `,
-      life: 3000,
+      life: 0,
     });
   };
 

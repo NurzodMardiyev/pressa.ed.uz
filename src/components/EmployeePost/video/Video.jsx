@@ -91,7 +91,7 @@ export default function Video() {
       severity: "success",
       summary: "Success",
       detail: "Message Content",
-      life: 3000,
+      life: 0,
     });
   };
 
@@ -100,7 +100,7 @@ export default function Video() {
       severity: "error",
       summary: "Xato",
       detail: `To'g'ri kiritganingizga e'tibor bering! `,
-      life: 3000,
+      life: 0,
     });
   };
 
@@ -143,7 +143,7 @@ export default function Video() {
                         },
                       ]}
                     >
-                      <Input />
+                      <Input className="py-1.5" />
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">
@@ -156,7 +156,7 @@ export default function Video() {
                       <DatePicker
                         //showTime={{ format: "HH:mm" }} // Sekundsiz faqat soat va daqiqa
                         format="YYYY-MM-DD" // Umumiy format, sana + vaqt
-                        className="w-full py-2"
+                        className="w-full py-1.5"
                       />
                     </Form.Item>
                   </div>
@@ -173,7 +173,7 @@ export default function Video() {
                       ]}
                     >
                       <Select
-                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[40px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
+                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[39px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
                         placeholder="custom dropdown render"
                         dropdownRender={(menu) => (
                           <>
@@ -216,15 +216,15 @@ export default function Video() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="socialMediaName"
-                      label="Material mavzusi"
+                      label="E’lon qilingan OAV/Ijtimoiy tarmoq nomi"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos material mavzusini kiriting!",
+                          message: "Iltimos qiymat kiriting!",
                         },
                       ]}
                     >
-                      <Input className="" />
+                      <Input className="py-1.5" />
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">

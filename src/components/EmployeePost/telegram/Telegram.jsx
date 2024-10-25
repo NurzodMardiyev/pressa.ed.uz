@@ -51,7 +51,7 @@ export default function Telegram() {
       severity: "success",
       summary: "Success",
       detail: "Message Content",
-      life: 3000,
+      life: 0,
     });
   };
 
@@ -60,7 +60,7 @@ export default function Telegram() {
       severity: "error",
       summary: "Xato",
       detail: `To'g'ri kiritganingizga e'tibor bering! `,
-      life: 3000,
+      life: 0,
     });
   };
 

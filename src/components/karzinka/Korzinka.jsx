@@ -5,6 +5,7 @@ import { oavIV } from "../../feature/queryApi";
 import { useGetTrashes } from "../../hooks/useGetTypePosts";
 import { FiRefreshCw } from "react-icons/fi";
 import { FaTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const sharedOnCell = () => {};
 const columns = [
@@ -161,6 +162,119 @@ const columnsmaterial = [
   },
 ];
 
+const columnsOfficial = [
+  {
+    title: "No",
+    dataIndex: "key",
+    rowScope: "row",
+  },
+  {
+    title: "Telegram linki va obunachilar soni",
+    dataIndex: "telegram",
+    onCell: sharedOnCell,
+  },
+  {
+    title: " Instagram linki va obunachilar soni",
+    dataIndex: "instagram",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "You Tube linki va obunachilar soni",
+    dataIndex: "youtube",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "X linki va obunachilar soni",
+    dataIndex: "x",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Harakat",
+    dataIndex: "action",
+    onCell: sharedOnCell,
+  },
+];
+
+const columnsOnline = [
+  {
+    title: "No",
+    dataIndex: "key",
+    rowScope: "row",
+  },
+  {
+    title: "Onlayn efir/ovozli chat mavzusi",
+    dataIndex: "title",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "O'tkazilgan sanasi",
+    dataIndex: "date",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "OTM rahbar hodimlarining ishtiroki",
+    dataIndex: "participation",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Ijtimoiy tarmoq nomi",
+    dataIndex: "mesengerTitle",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Ishtirokchilar soni",
+    dataIndex: "amountAttand",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Havolasi",
+    dataIndex: "link",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Harakat",
+    dataIndex: "action",
+    onCell: sharedOnCell,
+  },
+];
+
+const columnsMediaProjetcs = [
+  {
+    title: "No",
+    dataIndex: "key",
+    rowScope: "row",
+  },
+  {
+    title: "Medialoyiha nomi",
+    dataIndex: "title",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Loyiha tavfsifi",
+    dataIndex: "description",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "E'lon qilingan OAV/Ijtimoiy tarmoq turi",
+    dataIndex: "tarmoqTuri",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Davriyligi",
+    dataIndex: "period",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Havolasi",
+    dataIndex: "link",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Harakat",
+    dataIndex: "action",
+    onCell: sharedOnCell,
+  },
+];
 export default function Korzinka() {
   const queryClient = useQueryClient();
 
@@ -173,44 +287,100 @@ export default function Korzinka() {
     },
   });
 
-  // const deletePost = useMutation(oavIV.deletePost, {
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries();
-  //     console.log("delete ketti");
-  //   },
-  //   onError: () => {
-  //     console.log("error");
-  //   },
-  // });
+  const reLoadPost = useMutation(oavIV.getPostReload, {
+    onSuccess: () => {
+      console.log("success");
+      queryClient.invalidateQueries();
+      console.log("delete ketti");
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
 
-  // // Postni o'chirish uchun backendga so'rov Yuborish
-  // const deleteMediaEvent = useMutation(oavIV.deleteMediaEvent, {
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries();
-  //     console.log("delete ketti");
-  //   },
-  //   onError: () => {
-  //     console.log("error");
-  //   },
-  // });
+  const reLoadMediaEvent = useMutation(oavIV.getMediaEventReload, {
+    onSuccess: () => {
+      console.log("success");
+      queryClient.invalidateQueries();
+      console.log("delete ketti");
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
+
+  // Postni o'chirish uchun backendga so'rov Yuborish
+  const deletePost = useMutation(oavIV.deletePosttoTrash, {
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+      console.log("delete ketti");
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
+
+  // MediaEventni o'chirish uchun backendga so'rov Yuborish
+  const deleteMediaEvent = useMutation(oavIV.deleteMediaEventtoTrash, {
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+      console.log("delete ketti");
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
 
   useEffect(() => {
     getTrash.mutate();
   }, []);
 
-  // const handleDeletePost = (id) => {
-  //   deletePost.mutate(id);
-  // };
-  // const handleDeleteMediaEvent = (id) => {
-  //   deleteMediaEvent.mutate(id);
-  // };
+  const handleReLoadPost = (id) => {
+    reLoadPost.mutate(id);
+  };
+  const handleDeletePost = (id) => {
+    deletePost.mutate(id);
+  };
+
+  const handleReLoadMediaEvent = (id) => {
+    reLoadMediaEvent.mutate(id);
+  };
+  const handleDeleteMediaEvent = (id) => {
+    deleteMediaEvent.mutate(id);
+  };
 
   const { data: trashData } = useGetTrashes();
+  let trashPosts = [];
+  let trashMaterial = [];
+  let trashMediaEvent = [];
+  let trashOnline = [];
+  let trashOfficial = [];
+  let trashMediaProjects = [];
 
-  console.log(trashData);
+  if (trashData) {
+    Object.entries(trashData).forEach(([key, value]) => {
+      if (key === "POSTS") {
+        trashPosts = value;
+      } else if (key === "MEDIA_EVENT") {
+        trashMediaEvent = value;
+      } else if (key === "MATERIALS") {
+        trashMaterial = value;
+      } else if (key === "ONLINE_BROADCAST") {
+        trashOnline = value;
+      } else if (key === "OFFICIAL_PAGE") {
+        trashOfficial = value;
+      } else if (key === "MEDIA_PROJECTS") {
+        trashMediaProjects = value;
+      }
+    });
+  } else {
+    console.log("yoq");
+  }
 
-  const dataTable = trashData
-    ? trashData[0]?.map((item, index) => {
+  // console.log(trashPosts);
+
+  const dataTable = trashPosts
+    ? trashPosts?.map((item, index) => {
         let type = ""; // Mahalliy o'zgaruvchi sifatida ishlatamiz
         if (item.postType === "TV_CHANNEL") {
           type = "Televediniya";
@@ -244,7 +414,7 @@ export default function Korzinka() {
               description="Haqiqatdan ham o'chirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
-              // onConfirm={() => handleDeletePost(item.id)}
+              onConfirm={() => handleReLoadPost(item.id)}
             >
               <Button className="border-green-500 text-green-500">
                 <FiRefreshCw />
@@ -257,7 +427,7 @@ export default function Korzinka() {
               description="Haqiqatdan ham o'chirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
-              // onConfirm={() => handleDeletePost(item.id)}
+              onConfirm={() => handleDeletePost(item.id)}
             >
               <Button danger>Delete</Button>
             </Popconfirm>
@@ -265,8 +435,8 @@ export default function Korzinka() {
         };
       })
     : [];
-  const dataTableMedia = trashData
-    ? trashData[1]?.map((item, index) => {
+  const dataTableMedia = trashMediaEvent
+    ? trashMediaEvent?.map((item, index) => {
         let type = ""; // Mahalliy o'zgaruvchi sifatida ishlatamiz
         if (item.mediaEventType === "PRESS_CONFERENCE") {
           type = "Matbuot anjumani";
@@ -296,7 +466,7 @@ export default function Korzinka() {
               description="Haqiqatdan ham o'chirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
-              // onConfirm={() => handleDeletePost(item.id)}
+              onConfirm={() => handleReLoadMediaEvent(item.id)}
             >
               <Button className="border-green-500 text-green-500">
                 <FiRefreshCw />
@@ -309,7 +479,7 @@ export default function Korzinka() {
               description="Haqiqatdan ham o'chirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
-              // onConfirm={() => handleDeleteMediaEvent(item.id)}
+              onConfirm={() => handleDeleteMediaEvent(item.id)}
             >
               <Button danger>Delete</Button>
             </Popconfirm>
@@ -318,8 +488,8 @@ export default function Korzinka() {
       })
     : [];
 
-  const dataMaterial = trashData
-    ? trashData[2]?.map((item, index) => {
+  const dataMaterial = trashMaterial
+    ? trashMaterial?.map((item, index) => {
         let type = ""; // Mahalliy o'zgaruvchi sifatida ishlatamiz
         if (item.materialType === "VIDEO") {
           type = "Video";
@@ -372,63 +542,271 @@ export default function Korzinka() {
       })
     : [];
 
+  const dataOfficial = trashOfficial
+    ? trashOfficial?.map((item, index) => {
+        return {
+          key: index + 1,
+          telegram: (
+            <div className="flex gap-3">
+              <Link
+                to={item.messengersAndLinks.TELEGRAM}
+                className="font-semibold"
+              >
+                {item.messengersAndLinks.TELEGRAM}
+              </Link>{" "}
+              <span>{item.followers.TELEGRAM}</span>
+            </div>
+          ),
+          instagram: (
+            <div className="flex gap-3">
+              <Link
+                to={item.messengersAndLinks.INSTAGRAM}
+                className="font-semibold"
+              >
+                {item.messengersAndLinks.INSTAGRAM}
+              </Link>{" "}
+              <span>{item.followers.INSTAGRAM}</span>
+            </div>
+          ),
+          youtube: (
+            <div className="flex gap-3">
+              <Link
+                to={item.messengersAndLinks.YOUTUBE}
+                className="font-semibold"
+              >
+                {item.messengersAndLinks.YOUTUBE}
+              </Link>{" "}
+              <span>{item.followers.YOUTUBE}</span>
+            </div>
+          ),
+          action: (
+            <Popconfirm
+              title={`ga tegishli post`}
+              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              okText="Yes"
+              cancelText="No"
+              // onConfirm={() => handleDeleteofficail(item.id)}
+            >
+              <Button danger>
+                {" "}
+                <FaTrashAlt />
+              </Button>
+            </Popconfirm>
+          ),
+        };
+      })
+    : [];
+
+  const dataOnline = trashOnline
+    ? trashOnline?.map((item, index) => {
+        const publishDate = item.eventDate
+          .map((num) => (num > 10 ? num : `0${num}`))
+          .join("-");
+        return {
+          key: index + 1,
+          title: `${item.title}`,
+          date: publishDate,
+          participation: item.stuff,
+          mesengerTitle: item.messenger,
+          amountAttand: item.numberOfPeople,
+          link: <Link to={`${item.link}`}> {item.link}</Link>,
+          action: (
+            <Popconfirm
+              title={`ga tegishli post`}
+              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              okText="Yes"
+              cancelText="No"
+              // onConfirm={() => handleDeleteOnline(item.id)}
+            >
+              <Button danger>
+                {" "}
+                <FaTrashAlt />
+              </Button>
+            </Popconfirm>
+          ),
+        };
+      })
+    : [];
+
+  const dataMediaProjects = trashMediaProjects
+    ? trashMediaProjects?.map((item, index) => {
+        return {
+          key: index + 1,
+          title: `${item.name}`,
+          description: item.description,
+          tarmoqTuri: item.massMedia,
+          period: item.period,
+          link: <Link to={`${item.link}`}> {item.link}</Link>,
+          action: (
+            <Popconfirm
+              title={`ga tegishli post`}
+              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              okText="Yes"
+              cancelText="No"
+              // onConfirm={() => handleDeleteMediaProjects(item.id)}
+            >
+              <Button danger>
+                {" "}
+                <FaTrashAlt />
+              </Button>
+            </Popconfirm>
+          ),
+        };
+      })
+    : [];
+
   return (
     <div>
-      <div className="mb-3">
-        <h2 className="text-[20px]  dark:text-white">
-          <span className="font-[500] mr-2">
-            Faoliyatga doir axborotni OAV, Internet saytlar va ijtimoiy
-            tarmoqlar orqali yoritilishi
-          </span>
-        </h2>
-      </div>
-      <div>
-        <div className="televediniya">
-          <Table
-            columns={columns}
-            dataSource={dataTable}
-            bordered
-            rowClassName=" dark:bg-inherit"
-          />
+      {trashPosts.length > 0 ? (
+        <div>
+          <div className="mb-3">
+            <h2 className="text-[20px]  dark:text-white">
+              <span className="font-[500] mr-2">
+                Faoliyatga doir axborotni OAV, Internet saytlar va ijtimoiy
+                tarmoqlar orqali yoritilishi
+              </span>
+            </h2>
+          </div>
+          <div>
+            <div className="televediniya">
+              <Table
+                columns={columns}
+                dataSource={dataTable}
+                bordered
+                rowClassName=" dark:bg-inherit"
+              />
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
 
-      <div className="mb-3">
-        <h2 className="text-[20px]  dark:text-white">
-          <span className="font-[500] mr-2">
-            Matbuot kotibi tomonidan o‘tkazilgan mediyatadbirlar.
-          </span>
-        </h2>
-      </div>
-      <div>
-        <div className="televediniya">
-          <Table
-            columns={columnsMedia}
-            dataSource={dataTableMedia}
-            bordered
-            rowClassName=" dark:bg-inherit"
-          />
+      {trashMediaEvent.length > 0 ? (
+        <div>
+          <div className="mb-3">
+            <h2 className="text-[20px]  dark:text-white">
+              <span className="font-[500] mr-2">
+                Matbuot kotibi tomonidan o‘tkazilgan mediyatadbirlar.
+              </span>
+            </h2>
+          </div>
+          <div>
+            <div className="televediniya">
+              <Table
+                columns={columnsMedia}
+                dataSource={dataTableMedia}
+                bordered
+                rowClassName=" dark:bg-inherit"
+              />
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
 
-      <div className="mb-3">
-        <h2 className="text-[20px]  dark:text-white">
-          <span className="font-[500] mr-2">
-            Faoliyatga doir axborotni yetkazib berishda akustik va vizual
-            materiallardan foydalanganligi
-          </span>
-        </h2>
-      </div>
-      <div>
-        <div className="televediniya">
-          <Table
-            columns={columnsmaterial}
-            dataSource={dataMaterial}
-            bordered
-            rowClassName=" dark:bg-inherit"
-          />
+      {trashMaterial.length > 0 ? (
+        <div>
+          <div className="mb-3">
+            <h2 className="text-[20px]  dark:text-white">
+              <span className="font-[500] mr-2">
+                Faoliyatga doir axborotni yetkazib berishda akustik va vizual
+                materiallardan foydalanganligi
+              </span>
+            </h2>
+          </div>
+          <div>
+            <div className="televediniya">
+              <Table
+                columns={columnsmaterial}
+                dataSource={dataMaterial}
+                bordered
+                rowClassName=" dark:bg-inherit"
+              />
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
+
+      {trashOnline.length > 0 ? (
+        <div>
+          <div className="mb-3">
+            <h2 className="text-[20px]  dark:text-white">
+              <span className="font-[500] mr-2">
+                Ijtimoiy tarmoqlarda berilgan onlayn efir (ovozli chat) lar soni
+              </span>
+            </h2>
+          </div>
+          <div>
+            <div className="televediniya z-[] relative">
+              <Table
+                columns={columnsOnline}
+                dataSource={dataOnline}
+                bordered
+                rowClassName=" dark:bg-inherit"
+                className="z-0"
+              />
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+
+      {trashOfficial.length > 0 ? (
+        <div>
+          <div className="mb-3">
+            <h2 className="text-[20px]  dark:text-white">
+              <span className="font-[500] mr-2">
+                Ijtimoiy tarmoq va messenjerlardagi OTM rasmiy sahifalarida
+                obunachilar soni
+              </span>
+            </h2>
+          </div>
+          <div>
+            <div className="televediniya z-[] relative">
+              <Table
+                columns={columnsOfficial}
+                dataSource={dataOfficial}
+                bordered
+                rowClassName=" dark:bg-inherit"
+                className="z-0"
+              />
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+
+      {trashMediaProjects.length > 0 ? (
+        <div>
+          {" "}
+          <div className="mb-3">
+            <h2 className="text-[20px]  dark:text-white">
+              <span className="font-[500] mr-2">
+                Axborot xizmati tomonidan yo'lga qo'yilgan medialoyihalar
+              </span>
+            </h2>
+          </div>
+          <div>
+            <div className="televediniya z-[] relative">
+              <Table
+                columns={columnsMediaProjetcs}
+                dataSource={dataMediaProjects}
+                bordered
+                rowClassName=" dark:bg-inherit"
+                className="z-0"
+              />
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

@@ -1,9 +1,7 @@
 import React from "react";
 import HeaderEmployee from "../../components/header/HeaderEmployee";
-import SidebarJS from "../../components/sidebar/SidebarJS";
 import { Outlet } from "react-router-dom";
 import SideBarAnt from "../../components/sidebar/SideBarAnt";
-// import SideBarAnt from "../../components/sidebar/SideBarAnt";
 
 export default function EmployeePanel() {
   return (

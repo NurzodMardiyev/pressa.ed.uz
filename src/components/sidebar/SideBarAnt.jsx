@@ -2,8 +2,6 @@ import React from "react";
 import { Menu } from "antd";
 import { SiGooglenews } from "react-icons/si";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "react-query";
-import { oavIV } from "../../feature/queryApi";
 import { FaTrashAlt } from "react-icons/fa";
 import "../../App.css";
 
@@ -36,6 +34,13 @@ const items = [
       { key: "/press_tur", label: "Press tur" },
     ],
   },
+
+  {
+    key: "/foreign",
+    label:
+      "Xorijiy ommaviy axborot vositalarida OTM faoliyatiga doir e'lon qilingan materiallar soni",
+    icon: <SiGooglenews />,
+  },
   {
     key: "sub5",
     label:
@@ -62,6 +67,18 @@ const items = [
       { key: "/organization", label: "Xodimlar" },
     ],
   },
+
+  {
+    key: "/mediaprojects",
+    label: "Axborot xizmati tomonidan yo'lga qo'yilgan medialoyihalar",
+    icon: <SiGooglenews />,
+  },
+  {
+    key: "/levelIllumination",
+    label:
+      "OTM faoliyatidagi turli tadbirlarni ommaviy axborot vositalari orqali yoritilganlik darajasi",
+    icon: <SiGooglenews />,
+  },
   {
     key: "/trashbox",
     label: "Karzinka",
@@ -70,46 +87,11 @@ const items = [
 ];
 
 const SideBarAnt = () => {
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const tvMutation = useMutation(oavIV.tv, {
-    onSuccess: () => queryClient.invalidateQueries(),
-    onError: () => console.error("Error in tv mutation"),
-  });
-
-  const mediaMutation = useMutation(oavIV.eventMediaGetChannel, {
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-      console.log("Media mutation succeeded");
-    },
-    onError: () => console.error("Error in media mutation"),
-  });
-
-  const mediaAllMutation = useMutation(oavIV.eventMediaAll, {
-    onSuccess: () => queryClient.invalidateQueries(),
-    onError: () => console.error("Error in mediaAll mutation"),
-  });
-
   const handleClick = (e) => {
     const key = e.key;
-
-    const mediaKeys = [
-      "/brifing",
-      "/press_tur",
-      "/matbuot_anjumani",
-      "/infografika",
-      "/audio",
-      "/video",
-    ];
-
-    if (mediaKeys.includes(key)) {
-      if (!mediaMutation.isLoading) mediaMutation.mutate();
-      if (!mediaAllMutation.isLoading) mediaAllMutation.mutate();
-    } else {
-      if (!tvMutation.isLoading) tvMutation.mutate(key); // telegramlar ketmasligi kerak
-    }
 
     navigate(key);
   };
@@ -123,7 +105,7 @@ const SideBarAnt = () => {
         items={items}
         className="bg-slate-100 dark:bg-gray-800 dark:text-white pt-20 md:w-[400px] h-[100vh] fixed overflow-y-scroll z-[99]"
       />
-      <style jsx>{`
+      <style jsx="true">{`
         ::-webkit-scrollbar {
           width: 1px;
         }

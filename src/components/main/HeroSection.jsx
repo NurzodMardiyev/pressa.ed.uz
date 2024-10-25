@@ -1,9 +1,9 @@
 import React from "react";
 import { Carousel } from "antd";
-import img1 from "../../images/08.jpg";
-import img2 from "../../images/07 (2).jpg";
-import img3 from "../../images/5T3A0121.jpg";
-import img4 from "../../images/03.jpg";
+import img1 from "../../images/auth.webp";
+import img2 from "../../images/auth.webp";
+import img3 from "../../images/auth.webp";
+import img4 from "../../images/auth.webp";
 
 const contentStyle = {
   height: "260px",

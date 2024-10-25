@@ -1,9 +1,22 @@
 import React, { useState } from "react";
 import { MdModeEdit } from "react-icons/md";
-import { Button, Form, Input, Modal, Table } from "antd";
-
+import {
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  Modal,
+  Popconfirm,
+  Spin,
+  Table,
+} from "antd";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { oavIV } from "../../feature/queryApi";
+import { Link } from "react-router-dom";
+import { FaTrashAlt } from "react-icons/fa";
 const sharedOnCell = () => {};
 
+// columnslar infoniki
 const columns = [
   {
     title: "No",
@@ -11,18 +24,8 @@ const columns = [
     rowScope: "row",
   },
   {
-    title: "OTM vakili rasmi",
-    dataIndex: "img",
-    onCell: sharedOnCell,
-  },
-  {
     title: "Ko'rsatuvda qatnashgan OTM vakili F.I.O",
     dataIndex: "fio",
-    onCell: sharedOnCell,
-  },
-  {
-    title: "Postlar soni",
-    dataIndex: "postNumber",
     onCell: sharedOnCell,
   },
   {
@@ -31,7 +34,7 @@ const columns = [
     onCell: sharedOnCell,
   },
   {
-    title: "Email passwordi",
+    title: "OTM nomi",
     dataIndex: "password",
     onCell: sharedOnCell,
   },
@@ -50,10 +53,390 @@ const columns = [
     dataIndex: "action",
     onCell: sharedOnCell,
   },
+  {
+    title: "Info",
+    dataIndex: "info",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Posts",
+    dataIndex: "post",
+    onCell: sharedOnCell,
+  },
+];
+
+const columnsOneEmployee = [
+  {
+    title: "No",
+    dataIndex: "key",
+    rowScope: "row",
+  },
+  {
+    title: "OTM vakili rasmi",
+    dataIndex: "img",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Telefon raqami",
+    dataIndex: "phone",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Jinsi",
+    dataIndex: "gender",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Manzil",
+    dataIndex: "province",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Ilmiy darajangiz",
+    dataIndex: "degree",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "OTM nomi",
+    dataIndex: "organization",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Buyruq raqami",
+    dataIndex: "commentNumber",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Ishga qabul qilingan yil",
+    dataIndex: "entryDate",
+    onCell: sharedOnCell,
+  },
+  {
+    title:
+      "AOKA yoki OTFIVning malaka oshirish kurslari yoki seminarlarida ishtirok etganligi (qachon, qayerda)",
+    dataIndex: "seminar",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Shtatdagi o'rni",
+    dataIndex: "shtat",
+    onCell: sharedOnCell,
+  },
+  {
+    title:
+      "Rektorning axborot siyosati masalalari bo'yicha maslahatchisi etib belgilangan (Asos hujjat raqami)",
+    dataIndex: "hujjat_raqami",
+    onCell: sharedOnCell,
+  },
+  {
+    title:
+      "Matbuot kotibining kasbiy va qo'shimcha kompetentsiyasi (siz nima qilasiz)",
+    dataIndex: "qushimcha_kom",
+    onCell: sharedOnCell,
+  },
+  {
+    title:
+      "Matbuot bo'limi uchun alohida xona ajratilganligi (ha/yo'q bo'lsa qaysi bo'lim bilan birga o'tiradi)",
+    dataIndex: "alohidaHona",
+    onCell: sharedOnCell,
+  },
+  {
+    title:
+      "Oxirgi bir yillik oylik maoshining o'rtacha miqdori (UzASBO tizimi yoki my.gov.uz orqali olingan ma'lumot fayl shaklida taqdim etiladi)",
+    dataIndex: "urtacha_oylik",
+    onCell: sharedOnCell,
+  },
+  {
+    title:
+      "Alohida Matbuot/axborot xizmati bo'limi tashkil etilganligi (bo'lsa unda nechta shtat bor yoki nechta boshqa bo'limdan jalb qilingan)",
+    dataIndex: "axborot_xizmati",
+    onCell: sharedOnCell,
+  },
+  {
+    title:
+      "Matbuot kotibini xorijga xizmat safarlariga yuborilganligi (qachon, qayerga)",
+    dataIndex: "hizmat_safari",
+    onCell: sharedOnCell,
+  },
+  {
+    title:
+      "Moddiy-texnik bazasining holati  (kamera soni va uning nomi, modeli;// telefon: bor/yo'q; televizor: bor/yo'q; kompyuter jamlamasi soni va nechtasi hujjat bilan ishlash uchun, nechtasi montaj uchun; Qo'shimcha izoh)",
+    dataIndex: "moddiyTexnik",
+    onCell: sharedOnCell,
+  },
+];
+
+// columnslar postlarniki
+const columnsPosts = [
+  {
+    title: "No",
+    dataIndex: "key",
+    rowScope: "row",
+  },
+  {
+    title: "Ko'rsatuvda qatnashgan OTM vakili F.I.O",
+    dataIndex: "fio",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Faoliyatga doir axborot turi",
+    dataIndex: "type",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "TV nomi",
+    dataIndex: "tvName",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Dastur nomi",
+    dataIndex: "appName",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Chiqqan sanasi va vaqti",
+    dataIndex: "date",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Miqyosi (respublika, hududiy yoki xorijiy)",
+    dataIndex: "miqyosi",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Havolasi (http bilan boshlanishi shart!)",
+    dataIndex: "link",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Harakat",
+    dataIndex: "action",
+    onCell: sharedOnCell,
+  },
+];
+
+const columnsMedia = [
+  {
+    title: "No",
+    dataIndex: "key",
+    rowScope: "row",
+  },
+  {
+    title: "Hodisa Nomi",
+    dataIndex: "eventName",
+    onCell: sharedOnCell,
+  },
+  {
+    title: " turi",
+    dataIndex: "type",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Ishchilar Ro'yhati",
+    dataIndex: "stuffs",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "messengers",
+    dataIndex: "messengers",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "newspapers",
+    dataIndex: "newspapers",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "radio_channels",
+    dataIndex: "radio_channels",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "tv_channels",
+    dataIndex: "tv_channels",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Harakat",
+    dataIndex: "action",
+    onCell: sharedOnCell,
+  },
+];
+
+const columnsmaterial = [
+  {
+    title: "No",
+    dataIndex: "key",
+    rowScope: "row",
+  },
+  {
+    title: "Material mavzusi",
+    dataIndex: "topic",
+    onCell: sharedOnCell,
+  },
+  {
+    title: " turi",
+    dataIndex: "type",
+    onCell: sharedOnCell,
+  },
+  {
+    title: " E'lon qilingan OAV/Ijtimoiy tarmoq turi",
+    dataIndex: "massMedia",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "E'lon qilingan sanasi",
+    dataIndex: "publishDate",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Material mavzusi",
+    dataIndex: "socialMediaName",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Havolasi",
+    dataIndex: "link",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Harakat",
+    dataIndex: "action",
+    onCell: sharedOnCell,
+  },
+];
+
+const columnsOfficial = [
+  {
+    title: "No",
+    dataIndex: "key",
+    rowScope: "row",
+  },
+  {
+    title: "Telegram linki va obunachilar soni",
+    dataIndex: "telegram",
+    onCell: sharedOnCell,
+  },
+  {
+    title: " Instagram linki va obunachilar soni",
+    dataIndex: "instagram",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "You Tube linki va obunachilar soni",
+    dataIndex: "youtube",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "X linki va obunachilar soni",
+    dataIndex: "x",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Harakat",
+    dataIndex: "action",
+    onCell: sharedOnCell,
+  },
+];
+
+const columnsOnline = [
+  {
+    title: "No",
+    dataIndex: "key",
+    rowScope: "row",
+  },
+  {
+    title: "Onlayn efir/ovozli chat mavzusi",
+    dataIndex: "title",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "O'tkazilgan sanasi",
+    dataIndex: "date",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "OTM rahbar hodimlarining ishtiroki",
+    dataIndex: "participation",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Ijtimoiy tarmoq nomi",
+    dataIndex: "mesengerTitle",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Ishtirokchilar soni",
+    dataIndex: "amountAttand",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Havolasi",
+    dataIndex: "link",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Harakat",
+    dataIndex: "action",
+    onCell: sharedOnCell,
+  },
+];
+
+const columnsMediaProjetcs = [
+  {
+    title: "No",
+    dataIndex: "key",
+    rowScope: "row",
+  },
+  {
+    title: "Medialoyiha nomi",
+    dataIndex: "title",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Loyiha tavfsifi",
+    dataIndex: "description",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "E'lon qilingan OAV/Ijtimoiy tarmoq turi",
+    dataIndex: "tarmoqTuri",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Davriyligi",
+    dataIndex: "period",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Havolasi",
+    dataIndex: "link",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Harakat",
+    dataIndex: "action",
+    onCell: sharedOnCell,
+  },
 ];
 
 export default function AllEmployeers() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [open1, setOpen1] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
+  const [loading1, setLoading1] = React.useState(true);
+  const [dataOneEmployee, setDataOneEmployee] = useState([]);
+  const [postsData, setPostsData] = useState();
+  const [coveragesData, setCoveragesData] = useState();
+  const [materialsData, setMaterialsData] = useState();
+  const [media_eventData, setMedia_eventData] = useState();
+  const [online_broadcastData, setOnline_broadcastData] = useState();
+  const [official_pageData, setOfficial_pageData] = useState();
+  const [media_ProjectsData, setMedia_ProjectsData] = useState();
+  const [modelDelete, setModelDelete] = useState(false);
+  const [formDelete] = Form.useForm();
+  const [modalIDKEY, setModalIDKEY] = useState();
 
   const showModal = (id) => {
     setIsModalOpen(true);
@@ -62,35 +445,121 @@ export default function AllEmployeers() {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
+  const showModalDelete = (id, key) => {
+    setModelDelete(true);
+    setModalIDKEY({ id: id, key: key });
+  };
+  const handleOkDelete = () => {
+    formDelete.submit();
+  };
+  const handleCancelDelete = () => {
+    setModelDelete(false);
+  };
+
+  const queryClient = useQueryClient();
+  const token = JSON.parse(localStorage.getItem("token"));
+
   const onFinish = (value) => {
     console.log(value);
   };
 
-  const dataTable = [
+  // All empoyerlarni olib kelish uchun
+  const { data } = useQuery(["allEmployees"], () => oavIV.getAllEmployees(), {
+    refetchOnWindowFocus: false,
+  });
+  // console.log(data);
+
+  const oneEmployeeInfo = useMutation(
+    (values) =>
+      oavIV.getOneEmployeeInfo(values, {
+        headers: { Authorization: `${token}` },
+      }),
     {
-      key: 1,
-      fio: "Nurzod",
-      img: (
-        <div className="w-[100px] h-[50px]">
-          <img
-            className="w-full h-full object-cover"
-            src="data:image/jpeg;base64,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"
-            alt=""
-          />
-        </div>
-      ),
-      postNumber: 45,
+      onSuccess: (response) => {
+        queryClient.invalidateQueries();
+        setDataOneEmployee(response);
+        console.log(response);
+        setLoading(false);
+      },
+      onError: (error) => {
+        // showError(error);
+        setLoading(false);
+        console.log(error);
+      },
+    }
+  );
+
+  const oneEmployeePosts = useMutation(
+    (values) =>
+      oavIV.getOneEmployeePosts(values, {
+        headers: { Authorization: `${token}` },
+      }),
+    {
+      onSuccess: (response) => {
+        console.log(response);
+        queryClient.invalidateQueries();
+        Object.entries(response).map(([key, data]) => {
+          if (key === "POSTS") {
+            console.log(data);
+            setPostsData(data);
+          } else if (key === "COVERAGES") {
+            setCoveragesData(data);
+          } else if (key === "MATERIALS") {
+            setMaterialsData(data);
+          } else if (key === "MEDIA_EVENT") {
+            console.log(data);
+            setMedia_eventData(data);
+          } else if (key === "MEDIA_PROJECTS") {
+            setMedia_ProjectsData(data);
+          } else if (key === "ONLINE_BROADCAST") {
+            setOnline_broadcastData(data);
+          } else if (key === "OFFICIAL_PAGE") {
+            setOfficial_pageData(data);
+          }
+        });
+        setLoading1(false);
+      },
+      onError: (error) => {
+        // showError(error);
+        console.log(error);
+        setLoading1(false);
+      },
+    }
+  );
+
+  const handletakeInfo = (id) => {
+    oneEmployeeInfo.mutate(id);
+    setLoading(true);
+    setOpen(true);
+  };
+
+  const handletakePosts = (id) => {
+    oneEmployeePosts.mutate(id);
+    setLoading(true);
+    setOpen1(true);
+  };
+
+  const handleOpenModelDelete = (id, key) => {
+    showModalDelete(id, key);
+  };
+
+  const dataTable = data?.map((item, index) => {
+    return {
+      key: 1 + index,
+      fio: item.fullName,
+
       email: (
         <div className="flex justify-between items-center">
-          <p>nurzodbekmardiyev1306@gmail</p>
+          <p>{item.email}</p>
         </div>
       ),
       password: (
         <div className="flex justify-between items-center">
-          <p>Nurzod7777</p>
+          <p>{item.organizationName}</p>
         </div>
       ),
-      phoneNumber: "+998883921383",
+      phoneNumber: item.phone,
       notification: (
         <button
           onClick={() => showModal(1)}
@@ -101,43 +570,243 @@ export default function AllEmployeers() {
       ),
       action: (
         <button className=" transition-all duration-150 bg-[#FFF2E8] px-2 py-1 rounded-md text-[#E06E4D] hover:text-red-400 border border-[#E06E4D]">
-          o'chirish
+          O'chirish
         </button>
       ),
-    },
-  ];
+      info: (
+        <button
+          className=" transition-all duration-150 bg-[#f0e8ff] px-2 py-1 rounded-md text-[#553fff] hover:text-blue-400 border border-[#553fff]"
+          onClick={() => handletakeInfo(item.id)}
+        >
+          Info
+        </button>
+      ),
+      post: (
+        <button
+          className=" transition-all duration-150 bg-[#ffad3274] px-2 py-1 rounded-md text-[#000000] hover:text-blue-400 border border-[#553fff]"
+          onClick={() => handletakePosts(item.employeeId)}
+        >
+          Postlar
+        </button>
+      ),
+    };
+  });
 
-  // const dataTable = data?.map((item, index) => {
-  //   return {
-  //     key: index + 1,
-  //     fio: `${item.showedUser}`,
-  //     tvName: item.media,
-  //     appName: item.show,
-  //     date: `${String(item.dateTime[2]).padStart(2, "0")}-${String(
-  //       item.dateTime[1]
-  //     ).padStart(2, "0")}-${String(item.dateTime[0]).slice(2)}`,
-  //     miqyosi: item.scale,
-  //     link: item.link,
-  //     action: (
-  //       <button
-  //         className=" transition-all duration-150 bg-[#FFF2E8] px-2 py-1 rounded-md text-[#E06E4D] hover:text-red-400 border border-[#E06E4D]"
-  //         onClick={() => handleDeletePost(item.id)}
-  //       >
-  //         o'chirish
-  //       </button>
-  //     ),
-  //   };
-  // });
+  const base64Image = `data:image/png;base64,${dataOneEmployee?.user?.base64}`;
+
+  const dataTableOneEmployee = dataOneEmployee
+    ? [
+        {
+          key: 1,
+          img: (
+            <div>
+              <img src={base64Image} alt={dataOneEmployee?.user?.fullName} />
+            </div>
+          ),
+          phone: dataOneEmployee?.user?.phone,
+          gender: dataOneEmployee?.gender,
+          province: dataOneEmployee?.user?.organization?.province,
+          degree: dataOneEmployee?.speciality?.specialities
+            ? Object.entries(dataOneEmployee?.speciality?.specialities).map(
+                ([name, url]) => (
+                  <div key={name}>
+                    <span>{name}</span>: <div>{url}</div>
+                  </div>
+                )
+              )
+            : "",
+          organization: `${dataOneEmployee?.organization?.name}: ${dataOneEmployee?.organization?.orgType}`,
+          commentNumber: dataOneEmployee?.details?.commendNumber,
+          entryDate: `${String(dataOneEmployee?.details?.entryDate[2]).padStart(
+            2,
+            "0"
+          )}-${String(dataOneEmployee?.details?.entryDate[1]).padStart(
+            2,
+            "0"
+          )}-${String(dataOneEmployee?.details?.entryDate[0]).slice(2)}`,
+          seminar: dataOneEmployee?.details?.qualificationInfo,
+          shtat: dataOneEmployee?.details?.workType,
+          hujjat_raqami: dataOneEmployee?.details?.advisor,
+          qushimcha_kom: dataOneEmployee?.details?.skills,
+          alohidaHona: dataOneEmployee?.details?.room,
+          urtacha_oylik: dataOneEmployee?.details?.averageSalary,
+          axborot_xizmati: dataOneEmployee?.details?.departmentOrganisation,
+          hizmat_safari: dataOneEmployee?.details?.businessTrip,
+          moddiyTexnik: dataOneEmployee?.details?.resource,
+        },
+      ]
+    : [];
+
+  // Postlarni table uchun datalar
+
+  const dataTablePosts = postsData?.map((item, index) => {
+    let type = ""; // Mahalliy o'zgaruvchi sifatida ishlatamiz
+    if (item.postType === "TV_CHANNEL") {
+      type = "Televediniya";
+    } else if (item.postType === "RADIO_CHANNEL") {
+      type = "Radio";
+    } else if (item.postType === "MESSENGER") {
+      type = "Ijtimoiy tarmoq va messengerlar";
+    } else if (item.postType === "WEB_SITE") {
+      type = "Internet saytlari";
+    } else {
+      type = "Ommaviy axborot vositalari";
+    }
+    return {
+      key: index + 1,
+      fio: `${item.showedUser}`,
+      type: (
+        <div className="px-3 py-1 bg-[#E6EEDD] border border-[#5CA53C] text-[#5CA53C] rounded">
+          {type}
+        </div>
+      ),
+      tvName: item.media,
+      appName: item.show,
+      date: `${String(item.dateTime[2]).padStart(2, "0")}-${String(
+        item.dateTime[1]
+      ).padStart(2, "0")}-${String(item.dateTime[0]).slice(2)}`,
+      miqyosi: item.scale,
+      link: <Link to={item.link}>{item.link}</Link>,
+      action: (
+        <Popconfirm
+          title={`${type}ga tegishli post`}
+          description="Haqiqatdan ham o'chirmoqchimisiz?"
+          okText="Yes"
+          cancelText="No"
+          onConfirm={() => handleOpenModelDelete(item.id, "POSTS")}
+        >
+          <Button danger>
+            <FaTrashAlt />
+          </Button>
+        </Popconfirm>
+      ),
+    };
+  });
+
+  console.log(media_eventData);
+
+  const dataTableMedia = media_eventData?.map((item, index) => {
+    let type = ""; // Mahalliy o'zgaruvchi sifatida ishlatamiz
+    if (item.mediaEventType === "PRESS_CONFERENCE") {
+      type = "Matbuot anjumani";
+    } else if (item.mediaEventType === "BRIEFING") {
+      type = "Brifing";
+    } else if (item.mediaEventType === "PRESS_TOUR") {
+      type = "Press tur";
+    }
+    return {
+      key: index + 1,
+      eventName: `${item.eventName}`,
+      type: (
+        <div className="px-3 py-1 bg-[#E6EEDD] border border-[#5CA53C] text-[#5CA53C] rounded">
+          {type}
+        </div>
+      ),
+      stuffs: item.stuff.map((i) => {
+        return i + ", ";
+      }),
+      messengers: item.messengers
+        ? Object.entries(item.messengers).map(([name, url]) => (
+            <div key={name}>
+              <span>{name}</span>: <Link to={url}>`{url}`</Link>
+            </div>
+          ))
+        : "",
+      newspapers: item.newspapers
+        ? Object.entries(item.newspapers).map(([name, url]) => (
+            <div key={name}>
+              <span>{name}</span>: <Link to={url}>`{url}`</Link>
+            </div>
+          ))
+        : "",
+      radio_channels: item.radio_channels
+        ? Object.entries(item.radio_channels).map(([name, url]) => (
+            <div key={name}>
+              <span>{name}</span>: <Link to={url}>`{url}`</Link>
+            </div>
+          ))
+        : "",
+      tv_channels: item.tv_channels
+        ? Object.entries(item.tv_channels).map(([name, url]) => (
+            <div key={name}>
+              <span>{name}</span>: <Link to={url}>`{url}`</Link>
+            </div>
+          ))
+        : "",
+      action: (
+        <Popconfirm
+          title={`${type}ga tegishli post`}
+          description="Haqiqatdan ham o'chirmoqchimisiz?"
+          okText="Yes"
+          cancelText="No"
+          // onConfirm={() => handleDeleteMediaEvent(item.id)}
+        >
+          <Button danger>
+            {" "}
+            <FaTrashAlt />
+          </Button>
+        </Popconfirm>
+      ),
+    };
+  });
+
+  // Excel
+  const getEmployeeExcel = useMutation(
+    () =>
+      oavIV.getEmployeeExcel(
+        {}, // agar kerak bo'lsa values yuboring
+        {
+          headers: { Authorization: `${token}` },
+          responseType: "blob", // bu yerda faylni blob shaklida olishni ta'minlaymiz
+        }
+      ),
+    {
+      onSuccess: (response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "employee_data.xlsx"); // fayl nomi
+        document.body.appendChild(link);
+        link.click(); // yuklashni boshlash
+        link.remove(); // elementni tozalash
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    }
+  );
+
+  const handleGetEmployeeExcel = () => {
+    getEmployeeExcel.mutate();
+  };
+
+  const onFinishDelete = (values) => {
+    // Yig'ilgan checkbox qiymatlarini ko'rish
+    const fieldsValue = {
+      reasons: values.renasans,
+      postId: modalIDKEY.id,
+      postType: modalIDKEY.key,
+    };
+
+    console.log("Yuboriladigan obyekt:", fieldsValue);
+  };
+
   return (
     <div>
-      <div className="md:ms-[370px] ms-[50px] md:me-[20px] me-[10px] md:pt-24 pt-14 flex-1 overflow-x-scroll">
+      <div className=" md:me-[20px] me-[10px] md:pt-24 pt-14 flex-1 overflow-x-scroll">
         <div className="pb-16 container lg:max-w-[2560px] md:max-w-[1600px]  mx-auto  mt-4">
           {/* Televediniya */}
 
-          <div className="mb-3">
+          <div className="mb-3 flex justify-between w-full items-center">
             <h2 className="text-[30px]  dark:text-white">
               <span className="font-[500] mr-2">Barcha Xodimlar</span>
             </h2>
+            <button
+              className="bg-green-600 text-white px-6 py-2 rounded"
+              onClick={handleGetEmployeeExcel}
+            >
+              Excel
+            </button>
           </div>
           <div>
             <Modal
@@ -171,12 +840,99 @@ export default function AllEmployeers() {
                 </Form>
               </div>
             </Modal>
-            <div className="televediniya">
+
+            <Modal
+              title={<p>Xodim ma'lumotlari</p>}
+              open={open}
+              onCancel={() => setOpen(false)}
+              footer={null}
+              width="90%"
+              style={{ maxHeight: "100%", overflowY: "scroll" }}
+            >
+              {loading ? (
+                <div className="flex justify-center items-center">
+                  <Spin size="large" />
+                </div>
+              ) : Object.keys(dataTableOneEmployee).length > 0 ? (
+                <div style={{ overflowX: "auto" }}>
+                  {" "}
+                  {/* Jadvalning kengligi katta bo'lsa, gorizontal skroll qo'shish */}
+                  <Table
+                    columns={columnsOneEmployee}
+                    dataSource={dataTableOneEmployee}
+                    bordered
+                    rowClassName="dark:bg-inherit"
+                    pagination={{ pageSize: 10 }}
+                  />
+                </div>
+              ) : (
+                <p>No data available</p>
+              )}
+            </Modal>
+
+            {/* Postlar va tadborlar uchun modal */}
+            <Modal
+              title={<p>Xodimning qo'ygan postlari</p>}
+              open={open1}
+              onCancel={() => setOpen1(false)}
+              footer={null}
+              width="90%"
+              style={{ maxHeight: "100%", overflowY: "scroll" }}
+            >
+              {loading1 ? (
+                <div className="flex justify-center items-center">
+                  <Spin size="large" />
+                </div>
+              ) : dataTablePosts.length > 0 ? (
+                <div style={{ overflowX: "auto" }}>
+                  {" "}
+                  {/* Jadvalning kengligi katta bo'lsa, gorizontal skroll qo'shish */}
+                  <Modal
+                    title="Basic Modal"
+                    open={modelDelete}
+                    onOk={handleOkDelete}
+                    onCancel={handleCancelDelete}
+                  >
+                    <Form
+                      form={formDelete}
+                      name="deleteModal"
+                      initialValues={{ remember: true }}
+                      onFinish={onFinishDelete}
+                    >
+                      <Form.Item name="renasans">
+                        <Checkbox.Group>
+                          <Checkbox value="link1">Link 1</Checkbox>
+                          <Checkbox value="link2">Link 2</Checkbox>
+                          <Checkbox value="link3">Link 3</Checkbox>
+                        </Checkbox.Group>
+                      </Form.Item>
+                    </Form>
+                  </Modal>
+                  <Table
+                    columns={columnsPosts}
+                    dataSource={dataTablePosts}
+                    bordered
+                    rowClassName="dark:bg-inherit"
+                    pagination={{ pageSize: 10 }}
+                  />
+                  <Table
+                    columns={columnsMedia}
+                    dataSource={dataTableMedia}
+                    bordered
+                    rowClassName=" dark:bg-inherit"
+                    className="z-0"
+                  />
+                </div>
+              ) : (
+                <p>No data available</p>
+              )}
+            </Modal>
+            <div>
               <Table
                 columns={columns}
                 dataSource={dataTable}
                 bordered
-                rowClassName=" dark:bg-inherit"
+                rowClassName="dark:bg-inherit"
               />
             </div>
           </div>

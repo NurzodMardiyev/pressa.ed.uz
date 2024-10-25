@@ -91,7 +91,7 @@ export default function Audio() {
       severity: "success",
       summary: "Success",
       detail: "Message Content",
-      life: 3000,
+      life: 0,
     });
   };
 
@@ -100,7 +100,7 @@ export default function Audio() {
       severity: "error",
       summary: "Error",
       detail: `${data}`,
-      life: 3000,
+      life: 0,
     });
   };
 
@@ -143,7 +143,7 @@ export default function Audio() {
                         },
                       ]}
                     >
-                      <Input />
+                      <Input className="py-1.5" />
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">
@@ -156,7 +156,7 @@ export default function Audio() {
                       <DatePicker
                         //showTime={{ format: "HH:mm" }} // Sekundsiz faqat soat va daqiqa
                         format="YYYY-MM-DD" // Umumiy format, sana + vaqt
-                        className="w-full py-2"
+                        className="w-full py-1.5"
                       />
                     </Form.Item>
                   </div>
@@ -216,15 +216,15 @@ export default function Audio() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="socialMediaName"
-                      label="Material mavzusi"
+                      label="E’lon qilingan OAV/Ijtimoiy tarmoq nomi"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos material mavzusini kiriting!",
+                          message: "Iltimos qiymat kiriting!",
                         },
                       ]}
                     >
-                      <Input className="" />
+                      <Input className="py-1.5" />
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">
@@ -242,7 +242,7 @@ export default function Audio() {
                         },
                       ]}
                     >
-                      <Input placeholder="https://kun.uz" />
+                      <Input placeholder="https://kun.uz" className="py-1.5" />
                     </Form.Item>
                   </div>
                 </div>

@@ -108,7 +108,7 @@ export default function Profile() {
                 Tashash shahri
               </span>
               <p className="px-4 py-2 bg-[#F9F9F9] dark:bg-gray-700 rounded-md font-semibold">
-                {data?.user.organization.province}
+                {data?.user?.organization?.province}
               </p>
             </div>
           </div>
@@ -125,7 +125,7 @@ export default function Profile() {
                 <p className="px-4 py-3 bg-[#F9F9F9] dark:bg-gray-700 rounded-md font-semibold ">
                   {/* data?.speciality.specialities */}
                   <span>
-                    {Object.entries(data?.speciality.specialities).map(
+                    {Object.entries(data?.speciality?.specialities).map(
                       ([name, direction], index) => {
                         return (
                           <span key={index} className="uppercase">
@@ -194,7 +194,17 @@ export default function Profile() {
                   Shtatdagi o'rni
                 </span>
                 <p className="px-4 py-3 bg-[#F9F9F9] dark:bg-gray-700 rounded-md font-semibold ">
-                  {data?.details.workType}
+                  <span>
+                    {Object.entries(data?.details?.workType).map(
+                      ([name, direction], index) => {
+                        return (
+                          <span key={index}>
+                            {name}: {direction}
+                          </span>
+                        );
+                      }
+                    )}
+                  </span>
                 </p>
               </div>
               <div className="mt-4">

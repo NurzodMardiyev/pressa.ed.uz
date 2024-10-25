@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import logo from "../../images/pressa logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -8,22 +8,23 @@ import { IoCloseSharp } from "react-icons/io5";
 // import { useTranslation } from "react-i18next";
 import "../../App.css";
 import { useEmployeeInfo } from "../../hooks/useEmployeeInfo";
-import { Flex, Spin } from "antd";
+import { Drawer, Flex, Spin } from "antd";
+import { BellIcon } from "@heroicons/react/24/outline";
 
 export default function HeaderEmployee() {
   const [selectedLanguage, setSelectedLanguage] = useState("Uz");
   const [show, setShow] = useState(true);
   const menuRef = useRef(null);
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
 
   const { data, error, isLoading } = useEmployeeInfo();
-
-  // const { t, i18n } = useTranslation();
-  // useEffect(() => {
-  //   const lng = navigator.language;
-  // i18n.changeLanguage(lng);
-  // }, [i18n]);
-
-  // const lng = navigator.language
 
   const languages = [
     {
@@ -70,19 +71,43 @@ export default function HeaderEmployee() {
         </Flex>
       </div>
     );
-  if (error) return <div>Xato: {error.message}</div>;
+
+  if (error) {
+    navigate("/signup");
+  }
 
   const base64Image = `data:image/png;base64,${data?.user.base64}`;
+  // console.log(base64Image);
+  const profileImgage = base64Image;
 
   return (
     <div className="dark:bg-gray-800 fixed top-0 bg-slate-100 w-full z-[999] ">
       <div className="header-wrapper container lg:max-w-[2560px] md:max-w-[1600px]  mx-auto flex justify-between py-4 md:px-5  ">
         <div className="logpSection flex gap-6 items-center ">
-          <div className="logo h-[30px]  md:h-[40px]">
+          <Link to="/signup" className="logo h-[30px]  md:h-[40px]">
             <img className="w-full h-full" src={logo} alt="OTFIV logo" />
-          </div>
+          </Link>
         </div>
         <div className="loginSection flex items-center">
+          <button
+            type="button"
+            onClick={showDrawer}
+            className="relative rounded-full p-1 text-gray-400 dark:text-white dark:hover:text-white hover:text-gray-800 focus:outline-none focus:ring-0 focus:ring-[#727272] focus:ring-offset-2 mr-3"
+          >
+            <span className="absolute -inset-1.5" />
+            <span className="sr-only">View notifications</span>
+            <BellIcon aria-hidden="true" className="h-6 w-6" />
+          </button>
+          <Drawer
+            title="Basic Drawer"
+            onClose={onClose}
+            open={open}
+            className="dark:bg-gray-700 dark:text-white"
+          >
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+          </Drawer>
           <div className="darkMode flex items-center">
             <Flowbite>
               <DarkThemeToggle />
@@ -145,6 +170,7 @@ export default function HeaderEmployee() {
                 />
               )}
             </Link>
+
             <div
               className={`responsive ${
                 show
@@ -160,7 +186,7 @@ export default function HeaderEmployee() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         alt=""
-                        src={base64Image}
+                        src={profileImgage}
                         className="h-8 w-8 rounded-full"
                       />
                     </MenuButton>
@@ -198,6 +224,7 @@ export default function HeaderEmployee() {
               </div>
             </div>
           </div>
+
           <div className="loginOrSignUp md:flex items-center gap-2 hidden">
             <Menu as="div" className="relative ml-3">
               <div>

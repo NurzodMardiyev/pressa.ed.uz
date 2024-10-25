@@ -112,7 +112,7 @@ export default function OAVjs() {
       severity: "success",
       summary: "Success",
       detail: "Message Content",
-      life: 3000,
+      life: 0,
     });
   };
 
@@ -121,7 +121,7 @@ export default function OAVjs() {
       severity: "error",
       summary: "Xato",
       detail: `To'g'ri kiritganingizga e'tibor bering! `,
-      life: 3000,
+      life: 0,
     });
   };
 
@@ -179,7 +179,35 @@ export default function OAVjs() {
                       <Input className="py-1.5" />
                     </Form.Item>
                   </div>
-
+                  <div className="sm:col-span-3">
+                    <Form.Item
+                      name="stuff"
+                      label="Lavozimi"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Iltimos qiymat kiriting!",
+                        },
+                      ]}
+                    >
+                      <Select placeholder="select scale" className="h-[40px]">
+                        <Option value="Rektor">Rektor</Option>
+                        <Option value="Prorektor">Prorektor</Option>
+                        <Option value="Matbuot kotibi">Matbuot kotibi</Option>
+                        <Option value="Boshqarma boshlig'i">
+                          Boshqarma boshlig'i
+                        </Option>
+                        <Option value="Bo'lim boshlig'i">
+                          Bo'lim boshlig'i
+                        </Option>
+                        <Option value="Dekan">Dekan</Option>
+                        <Option value="Dekan o'rinbosari">
+                          Dekan o'rinbosari
+                        </Option>
+                        <Option value="Kafedra mudiri">Kafedra mudiri</Option>
+                      </Select>
+                    </Form.Item>
+                  </div>
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="showedMedia"

@@ -173,6 +173,12 @@ outline: none;
   /* yoki */
   /* background-color: #333;  Dark mode hover fon rangi */
 }
+.dark :where(.css-dev-only-do-not-override-11lehqq).ant-input-outlined.ant-input-status-warning:not(.ant-input-disabled) {
+  background: inherit;
+}
+.dark :where(.css-dev-only-do-not-override-11lehqq).ant-input-outlined.ant-input-status-error:not(.ant-input-disabled) {
+  background: #374151;
+}
 /* DetailsInfo  */
 :where(.css-dev-only-do-not-override-11lehqq).ant-row {
   display: flex;
@@ -218,9 +224,27 @@ outline: none;
 }
 :where(.css-dev-only-do-not-override-11lehqq).ant-form-horizontal .ant-form-item-control {
   flex: 1 0;
+  width: 100%;
 }
 .ant-form-item-control-input-content textarea {
   min-height: 41px !important;
   padding-top: 7px;
 }
 /* #d9d9d9  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1) */
+:where(.css-dev-only-do-not-override-11lehqq).ant-upload-wrapper .ant-upload {
+  width: 100%;
+}
+:where(.css-dev-only-do-not-override-11lehqq).ant-radio-group {
+  width: 100%;
+  display: flex;
+}
+:where(.css-dev-only-do-not-override-11lehqq).ant-radio-button-wrapper:first-child, :where(.css-dev-only-do-not-override-11lehqq).ant-radio-button-wrapper:last-child {
+  height: 41px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+:where(.css-dev-only-do-not-override-11lehqq).ant-radio-button-wrapper:first-child span, :where(.css-dev-only-do-not-override-11lehqq).ant-radio-button-wrapper:last-child span{
+  padding-top:  4px;
+  
+}

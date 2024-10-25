@@ -20,3 +20,11 @@ export const useGetTypeMaterial = () => {
 export const useGetTypeOfficial = () => {
   return useQuery("getOfficialPage", oavIV.getOfficialPage);
 };
+
+export const useGetTypeOnline = () => {
+  return useQuery("getOnlineEvent", oavIV.getOnlineEvent);
+};
+
+export const useGetMediaProjects = () => {
+  return useQuery("getMediaProjects", oavIV.getMediaProjects);
+};

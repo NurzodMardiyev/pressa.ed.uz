@@ -9,14 +9,41 @@ import "../../App.css";
 
 const items = [
   {
-    key: "",
+    key: "/superadminpanel/dashboard",
     label: "Bosh Sahifa",
     icon: <SiGooglenews />,
+  },
+
+  {
+    key: "sub2",
+    label:
+      "Faoliyatga doir axborotni OAV, Internet saytlar va ijtimoiy tarmoqlar orqali yoritilishi",
+    icon: <SiGooglenews />,
+    children: [
+      { key: "/superadminpanel/televediniye", label: "Telvideniye" },
+      { key: "/superadminpanel/radio", label: "Radio" },
+      { key: "/superadminpanel/oav", label: "Bosma OAV (gazeta va jurnallar)" },
+      { key: "/superadminpanel/internet_sites", label: "Internet saytlari" },
+      {
+        key: "/superadminpanel/messenger",
+        label: "Ijtimoiy tarmoq va messenjerlar",
+      },
+    ],
   },
   {
     key: "/superadminpanel/allemployees",
     label: "Barcha Xodimlar",
     icon: <SiGooglenews />,
+  },
+  {
+    key: "sub4",
+    label: "Matbuot kotibi tomonidan o‘tkazilgan mediatadbirlar",
+    icon: <SiGooglenews />,
+    children: [
+      { key: "/superadminpanel/matbuot_anjumani", label: "Matbuot anjumani" },
+      { key: "/superadminpanel/brifing", label: "Brifing" },
+      { key: "/superadminpanel/press_tur", label: "Press tur" },
+    ],
   },
   {
     key: "/superadminpanel/addemployees",
@@ -25,53 +52,23 @@ const items = [
   },
 
   {
-    key: "/",
+    key: "/superadminpanel/onlayn_efir",
+    label: "Ijtimoiy tarmoqlarda berilgan onlayn efir (ovozli chat)lar soni",
+    icon: <SiGooglenews />,
+  },
+  {
+    key: "/superadminpanel/korzinka",
     label: "Karzinka",
     icon: <SiGooglenews />,
   },
 ];
 
 const SuperSideBar = () => {
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const tvMutation = useMutation(oavIV.tv, {
-    onSuccess: () => queryClient.invalidateQueries(),
-    onError: () => console.error("Error in tv mutation"),
-  });
-
-  const mediaMutation = useMutation(oavIV.eventMediaGetChannel, {
-    onSuccess: () => {
-      queryClient.invalidateQueries();
-      console.log("Media mutation succeeded");
-    },
-    onError: () => console.error("Error in media mutation"),
-  });
-
-  const mediaAllMutation = useMutation(oavIV.eventMediaAll, {
-    onSuccess: () => queryClient.invalidateQueries(),
-    onError: () => console.error("Error in mediaAll mutation"),
-  });
-
   const handleClick = (e) => {
     const key = e.key;
-
-    const mediaKeys = [
-      "/brifing",
-      "/press_tur",
-      "/matbuot_anjumani",
-      "/infografika",
-      "/audio",
-      "/video",
-    ];
-
-    if (mediaKeys.includes(key)) {
-      if (!mediaMutation.isLoading) mediaMutation.mutate();
-      if (!mediaAllMutation.isLoading) mediaAllMutation.mutate();
-    } else {
-      if (!tvMutation.isLoading) tvMutation.mutate(key);
-    }
 
     navigate(key);
   };
@@ -85,7 +82,7 @@ const SuperSideBar = () => {
         items={items}
         className="bg-slate-100 dark:bg-gray-800 dark:text-white pt-20 md:w-[330px] h-[100vh] fixed overflow-y-scroll z-[99]"
       />
-      <style jsx>{`
+      <style jsx="true">{`
         ::-webkit-scrollbar {
           width: 1px;
         }
