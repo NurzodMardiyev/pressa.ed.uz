@@ -5,7 +5,7 @@ import { oavIV } from "../../../feature/queryApi";
 import { Toast } from "primereact/toast";
 import { PlusOutlined } from "@ant-design/icons";
 import { useMutation, useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 let index = 0;
 
 const config = {
@@ -22,6 +22,7 @@ export default function Video() {
   // const queryClient = useQueryClient();
   const toast = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   // const token = JSON.parse(localStorage.getItem("token"));
 
@@ -37,9 +38,15 @@ export default function Video() {
         queryClient.invalidateQueries();
         showSuccess();
         // reset();
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 300);
+        if (location.pathname === "/superadminpanel/video") {
+          setTimeout(() => {
+            navigate("/superadminpanel/dashboard");
+          }, 300);
+        } else {
+          setTimeout(() => {
+            navigate("/dashboard");
+          }, 300);
+        }
       },
       onError: () => {
         showError();

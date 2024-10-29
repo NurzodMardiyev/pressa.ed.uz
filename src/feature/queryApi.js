@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const IP = "10.10.2.131";
+const IP = "10.10.3.181";
 const api = `http://${IP}:8080/api`;
 
 // Tokenni har safar olish uchun
@@ -162,7 +162,6 @@ export const oavIV = {
         },
       });
 
-      console.log(data);
       return data;
     } catch (error) {
       throw new Error(error.message);
@@ -453,6 +452,24 @@ export const oavIV = {
     }
   },
 
+  // Coverage Loyiha  get zapros
+  getCoverage: async () => {
+    //botta type beriladi
+    try {
+      const token = getToken();
+      const { data } = await axios.get(`${api}/coverage/get-all`, {
+        headers: {
+          Authorization: `${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
   deletePost: async (id) => {
     //botta type beriladi
     try {
@@ -567,6 +584,24 @@ export const oavIV = {
           },
         }
       );
+
+      console.log("ishl");
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  deleteCoverage: async (id) => {
+    //botta type beriladi
+    try {
+      const token = getToken();
+      const { data } = await axios.delete(`${api}/coverage/delete?id=${id}`, {
+        headers: {
+          Authorization: `${token}`,
+          "Content-Type": "application/json",
+        },
+      });
 
       console.log("ishl");
       return data;
@@ -772,6 +807,101 @@ export const oavIV = {
       throw new Error(error.message);
     }
   },
+
+  // O'chirilgan Material ni qayta tiklash uchun
+  getMaterialReload: async (id) => {
+    try {
+      const token = getToken();
+      const { data } = await axios.get(
+        `${api}/material/recovered?materialId=${id}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  getCoveragesReload: async (id) => {
+    try {
+      const token = getToken();
+      const { data } = await axios.get(
+        `${api}/coverage/recovered?coverageId=${id}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  // O'chirilgan Material ni qayta tiklash uchun
+  getOnlineReload: async (id) => {
+    try {
+      const token = getToken();
+      const { data } = await axios.get(
+        `${api}/broadcast/recovered?broadcastId=${id}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  getOfficialReload: async (id) => {
+    try {
+      const token = getToken();
+      const { data } = await axios.get(
+        `${api}/official-page/recovered?officialPageId=${id}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  getMediaProjectsReload: async (id) => {
+    try {
+      const token = getToken();
+      const { data } = await axios.get(
+        `${api}/media-project/recovered?mediaProjectId=${id}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
   deletePosttoTrash: async (id) => {
     //botta type beriladi
     try {
@@ -812,12 +942,108 @@ export const oavIV = {
     }
   },
 
+  deleteMaterialtoTrash: async (id) => {
+    //botta type beriladi
+    try {
+      const token = getToken();
+      const { data } = await axios.delete(
+        `${api}/material/absolute-delete?materialId=${id}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  deleteOnlinetoTrash: async (id) => {
+    //botta type beriladi
+    try {
+      const token = getToken();
+      const { data } = await axios.delete(
+        `${api}/broadcast/absolute-delete?broadcastId=${id}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  deleteOfficialtoTrash: async (id) => {
+    //botta type beriladi
+    try {
+      const token = getToken();
+      const { data } = await axios.delete(
+        `${api}/official-page/absolute-delete?officialPageId=${id}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  deleteMediaProjectstoTrash: async (id) => {
+    //botta type beriladi
+    try {
+      const token = getToken();
+      const { data } = await axios.delete(
+        `${api}/media-project/absolute-delete?mediaProjectId=${id}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  deleteCoveragestoTrash: async (id) => {
+    //botta type beriladi
+    try {
+      const token = getToken();
+      const { data } = await axios.delete(
+        `${api}/coverage/absolute-delete?coverageId=${id}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
   // Postlarni superadmin o'chiraolishi uchun
   deletePostSuperAdmin: async (obj) => {
     //botta type beriladi
     try {
       const token = getToken();
-      const { data } = await axios.delete(
+      const { data } = await axios.post(
         `${api}/admin/delete-employee-post`,
         obj,
         {

@@ -28,7 +28,7 @@ const config = {
   ],
 };
 
-export default function Televediniye1() {
+export default function RadioTVAdmin() {
   // const queryClient = useQueryClient();
   const { Option } = Select;
   const [mediaItems, setMediaItems] = useState([]);
@@ -48,8 +48,9 @@ export default function Televediniye1() {
         queryClient.invalidateQueries();
         showSuccess();
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/superadminpanel/dashboard");
         }, 300);
+        // reset();
       },
       onError: () => {
         showError();
@@ -59,8 +60,8 @@ export default function Televediniye1() {
   );
 
   const { data, isLoading, error } = useQuery(
-    ["tv", "/televediniye"],
-    () => oavIV.tv("/televediniye"),
+    ["tv", "/radio"],
+    () => oavIV.tv("/radio"),
     {
       refetchOnWindowFocus: false,
     }
@@ -86,8 +87,9 @@ export default function Televediniye1() {
       ...fieldsValue,
       time: fieldsValue["time"],
       showedMedia: fieldsValue["showedMedia"],
-      type: "televediniye",
+      type: "radio",
     };
+    console.log("Received values of form: ", values);
     addPost.mutate(values);
   };
   // Submit bosilganda ishlaydigan Funksiya
@@ -176,23 +178,22 @@ export default function Televediniye1() {
                   <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white md:text-xl">
                     Faoliyatga doir axborotni OAV, Internet saytlar va ijtimoiy
                     tarmoqlar <br /> orqali yoritilishi.{" "}
-                    <span className="uppercase">Televediniya</span>
+                    <span className="uppercase">Radio</span>
                   </h2>
                 </div>
                 <div className="md:mt-5 grid grid-cols-1 gap-x-6 md:gap-y-2 sm:gap-y-2 sm:grid-cols-6 ">
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="showedUser"
-                      label="Ko'rsatuvda qatnashgan OTM vakili F.I.O"
+                      label="Eshittirish qatnashgan OTM vakili F.I.O"
                       rules={[
                         {
                           required: true,
-                          message:
-                            "Iltimos Televediniyega chiqishini kiriting!",
+                          message: "Iltimos Eshittirishga chiqishini kiriting!",
                         },
                       ]}
                     >
-                      <Input className="py-1.5" />
+                      <Input className="py-1.5 " />
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">
@@ -206,32 +207,22 @@ export default function Televediniye1() {
                         },
                       ]}
                     >
-                      <Select placeholder="select scale" className="h-[41px]">
-                        <Option value="Rektor">Rektor</Option>
-                        <Option value="Prorektor">Prorektor</Option>
-                        <Option value="Matbuot kotibi">Matbuot kotibi</Option>
-                        <Option value="Boshqarma boshlig'i">
-                          Boshqarma boshlig'i
+                      <Select placeholder="select scale" className="h-[40px]">
+                        <Option value="Vazir">Vazir</Option>
+                        <Option value="Vazir o'rinbosari">
+                          Vazir o'rinbosari
                         </Option>
-                        <Option value="Bo'lim boshlig'i">
-                          Bo'lim boshlig'i
-                        </Option>
-                        <Option value="Dekan">Dekan</Option>
-                        <Option value="Dekan o'rinbosari">
-                          Dekan o'rinbosari
-                        </Option>
-                        <Option value="Kafedra mudiri">Kafedra mudiri</Option>
                       </Select>
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="channel"
-                      label="TV nomi"
+                      label="Radio kanal nomi"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos TV nomini kiriting!",
+                          message: "Iltimos Radio kanal nomini kiriting!",
                         },
                       ]}
                     >
@@ -373,7 +364,7 @@ export default function Televediniye1() {
                         },
                       ]}
                     >
-                      <Input placeholder="https://kun.uz" id="warning" />
+                      <Input placeholder="https://kun.uz" />
                     </Form.Item>
                   </div>
                 </div>

@@ -28,7 +28,7 @@ const config = {
   ],
 };
 
-export default function Televediniye1() {
+export default function TelevediniyeAdmin() {
   // const queryClient = useQueryClient();
   const { Option } = Select;
   const [mediaItems, setMediaItems] = useState([]);
@@ -46,10 +46,10 @@ export default function Televediniye1() {
     {
       onSuccess: () => {
         queryClient.invalidateQueries();
-        showSuccess();
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/superadminpanel/dashboard");
         }, 300);
+        showSuccess();
       },
       onError: () => {
         showError();
@@ -88,6 +88,7 @@ export default function Televediniye1() {
       showedMedia: fieldsValue["showedMedia"],
       type: "televediniye",
     };
+    console.log("Received values of form: ", values);
     addPost.mutate(values);
   };
   // Submit bosilganda ishlaydigan Funksiya
@@ -207,20 +208,8 @@ export default function Televediniye1() {
                       ]}
                     >
                       <Select placeholder="select scale" className="h-[41px]">
-                        <Option value="Rektor">Rektor</Option>
-                        <Option value="Prorektor">Prorektor</Option>
-                        <Option value="Matbuot kotibi">Matbuot kotibi</Option>
-                        <Option value="Boshqarma boshlig'i">
-                          Boshqarma boshlig'i
-                        </Option>
-                        <Option value="Bo'lim boshlig'i">
-                          Bo'lim boshlig'i
-                        </Option>
-                        <Option value="Dekan">Dekan</Option>
-                        <Option value="Dekan o'rinbosari">
-                          Dekan o'rinbosari
-                        </Option>
-                        <Option value="Kafedra mudiri">Kafedra mudiri</Option>
+                        <Option value="Vazir">Vazir</Option>
+                        <Option value="Prorektor">Vazir o'rinbosari</Option>
                       </Select>
                     </Form.Item>
                   </div>

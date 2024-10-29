@@ -60,7 +60,7 @@ export default function AddEmployees() {
 
   return (
     <div className="flex ">
-      <div className=" md:pt-24 pt-14 w-full ">
+      <div className="  w-full ">
         <div className=" w-full">
           <div className="container w-full mx-auto   flex ">
             <Form

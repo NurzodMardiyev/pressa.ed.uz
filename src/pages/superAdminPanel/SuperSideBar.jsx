@@ -5,61 +5,117 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "react-query";
 import { oavIV } from "../../feature/queryApi";
 import { FaTrashAlt } from "react-icons/fa";
+import { MdDashboard } from "react-icons/md";
+import { RiChatVoiceFill } from "react-icons/ri";
+import { MdPermMedia } from "react-icons/md";
+import { IoSchoolSharp } from "react-icons/io5";
+import { SiMaterialformkdocs } from "react-icons/si";
+import { BsPersonLinesFill } from "react-icons/bs";
+import { FaFacebookMessenger } from "react-icons/fa";
+import { AiFillProject } from "react-icons/ai";
+import { SiLevelsdotfyi } from "react-icons/si";
+import { FaStubber } from "react-icons/fa6";
+import { IoPersonAddSharp } from "react-icons/io5";
 import "../../App.css";
 
 const items = [
   {
     key: "/superadminpanel/dashboard",
     label: "Bosh Sahifa",
-    icon: <SiGooglenews />,
+    icon: <MdDashboard />,
   },
-
   {
-    key: "sub2",
-    label:
-      "Faoliyatga doir axborotni OAV, Internet saytlar va ijtimoiy tarmoqlar orqali yoritilishi",
+    key: "sub",
+    label: "Post joylashtirish",
     icon: <SiGooglenews />,
     children: [
-      { key: "/superadminpanel/televediniye", label: "Telvideniye" },
-      { key: "/superadminpanel/radio", label: "Radio" },
-      { key: "/superadminpanel/oav", label: "Bosma OAV (gazeta va jurnallar)" },
-      { key: "/superadminpanel/internet_sites", label: "Internet saytlari" },
       {
-        key: "/superadminpanel/messenger",
-        label: "Ijtimoiy tarmoq va messenjerlar",
+        key: "sub2",
+        label:
+          "Faoliyatga doir axborotni OAV, Internet saytlar va ijtimoiy tarmoqlar orqali yoritilishi",
+        icon: <RiChatVoiceFill />,
+        children: [
+          { key: "/superadminpanel/televediniye", label: "Telvideniye" },
+          { key: "/superadminpanel/radio", label: "Radio" },
+          {
+            key: "/superadminpanel/oav",
+            label: "Bosma OAV (gazeta va jurnallar)",
+          },
+          {
+            key: "/superadminpanel/internet_sites",
+            label: "Internet saytlari",
+          },
+          {
+            key: "/superadminpanel/messenger",
+            label: "Ijtimoiy tarmoq va messenjerlar",
+          },
+        ],
+      },
+      {
+        key: "sub4",
+        label: "Matbuot kotibi tomonidan o‘tkazilgan mediatadbirlar",
+        icon: <MdPermMedia />,
+        children: [
+          {
+            key: "/superadminpanel/matbuot_anjumani",
+            label: "Matbuot anjumani",
+          },
+          { key: "/superadminpanel/brifing", label: "Brifing" },
+          { key: "/superadminpanel/press_tur", label: "Press tur" },
+        ],
+      },
+      {
+        key: "/superadminpanel/foreign",
+        label:
+          "Xorijiy ommaviy axborot vositalarida OTM faoliyatiga doir e'lon qilingan materiallar soni",
+        icon: <IoSchoolSharp />,
+      },
+      {
+        key: "sub5",
+        label:
+          "Faoliyatga doir axborotni yetkazib berishda akustik va vizual materiallardan foydalanganligi",
+        icon: <SiMaterialformkdocs />,
+        children: [
+          { key: "/superadminpanel/infografika", label: "Infografika" },
+          { key: "/superadminpanel/audio", label: "Audio" },
+          { key: "/superadminpanel/video", label: "Video" },
+        ],
+      },
+      {
+        key: "/superadminpanel/onlayn_efir",
+        label:
+          "Ijtimoiy tarmoqlarda berilgan onlayn efir (ovozli chat)lar soni",
+        icon: <BsPersonLinesFill />,
+      },
+      {
+        key: "/superadminpanel/mediaprojects",
+        label: "Axborot xizmati tomonidan yo'lga qo'yilgan medialoyihalar",
+        icon: <AiFillProject />,
+      },
+      {
+        key: "/superadminpanel/levelIllumination",
+        label:
+          "OTM faoliyatidagi turli tadbirlarni ommaviy axborot vositalari orqali yoritilganlik darajasi",
+        icon: <SiLevelsdotfyi />,
       },
     ],
   },
+
   {
     key: "/superadminpanel/allemployees",
     label: "Barcha Xodimlar",
-    icon: <SiGooglenews />,
-  },
-  {
-    key: "sub4",
-    label: "Matbuot kotibi tomonidan o‘tkazilgan mediatadbirlar",
-    icon: <SiGooglenews />,
-    children: [
-      { key: "/superadminpanel/matbuot_anjumani", label: "Matbuot anjumani" },
-      { key: "/superadminpanel/brifing", label: "Brifing" },
-      { key: "/superadminpanel/press_tur", label: "Press tur" },
-    ],
-  },
-  {
-    key: "/superadminpanel/addemployees",
-    label: "Xodim Qo'shish",
-    icon: <SiGooglenews />,
+    icon: <FaStubber />,
   },
 
   {
-    key: "/superadminpanel/onlayn_efir",
-    label: "Ijtimoiy tarmoqlarda berilgan onlayn efir (ovozli chat)lar soni",
-    icon: <SiGooglenews />,
+    key: "/superadminpanel/addemployees",
+    label: "Xodim Qo'shish",
+    icon: <IoPersonAddSharp />,
   },
   {
     key: "/superadminpanel/korzinka",
     label: "Karzinka",
-    icon: <SiGooglenews />,
+    icon: <FaTrashAlt />,
   },
 ];
 

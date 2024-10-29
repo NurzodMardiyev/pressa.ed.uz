@@ -24,10 +24,9 @@ export default function Telegram() {
       onSuccess: () => {
         queryClient.invalidateQueries();
         showSuccess();
-        // reset();
-        // setTimeout(() => {
-        //   navigate("/dashboard");
-        // }, 300);
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 300);
       },
       onError: () => {
         showError();
@@ -108,8 +107,8 @@ export default function Telegram() {
 
                   <div className="sm:col-span-3">
                     <Form.Item
-                      name="xLink"
-                      label="X havolasi"
+                      name="instagramLink"
+                      label="Instagram havolasi"
                       rules={[
                         {
                           type: "url",
@@ -123,8 +122,8 @@ export default function Telegram() {
 
                   <div className="sm:col-span-3">
                     <Form.Item
-                      name="instagramLink"
-                      label="Instagram havolasi"
+                      name="link"
+                      label="X havolasi"
                       rules={[
                         {
                           type: "url",

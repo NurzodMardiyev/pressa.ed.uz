@@ -28,12 +28,12 @@ const config = {
   ],
 };
 
-export default function Brifing() {
+export default function BrifingAdmin() {
   // const [showItems, setShowItems] = useState([]);
   const toast = useRef(null);
 
   // channels
-  const [mediaItems, setMediaItems] = useState([]);
+  const [mediaItems, setMediaItems] = useState(["Vazir", "Vazir o'rinbosari"]);
   const [tvChannalNames, setTvChannalNames] = useState([]);
   const [radioChannal, setRadioChannal] = useState([]);
   const [newspaper, setNewspaper] = useState([]);
@@ -52,9 +52,8 @@ export default function Brifing() {
       onSuccess: () => {
         queryClient.invalidateQueries();
         showSuccess();
-        // reset();
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/superadminpanel/dashboard");
         }, 300);
       },
       onError: () => {
@@ -80,7 +79,6 @@ export default function Brifing() {
     if (data && dataAll) {
       // Ma'lumotlarni o'rnatish
 
-      const media = Array.isArray(data) ? data : [];
       const tvChananal = Array.isArray(dataAll?.body[0]?.media)
         ? dataAll?.body[0]?.media
         : [];
@@ -96,7 +94,6 @@ export default function Brifing() {
       const messanger = Array.isArray(dataAll?.body[4]?.shows)
         ? dataAll?.body[4]?.shows
         : [];
-      setMediaItems(media);
       setTvChannalNames(tvChananal);
       setRadioChannal(radioChannal);
       setNewspaper(newspaper);
@@ -146,6 +143,7 @@ export default function Brifing() {
         return acc;
       }, {});
     }
+    console.log("Received values of form: ", values);
     addPostMatbuot.mutate(values);
   };
 
@@ -331,36 +329,7 @@ export default function Brifing() {
                         placeholder="Please select"
                         defaultValue={[]}
                         options={mediaItems.map((item) => {
-                          let label, value;
-                          if (item === "RECTOR") {
-                            label = "Rektor";
-                            value = "Rektor";
-                          } else if (item === "VICE_RECTOR") {
-                            label = "Prorektor";
-                            value = "Prorektor";
-                          } else if (item === "PRESS_SECRETARY") {
-                            label = "Matbuot kotibi";
-                            value = "Matbuot kotibi";
-                          } else if (item === "HEAD_OF_ADMINISTRATION") {
-                            label = "Boshqarma boshlig‘i";
-                            value = "Boshqarma boshlig‘i";
-                          } else if (item === "HEAD_OF_DIVISION") {
-                            label = "Bo'lim boshlig‘i";
-                            value = "Bo'lim boshlig‘i";
-                          } else if (item === "DEAN") {
-                            label = "Dekan";
-                            value = "Dekan";
-                          } else if (item === "VICE_DEAN") {
-                            label = "Dekan o‘rinbosari";
-                            value = "Dekan o‘rinbosari";
-                          } else if (item === "HEAD_OF_DEPARTMENT") {
-                            label = "Kafedra mudiri";
-                            value = "Kafedra mudiri";
-                          } else {
-                            label = "boshqa";
-                            value = "boshqa";
-                          }
-                          return { label, value };
+                          return { label: item, value: item };
                         })}
                       />
                     </Form.Item>

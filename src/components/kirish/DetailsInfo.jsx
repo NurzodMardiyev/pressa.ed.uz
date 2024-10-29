@@ -25,7 +25,7 @@ import { oavIV } from "../../feature/queryApi";
 import { Toast } from "primereact/toast";
 let index = 0;
 
-const IP = "10.10.2.131";
+const IP = "10.10.3.181";
 
 const config = {
   rules: [
@@ -65,7 +65,10 @@ export default function DetailsInfo() {
   const [current, setCurrent] = useState(0);
   const [isAdded, setIsAdded] = useState(false);
   const [isRadioAdd, setIsRadioAdd] = useState(false);
-  const [isTvAdd, setIsTvAdd] = useState(false);
+  const [isSecondRadioAdded, setIsSecondRadioAdded] = useState(false);
+  const [isSecondInputAdded, setIsSecondInputAdded] = useState(false);
+  const [resourceInput, setResourceInput] = useState("");
+  const [resourceInput2, setResourceInput2] = useState("");
   const { Option } = Select;
   const queryClient = useQueryClient();
   const toast = useRef(null);
@@ -228,6 +231,7 @@ export default function DetailsInfo() {
   }, [data]);
 
   const onFinish = (fieldsValue) => {
+    let resource = `${resourceInput}, telefon: ${fieldsValue.resource[0].value}, televizor: ${fieldsValue.resource[1].value}, ${resourceInput2}`;
     let licenseValue = "";
 
     if (radioValue === "ha" && fieldsValue.license.length > 0) {
@@ -284,6 +288,7 @@ export default function DetailsInfo() {
       room: room,
       departmentOrganisation: departmentOrganisation,
       businessTrip: businessTrip,
+      resource: resource,
     };
 
     if (values.specialities) {
@@ -1070,7 +1075,7 @@ export default function DetailsInfo() {
                                   className="col-span-1"
                                 >
                                   <Input.TextArea
-                                    placeholder="Qachon va qayerda"
+                                    placeholder="Qaysi bo'lim birga o'tiradi"
                                     autoSize={{ minRows: 1, maxRows: 5 }}
                                     style={{
                                       height: 41,
@@ -1298,194 +1303,97 @@ export default function DetailsInfo() {
                         },
                       ]}
                     >
-                      <Input />
-                      {/* <Form.List name="resource">
+                      {/* <Input /> */}
+                      <Form.List name="resource">
                         {(fields, { add, remove }) => (
                           <>
                             <Form.Item>
                               <Input
                                 onChange={(e) => {
-                                  console.log(e.target.value.split("").length);
-                                  if (
-                                    e.target.value.split("").length > 3 &&
-                                    !isAdded
-                                  ) {
-                                    add();
+                                  // Inputning uzunligini tekshirish
+                                  setResourceInput(e.target.value);
+                                  if (e.target.value.length > 3 && !isAdded) {
+                                    add(); // Radio tugma qo'shish
                                     setIsAdded(true);
-                                  } else if (
-                                    e.target.value.split("").length < 4
-                                  ) {
-                                    console.log("yes");
-                                    remove(0);
+                                    setIsRadioAdd(false); // Radioga yangi element qo'shish uchun tayyorlanadi
+                                    setIsSecondRadioAdded(false); // Ikkinchi radio uchun flagni yana false qilish
+                                  } else if (e.target.value.length < 4) {
+                                    remove(0); // Input 4 harfdan kam bo'lsa, radio tugmani olib tashlash
                                     setIsAdded(false);
                                   }
                                 }}
                               />
                             </Form.Item>
-                            {fields.map(({ key, name, ...restField }) => (
-                              <Space
-                                key={key}
-                                style={{
-                                  marginBottom: "-20px",
-                                }}
-                                align="baseline"
-                                className="w-full relative items-center grid grid-cols-1"
-                              >
-                                <Form.Item
-                                  {...restField}
-                                  name={[name, "value"]}
-                                  rules={[
-                                    {
-                                      required: radioValue === "ha", // faqat "ha" tanlanganida kerak
-                                      message: "Missing direction",
-                                    },
-                                  ]}
-                                  className="col-span-1"
+
+                            {fields.map(
+                              ({ key, name, ...restField }, index) => (
+                                <Space
+                                  key={key}
+                                  style={{
+                                    marginBottom: "-20px",
+                                  }}
+                                  align="baseline"
+                                  className="w-full relative items-center grid grid-cols-1"
                                 >
-                                  <Form.List name="telefon">
-                                    {(fields, { add, remove }) => (
-                                      <>
-                                        <Form.Item
-                                          label="Telefon bor yo'qligi"
-                                          style={{
-                                            marginTop: "-20px",
-                                          }}
-                                        >
-                                          <Radio.Group
-                                            block
-                                            options={optionsAOKA}
-                                            optionType="button"
-                                            buttonStyle="solid"
-                                            onChange={(e) => {
-                                              //setRadioValueRoom(e.target.value); // Radio qiymatini saqlab qo'yamiz
-                                              if (
-                                                e.target.value &&
-                                                !isRadioAdd
-                                              ) {
-                                                add(); // Ha bo'lsa input qo'shiladi
-                                                setIsRadioAdd(true);
-                                              }
-                                            }}
-                                          />
-                                        </Form.Item>
-                                        {fields.map(
-                                          ({ key, name, ...restField }) => (
-                                            <Space
-                                              key={key}
-                                              style={{
-                                                marginTop: "-10px",
-                                              }}
-                                              align="baseline"
-                                              className="w-full relative items-center grid grid-cols-1"
-                                            >
-                                              <Form.Item
-                                                {...restField}
-                                                name={[name, "value"]}
-                                                rules={[
-                                                  {
-                                                    required:
-                                                      radioValue === "ha", // faqat "ha" tanlanganida kerak
-                                                    message:
-                                                      "Missing direction",
-                                                  },
-                                                ]}
-                                                className="col-span-1"
-                                              >
-                                                <Form.List name="telefon">
-                                                  {(
-                                                    fields,
-                                                    { add, remove }
-                                                  ) => (
-                                                    <>
-                                                      <Form.Item
-                                                        label="Telefon bor yo'qligi"
-                                                        style={{
-                                                          marginTop: "-20px",
-                                                        }}
-                                                      >
-                                                        <Radio.Group
-                                                          block
-                                                          options={optionsAOKA}
-                                                          optionType="button"
-                                                          buttonStyle="solid"
-                                                          onChange={(e) => {
-                                                            //setRadioValueRoom(e.target.value); // Radio qiymatini saqlab qo'yamiz
-                                                            if (
-                                                              e.target.value &&
-                                                              !isRadioAdd
-                                                            ) {
-                                                              add(); // Ha bo'lsa input qo'shiladi
-                                                              setIsRadioAdd(
-                                                                true
-                                                              );
-                                                            }
-                                                          }}
-                                                        />
-                                                      </Form.Item>
-                                                      {fields.map(
-                                                        ({
-                                                          key,
-                                                          name,
-                                                          ...restField
-                                                        }) => (
-                                                          <Space
-                                                            key={key}
-                                                            style={{
-                                                              marginTop:
-                                                                "-10px",
-                                                            }}
-                                                            align="baseline"
-                                                            className="w-full relative items-center grid grid-cols-1"
-                                                          >
-                                                            <Form.Item
-                                                              {...restField}
-                                                              name={[
-                                                                name,
-                                                                "value",
-                                                              ]}
-                                                              rules={[
-                                                                {
-                                                                  message:
-                                                                    "Missing direction",
-                                                                },
-                                                              ]}
-                                                              className="col-span-1"
-                                                            >
-                                                              <Input />
-                                                            </Form.Item>
-                                                            <MinusCircleOutlined
-                                                              onClick={() =>
-                                                                remove(name)
-                                                              }
-                                                              className="absolute z-10 top-4 right-1"
-                                                            />
-                                                          </Space>
-                                                        )
-                                                      )}
-                                                    </>
-                                                  )}
-                                                </Form.List>
-                                              </Form.Item>
-                                              <MinusCircleOutlined
-                                                onClick={() => remove(name)}
-                                                className="absolute z-10 top-4 right-1"
-                                              />
-                                            </Space>
-                                          )
-                                        )}
-                                      </>
-                                    )}
-                                  </Form.List>
-                                </Form.Item>
-                                <MinusCircleOutlined
-                                  onClick={() => remove(name)}
-                                  className="absolute z-10 top-6 right-1"
+                                  <Form.Item
+                                    {...restField}
+                                    name={[name, "value"]}
+                                    className="col-span-1 mt-[-10px]"
+                                    label={
+                                      index === 0
+                                        ? "Telefon bor yo'qligi"
+                                        : "Televizor bor yo'qligi"
+                                    }
+                                  >
+                                    <Radio.Group
+                                      block
+                                      options={optionsAOKA}
+                                      optionType="button"
+                                      buttonStyle="solid"
+                                      onChange={(e) => {
+                                        // Radio tugmasi tanlanganligini tekshirish
+                                        if (e.target.value && !isRadioAdd) {
+                                          add(); // Yangi radio tugma qo'shish
+                                          setIsRadioAdd(true);
+                                        } else if (
+                                          e.target.value && // Ikkinchi radio tugma tanlanganligini tekshirish
+                                          !isSecondRadioAdded // Yangi input faqat bir marta qo'shiladi
+                                        ) {
+                                          setIsSecondRadioAdded(true);
+                                          setIsSecondInputAdded(true);
+                                        }
+                                      }}
+                                    />
+                                  </Form.Item>
+
+                                  <MinusCircleOutlined
+                                    onClick={() => remove(name)}
+                                    className="absolute z-10 top-8 right-1"
+                                  />
+                                </Space>
+                              )
+                            )}
+                            {isSecondRadioAdded && isSecondInputAdded ? (
+                              <Form.Item
+                                label="Kompyuterlar soni, nechtasi hujjat bilan
+                    ishlash uchun, nechtasi montaj uchun; Qo'shimcha izoh"
+                              >
+                                <Input
+                                  onChange={(e) => {
+                                    setResourceInput2(e.target.value);
+                                  }}
                                 />
-                              </Space>
-                            ))}
+                                <MinusCircleOutlined
+                                  onClick={() => setIsSecondRadioAdded(false)}
+                                  className="absolute z-10 top-3 right-1"
+                                />
+                              </Form.Item>
+                            ) : (
+                              ""
+                            )}
                           </>
                         )}
-                      </Form.List> */}
+                      </Form.List>
                     </Form.Item>
                   </div>
                 </div>

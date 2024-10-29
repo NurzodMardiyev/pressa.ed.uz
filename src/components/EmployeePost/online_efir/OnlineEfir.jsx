@@ -5,7 +5,7 @@ import { oavIV } from "../../../feature/queryApi";
 import { Toast } from "primereact/toast";
 import { PlusOutlined } from "@ant-design/icons";
 import { useMutation, useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 let index = 0;
 
 const config = {
@@ -22,6 +22,7 @@ export default function OnlineEfir() {
   // const queryClient = useQueryClient();
   const toast = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   // const token = JSON.parse(localStorage.getItem("token"));
 
@@ -36,10 +37,15 @@ export default function OnlineEfir() {
       onSuccess: () => {
         queryClient.invalidateQueries();
         showSuccess();
-        // reset();
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 300);
+        if (location.pathname === "/superadminpanel/onlayn_efir") {
+          setTimeout(() => {
+            navigate("/superadminpanel/dashboard");
+          }, 300);
+        } else {
+          setTimeout(() => {
+            navigate("/dashboard");
+          }, 300);
+        }
       },
       onError: () => {
         showError();
@@ -55,20 +61,22 @@ export default function OnlineEfir() {
       publishDate: fieldsValue["publishDate"],
       materialType: "Video",
     };
-    console.log("Received values of form: ", values);
     onlineEent.mutate(values);
   };
   // Submit bosilganda ishlaydigan Funksiya
 
-  const stuffs = [
-    "Rektor",
-    "Prorektor",
-    "Matbuot kotibi",
-    "Boshqarma boshlig'i",
-    "Dekan",
-    "Dekan o'rinbosari",
-    "Kafedra mudiri",
-  ];
+  const stuffs =
+    location.pathname === "/superadminpanel/onlayn_efir"
+      ? ["Vazir", "Vazir o'rinbosari"]
+      : [
+          "Rektor",
+          "Prorektor",
+          "Matbuot kotibi",
+          "Boshqarma boshlig'i",
+          "Dekan",
+          "Dekan o'rinbosari",
+          "Kafedra mudiri",
+        ];
 
   const messengers = ["Telegram", "Instagram", "Facebook", "YouTube"];
   // Sellect Dastur Nomi
@@ -179,7 +187,7 @@ export default function OnlineEfir() {
                           height: 41,
                         }}
                         placeholder="Please select"
-                        defaultValue={[]}
+                        // defaultValue={[]}
                         options={stuffs.map((item) => ({
                           label: item,
                           value: item,

@@ -1,11 +1,21 @@
-import React, { useRef, useState } from "react";
-import { Button, DatePicker, Divider, Form, Input, Select, Space } from "antd";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Button,
+  DatePicker,
+  Divider,
+  Flex,
+  Form,
+  Input,
+  Select,
+  Space,
+  Spin,
+} from "antd";
 import "../../../App.css";
 import { oavIV } from "../../../feature/queryApi";
 import { Toast } from "primereact/toast";
 import { PlusOutlined } from "@ant-design/icons";
-import { useMutation, useQueryClient } from "react-query";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
 let index = 0;
 
 const config = {
@@ -18,37 +28,25 @@ const config = {
   ],
 };
 
-export default function Audio() {
+export default function InternetSitesJSAdmin() {
   // const queryClient = useQueryClient();
+  const { Option } = Select;
+  const [showItems, setShowItems] = useState([]);
   const toast = useRef(null);
   const navigate = useNavigate();
-  const location = useLocation();
 
   // const token = JSON.parse(localStorage.getItem("token"));
 
   const queryClient = useQueryClient();
   const token = JSON.parse(localStorage.getItem("token"));
-  const addPostInfografika = useMutation(
+  const addPost = useMutation(
     (values) =>
-      oavIV.addPostInfografika(values, {
-        headers: { Authorization: `${token}` },
-      }),
+      oavIV.addPost(values, { headers: { Authorization: `${token}` } }),
     {
       onSuccess: () => {
         queryClient.invalidateQueries();
         showSuccess();
         // reset();
-        if (location.pathname === "/superadminpanel/audio") {
-          setTimeout(() => {
-            navigate("/superadminpanel/dashboard");
-          }, 300);
-        } else if ("/audio") {
-          setTimeout(() => {
-            navigate("/dashboard");
-          }, 300);
-        } else {
-          navigate("/");
-        }
       },
       onError: () => {
         showError();
@@ -57,29 +55,40 @@ export default function Audio() {
     }
   );
 
+  const { data, isLoading, error } = useQuery(
+    ["tv", "/internet_sites"],
+    () => oavIV.tv("/internet_sites"),
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  useEffect(() => {
+    if (data) {
+      // Ma'lumotlarni o'rnatish
+      const shows = Array.isArray(data?.shows) ? data.shows : [];
+      setShowItems(shows);
+
+      // items va items1 ni yangilash
+      setItems1(shows);
+    }
+  }, [data]);
+
   // Submit bosilganda ishlaydigan Funksiya
   const onFinish = (fieldsValue) => {
     const values = {
       ...fieldsValue,
-      publishDate: fieldsValue["publishDate"],
-      materialType: "Audio",
+      time: fieldsValue["time"],
+      showedMedia: fieldsValue["showedMedia"],
+      type: "internet_sites",
     };
-    addPostInfografika.mutate(values);
+    console.log("Received values of form: ", values);
+    addPost.mutate(values);
   };
   // Submit bosilganda ishlaydigan Funksiya
 
-  const elon = [
-    "Televediniye",
-    "Radio",
-    "Gazeta/jurnallar",
-    "Internet saytlari",
-    "Telegram",
-    "Instagram",
-    "Youtube",
-    "Facebook",
-  ];
   // Sellect Dastur Nomi
-  const [items1, setItems1] = useState([]);
+  const [items1, setItems1] = useState(showItems);
   const [name1, setName1] = useState("");
   const inputRef1 = useRef(null);
   const onNameChange1 = (event) => {
@@ -106,13 +115,23 @@ export default function Audio() {
   const showError = (data) => {
     toast.current.show({
       severity: "error",
-      summary: "Error",
-      detail: `${data}`,
+      summary: "Xato",
+      detail: `To'g'ri kiritganingizga e'tibor bering! `,
       life: 0,
     });
   };
 
   // End step commands
+
+  if (isLoading)
+    return (
+      <div className="absolute w-full h-[100vh] top-0 left-0 flex items-center justify-center">
+        <Flex>
+          <Spin size="large" />
+        </Flex>
+      </div>
+    );
+  if (error) return <div>An error occurred: {error.message}</div>;
 
   return (
     <div>
@@ -134,20 +153,21 @@ export default function Audio() {
               <div className={`w-full  `}>
                 <div>
                   <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white md:text-xl">
-                    Faoliyatga doir axborotni yetkazib berishda akustik va
-                    vizual materiallardan foydalanganligi. <br />{" "}
-                    <span className="uppercase">Audio</span>
+                    Faoliyatga doir axborotni OAV, Internet saytlar va ijtimoiy
+                    tarmoqlar <br /> orqali yoritilishi.{" "}
+                    <span className="uppercase">Internet saytlar</span>
                   </h2>
                 </div>
                 <div className="md:mt-5 grid grid-cols-1 gap-x-6 md:gap-y-2 sm:gap-y-2 sm:grid-cols-6 ">
                   <div className="sm:col-span-3">
                     <Form.Item
-                      name="topic"
-                      label="Material mavzusi"
+                      name="showedUser"
+                      label="Internet saytlarda qatnashgan OTM vakili F.I.O"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos material mavzusini kiriting!",
+                          message:
+                            "Iltimos Internet saytlarga chiqishini kiriting!",
                         },
                       ]}
                     >
@@ -156,23 +176,8 @@ export default function Audio() {
                   </div>
                   <div className="sm:col-span-3">
                     <Form.Item
-                      name="publishDate"
-                      label="E'lon qilingan sanasi"
-                      {...config}
-                      className=""
-                    >
-                      <DatePicker
-                        //showTime={{ format: "HH:mm" }} // Sekundsiz faqat soat va daqiqa
-                        format="YYYY-MM-DD" // Umumiy format, sana + vaqt
-                        className="w-full py-1.5"
-                      />
-                    </Form.Item>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <Form.Item
-                      name="massMedia"
-                      label="E'lon qilingan OAV/Ijtimoiy tarmoq turi"
+                      name="stuff"
+                      label="Lavozimi"
                       rules={[
                         {
                           required: true,
@@ -180,12 +185,31 @@ export default function Audio() {
                         },
                       ]}
                     >
+                      <Select placeholder="select scale" className="h-[40px]">
+                        <Option value="Vazir">Vazir</Option>
+                        <Option value="Vazir o'rinbosari">
+                          Vazir o'rinbosari
+                        </Option>
+                      </Select>
+                    </Form.Item>
+                  </div>
+                  <div className="sm:col-span-3">
+                    <Form.Item
+                      name="showedMedia"
+                      label="Dastur nomi"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Iltimos Dastur nomini kiriting!",
+                        },
+                      ]}
+                    >
                       <Select
-                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[40px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
+                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[37px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
                         placeholder="custom dropdown render"
-                        dropdownRender={(menu) => (
+                        dropdownRender={(menu1) => (
                           <>
-                            {menu}
+                            {menu1}
                             <Divider
                               style={{
                                 margin: "8px 0",
@@ -197,7 +221,7 @@ export default function Audio() {
                               }}
                             >
                               <Input
-                                placeholder="Boshqa bo'lsa kiriting!"
+                                placeholder="Please enter item"
                                 ref={inputRef1}
                                 value={name1}
                                 onChange={onNameChange1}
@@ -208,31 +232,48 @@ export default function Audio() {
                                 icon={<PlusOutlined />}
                                 onClick={addItem1}
                               >
-                                Qo'shish
+                                Add item
                               </Button>
                             </Space>
                           </>
                         )}
-                        options={elon?.map((item) => ({
+                        options={items1.map((item) => ({
                           label: item,
                           value: item,
                         }))}
                       />
                     </Form.Item>
                   </div>
-
                   <div className="sm:col-span-3">
                     <Form.Item
-                      name="socialMediaName"
-                      label="E’lon qilingan OAV/Ijtimoiy tarmoq nomi"
+                      name="time"
+                      label="Chiqqan sanasi va vaqti"
+                      {...config}
+                      className=""
+                    >
+                      <DatePicker
+                        showTime={{ format: "HH:mm" }} // Sekundsiz faqat soat va daqiqa
+                        format="YYYY-MM-DD HH:mm" // Umumiy format, sana + vaqt
+                        className="w-full py-2"
+                      />
+                    </Form.Item>
+                  </div>
+                  <div className="sm:col-span-3">
+                    <Form.Item
+                      name="scale"
+                      label="Miqyosi (respublika yoki hududiy telekanal)"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos miqyosini kiriting!",
                         },
                       ]}
                     >
-                      <Input className="py-1.5" />
+                      <Select placeholder="select scale" className="h-[41px]">
+                        <Option value="Respublika">Respublika</Option>
+                        <Option value="Hududiy">Hududiy</Option>
+                        <Option value="Xorijiy">Xorijiy</Option>
+                      </Select>
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">
@@ -250,7 +291,7 @@ export default function Audio() {
                         },
                       ]}
                     >
-                      <Input placeholder="https://kun.uz" className="py-1.5" />
+                      <Input placeholder="https://kun.uz" />
                     </Form.Item>
                   </div>
                 </div>

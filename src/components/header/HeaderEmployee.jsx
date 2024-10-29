@@ -73,7 +73,7 @@ export default function HeaderEmployee() {
     );
 
   if (error) {
-    navigate("/signup");
+    navigate("/");
   }
 
   const base64Image = `data:image/png;base64,${data?.user.base64}`;
@@ -84,7 +84,7 @@ export default function HeaderEmployee() {
     <div className="dark:bg-gray-800 fixed top-0 bg-slate-100 w-full z-[999] ">
       <div className="header-wrapper container lg:max-w-[2560px] md:max-w-[1600px]  mx-auto flex justify-between py-4 md:px-5  ">
         <div className="logpSection flex gap-6 items-center ">
-          <Link to="/signup" className="logo h-[30px]  md:h-[40px]">
+          <Link to="/" className="logo h-[30px]  md:h-[40px]">
             <img className="w-full h-full" src={logo} alt="OTFIV logo" />
           </Link>
         </div>

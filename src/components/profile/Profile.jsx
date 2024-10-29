@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import { useEmployeeInfo } from "../../hooks/useEmployeeInfo";
-import { Flex, Spin } from "antd";
+import { Button, Flex, message, Modal, Spin, Upload } from "antd";
+import { Link } from "react-router-dom";
+import { UploadOutlined } from "@ant-design/icons";
+
+const IP = "10.10.3.181";
 
 export default function Profile() {
   const { data, isLoading, isError } = useEmployeeInfo();
@@ -53,6 +57,39 @@ export default function Profile() {
     setEnterDate(enterDate?.join("-"));
   }, [data?.createdAt]);
 
+  const token = JSON.parse(localStorage.getItem("token"));
+
+  const beforeUpload = (file) => {
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    if (!isJpgOrPng) {
+      message.error("Faqat JPG yoki PNG formatdagi fayllarni yuklash mumkin!");
+      return false;
+    }
+
+    const isLt2M = file.size / 1024 / 1024 < 2; // 2MB dan katta fayllarni yuklashni oldini olish
+    if (!isLt2M) {
+      message.error("Rasm hajmi 2MB dan oshmasligi kerak!");
+      return false;
+    }
+
+    return isJpgOrPng && isLt2M;
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [updateImg, setUpdateImg] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    if (updateImg) {
+      window.location.reload();
+    }
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   const base64Image = `data:image/png;base64,${data?.user.base64}`;
 
   if (isLoading)
@@ -74,7 +111,55 @@ export default function Profile() {
               alt={data?.user.fullName}
               className="object-cover w-full rounded-full  h-full"
             />
-            <button className="absolute bg-blue-500 bottom-2 right-2 p-2 rounded-full text-white">
+            <Modal
+              title="Profil rasmingizni o'zgartiring!"
+              open={isModalOpen}
+              onOk={handleOk}
+              onCancel={handleCancel}
+            >
+              <Upload
+                action={`http://${IP}:8080/api/employee/settings/upload-photo`}
+                listType="picture"
+                beforeUpload={beforeUpload} // Uploaddan oldin JPG yoki PNG formatini tekshirish
+                headers={{
+                  Authorization: `${token}`, // Headerlarda tokenni qo'shamiz
+                }}
+                enctype="multipart/form-data"
+                name="photo"
+                className="w-full"
+                onChange={(info) => {
+                  if (info.file.status === "done") {
+                    message.success(`${info.file.name} yuklandi.`);
+                    setUpdateImg(true);
+                    console.log("Yuklash tugadi:", info.file.response);
+                  } else if (info.file.status === "error") {
+                    message.error(`${info.file.name} yuklanmadi.`);
+                    setUpdateImg(false);
+                    console.log("Yuklashda xato:", info.file.response);
+                  }
+                }}
+              >
+                <div className="w-full flex flex-col gap-2">
+                  <label htmlFor="" className="flex items-center gap-1">
+                    <span className="text-[17px] text-red-500  inline-block">
+                      *
+                    </span>{" "}
+                    Rasmingizni yuklang (JPG yoki PNG)
+                  </label>
+                  <Button
+                    type="bg-[#73d13d]"
+                    icon={<UploadOutlined />}
+                    className="w-full bg-inherit h-[41px] text-[#333] border border-[#D9D9D9] hover:text-[#4CA852] hover:border-[#4CA852]"
+                  >
+                    Yuklash
+                  </Button>
+                </div>
+              </Upload>
+            </Modal>
+            <button
+              className="absolute bg-blue-500 bottom-2 right-2 p-2 rounded-full text-white"
+              onClick={showModal}
+            >
               <FaCamera />
             </button>
           </div>
@@ -273,6 +358,14 @@ export default function Profile() {
                 </p>
               </div>
             </div>
+          </div>
+          <div>
+            <Link
+              to="/detailsinfo"
+              className="px-8 py-2 rounded bg-green-400 text-white float-right my-4"
+            >
+              O'zgartirish
+            </Link>
           </div>
         </div>
       </div>

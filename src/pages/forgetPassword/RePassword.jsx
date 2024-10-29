@@ -26,7 +26,7 @@ export default function RePassword() {
       onSuccess: () => {
         queryClient.invalidateQueries();
         showSuccess();
-        navigate("/signup");
+        navigate("/");
       },
       onError: (error) => {
         showError(error);

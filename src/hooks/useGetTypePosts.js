@@ -28,3 +28,7 @@ export const useGetTypeOnline = () => {
 export const useGetMediaProjects = () => {
   return useQuery("getMediaProjects", oavIV.getMediaProjects);
 };
+
+export const useGetCoverage = () => {
+  return useQuery("getCoverage", oavIV.getCoverage);
+};

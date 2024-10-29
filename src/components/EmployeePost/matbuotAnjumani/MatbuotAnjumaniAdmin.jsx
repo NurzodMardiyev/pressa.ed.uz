@@ -28,18 +28,18 @@ const config = {
   ],
 };
 
-export default function Brifing() {
+export default function MatbuotAnjumaniJSAdmin() {
   // const [showItems, setShowItems] = useState([]);
   const toast = useRef(null);
+  const navigate = useNavigate();
 
   // channels
-  const [mediaItems, setMediaItems] = useState([]);
+  const [mediaItems, setMediaItems] = useState(["Vazir", "Vazir o'rinbosari"]);
   const [tvChannalNames, setTvChannalNames] = useState([]);
   const [radioChannal, setRadioChannal] = useState([]);
   const [newspaper, setNewspaper] = useState([]);
   const [webSite, setWebSite] = useState([]);
   const [messanger, setMessanger] = useState([]);
-  const navigate = useNavigate();
 
   // const token = JSON.parse(localStorage.getItem("token"));
 
@@ -52,10 +52,10 @@ export default function Brifing() {
       onSuccess: () => {
         queryClient.invalidateQueries();
         showSuccess();
-        // reset();
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/superadminpanel/dashboard");
         }, 300);
+        // reset();
       },
       onError: () => {
         showError();
@@ -80,7 +80,6 @@ export default function Brifing() {
     if (data && dataAll) {
       // Ma'lumotlarni o'rnatish
 
-      const media = Array.isArray(data) ? data : [];
       const tvChananal = Array.isArray(dataAll?.body[0]?.media)
         ? dataAll?.body[0]?.media
         : [];
@@ -96,7 +95,6 @@ export default function Brifing() {
       const messanger = Array.isArray(dataAll?.body[4]?.shows)
         ? dataAll?.body[4]?.shows
         : [];
-      setMediaItems(media);
       setTvChannalNames(tvChananal);
       setRadioChannal(radioChannal);
       setNewspaper(newspaper);
@@ -111,7 +109,7 @@ export default function Brifing() {
       ...fieldsValue,
       dateOfEvent: fieldsValue["dateOfEvent"],
       showedMedia: fieldsValue["showedMedia"],
-      type: "Brifing",
+      type: "Matbuot_anjumani",
     };
 
     if (values.tv_channels) {
@@ -146,6 +144,7 @@ export default function Brifing() {
         return acc;
       }, {});
     }
+    console.log("Received values of form: ", values);
     addPostMatbuot.mutate(values);
   };
 
@@ -288,7 +287,7 @@ export default function Brifing() {
                 <div>
                   <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white md:text-xl">
                     Matbuot kotibi tomonidan o‘tkazilgan mediyatadbirlar. <br />{" "}
-                    <span className="uppercase">Brifing</span>
+                    <span className="uppercase">Matbuot anjumani</span>
                   </h2>
                 </div>
                 <div className="md:mt-5 grid grid-cols-1 gap-x-6 md:gap-y-2 sm:gap-y-2 sm:grid-cols-6 ">
@@ -314,8 +313,7 @@ export default function Brifing() {
                       rules={[
                         {
                           required: true,
-                          message:
-                            "Iltimos, Ishchi hodimlarning ro'yhatini kiriting!",
+                          message: "Iltimos, qiymatni qo'shing!",
                         },
                       ]}
                       style={{
@@ -329,38 +327,9 @@ export default function Brifing() {
                           height: 41,
                         }}
                         placeholder="Please select"
-                        defaultValue={[]}
+                        // defaultValue={[]}
                         options={mediaItems.map((item) => {
-                          let label, value;
-                          if (item === "RECTOR") {
-                            label = "Rektor";
-                            value = "Rektor";
-                          } else if (item === "VICE_RECTOR") {
-                            label = "Prorektor";
-                            value = "Prorektor";
-                          } else if (item === "PRESS_SECRETARY") {
-                            label = "Matbuot kotibi";
-                            value = "Matbuot kotibi";
-                          } else if (item === "HEAD_OF_ADMINISTRATION") {
-                            label = "Boshqarma boshlig‘i";
-                            value = "Boshqarma boshlig‘i";
-                          } else if (item === "HEAD_OF_DIVISION") {
-                            label = "Bo'lim boshlig‘i";
-                            value = "Bo'lim boshlig‘i";
-                          } else if (item === "DEAN") {
-                            label = "Dekan";
-                            value = "Dekan";
-                          } else if (item === "VICE_DEAN") {
-                            label = "Dekan o‘rinbosari";
-                            value = "Dekan o‘rinbosari";
-                          } else if (item === "HEAD_OF_DEPARTMENT") {
-                            label = "Kafedra mudiri";
-                            value = "Kafedra mudiri";
-                          } else {
-                            label = "boshqa";
-                            value = "boshqa";
-                          }
-                          return { label, value };
+                          return { label: item, value: item };
                         })}
                       />
                     </Form.Item>
@@ -371,7 +340,7 @@ export default function Brifing() {
                       name="tv_channels"
                       label="Telekanal nomi va url manzilini qo'shing!"
                       style={{
-                        marginBottom: 20,
+                        marginBottom: 10,
                       }}
                     >
                       <Form.List name="tv_channels">

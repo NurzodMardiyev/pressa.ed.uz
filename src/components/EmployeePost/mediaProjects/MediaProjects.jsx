@@ -15,12 +15,13 @@ import { oavIV } from "../../../feature/queryApi";
 import { Toast } from "primereact/toast";
 import { PlusOutlined } from "@ant-design/icons";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 let index = 0;
 
 export default function MediaProjects() {
   const toast = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   // const token = JSON.parse(localStorage.getItem("token"));
 
@@ -33,9 +34,15 @@ export default function MediaProjects() {
       onSuccess: () => {
         queryClient.invalidateQueries();
         showSuccess();
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 300);
+        if (location.pathname === "/superadminpanel/mediaprojects") {
+          setTimeout(() => {
+            navigate("/superadminpanel/dashboard");
+          }, 300);
+        } else {
+          setTimeout(() => {
+            navigate("/dashboard");
+          }, 300);
+        }
       },
       onError: () => {
         showError();
@@ -49,7 +56,6 @@ export default function MediaProjects() {
     const values = {
       ...fieldsValue,
     };
-    console.log("Received values of form: ", values);
     addMediaProjectt.mutate(values);
   };
   // Submit bosilganda ishlaydigan Funksiya

@@ -1,16 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 // import { useEmployeeInfo } from "../../../hooks/useEmployeeInfo";
 import { Button, Flex, Popconfirm, Spin, Table } from "antd";
 import { useMutation, useQueryClient } from "react-query";
 import { oavIV } from "../../../feature/queryApi";
-import {
-  useGetMediaProjects,
-  useGetTypeMaterial,
-  useGetTypeMediaEvent,
-  useGetTypeOfficial,
-  useGetTypeOnline,
-  useGetTypePosts,
-} from "../../../hooks/useGetTypePosts";
+import gif from "../../../images/ezgif-2-4f3658adc3-ezgif.com-gif-maker.gif";
 import { Link } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
 
@@ -279,76 +272,116 @@ const columnsMediaProjetcs = [
   },
 ];
 
+const columnsCoverage = [
+  {
+    title: "No",
+    dataIndex: "key",
+    rowScope: "row",
+  },
+  {
+    title: "Tadbir nomi",
+    dataIndex: "title",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Tadbir turi",
+    dataIndex: "tadbirTuri",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Yoritish shakli",
+    dataIndex: "yoritShakli",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "E'lon qilingan OAV/Ijtimoiy tarmoq turi",
+    dataIndex: "type",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Yoritilgan OAV nomi va linki!",
+    dataIndex: "link",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Yaratilgan sanasi",
+    dataIndex: "publishDate",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Harakat",
+    dataIndex: "action",
+    onCell: sharedOnCell,
+  },
+];
+
 export default function BoshSahifa() {
   const queryClient = useQueryClient();
-
-  const {
-    data: postData,
-    error: postError,
-    isLoading: isLoadingPosts,
-  } = useGetTypePosts();
-  const {
-    data: mediaData,
-    error: mediaError,
-    isLoading: isLoadingMedia,
-  } = useGetTypeMediaEvent();
-  const {
-    data: material,
-    error: materialError,
-    isLoading: isLoadingMaterial,
-  } = useGetTypeMaterial();
-  const {
-    data: official,
-    error: officialError,
-    isLoading: isLoadingOfficial,
-  } = useGetTypeOfficial();
-  const {
-    data: online,
-    error: onlenError,
-    isLoading: isLoadingOnline,
-  } = useGetTypeOnline();
-  const {
-    data: mediaProjects,
-    error: errorMediaProjects,
-    isLoading: isLoadingMediaprojects,
-  } = useGetMediaProjects();
+  const [coverageData, setCoverage] = useState([]);
+  const [postData, setPostData] = useState([]);
+  const [mediaData, setMediaData] = useState([]);
+  const [material, setMaterial] = useState([]);
+  const [official, setOfficial] = useState([]);
+  const [online, setOnline] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [mediaProjects, setMediaProjects] = useState([]);
 
   // Malumotlarni olib kelish va chiqarish
   const getTypePost = useMutation(oavIV.getTypePost, {
-    onSuccess: () => {
+    onSuccess: (data) => {
+      setPostData(data);
+      setLoading(false);
       queryClient.invalidateQueries();
     },
   });
 
   // Malumotlarni olib kelish va chiqarish
   const getTypeMediaEvent = useMutation(oavIV.getTypeMediaEvent, {
-    onSuccess: () => {
+    onSuccess: (data) => {
+      setMediaData(data);
+      setLoading(false);
       queryClient.invalidateQueries();
     },
   });
 
   // Malumotlarni olib kelish va chiqarish
   const getTypematerial = useMutation(oavIV.getTypeMaterial, {
-    onSuccess: () => {
+    onSuccess: (data) => {
+      setMaterial(data);
+      setLoading(false);
       queryClient.invalidateQueries();
     },
   });
 
   // Malumotlarni olib kelish va chiqarish
   const getOfficialPage = useMutation(oavIV.getOfficialPage, {
-    onSuccess: () => {
+    onSuccess: (data) => {
+      setOfficial(data);
+      setLoading(false);
       queryClient.invalidateQueries();
     },
   });
 
   const getOnlineEvent = useMutation(oavIV.getOnlineEvent, {
-    onSuccess: () => {
+    onSuccess: (data) => {
+      setOnline(data);
+      setLoading(false);
       queryClient.invalidateQueries();
     },
   });
 
   const getMediaProjects = useMutation(oavIV.getMediaProjects, {
-    onSuccess: () => {
+    onSuccess: (data) => {
+      setMediaProjects(data);
+      setLoading(false);
+      queryClient.invalidateQueries();
+    },
+  });
+
+  const getCoverage = useMutation(oavIV.getCoverage, {
+    onSuccess: (data) => {
+      setCoverage(data);
+      setLoading(false);
       queryClient.invalidateQueries();
     },
   });
@@ -362,6 +395,7 @@ export default function BoshSahifa() {
       getOfficialPage.mutateAsync(),
       getOnlineEvent.mutateAsync(),
       getMediaProjects.mutateAsync(),
+      getCoverage.mutateAsync(),
     ])
       .then(() => {
         console.log("All requests finished");
@@ -437,7 +471,6 @@ export default function BoshSahifa() {
     };
   });
 
-  console.log(mediaData);
   const dataTableMedia = mediaData?.body?.map((item, index) => {
     let type = ""; // Mahalliy o'zgaruvchi sifatida ishlatamiz
     if (item.mediaEventType === "PRESS_CONFERENCE") {
@@ -455,8 +488,8 @@ export default function BoshSahifa() {
           {type}
         </div>
       ),
-      stuffs: item.stuff.map((i) => {
-        return i + ", ";
+      stuffs: item.stuff.map((i, index) => {
+        return <span key={index}>{i + ", "}</span>;
       }),
       messengers: item.messengers
         ? Object.entries(item.messengers).map(([name, url]) => (
@@ -582,6 +615,14 @@ export default function BoshSahifa() {
           <span>{item.followers.YOUTUBE}</span>
         </div>
       ),
+      x: (
+        <div className="flex gap-3">
+          <Link to={item.messengersAndLinks.X} className="font-semibold">
+            {item.messengersAndLinks.X}
+          </Link>{" "}
+          <span>{item.followers.X}</span>
+        </div>
+      ),
       action: (
         <Popconfirm
           title={`ga tegishli post`}
@@ -607,7 +648,11 @@ export default function BoshSahifa() {
       key: index + 1,
       title: `${item.title}`,
       date: publishDate,
-      participation: item.stuff,
+      participation: item.stuff.map((i, index) => (
+        <span key={index}>
+          {i === "DEPUTY_MINISTER" ? "Vazir o'ribosari" : "Vazir"},{" "}
+        </span>
+      )),
       mesengerTitle: item.messenger,
       amountAttand: item.numberOfPeople,
       link: <Link to={`${item.link}`}> {item.link}</Link>,
@@ -643,6 +688,43 @@ export default function BoshSahifa() {
           okText="Yes"
           cancelText="No"
           onConfirm={() => handleDeleteMediaProjects(item.id)}
+        >
+          <Button danger>
+            {" "}
+            <FaTrashAlt />
+          </Button>
+        </Popconfirm>
+      ),
+    };
+  });
+
+  const dataCoverage = coverageData?.map((item, index) => {
+    return {
+      key: index + 1,
+      title: `${item.eventName}`,
+      tadbirTuri: item.eventType,
+      yoritShakli: item.publishType,
+      type: item.massMedia,
+      link: item.mediaLinks
+        ? Object.entries(item.mediaLinks).map(([name, url]) => (
+            <div key={name}>
+              <span>{name}</span>: <Link to={url}>`{url}`</Link>
+            </div>
+          ))
+        : "",
+      publishDate: item.publishDate.map((i, index) => (
+        <span key={index}>
+          {i}
+          {index !== item.publishDate.length - 1 && "-"}
+        </span>
+      )),
+      action: (
+        <Popconfirm
+          title={`ga tegishli post`}
+          description="Haqiqatdan ham o'chirmoqchimisiz?"
+          okText="Yes"
+          cancelText="No"
+          onConfirm={() => handleDeleteCoverage(item.id)}
         >
           <Button danger>
             {" "}
@@ -713,231 +795,322 @@ export default function BoshSahifa() {
     },
   });
 
+  // Coverage o'chirish uchun backendga so'rov Yuborish
+  const deleteCoverage = useMutation(oavIV.deleteCoverage, {
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
+
   const handleDeletePost = (id) => {
-    deletePost.mutate(id);
+    deletePost.mutate(id, {
+      onSuccess: () => {
+        setPostData((prevPostData) =>
+          prevPostData.filter((item) => item.id !== id)
+        );
+        queryClient.invalidateQueries();
+      },
+      onError: () => {
+        console.log("Error");
+      },
+    });
   };
   const handleDeleteMediaEvent = (id) => {
-    deleteMediaEvent.mutate(id);
+    deleteMediaEvent.mutate(id, {
+      onSuccess: () => {
+        setMediaData((prevMediaData) =>
+          prevMediaData?.body.filter((item) => item.id !== id)
+        );
+        queryClient.invalidateQueries();
+      },
+      onError: () => {
+        console.log("Error");
+      },
+    });
   };
   const handleDeleteMaterial = (id) => {
-    deletematerial.mutate(id);
+    deletematerial.mutate(id, {
+      onSuccess: () => {
+        setMaterial((prevMaterial) =>
+          prevMaterial.filter((item) => item.id !== id)
+        );
+        queryClient.invalidateQueries();
+      },
+      onError: () => {
+        console.log("Error");
+      },
+    });
   };
   const handleDeleteofficail = (id) => {
-    deleteofficial.mutate(id);
+    deleteofficial.mutate(id, {
+      onSuccess: () => {
+        setOfficial((prevOfficial) =>
+          prevOfficial.filter((item) => item.id !== id)
+        );
+        queryClient.invalidateQueries();
+      },
+      onError: () => {
+        console.log("Error");
+      },
+    });
   };
   const handleDeleteOnline = (id) => {
-    deleteOnline.mutate(id);
+    deleteOnline.mutate(id, {
+      onSuccess: () => {
+        setOnline((prevOnline) => prevOnline.filter((item) => item.id !== id));
+        queryClient.invalidateQueries();
+      },
+      onError: () => {
+        console.log("Error");
+      },
+    });
   };
   const handleDeleteMediaProjects = (id) => {
-    deleteMediaProjects.mutate(id);
+    deleteMediaProjects.mutate(id, {
+      onSuccess: () => {
+        setMediaProjects((prevMediaProject) =>
+          prevMediaProject.filter((item) => item.id !== id)
+        );
+        queryClient.invalidateQueries();
+      },
+      onError: () => {
+        console.log("Error");
+      },
+    });
+  };
+  const handleDeleteCoverage = (id) => {
+    deleteCoverage.mutate(id, {
+      onSuccess: () => {
+        // Backenddan muvaffaqiyatli o'chirilgandan so'ng interfeysni yangilash
+        setCoverage((prevCoverage) =>
+          prevCoverage.filter((item) => item.id !== id)
+        );
+        queryClient.invalidateQueries(); // Cache-ni yangilash
+      },
+      onError: () => {
+        console.log("error");
+      },
+    });
   };
 
-  // if (
-  //   postData &&
-  //   mediaData &&
-  //   material &&
-  //   online &&
-  //   official &&
-  //   mediaProjects
-  // ) {
-  //   return (
-  //     <div>
-  //       <div className="absolute w-full h-[100vh] top-0 left-0 flex items-center justify-center z-[]">
-  //         <div className="text-3xl text-[#0000007e] select-none">
-  //           Ma'lumot Yo'q
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
   // loading va Error qismi
+  if (loading) {
+    return (
+      <div className="flex w-full h-[100vh] justify-center items-center">
+        <Flex>
+          <Spin />
+        </Flex>
+      </div>
+    );
+  }
   if (
-    isLoadingPosts ||
-    isLoadingMedia ||
-    isLoadingMaterial ||
-    isLoadingOfficial ||
-    isLoadingOnline ||
-    isLoadingMediaprojects
-  )
+    postData?.length < 1 &&
+    mediaData?.body?.length < 1 &&
+    material?.length < 1 &&
+    online?.length < 1 &&
+    official?.length < 1 &&
+    mediaProjects?.length < 1 &&
+    coverageData?.length < 1
+  ) {
     return (
       <div>
-        <div className="absolute w-full h-[100vh] top-0 left-0 flex items-center justify-center bg-[#000000ab] z-[999]">
-          <Flex>
-            <Spin size="large" />
-          </Flex>
+        <div className="absolute w-full h-[100vh] top-0 left-0 flex items-center justify-center z-[]">
+          <div className="text-3xl text-[#0000007e] select-none">
+            <img src={gif} alt="" />
+          </div>
         </div>
       </div>
     );
-  if (
-    postError ||
-    mediaError ||
-    materialError ||
-    officialError ||
-    onlenError ||
-    errorMediaProjects
-  ) {
-    return <div>Error loading data</div>;
-  }
-  return (
-    <div>
-      <div className="pb-16 container w-[95%] mx-auto">
-        {/* Televediniya */}
+  } else {
+    return (
+      <div>
+        <div className="pb-16 container w-[95%] mx-auto">
+          {/* Televediniya */}
 
-        {postData?.length > 0 ? (
-          <div>
-            <div className="mb-3">
-              <h2 className="text-[20px]  dark:text-white">
-                <span className="font-[500] mr-2">
-                  Faoliyatga doir axborotni OAV, Internet saytlar va ijtimoiy
-                  tarmoqlar orqali yoritilishi
-                </span>
-              </h2>
-            </div>
+          {postData?.length > 0 ? (
             <div>
-              <div className="televediniya z-[] relative">
-                <Table
-                  columns={columns}
-                  dataSource={dataTable}
-                  bordered
-                  rowClassName=" dark:bg-inherit"
-                  className="z-0"
-                />
+              <div className="mb-3">
+                <h2 className="text-[20px]  dark:text-white">
+                  <span className="font-[500] mr-2">
+                    Faoliyatga doir axborotni OAV, Internet saytlar va ijtimoiy
+                    tarmoqlar orqali yoritilishi
+                  </span>
+                </h2>
+              </div>
+              <div>
+                <div className="televediniya z-[] relative">
+                  <Table
+                    columns={columns}
+                    dataSource={dataTable}
+                    bordered
+                    rowClassName=" dark:bg-inherit"
+                    className="z-0"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        ) : (
-          ""
-        )}
+          ) : (
+            ""
+          )}
 
-        {mediaData?.body?.length > 0 ? (
-          <div>
-            <div className="mb-3">
-              <h2 className="text-[20px]  dark:text-white">
-                <span className="font-[500] mr-2">
-                  Matbuot kotibi tomonidan o‘tkazilgan mediyatadbirlar.
-                </span>
-              </h2>
-            </div>
+          {mediaData?.body?.length > 0 ? (
             <div>
-              <div className="televediniya z-[] relative">
-                <Table
-                  columns={columnsMedia}
-                  dataSource={dataTableMedia}
-                  bordered
-                  rowClassName=" dark:bg-inherit"
-                  className="z-0"
-                />
+              <div className="mb-3">
+                <h2 className="text-[20px]  dark:text-white">
+                  <span className="font-[500] mr-2">
+                    Matbuot kotibi tomonidan o‘tkazilgan mediyatadbirlar.
+                  </span>
+                </h2>
+              </div>
+              <div>
+                <div className="televediniya z-[] relative">
+                  <Table
+                    columns={columnsMedia}
+                    dataSource={dataTableMedia}
+                    bordered
+                    rowClassName=" dark:bg-inherit"
+                    className="z-0"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        ) : (
-          ""
-        )}
+          ) : (
+            ""
+          )}
 
-        {material?.length > 0 ? (
-          <div>
-            <div className="mb-3">
-              <h2 className="text-[20px]  dark:text-white">
-                <span className="font-[500] mr-2">
-                  Faoliyatga doir axborotni yetkazib berishda akustik va vizual
-                  materiallardan foydalanganligi
-                </span>
-              </h2>
-            </div>
+          {material?.length > 0 ? (
             <div>
-              <div className="televediniya z-[] relative">
-                <Table
-                  columns={columnsmaterial}
-                  dataSource={dataMaterial}
-                  bordered
-                  rowClassName=" dark:bg-inherit"
-                  className="z-0"
-                />
+              <div className="mb-3">
+                <h2 className="text-[20px]  dark:text-white">
+                  <span className="font-[500] mr-2">
+                    Faoliyatga doir axborotni yetkazib berishda akustik va
+                    vizual materiallardan foydalanganligi
+                  </span>
+                </h2>
+              </div>
+              <div>
+                <div className="televediniya z-[] relative">
+                  <Table
+                    columns={columnsmaterial}
+                    dataSource={dataMaterial}
+                    bordered
+                    rowClassName=" dark:bg-inherit"
+                    className="z-0"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        ) : (
-          ""
-        )}
+          ) : (
+            ""
+          )}
 
-        {online?.length > 0 ? (
-          <div>
-            <div className="mb-3">
-              <h2 className="text-[20px]  dark:text-white">
-                <span className="font-[500] mr-2">
-                  Ijtimoiy tarmoqlarda berilgan onlayn efir (ovozli chat) lar
-                  soni
-                </span>
-              </h2>
-            </div>
+          {online?.length > 0 ? (
             <div>
-              <div className="televediniya z-[] relative">
-                <Table
-                  columns={columnsOnline}
-                  dataSource={dataOnline}
-                  bordered
-                  rowClassName=" dark:bg-inherit"
-                  className="z-0"
-                />
+              <div className="mb-3">
+                <h2 className="text-[20px]  dark:text-white">
+                  <span className="font-[500] mr-2">
+                    Ijtimoiy tarmoqlarda berilgan onlayn efir (ovozli chat) lar
+                    soni
+                  </span>
+                </h2>
+              </div>
+              <div>
+                <div className="televediniya z-[] relative">
+                  <Table
+                    columns={columnsOnline}
+                    dataSource={dataOnline}
+                    bordered
+                    rowClassName=" dark:bg-inherit"
+                    className="z-0"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        ) : (
-          ""
-        )}
+          ) : (
+            ""
+          )}
 
-        {official?.length > 0 ? (
-          <div>
-            <div className="mb-3">
-              <h2 className="text-[20px]  dark:text-white">
-                <span className="font-[500] mr-2">
-                  Ijtimoiy tarmoq va messenjerlardagi OTM rasmiy sahifalarida
-                  obunachilar soni
-                </span>
-              </h2>
-            </div>
+          {official?.length > 0 ? (
             <div>
-              <div className="televediniya z-[] relative">
-                <Table
-                  columns={columnsOfficial}
-                  dataSource={dataOfficial}
-                  bordered
-                  rowClassName=" dark:bg-inherit"
-                  className="z-0"
-                />
+              <div className="mb-3">
+                <h2 className="text-[20px]  dark:text-white">
+                  <span className="font-[500] mr-2">
+                    Ijtimoiy tarmoq va messenjerlardagi OTM rasmiy sahifalarida
+                    obunachilar soni
+                  </span>
+                </h2>
+              </div>
+              <div>
+                <div className="televediniya z-[] relative">
+                  <Table
+                    columns={columnsOfficial}
+                    dataSource={dataOfficial}
+                    bordered
+                    rowClassName=" dark:bg-inherit"
+                    className="z-0"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        ) : (
-          ""
-        )}
+          ) : (
+            ""
+          )}
 
-        {mediaProjects?.length > 0 ? (
-          <div>
-            <div className="mb-3">
-              <h2 className="text-[20px]  dark:text-white">
-                <span className="font-[500] mr-2">
-                  Axborot xizmati tomonidan yo'lga qo'yilgan medialoyihalar
-                </span>
-              </h2>
-            </div>
+          {mediaProjects?.length > 0 ? (
             <div>
-              <div className="televediniya z-[] relative">
-                <Table
-                  columns={columnsMediaProjetcs}
-                  dataSource={dataMediaProjects}
-                  bordered
-                  rowClassName=" dark:bg-inherit"
-                  className="z-0"
-                />
+              <div className="mb-3">
+                <h2 className="text-[20px]  dark:text-white">
+                  <span className="font-[500] mr-2">
+                    Axborot xizmati tomonidan yo'lga qo'yilgan medialoyihalar
+                  </span>
+                </h2>
+              </div>
+              <div>
+                <div className="televediniya z-[] relative">
+                  <Table
+                    columns={columnsMediaProjetcs}
+                    dataSource={dataMediaProjects}
+                    bordered
+                    rowClassName=" dark:bg-inherit"
+                    className="z-0"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        ) : (
-          ""
-        )}
+          ) : (
+            ""
+          )}
+
+          {coverageData?.length > 0 ? (
+            <div>
+              <div className="mb-3">
+                <h2 className="text-[20px]  dark:text-white">
+                  <span className="font-[500] mr-2">
+                    OTM faoliyatidagi turli tadbirlarni ommaviy axborot
+                    vositalari orqali yoritilganlik darajasi
+                  </span>
+                </h2>
+              </div>
+              <div>
+                <div className="televediniya z-[] relative">
+                  <Table
+                    columns={columnsCoverage}
+                    dataSource={dataCoverage}
+                    bordered
+                    rowClassName=" dark:bg-inherit"
+                    className="z-0"
+                  />
+                </div>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }

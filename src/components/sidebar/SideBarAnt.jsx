@@ -1,21 +1,29 @@
 import React from "react";
 import { Menu } from "antd";
-import { SiGooglenews } from "react-icons/si";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
+import { MdDashboard } from "react-icons/md";
+import { RiChatVoiceFill } from "react-icons/ri";
+import { MdPermMedia } from "react-icons/md";
+import { IoSchoolSharp } from "react-icons/io5";
+import { SiMaterialformkdocs } from "react-icons/si";
+import { BsPersonLinesFill } from "react-icons/bs";
+import { FaFacebookMessenger } from "react-icons/fa";
+import { AiFillProject } from "react-icons/ai";
+import { SiLevelsdotfyi } from "react-icons/si";
 import "../../App.css";
 
 const items = [
   {
     key: "/dashboard",
     label: "Bosh Sahifa",
-    icon: <SiGooglenews />,
+    icon: <MdDashboard />,
   },
   {
     key: "sub2",
     label:
       "Faoliyatga doir axborotni OAV, Internet saytlar va ijtimoiy tarmoqlar orqali yoritilishi",
-    icon: <SiGooglenews />,
+    icon: <RiChatVoiceFill />,
     children: [
       { key: "/televediniye", label: "Telvideniye" },
       { key: "/radio", label: "Radio" },
@@ -27,7 +35,7 @@ const items = [
   {
     key: "sub4",
     label: "Matbuot kotibi tomonidan o‘tkazilgan mediatadbirlar",
-    icon: <SiGooglenews />,
+    icon: <MdPermMedia />,
     children: [
       { key: "/matbuot_anjumani", label: "Matbuot anjumani" },
       { key: "/brifing", label: "Brifing" },
@@ -39,13 +47,13 @@ const items = [
     key: "/foreign",
     label:
       "Xorijiy ommaviy axborot vositalarida OTM faoliyatiga doir e'lon qilingan materiallar soni",
-    icon: <SiGooglenews />,
+    icon: <IoSchoolSharp />,
   },
   {
     key: "sub5",
     label:
       "Faoliyatga doir axborotni yetkazib berishda akustik va vizual materiallardan foydalanganligi",
-    icon: <SiGooglenews />,
+    icon: <SiMaterialformkdocs />,
     children: [
       { key: "/infografika", label: "Infografika" },
       { key: "/audio", label: "Audio" },
@@ -55,13 +63,13 @@ const items = [
   {
     key: "/onlayn_efir",
     label: "Ijtimoiy tarmoqlarda berilgan onlayn efir (ovozli chat)lar soni",
-    icon: <SiGooglenews />,
+    icon: <BsPersonLinesFill />,
   },
   {
     key: "sub6",
     label:
       "Ijtimoiy tarmoq va messenjerlardagi OTM rasmiy sahifalarida obunachilar soni.",
-    icon: <SiGooglenews />,
+    icon: <FaFacebookMessenger />,
     children: [
       { key: "/telegram", label: "Ijtimoiy tarmoqlar" },
       { key: "/organization", label: "Xodimlar" },
@@ -71,13 +79,13 @@ const items = [
   {
     key: "/mediaprojects",
     label: "Axborot xizmati tomonidan yo'lga qo'yilgan medialoyihalar",
-    icon: <SiGooglenews />,
+    icon: <AiFillProject />,
   },
   {
     key: "/levelIllumination",
     label:
       "OTM faoliyatidagi turli tadbirlarni ommaviy axborot vositalari orqali yoritilganlik darajasi",
-    icon: <SiGooglenews />,
+    icon: <SiLevelsdotfyi />,
   },
   {
     key: "/trashbox",
