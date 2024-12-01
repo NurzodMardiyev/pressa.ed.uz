@@ -1,16 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
 import logo from "../../images/pressa logo.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { IoCloseSharp } from "react-icons/io5";
 // import { useTranslation } from "react-i18next";
 import "../../App.css";
 export default function Header() {
   const [selectedLanguage, setSelectedLanguage] = useState("Uz");
   const [show, setShow] = useState(true);
   const menuRef = useRef(null);
+  const location = useLocation();
+  let display = "";
+  if (location.pathname.startsWith("/superadminpanel")) {
+    display = "hidden";
+  } else {
+    display = "";
+  }
 
   const languages = [
     {
@@ -31,10 +36,6 @@ export default function Header() {
     setSelectedLanguage(langCode);
   };
 
-  const handleShowMenu = () => {
-    setShow(!show);
-  };
-
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -50,10 +51,10 @@ export default function Header() {
   }, [menuRef]);
 
   return (
-    <div className="dark:bg-gray-800 fixed top-0 bg-slate-100 w-full z-[999] ">
-      <div className="header-wrapper container lg:max-w-[2560px] md:max-w-[1600px]  mx-auto flex justify-between py-4 md:px-5  ">
+    <div className="dark:bg-gray-800  bg-slate-100 w-full z-[99] flex  fixed">
+      <div className="header-wrapper container lg:max-w-[2560px] md:max-w-[1600px] shadow-md  mx-auto flex justify-between py-4 md:px-5 max-w-[768px] ">
         <div className="logpSection flex gap-6 items-center ">
-          <Link to="/" className="logo h-[30px]  md:h-[40px]">
+          <Link to="/" className="logo md:h-[50px]  h-[40px]">
             <img className="w-full h-full" src={logo} alt="OTFIV logo" />
           </Link>
         </div>
@@ -67,7 +68,7 @@ export default function Header() {
             <div>
               <MenuButton className="relative flex text-sm focus:outline-none rounded-l-lg md:border-r">
                 <span className="sr-only">Open user menu</span>
-                <div className="flex items-center gap-2 md:px-4 ps-0  md:py-1.5 py-1">
+                <div className="flex items-center gap-2 md:px-4 ps-0  md:py-2 py-1">
                   <img
                     alt=""
                     src={
@@ -93,7 +94,7 @@ export default function Header() {
                     key={lang.title}
                     onClick={() => handleLanguageChange(lang.title)}
                   >
-                    <div className="flex items-center gap-2 px-4 py-1.5 cursor-pointer">
+                    <div className="flex items-center gap-2 px-4 py-2 cursor-pointer">
                       <img alt="" src={lang.flag} className="md:w-7 w-5" />
                       <span className="font-[500] md:text-[14px] text-[12px] dark:text-white ">
                         {lang.title}
@@ -103,22 +104,13 @@ export default function Header() {
                 ))}
             </MenuItems>
           </Menu>
-          <div
-            className="responsiveMenu relative md:hidden  ps-3 py-1"
-            ref={menuRef}
-          >
-            <Link className="transition-all duration-150">
-              {show ? (
-                <GiHamburgerMenu
-                  onClick={handleShowMenu}
-                  className="dark:text-white"
-                />
-              ) : (
-                <IoCloseSharp
-                  onClick={handleShowMenu}
-                  className="dark:text-white"
-                />
-              )}
+          <div className="md:block hidden">
+            <Link
+              className={`md:px-8 md:py-2 px-6 py-1.5 md:text-[14px] text-[12px] rounded bg-green-200 hover:shadow-xl transition-all duration-150 flex font-semibold ${display}`}
+              style={{ fontFamily: "Roboto" }}
+              to="/login"
+            >
+              Kirish
             </Link>
           </div>
         </div>

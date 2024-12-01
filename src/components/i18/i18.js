@@ -20,7 +20,7 @@ i18n
       uz: {
         translation: {
           greeting: {
-            oliy_talim: "Oliy ta'lim",
+            oliy_talim: "Oliy ta’lim",
           },
         },
       },

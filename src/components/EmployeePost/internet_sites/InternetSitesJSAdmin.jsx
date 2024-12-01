@@ -23,7 +23,7 @@ const config = {
     {
       type: "object",
       required: true,
-      message: "Please select time!",
+      message: "Iltimos Inputga qiymat kiriting!",
     },
   ],
 };
@@ -46,6 +46,9 @@ export default function InternetSitesJSAdmin() {
       onSuccess: () => {
         queryClient.invalidateQueries();
         showSuccess();
+        setTimeout(() => {
+          navigate("/superadminpanel/dashboard");
+        });
         // reset();
       },
       onError: () => {
@@ -65,7 +68,7 @@ export default function InternetSitesJSAdmin() {
 
   useEffect(() => {
     if (data) {
-      // Ma'lumotlarni o'rnatish
+      // Ma’lumotlarni oʻrnatish
       const shows = Array.isArray(data?.shows) ? data.shows : [];
       setShowItems(shows);
 
@@ -103,6 +106,44 @@ export default function InternetSitesJSAdmin() {
     }, 0);
   };
 
+  const [items2, setItems2] = useState([
+    "Vazir",
+    "Vazirning birinchi o‘rinbosari",
+    "Vazir o‘rinbosari",
+    "Vazir kotibiyati boshlig‘i",
+    "Vazir maslahatchisi",
+    "Vazir yordamchisi",
+    "Department boshlig‘i",
+    "Boshqarma boshlig‘i",
+    "Boshqarma boshlig‘i o‘rinbosari",
+    "Bo‘lim boshlig‘i",
+    "Bo‘lim boshlig‘i o‘rinbosari",
+    "Bosh mutaxassis",
+    "Yetakchi mutaxassis",
+    "Jamoatchilik kengashi raisi",
+    "Jamoatchilik kengash raisi o‘rinbosari",
+    "Jamoatchilik kengashi a’zosi",
+    "Ilmiy-texnik kengashlar raisi",
+    "Ilmiy-texnik kengashlar raisi o‘rinbosari",
+    "Ilmiy-texnik kengashlar a’zosi",
+    "Ilm-fan va innovatsiyalar kengashi raisi",
+    "Ilm-fan va innovatsiyalar kengashi raisi o‘rinbosari",
+    "Ilm-fan va innovatsiyalar kengashi a’zosi",
+  ]);
+  const [name2, setName2] = useState("");
+  const inputRef2 = useRef(null);
+  const onNameChange2 = (event) => {
+    setName2(event.target.value);
+  };
+  const addItem2 = (e) => {
+    e.preventDefault();
+    setItems2([...items2, name2 || `New item ${index++}`]);
+    setName2("");
+    setTimeout(() => {
+      inputRef2.current?.focus();
+    }, 0);
+  };
+
   const showSuccess = () => {
     toast.current.show({
       severity: "success",
@@ -116,7 +157,7 @@ export default function InternetSitesJSAdmin() {
     toast.current.show({
       severity: "error",
       summary: "Xato",
-      detail: `To'g'ri kiritganingizga e'tibor bering! `,
+      detail: `Toʻg‘ri kiritganingizga e'tibor bering! `,
       life: 0,
     });
   };
@@ -155,23 +196,22 @@ export default function InternetSitesJSAdmin() {
                   <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white md:text-xl">
                     Faoliyatga doir axborotni OAV, Internet saytlar va ijtimoiy
                     tarmoqlar <br /> orqali yoritilishi.{" "}
-                    <span className="uppercase">Internet saytlar</span>
+                    <span className="uppercase">Internet saytlari</span>
                   </h2>
                 </div>
                 <div className="md:mt-5 grid grid-cols-1 gap-x-6 md:gap-y-2 sm:gap-y-2 sm:grid-cols-6 ">
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="showedUser"
-                      label="Internet saytlarda qatnashgan OTM vakili F.I.O"
+                      label="Internet saytlarida  E’lon qilingan material muallifi/ishtirokchisining F.I.O"
                       rules={[
                         {
                           required: true,
-                          message:
-                            "Iltimos Internet saytlarga chiqishini kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
-                      <Input className="py-1.5" />
+                      <Input className="py-2" />
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">
@@ -181,32 +221,64 @@ export default function InternetSitesJSAdmin() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
-                      <Select placeholder="select scale" className="h-[40px]">
-                        <Option value="Vazir">Vazir</Option>
-                        <Option value="Vazir o'rinbosari">
-                          Vazir o'rinbosari
-                        </Option>
-                      </Select>
+                      <Select
+                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[41px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
+                        placeholder="Tegishlisini tanlang"
+                        dropdownRender={(menu2) => (
+                          <>
+                            {menu2}
+                            <Divider
+                              style={{
+                                margin: "8px 0",
+                              }}
+                            />
+                            <Space
+                              style={{
+                                padding: "0 8px 4px",
+                              }}
+                            >
+                              <Input
+                                placeholder="Boshqa boʻlsa kiriting!"
+                                ref={inputRef2}
+                                value={name2}
+                                onChange={onNameChange2}
+                                onKeyDown={(e) => e.stopPropagation()}
+                              />
+                              <Button
+                                type="text"
+                                icon={<PlusOutlined />}
+                                onClick={addItem2}
+                              >
+                                Qoʻshish
+                              </Button>
+                            </Space>
+                          </>
+                        )}
+                        options={items2.map((item) => ({
+                          label: item,
+                          value: item,
+                        }))}
+                      />
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="showedMedia"
-                      label="Dastur nomi"
+                      label="Sayt nomi"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos Dastur nomini kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
                       <Select
-                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[37px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
-                        placeholder="custom dropdown render"
+                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[41px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
+                        placeholder="Tegishlisini tanlang"
                         dropdownRender={(menu1) => (
                           <>
                             {menu1}
@@ -221,7 +293,7 @@ export default function InternetSitesJSAdmin() {
                               }}
                             >
                               <Input
-                                placeholder="Please enter item"
+                                placeholder="Bu yerga kiriting"
                                 ref={inputRef1}
                                 value={name1}
                                 onChange={onNameChange1}
@@ -232,7 +304,7 @@ export default function InternetSitesJSAdmin() {
                                 icon={<PlusOutlined />}
                                 onClick={addItem1}
                               >
-                                Add item
+                                Qoʻshish
                               </Button>
                             </Space>
                           </>
@@ -247,7 +319,7 @@ export default function InternetSitesJSAdmin() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="time"
-                      label="Chiqqan sanasi va vaqti"
+                      label="E’lon qilingan sanasi"
                       {...config}
                       className=""
                     >
@@ -261,15 +333,18 @@ export default function InternetSitesJSAdmin() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="scale"
-                      label="Miqyosi (respublika yoki hududiy telekanal)"
+                      label="Miqyosi "
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos miqyosini kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
-                      <Select placeholder="select scale" className="h-[41px]">
+                      <Select
+                        placeholder="Tegishlisini tanlang"
+                        className="h-[41px]"
+                      >
                         <Option value="Respublika">Respublika</Option>
                         <Option value="Hududiy">Hududiy</Option>
                         <Option value="Xorijiy">Xorijiy</Option>
@@ -279,11 +354,11 @@ export default function InternetSitesJSAdmin() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="link"
-                      label="Havolasini kiriting (http bilan boshlanishi shart!)"
+                      label="Havolasi "
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos Havolasini kiriting!",
+                          message: "Iltimos Havolasi!",
                         },
                         {
                           type: "url",

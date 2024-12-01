@@ -53,7 +53,7 @@ export default function AddEmployees() {
     toast.current.show({
       severity: "error",
       summary: "Xato kiritdingiz",
-      detail: `Bunday foydalanuvchi bo'lishi mumkin! `,
+      detail: `Bunday foydalanuvchi boʻlishi mumkin! `,
       life: 0,
     });
   };
@@ -79,7 +79,7 @@ export default function AddEmployees() {
               <div className={`w-full  `}>
                 <div>
                   <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white md:text-xl">
-                    Xodimlarni Qo'shish
+                    Xodimlarni Qoʻshish
                   </h2>
                 </div>
                 <div className="md:mt-5 grid grid-cols-12 gap-x-6 md:gap-y-2 sm:gap-y-2 sm:grid-cols-12">
@@ -90,11 +90,11 @@ export default function AddEmployees() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
-                      <Input className="py-1.5 w-full flex" />
+                      <Input className="py-2 w-full flex" />
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-6 w-full">
@@ -104,11 +104,11 @@ export default function AddEmployees() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
-                      <Input className="py-1.5 w-full flex" />
+                      <Input className="py-2 w-full flex" />
                     </Form.Item>
                   </div>
                 </div>

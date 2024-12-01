@@ -58,7 +58,7 @@ export default function Telegram() {
     toast.current.show({
       severity: "error",
       summary: "Xato",
-      detail: `To'g'ri kiritganingizga e'tibor bering! `,
+      detail: `Toʻg‘ri kiritganingizga e'tibor bering! `,
       life: 0,
     });
   };
@@ -85,8 +85,9 @@ export default function Telegram() {
               <div className={`w-full  `}>
                 <div>
                   <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white md:text-xl">
-                    Ijtimoiy tarmoq va messenjerlardagi OTM rasmiy sahifalarida
-                    <br /> obunachilar soni.
+                    OTMning ijtimoiy tarmoq va messenjerlardagi rasmiy
+                    sahifalarida <br />
+                    obunachilar soni.
                   </h2>
                 </div>
                 <div className="md:mt-5 grid grid-cols-1 gap-x-6 md:gap-y-2 sm:gap-y-2 sm:grid-cols-6 ">
@@ -101,7 +102,7 @@ export default function Telegram() {
                         },
                       ]}
                     >
-                      <Input placeholder="https://kun.uz" />
+                      <Input placeholder="faqat havolasini kiriting" />
                     </Form.Item>
                   </div>
 
@@ -116,7 +117,7 @@ export default function Telegram() {
                         },
                       ]}
                     >
-                      <Input placeholder="https://kun.uz" />
+                      <Input placeholder="havolasi va obunachilar sonini kiriting" />
                     </Form.Item>
                   </div>
 
@@ -131,7 +132,7 @@ export default function Telegram() {
                         },
                       ]}
                     >
-                      <Input placeholder="https://kun.uz" />
+                      <Input placeholder="havolasi va obunachilar sonini kiriting" />
                     </Form.Item>
                   </div>
 
@@ -146,7 +147,7 @@ export default function Telegram() {
                         },
                       ]}
                     >
-                      <Input placeholder="https://kun.uz" />
+                      <Input placeholder="faqat havolasini kiriting " />
                     </Form.Item>
                   </div>
                 </div>

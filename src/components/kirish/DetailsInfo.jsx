@@ -23,24 +23,25 @@ import "../../App.css";
 import { useMutation, useQueryClient, useQuery } from "react-query";
 import { oavIV } from "../../feature/queryApi";
 import { Toast } from "primereact/toast";
+import { ip } from "../../ips";
 let index = 0;
 
-const IP = "10.10.3.181";
+const IP = ip;
 
 const config = {
   rules: [
     {
       type: "object",
       required: true,
-      message: "Please select time!",
+      message: "Iltimos Inputga qiymat kiriting!",
     },
   ],
 };
 
 const optionsAOKA = [
   {
-    label: "Yo'q",
-    value: "yo'q",
+    label: "Yoʻq",
+    value: "yoʻq",
   },
   {
     label: "Ha",
@@ -51,11 +52,11 @@ const optionsAOKA = [
 // Steps
 const steps = [
   {
-    title: "Shaxsiy Ma'lumotlar",
+    title: "Shaxsiy Ma’lumotlar",
     content: 1,
   },
   {
-    title: "Umumiy Ma'lumotlar",
+    title: "Umumiy Ma’lumotlar",
     content: 2,
   },
 ];
@@ -81,80 +82,6 @@ export default function DetailsInfo() {
     setRadioValueDepartmentOrganisation,
   ] = useState("");
   const [radioValueBusinessTrip, setRadioValueBusinessTrip] = useState("");
-
-  // const convertToWebP = (file) => {
-  //   return new Promise((resolve, reject) => {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(file); // Faylni base64 formatida o'qib olish
-
-  //     reader.onload = function (e) {
-  //       const img = new Image();
-  //       img.src = e.target.result;
-
-  //       img.onload = function () {
-  //         const canvas = document.createElement("canvas");
-  //         const ctx = canvas.getContext("2d");
-
-  //         // Rasm o'lchamini belgilash (masalan, maksimal kenglik va balandlik)
-  //         const maxWidth = 800; // Kenglikni cheklash
-  //         const maxHeight = 800; // Balandlikni cheklash
-  //         let width = img.width;
-  //         let height = img.height;
-
-  //         if (width > height) {
-  //           if (width > maxWidth) {
-  //             height *= maxWidth / width;
-  //             width = maxWidth;
-  //           }
-  //         } else {
-  //           if (height > maxHeight) {
-  //             width *= maxHeight / height;
-  //             height = maxHeight;
-  //           }
-  //         }
-
-  //         canvas.width = width;
-  //         canvas.height = height;
-
-  //         // Rasmni canvasga chizish
-  //         ctx.drawImage(img, 0, 0, width, height);
-
-  //         // WebP formatiga o'zgartirish
-  //         canvas.toBlob(
-  //           (blob) => {
-  //             if (blob) resolve(blob); // WebP faylni qaytarish
-  //             else reject(new Error("WebP ga o'zgartirishda xatolik!"));
-  //           },
-  //           "image/webp",
-  //           0.8
-  //         ); // 0.8 - sifat
-  //       };
-  //     };
-  //   });
-  // };
-
-  // // Uploaddan oldin rasmni WebP formatiga o'zgartirish
-  // const beforeUpload = async (file) => {
-  //   const isImage = file.type.startsWith("image/");
-  //   if (!isImage) {
-  //     message.error("Faqat rasm fayllarini yuklashingiz mumkin!");
-  //     return false;
-  //   }
-
-  //   // Rasmni WebP formatiga o'tkazish
-  //   try {
-  //     const webpFile = await convertToWebP(file);
-  //     const newFile = new File([webpFile], file.name.split(".")[0] + ".webp", {
-  //       type: "image/webp",
-  //     });
-  //     return newFile; // WebP faylni yuklash uchun qaytaramiz
-  //   } catch (error) {
-  //     message.error("Rasmni WebP formatiga o'zgartirishda xatolik yuz berdi!");
-  //     return false;
-  //   }
-  // };
-
-  // -----------------
 
   const beforeUpload = (file) => {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
@@ -221,7 +148,7 @@ export default function DetailsInfo() {
 
   useEffect(() => {
     if (data) {
-      // Ma'lumotlarni o'rnatish
+      // Ma’lumotlarni oʻrnatish
       const oraganizations = Array.isArray(data) ? data : [];
       setMediaItems(oraganizations);
 
@@ -235,9 +162,9 @@ export default function DetailsInfo() {
     let licenseValue = "";
 
     if (radioValue === "ha" && fieldsValue.license.length > 0) {
-      licenseValue = fieldsValue.license[0].value; // "ha" bo'lsa, birinchi input qiymati yuboriladi
+      licenseValue = fieldsValue.license[0].value; // "ha" boʻlsa, birinchi input qiymati yuboriladi
     } else {
-      licenseValue = "yo'q"; // "yo'q" bo'lsa, "yo'q" text yuboriladi
+      licenseValue = "yoʻq"; // "yoʻq" boʻlsa, "yoʻq" text yuboriladi
     }
 
     let qualificationInfo = "";
@@ -246,16 +173,16 @@ export default function DetailsInfo() {
       radioValueQualificationInfo === "ha" &&
       fieldsValue.qualificationInfo.length > 0
     ) {
-      qualificationInfo = fieldsValue.qualificationInfo[0].value; // "ha" bo'lsa, birinchi input qiymati yuboriladi
+      qualificationInfo = fieldsValue.qualificationInfo[0].value; // "ha" boʻlsa, birinchi input qiymati yuboriladi
     } else {
-      qualificationInfo = "yo'q"; // "yo'q" bo'lsa, "yo'q" text yuboriladi
+      qualificationInfo = "yoʻq"; // "yoʻq" boʻlsa, "yoʻq" text yuboriladi
     }
     let room = "";
 
     if (radioValueRoom === "ha") {
-      room = "ha"; // "yo'q" bo'lsa, "yo'q" text yuboriladi
+      room = "ha"; // "yoʻq" boʻlsa, "yoʻq" text yuboriladi
     } else {
-      room = fieldsValue.room[0].value; // "ha" bo'lsa, birinchi input qiymati yuboriladi
+      room = fieldsValue.room[0].value; // "ha" boʻlsa, birinchi input qiymati yuboriladi
     }
 
     let departmentOrganisation = "";
@@ -264,9 +191,9 @@ export default function DetailsInfo() {
       radioValueDepartmentOrganisation === "ha" &&
       fieldsValue.departmentOrganisation.length > 0
     ) {
-      departmentOrganisation = fieldsValue.departmentOrganisation[0].value; // "ha" bo'lsa, birinchi input qiymati yuboriladi
+      departmentOrganisation = fieldsValue.departmentOrganisation[0].value; // "ha" boʻlsa, birinchi input qiymati yuboriladi
     } else {
-      departmentOrganisation = "yo'q"; // "yo'q" bo'lsa, "yo'q" text yuboriladi
+      departmentOrganisation = "yoʻq"; // "yoʻq" boʻlsa, "yoʻq" text yuboriladi
     }
 
     let businessTrip = "";
@@ -275,9 +202,9 @@ export default function DetailsInfo() {
       radioValueBusinessTrip === "ha" &&
       fieldsValue.businessTrip.length > 0
     ) {
-      businessTrip = fieldsValue.businessTrip[0].value; // "ha" bo'lsa, birinchi input qiymati yuboriladi
+      businessTrip = fieldsValue.businessTrip[0].value; // "ha" boʻlsa, birinchi input qiymati yuboriladi
     } else {
-      businessTrip = "yo'q"; // "yo'q" bo'lsa, "yo'q" text yuboriladi
+      businessTrip = "yoʻq"; // "yoʻq" boʻlsa, "yoʻq" text yuboriladi
     }
     const values = {
       ...fieldsValue,
@@ -380,10 +307,10 @@ export default function DetailsInfo() {
               >
                 <div>
                   <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white md:text-xl">
-                    Matbuot kotibi shaxsiy ma'lumotlari
+                    Matbuot kotibining shaxsiy ma’lumotlari
                   </h2>
                   <p className="mt-1 text-md leading-6 text-gray-600 dark:text-gray-400">
-                    Har bir matbuot kotibi o'z malumotlarini kiritishi kerak!
+                    Har bir matbuot kotibi oʻz ma’lumotlarini kiritishi kerak!
                   </p>
                 </div>
                 <div className="md:mt-5 grid grid-cols-1 gap-x-6 md:gap-y-2 sm:gap-y-2 sm:grid-cols-6 ">
@@ -405,7 +332,7 @@ export default function DetailsInfo() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="birthday"
-                      label="Tug'ilgan yilingiz"
+                      label="Tug‘ilgan sanasi"
                       {...config}
                       className=""
                     >
@@ -416,7 +343,7 @@ export default function DetailsInfo() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="phone"
-                      label="Telefon raqamingiz (yoki telegram raqamingiz)"
+                      label="Telefon raqami va Telegram"
                       rules={[
                         {
                           required: true,
@@ -430,16 +357,16 @@ export default function DetailsInfo() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="gender"
-                      label="Jinsingizni kiriting!"
+                      label="Jinsi"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos jinsingizni kiriting!",
+                          message: "Iltimos qiymat kiriting!",
                         },
                       ]}
                     >
                       <Select
-                        placeholder="select your gender"
+                        placeholder="Tegishlisini tanlang"
                         className="min-h-[41px]"
                       >
                         <Option value="male">Erkak</Option>
@@ -450,17 +377,16 @@ export default function DetailsInfo() {
                   <div className="sm:col-span-3 relative">
                     <Form.Item
                       name="province"
-                      label="Yashayotgan viloyatingizni kiriting!"
+                      label="Yashash viloyati"
                       rules={[
                         {
                           required: true,
-                          message:
-                            "Iltimos Yashayotgan viloyatingizni kiriting!",
+                          message: "Iltimos inputga qiymat kiriting!",
                         },
                       ]}
                     >
                       <Select
-                        placeholder="select your province"
+                        placeholder="Manzilni tanlang"
                         className="h-[41px]"
                       >
                         <Option value="Toshkent" className="">
@@ -468,7 +394,7 @@ export default function DetailsInfo() {
                         </Option>
                         <Option value="Samarqand">Samarqand</Option>
                         <Option value="Jizzax">Jizzax</Option>
-                        <Option value="Farg'ona">Farg'ona</Option>
+                        <Option value="Farg‘ona">Farg‘ona</Option>
                         <Option value="Andijon">Andijon</Option>
                         <Option value="Namangan">Namangan</Option>
                         <Option value="Qashqadaryo">Qashqadaryo</Option>
@@ -477,7 +403,7 @@ export default function DetailsInfo() {
                         <Option value="Buxoro">Buxoro</Option>
                         <Option value="Navoiy">Navoiy</Option>
                         <Option value="Qoraqalpogiston">
-                          Qoraqalpog'iston respublikasi
+                          Qoraqalpog‘iston respublikasi
                         </Option>
                       </Select>
                     </Form.Item>
@@ -485,11 +411,11 @@ export default function DetailsInfo() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="specialities"
-                      label="Ilmiy darajangizni qo'shing!"
+                      label="Ilmiy darajani belgilash"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos, ilmiy darajangizni qo'shing!",
+                          message: "Iltimos, ilmiy darajangizni qoʻshing!",
                         },
                       ]}
                       style={{
@@ -520,7 +446,7 @@ export default function DetailsInfo() {
                                   className="col-span-1 mb-1"
                                 >
                                   <Select
-                                    placeholder="select your degree"
+                                    placeholder="Darajangizni belgilang"
                                     className="h-[41px]"
                                   >
                                     <Option value="bakalavr" className="">
@@ -547,17 +473,15 @@ export default function DetailsInfo() {
                                   className="col-span-1 mb-1"
                                 >
                                   <Input.TextArea
-                                    placeholder="Yo'nalishingiz"
+                                    placeholder="Yoʻnalish/Mutaxassislik/Ixtisoslik"
                                     autoSize={{ minRows: 1, maxRows: 5 }} // Kursor avtomatik yangi qatorga tushadi
                                     onKeyDown={(e) => {
                                       if (e.shiftKey && e.key === "Enter") {
-                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga o'tkazadi
-                                        e.target.value += "\n"; // Kursorni yangi qatorga o'tkazadi
+                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga oʻtkazadi
+                                        e.target.value += "\n"; // Kursorni yangi qatorga oʻtkazadi
                                       }
                                     }}
-                                    style={{
-                                      height: 41,
-                                    }}
+                                    style={{}}
                                     // className="h-[41px] inline-block"
                                   />
                                 </Form.Item>
@@ -573,9 +497,9 @@ export default function DetailsInfo() {
                                 onClick={() => add()}
                                 block
                                 icon={<PlusOutlined />}
-                                className="py-1.5 h-[41px]"
+                                className="py-2"
                               >
-                                Qo'shish
+                                Qoʻshish
                               </Button>
                             </Form.Item>
                           </>
@@ -590,7 +514,7 @@ export default function DetailsInfo() {
                       listType="picture"
                       beforeUpload={beforeUpload} // Uploaddan oldin JPG yoki PNG formatini tekshirish
                       headers={{
-                        Authorization: `${token}`, // Headerlarda tokenni qo'shamiz
+                        Authorization: `${token}`, // Headerlarda tokenni qoʻshamiz
                       }}
                       enctype="multipart/form-data"
                       name="photo"
@@ -598,7 +522,10 @@ export default function DetailsInfo() {
                       onChange={(info) => {
                         if (info.file.status === "done") {
                           message.success(`${info.file.name} yuklandi.`);
-                          console.log("Yuklash tugadi:", info.file.response);
+                          console.log(
+                            "Muvaffaqqiyatli yuklandi:",
+                            info.file.response
+                          );
                         } else if (info.file.status === "error") {
                           message.error(`${info.file.name} yuklanmadi.`);
                           console.log("Yuklashda xato:", info.file.response);
@@ -610,12 +537,12 @@ export default function DetailsInfo() {
                           <span className="text-[17px] text-red-500  inline-block">
                             *
                           </span>{" "}
-                          Rasmingizni yuklang (JPG yoki PNG)
+                          Rasmni yuklash (JPG yoki PNG)
                         </label>
                         <Button
                           type="bg-[#73d13d]"
                           icon={<UploadOutlined />}
-                          className="w-full bg-inherit h-[41px] text-[#333] border border-[#D9D9D9] hover:text-[#4CA852] hover:border-[#4CA852]"
+                          className="w-full bg-inherit text-[#333] border border-[#D9D9D9] hover:text-[#4CA852] hover:border-[#4CA852]"
                         >
                           Yuklash
                         </Button>
@@ -633,10 +560,10 @@ export default function DetailsInfo() {
               >
                 <div>
                   <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white md:text-xl">
-                    Matbuot kotibi Umumiy ma'lumotlari
+                    Matbuot kotibining umumiy ma’lumotlari
                   </h2>
                   <p className="mt-1 text-md leading-6 text-gray-600 dark:text-gray-400">
-                    Har bir matbuot kotibi o'z malumotlarini kiritishi kerak!
+                    Har bir matbuot kotibi oʻz ma’lumotlarini kiritishi kerak!
                   </p>
                 </div>
 
@@ -662,13 +589,13 @@ export default function DetailsInfo() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
                       <Select
-                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[41px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
-                        placeholder="custom dropdown render"
+                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full h-[41px] rounded-md border-0 py-0 text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
+                        placeholder="Tegishlisini tanlang"
                         dropdownRender={(menu1) => (
                           <>
                             {menu1}
@@ -683,7 +610,7 @@ export default function DetailsInfo() {
                               }}
                             >
                               <Input
-                                placeholder="Boshqa bo'lsa kiriting!"
+                                placeholder="Boshqa boʻlsa kiriting!"
                                 ref={inputRef}
                                 value={name}
                                 onChange={onNameChange}
@@ -694,7 +621,7 @@ export default function DetailsInfo() {
                                 icon={<PlusOutlined />}
                                 onClick={addItem}
                               >
-                                Qo'shish
+                                Qoʻshish
                               </Button>
                             </Space>
                           </>
@@ -744,7 +671,7 @@ export default function DetailsInfo() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="entryDate"
-                      label="Ishga qabul qilingan yil"
+                      label="Ishga qabul qilingan sanasi"
                       {...config}
                       className=""
                     >
@@ -754,13 +681,13 @@ export default function DetailsInfo() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       // name="license"
-                      label="AOKAdan attestatsiyadan o'tganligi (agar ha bo'lsa qachon,
+                      label="AOKAdan attestatsiyadan oʻtganligi (agar ha boʻlsa qachon,
                       guvohnoma raqami)"
                       rules={[
                         {
                           required: true,
                           message:
-                            "Iltimos attestatsiyadan o'tganligini kiriting!",
+                            "Iltimos attestatsiyadan oʻtganligini kiriting!",
                         },
                       ]}
                     >
@@ -791,7 +718,6 @@ export default function DetailsInfo() {
                                     placeholder="Qachon va guvohnoma raqami"
                                     autoSize={{ minRows: 1, maxRows: 5 }}
                                     style={{
-                                      height: 41,
                                       display: "block",
                                     }}
                                     className="w-full"
@@ -810,11 +736,11 @@ export default function DetailsInfo() {
                                 optionType="button"
                                 buttonStyle="solid"
                                 onChange={(e) => {
-                                  setRadioValue(e.target.value); // Radio qiymatini saqlab qo'yamiz
+                                  setRadioValue(e.target.value); // Radio qiymatini saqlab qoʻyamiz
                                   if (e.target.value === "ha") {
-                                    add(); // Ha bo'lsa input qo'shiladi
+                                    add(); // Ha boʻlsa input qoʻshiladi
                                   } else {
-                                    remove(0); // Yo'q bo'lsa inputni olib tashlaymiz
+                                    remove(0); // Yoʻq boʻlsa inputni olib tashlaymiz
                                   }
                                 }}
                               />
@@ -828,11 +754,11 @@ export default function DetailsInfo() {
                     <Form.Item
                       // name="qualificationInfo"
                       label="AOKA yoki OTFIVning malaka oshirish kurslari yoki
-                      seminarlarida ishtirok etganligi (qachon, qayerda)"
+                      seminarlarida ishtirok etganligi (agar ha boʻlsa qachon, qayerda)"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
@@ -863,7 +789,6 @@ export default function DetailsInfo() {
                                     placeholder="Qachon va qayerda"
                                     autoSize={{ minRows: 1, maxRows: 5 }}
                                     style={{
-                                      height: 41,
                                       display: "block",
                                     }}
                                     className="w-full"
@@ -884,11 +809,11 @@ export default function DetailsInfo() {
                                 onChange={(e) => {
                                   setRadioValueQualificationInfo(
                                     e.target.value
-                                  ); // Radio qiymatini saqlab qo'yamiz
+                                  ); // Radio qiymatini saqlab qoʻyamiz
                                   if (e.target.value === "ha") {
-                                    add(); // Ha bo'lsa input qo'shiladi
+                                    add(); // Ha boʻlsa input qoʻshiladi
                                   } else {
-                                    remove(0); // Yo'q bo'lsa inputni olib tashlaymiz
+                                    remove(0); // Yoʻq boʻlsa inputni olib tashlaymiz
                                   }
                                 }}
                               />
@@ -901,11 +826,11 @@ export default function DetailsInfo() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="workType"
-                      label="Shtatdagi o'rni"
+                      label="Shtatdagi oʻrni"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos shtatdagi o'rni kiriting!",
+                          message: "Iltimos shtatdagi oʻrni kiriting!",
                         },
                       ]}
                     >
@@ -927,13 +852,13 @@ export default function DetailsInfo() {
                                   rules={[
                                     {
                                       required: true,
-                                      message: "Darajangizni kiriting!",
+                                      message: "Tegishlisini tanlang",
                                     },
                                   ]}
                                   className="col-span-1 mb-1"
                                 >
                                   <Select
-                                    placeholder="select your degree"
+                                    placeholder="Tegishlisini tanlang"
                                     className="h-[41px]"
                                   >
                                     <Option value="1shtat" className="">
@@ -954,13 +879,13 @@ export default function DetailsInfo() {
                                   className="col-span-1 mb-1"
                                 >
                                   <Select
-                                    placeholder="select your degree"
+                                    placeholder="Tegishlisini tanlang"
                                     className="h-[41px]"
                                   >
                                     <Option value="asosiy" className="">
                                       Asosiy
                                     </Option>
-                                    <Option value="o'rindosh">O'rindosh</Option>
+                                    <Option value="oʻrindosh">oʻrindosh</Option>
                                   </Select>
                                 </Form.Item>
                                 <MinusCircleOutlined
@@ -975,9 +900,9 @@ export default function DetailsInfo() {
                                 onClick={() => add()}
                                 block
                                 icon={<PlusOutlined />}
-                                className="py-1.5 h-[41px]"
+                                className="py-2"
                               >
-                                Qo'shish
+                                Qoʻshish
                               </Button>
                             </Form.Item>
                           </>
@@ -988,12 +913,12 @@ export default function DetailsInfo() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="advisor"
-                      label="Rektorning axborot siyosati masalalari bo'yicha
-                      maslahatchisi etib belgilangan (Asos hujjat raqami)"
+                      label="Rektorning axborot siyosati masalalari boʻyicha
+                      maslahatchisi etib belgilanganligi (Asos hujjat raqami)"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
@@ -1001,13 +926,11 @@ export default function DetailsInfo() {
                         autoSize={{ minRows: 1, maxRows: 5 }} // Kursor avtomatik yangi qatorga tushadi
                         onKeyDown={(e) => {
                           if (e.shiftKey && e.key === "Enter") {
-                            e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga o'tkazadi
-                            e.target.value += "\n"; // Kursorni yangi qatorga o'tkazadi
+                            e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga oʻtkazadi
+                            e.target.value += "\n"; // Kursorni yangi qatorga oʻtkazadi
                           }
                         }}
-                        style={{
-                          height: 41,
-                        }}
+                        style={{}}
                         // className="h-[41px] inline-block"
                       />
                     </Form.Item>
@@ -1015,12 +938,12 @@ export default function DetailsInfo() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="skills"
-                      label="Matbuot kotibining kasbiy va qo'shimcha kompetentsiyasi
-                      (siz nima qilasiz)"
+                      label="Matbuot kotibining kasbiy va qoʻshimcha kompetensiyasi
+                      (siz nima qilolasiz)"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
@@ -1028,13 +951,11 @@ export default function DetailsInfo() {
                         autoSize={{ minRows: 1, maxRows: 5 }} // Kursor avtomatik yangi qatorga tushadi
                         onKeyDown={(e) => {
                           if (e.shiftKey && e.key === "Enter") {
-                            e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga o'tkazadi
-                            e.target.value += "\n"; // Kursorni yangi qatorga o'tkazadi
+                            e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga oʻtkazadi
+                            e.target.value += "\n"; // Kursorni yangi qatorga oʻtkazadi
                           }
                         }}
-                        style={{
-                          height: 41,
-                        }}
+                        style={{}}
                         // className="h-[41px] inline-block"
                       />
                     </Form.Item>
@@ -1042,12 +963,12 @@ export default function DetailsInfo() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       // name="room"
-                      label="Matbuot bo'limi uchun alohida xona ajratilganligi (ha/yo'q
-                      bo'lsa qaysi bo'lim bilan birga o'tiradi)"
+                      label="Matbuot boʻlimi uchun alohida xona ajratilganligi (yoʻq
+                      boʻlsa qaysi boʻlim bilan birga oʻtiradi)"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
@@ -1075,10 +996,9 @@ export default function DetailsInfo() {
                                   className="col-span-1"
                                 >
                                   <Input.TextArea
-                                    placeholder="Qaysi bo'lim birga o'tiradi"
+                                    placeholder="Qaysi boʻlim birga oʻtiradi"
                                     autoSize={{ minRows: 1, maxRows: 5 }}
                                     style={{
-                                      height: 41,
                                       display: "block",
                                     }}
                                     className="w-full"
@@ -1097,11 +1017,11 @@ export default function DetailsInfo() {
                                 optionType="button"
                                 buttonStyle="solid"
                                 onChange={(e) => {
-                                  setRadioValueRoom(e.target.value); // Radio qiymatini saqlab qo'yamiz
+                                  setRadioValueRoom(e.target.value); // Radio qiymatini saqlab qoʻyamiz
                                   if (e.target.value === "ha") {
-                                    remove(0); // Yo'q bo'lsa inputni olib tashlaymiz
+                                    remove(0); // Yoʻq boʻlsa inputni olib tashlaymiz
                                   } else {
-                                    add(); // Ha bo'lsa input qo'shiladi
+                                    add(); // Ha boʻlsa input qoʻshiladi
                                   }
                                 }}
                               />
@@ -1111,44 +1031,76 @@ export default function DetailsInfo() {
                       </Form.List>
                     </Form.Item>
                   </div>
-                  <div className="sm:col-span-3">
+                  <div className="sm:col-span-3 ">
                     <Form.Item
                       name="averageSalary"
-                      label="Oxirgi bir yillik oylik maoshining o'rtacha miqdori
-                      (UzASBO tizimi yoki my.gov.uz orqali olingan ma'lumot fayl
+                      label="Oxirgi bir yillik oylik maoshining oʻrtacha miqdori
+                      (UzASBO tizimi yoki my.gov.uz orqali olingan ma’lumot fayl
                       shaklida taqdim etiladi)"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
-                      <Input.TextArea
-                        autoSize={{ minRows: 1, maxRows: 5 }} // Kursor avtomatik yangi qatorga tushadi
-                        onKeyDown={(e) => {
-                          if (e.shiftKey && e.key === "Enter") {
-                            e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga o'tkazadi
-                            e.target.value += "\n"; // Kursorni yangi qatorga o'tkazadi
-                          }
-                        }}
-                        style={{
-                          height: 41,
-                        }}
-                        // className="h-[41px] inline-block"
-                      />
+                      <div className="flex gap-1 ">
+                        <Upload
+                          action={`http://${IP}:8080/api/employee/average-salary-upload`}
+                          headers={{
+                            Authorization: `${token}`, // Headerlarda tokenni qoʻshamiz
+                          }}
+                          name="averageSalaryFile"
+                          className="w-1/2"
+                          onChange={(info) => {
+                            if (info.file.status === "done") {
+                              message.success(`${info.file.name} yuklandi.`);
+                              console.log(
+                                "Muvaffaqqiyatli yuklandi:",
+                                info.file.response
+                              );
+                            } else if (info.file.status === "error") {
+                              message.error(`${info.file.name} yuklanmadi.`);
+                              console.log(
+                                "Yuklashda xato:",
+                                info.file.response
+                              );
+                            }
+                          }}
+                        >
+                          <div className="flex flex-col gap-2">
+                            <Button
+                              type="bg-[#73d13d]"
+                              icon={<UploadOutlined />}
+                              className="w-full bg-inherit text-[#333] border border-[#D9D9D9] hover:text-[#4CA852] hover:border-[#4CA852]"
+                            >
+                              Yuklash
+                            </Button>
+                          </div>
+                        </Upload>
+                        <Input.TextArea
+                          autoSize={{ minRows: 1, maxRows: 5 }} // Kursor avtomatik yangi qatorga tushadi
+                          onKeyDown={(e) => {
+                            if (e.shiftKey && e.key === "Enter") {
+                              e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga oʻtkazadi
+                              e.target.value += "\n"; // Kursorni yangi qatorga oʻtkazadi
+                            }
+                          }}
+                          className="w-1/2 inline-block"
+                        />
+                      </div>
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">
                     <Form.Item
                       // name="departmentOrganisation"
-                      label="Alohida Matbuot/axborot xizmati bo'limi tashkil
-                      etilganligi (bo'lsa unda nechta shtat bor yoki nechta
-                      boshqa bo'limdan jalb qilingan)"
+                      label="Alohida Matbuot/axborot xizmati boʻlimi tashkil
+                      etilganligi (boʻlsa unda nechta shtat bor yoki nechta
+                      boshqa boʻlimdan jalb qilingan)"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
@@ -1179,7 +1131,6 @@ export default function DetailsInfo() {
                                     placeholder="Nechta shtat borligi va nechta boshqadan jalb qilingabligi"
                                     autoSize={{ minRows: 1, maxRows: 5 }}
                                     style={{
-                                      height: 41,
                                       display: "block",
                                     }}
                                     className="w-full"
@@ -1200,11 +1151,11 @@ export default function DetailsInfo() {
                                 onChange={(e) => {
                                   setRadioValueDepartmentOrganisation(
                                     e.target.value
-                                  ); // Radio qiymatini saqlab qo'yamiz
+                                  ); // Radio qiymatini saqlab qoʻyamiz
                                   if (e.target.value === "ha") {
-                                    add(); // Ha bo'lsa input qo'shiladi
+                                    add(); // Ha boʻlsa input qoʻshiladi
                                   } else {
-                                    remove(0); // Yo'q bo'lsa inputni olib tashlaymiz
+                                    remove(0); // Yoʻq boʻlsa inputni olib tashlaymiz
                                   }
                                 }}
                               />
@@ -1217,12 +1168,12 @@ export default function DetailsInfo() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       // name="businessTrip"
-                      label="Matbuot kotibini xorijga xizmat safarlariga yuborilganligi
-                      (qachon, qayerga)"
+                      label="Matbuot kotibini chet el xizmat safarlariga yuborilganligi
+                      (agar ha boʻlsa qachon, qayerga)"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
@@ -1253,7 +1204,6 @@ export default function DetailsInfo() {
                                     placeholder="Qachon va qayerga"
                                     autoSize={{ minRows: 1, maxRows: 5 }}
                                     style={{
-                                      height: 41,
                                       display: "block",
                                     }}
                                     className="w-full"
@@ -1272,11 +1222,11 @@ export default function DetailsInfo() {
                                 optionType="button"
                                 buttonStyle="solid"
                                 onChange={(e) => {
-                                  setRadioValueBusinessTrip(e.target.value); // Radio qiymatini saqlab qo'yamiz
+                                  setRadioValueBusinessTrip(e.target.value); // Radio qiymatini saqlab qoʻyamiz
                                   if (e.target.value === "ha") {
-                                    add(); // Ha bo'lsa input qo'shiladi
+                                    add(); // Ha boʻlsa input qoʻshiladi
                                   } else {
-                                    remove(0); // Yo'q bo'lsa inputni olib tashlaymiz
+                                    remove(0); // Yoʻq boʻlsa inputni olib tashlaymiz
                                   }
                                 }}
                               />
@@ -1288,9 +1238,9 @@ export default function DetailsInfo() {
                   </div>
 
                   {/* Moddiy-texnik bazasining holati  (kamera soni va uning
-                    nomi, modeli;// telefon: bor/yo'q; televizor: bor/yo'q;
+                    nomi, modeli;// telefon: bor/yoʻq; televizor: bor/yoʻq;
                     kompyuter jamlamasi soni va nechtasi hujjat bilan
-                    ishlash uchun, nechtasi montaj uchun; Qo'shimcha izoh) */}
+                    ishlash uchun, nechtasi montaj uchun; Qoʻshimcha izoh) */}
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="resource"
@@ -1299,7 +1249,7 @@ export default function DetailsInfo() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
@@ -1309,16 +1259,17 @@ export default function DetailsInfo() {
                           <>
                             <Form.Item>
                               <Input
+                                placeholder="namunali/yaxshi/qoniqarli/qoniqarsiz"
                                 onChange={(e) => {
                                   // Inputning uzunligini tekshirish
                                   setResourceInput(e.target.value);
                                   if (e.target.value.length > 3 && !isAdded) {
-                                    add(); // Radio tugma qo'shish
+                                    add(); // Radio tugma qoʻshish
                                     setIsAdded(true);
-                                    setIsRadioAdd(false); // Radioga yangi element qo'shish uchun tayyorlanadi
+                                    setIsRadioAdd(false); // Radioga yangi element qoʻshish uchun tayyorlanadi
                                     setIsSecondRadioAdded(false); // Ikkinchi radio uchun flagni yana false qilish
                                   } else if (e.target.value.length < 4) {
-                                    remove(0); // Input 4 harfdan kam bo'lsa, radio tugmani olib tashlash
+                                    remove(0); // Input 4 harfdan kam boʻlsa, radio tugmani olib tashlash
                                     setIsAdded(false);
                                   }
                                 }}
@@ -1341,8 +1292,8 @@ export default function DetailsInfo() {
                                     className="col-span-1 mt-[-10px]"
                                     label={
                                       index === 0
-                                        ? "Telefon bor yo'qligi"
-                                        : "Televizor bor yo'qligi"
+                                        ? "Telefon bor yoʻqligi"
+                                        : "Televizor bor yoʻqligi"
                                     }
                                   >
                                     <Radio.Group
@@ -1353,11 +1304,11 @@ export default function DetailsInfo() {
                                       onChange={(e) => {
                                         // Radio tugmasi tanlanganligini tekshirish
                                         if (e.target.value && !isRadioAdd) {
-                                          add(); // Yangi radio tugma qo'shish
+                                          add(); // Yangi radio tugma qoʻshish
                                           setIsRadioAdd(true);
                                         } else if (
                                           e.target.value && // Ikkinchi radio tugma tanlanganligini tekshirish
-                                          !isSecondRadioAdded // Yangi input faqat bir marta qo'shiladi
+                                          !isSecondRadioAdded // Yangi input faqat bir marta qoʻshiladi
                                         ) {
                                           setIsSecondRadioAdded(true);
                                           setIsSecondInputAdded(true);
@@ -1376,7 +1327,7 @@ export default function DetailsInfo() {
                             {isSecondRadioAdded && isSecondInputAdded ? (
                               <Form.Item
                                 label="Kompyuterlar soni, nechtasi hujjat bilan
-                    ishlash uchun, nechtasi montaj uchun; Qo'shimcha izoh"
+                    ishlash uchun, nechtasi montaj uchun; Qoʻshimcha izoh"
                               >
                                 <Input
                                   onChange={(e) => {
@@ -1401,14 +1352,14 @@ export default function DetailsInfo() {
 
               {/* form Steps */}
 
-              <div className="md:mt-[24px] md:mb-[40px] mb-6">
+              <div className="md:mt-[24px] md:mb-[40px] mb-6" id="nextPrev">
                 {current > 0 && (
                   <Button
                     style={{
                       margin: "2px 8px",
                     }}
                     onClick={() => prev()}
-                    className="px-10 py-6 rounded-full shadow-lg text-[#4CA852] text-[16px]"
+                    className="px-10 py-6 rounded-xl shadow-lg text-[#4CA852] text-[16px] nextPrevBtn"
                   >
                     Oldingi
                   </Button>
@@ -1417,7 +1368,7 @@ export default function DetailsInfo() {
                 {current === steps.length - 1 && (
                   <Button
                     htmlType="submit"
-                    className="float-right px-10 py-6 rounded-full shadow-lg bg-[#4CA852] text-white text-[16px]"
+                    className="float-right px-10 py-6 rounded-xl shadow-lg bg-[#4CA852] text-white text-[16px] nextPrevBtn"
                   >
                     Yuborish
                   </Button>
@@ -1425,7 +1376,7 @@ export default function DetailsInfo() {
                 {current < steps.length - 1 && (
                   <Button
                     onClick={() => next()}
-                    className="float-right px-10 py-6 rounded-full shadow-lg bg-[#4CA852] text-white text-[16px] "
+                    className="float-right px-14 py-6 rounded-xl shadow-lg bg-[#4CA852] text-white text-[16px]  nextPrevBtn"
                   >
                     Keyingi
                   </Button>

@@ -25,7 +25,7 @@ const items = [
       "Faoliyatga doir axborotni OAV, Internet saytlar va ijtimoiy tarmoqlar orqali yoritilishi",
     icon: <RiChatVoiceFill />,
     children: [
-      { key: "/televediniye", label: "Telvideniye" },
+      { key: "/televediniye", label: "Televedeniye" },
       { key: "/radio", label: "Radio" },
       { key: "/oav", label: "Bosma OAV (gazeta va jurnallar)" },
       { key: "/internet_sites", label: "Internet saytlari" },
@@ -45,8 +45,7 @@ const items = [
 
   {
     key: "/foreign",
-    label:
-      "Xorijiy ommaviy axborot vositalarida OTM faoliyatiga doir e'lon qilingan materiallar soni",
+    label: "Xorijiy OAVlarida OTM faoliyatiga doir E’lon qilingan materiallar",
     icon: <IoSchoolSharp />,
   },
   {
@@ -78,18 +77,18 @@ const items = [
 
   {
     key: "/mediaprojects",
-    label: "Axborot xizmati tomonidan yo'lga qo'yilgan medialoyihalar",
+    label: "Axborot xizmati tomonidan yoʻlga qoʻyilgan medialoyihalar",
     icon: <AiFillProject />,
   },
   {
     key: "/levelIllumination",
     label:
-      "OTM faoliyatidagi turli tadbirlarni ommaviy axborot vositalari orqali yoritilganlik darajasi",
+      "Vazirlik faoliyatidagi turli tadbir (media reja)larni ommaviy axborot vositalari orqali yoritilganlik darajasi",
     icon: <SiLevelsdotfyi />,
   },
   {
     key: "/trashbox",
-    label: "Karzinka",
+    label: "Savat",
     icon: <FaTrashAlt />,
   },
 ];

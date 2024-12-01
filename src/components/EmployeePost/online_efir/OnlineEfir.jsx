@@ -13,7 +13,7 @@ const config = {
     {
       type: "object",
       required: true,
-      message: "Please select time!",
+      message: "Iltimos Inputga qiymat kiriting!",
     },
   ],
 };
@@ -61,20 +61,45 @@ export default function OnlineEfir() {
       publishDate: fieldsValue["publishDate"],
       materialType: "Video",
     };
+    console.log(values);
     onlineEent.mutate(values);
   };
   // Submit bosilganda ishlaydigan Funksiya
 
   const stuffs =
     location.pathname === "/superadminpanel/onlayn_efir"
-      ? ["Vazir", "Vazir o'rinbosari"]
+      ? [
+          "Vazir",
+          "Vazirning birinchi o‘rinbosari",
+          "Vazir o‘rinbosari",
+          "Vazir kotibiyati boshlig‘i",
+          "Vazir maslahatchisi",
+          "Vazir yordamchisi",
+          "Department boshlig‘i",
+          "Boshqarma boshlig‘i",
+          "Boshqarma boshlig‘i o‘rinbosari",
+          "Bo‘lim boshlig‘i",
+          "Bo‘lim boshlig‘i o‘rinbosari",
+          "Bosh mutaxassis",
+          "Yetakchi mutaxassis",
+          "Jamoatchilik kengashi raisi",
+          "Jamoatchilik kengashi raisi o‘rinbosari",
+          "Jamoatchilik kengashi a’zosi",
+          "Ilmiy-texnik kengashlar raisi",
+          "Ilmiy-texnik kengashlar raisi o‘rinbosari",
+          "Ilmiy-texnik kengashlar a’zosi",
+          "Ilm-fan va innovatsiyalar kengashi raisi",
+          "Ilm-fan va innovatsiyalar kengashi raisi o‘rinbosari",
+          "Ilm-fan va innovatsiyalar kengashi a’zosi",
+        ]
       : [
           "Rektor",
           "Prorektor",
           "Matbuot kotibi",
-          "Boshqarma boshlig'i",
+          "Boʻlim boshlig‘i",
+          "Boshqarma boshlig‘i",
           "Dekan",
-          "Dekan o'rinbosari",
+          "Dekan oʻrinbosari",
           "Kafedra mudiri",
         ];
 
@@ -108,7 +133,7 @@ export default function OnlineEfir() {
     toast.current.show({
       severity: "error",
       summary: "Xato",
-      detail: `To'g'ri kiritganingizga e'tibor bering! `,
+      detail: `Toʻg‘ri kiritganingizga e'tibor bering! `,
       life: 0,
     });
   };
@@ -147,7 +172,7 @@ export default function OnlineEfir() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos material mavzusini kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
@@ -157,7 +182,7 @@ export default function OnlineEfir() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="eventDate"
-                      label="O'tkazilgan sanasi"
+                      label="oʻtkazilgan sanasi"
                       {...config}
                       className=""
                     >
@@ -176,7 +201,7 @@ export default function OnlineEfir() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
@@ -184,14 +209,143 @@ export default function OnlineEfir() {
                         mode="multiple"
                         style={{
                           width: "100%",
-                          height: 41,
                         }}
-                        placeholder="Please select"
+                        placeholder="Tegishlisini tanlang"
                         // defaultValue={[]}
-                        options={stuffs.map((item) => ({
-                          label: item,
-                          value: item,
-                        }))}
+                        options={
+                          location.pathname === "/superadminpanel/onlayn_efir"
+                            ? [
+                                { label: "Vazir", value: "Vazir" },
+                                {
+                                  label: "Vazirning birinchi o‘rinbosari",
+                                  value: "Vazirning birinchi o‘rinbosari",
+                                },
+                                {
+                                  label: "Vazir o‘rinbosari",
+                                  value: "Vazir o‘rinbosari",
+                                },
+                                {
+                                  label: "Vazir kotibiyati boshlig‘i",
+                                  value: "Vazir kotibiyati boshlig‘i",
+                                },
+                                {
+                                  label: "Vazir maslahatchisi",
+                                  value: "Vazir maslahatchisi",
+                                },
+                                {
+                                  label: "Vazir yordamchisi",
+                                  value: "Vazir yordamchisi",
+                                },
+                                {
+                                  label: "Department boshlig‘i",
+                                  value: "Department boshlig‘i",
+                                },
+                                {
+                                  label: "Boshqarma boshlig‘i",
+                                  value: "Boshqarma boshlig‘i",
+                                },
+                                {
+                                  label: "Boshqarma boshlig‘i o‘rinbosari",
+                                  value: "Boshqarma boshlig‘i o‘rinbosari",
+                                },
+                                {
+                                  label: "Bo‘lim boshlig‘i",
+                                  value: "Bo‘lim boshlig‘i",
+                                },
+                                {
+                                  label: "Bo‘lim boshlig‘i o‘rinbosari",
+                                  value: "Bo‘lim boshlig‘i o‘rinbosari",
+                                },
+                                {
+                                  label: "Bosh mutaxassis",
+                                  value: "Bosh mutaxassis",
+                                },
+                                {
+                                  label: "Yetakchi mutaxassis",
+                                  value: "Yetakchi mutaxassis",
+                                },
+                                {
+                                  label: "Jamoatchilik kengashi raisi",
+                                  value: "Jamoatchilik kengashi raisi",
+                                },
+                                {
+                                  label:
+                                    "Jamoatchilik kengashi raisi o‘rinbosari",
+                                  value:
+                                    "Jamoatchilik kengashi raisi o‘rinbosari",
+                                },
+                                {
+                                  label: "Jamoatchilik kengashi a’zosi",
+                                  value: "Jamoatchilik kengashi a’zosi",
+                                },
+                                {
+                                  label: "Ilmiy-texnik kengashlar raisi",
+                                  value: "Ilmiy-texnik kengashlar raisi",
+                                },
+                                {
+                                  label:
+                                    "Ilmiy-texnik kengashlar raisi o‘rinbosari",
+                                  value:
+                                    "Ilmiy-texnik kengashlar raisi o‘rinbosari",
+                                },
+                                {
+                                  label: "Ilmiy-texnik kengashlar a’zosi",
+                                  value: "Ilmiy-texnik kengashlar a’zosi",
+                                },
+                                {
+                                  label:
+                                    "Ilm-fan va innovatsiyalar kengashi raisi",
+                                  value:
+                                    "Ilm-fan va innovatsiyalar kengashi raisi",
+                                },
+                                {
+                                  label:
+                                    "Ilm-fan va innovatsiyalar kengashi raisi o‘rinbosari",
+                                  value:
+                                    "Ilm-fan va innovatsiyalar kengashi raisi o‘rinbosari",
+                                },
+                                {
+                                  label:
+                                    "Ilm-fan va innovatsiyalar kengashi a’zosi",
+                                  value:
+                                    "Ilm-fan va innovatsiyalar kengashi a’zosi",
+                                },
+                              ]
+                            : [
+                                {
+                                  label: "Rektor",
+                                  value: "Rektor",
+                                },
+                                {
+                                  label: "Prorektor",
+                                  value: "Prorektor",
+                                },
+                                {
+                                  label: "Matbuot kotibi",
+                                  value: "Matbuot kotibi",
+                                },
+                                {
+                                  label: "Boʻlim boshlig‘i",
+                                  value: "Boʻlim boshlig‘i",
+                                },
+                                {
+                                  label: "Boshqarma boshlig‘i",
+                                  value: "Boshqarma boshlig‘i",
+                                },
+                                {
+                                  label: "Dekan",
+                                  value: "Dekan",
+                                },
+                                {
+                                  label: "Dekan oʻrinbosari",
+                                  value: "Dekan oʻrinbosari",
+                                },
+                                {
+                                  label: "Kafedra mudiri",
+                                  value: "Kafedra mudiri",
+                                },
+                              ]
+                        }
                       />
                     </Form.Item>
                   </div>
@@ -203,13 +357,13 @@ export default function OnlineEfir() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
                       <Select
-                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[41px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
-                        placeholder="custom dropdown render"
+                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full h-[41px] rounded-md border-0 py-0 text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
+                        placeholder="Tegishlisini tanlang"
                         dropdownRender={(menu) => (
                           <>
                             {menu}
@@ -224,7 +378,7 @@ export default function OnlineEfir() {
                               }}
                             >
                               <Input
-                                placeholder="Boshqa bo'lsa kiriting!"
+                                placeholder="Boshqa boʻlsa kiriting!"
                                 ref={inputRef1}
                                 value={name1}
                                 onChange={onNameChange1}
@@ -235,7 +389,7 @@ export default function OnlineEfir() {
                                 icon={<PlusOutlined />}
                                 onClick={addItem1}
                               >
-                                Qo'shish
+                                Qoʻshish
                               </Button>
                             </Space>
                           </>
@@ -255,7 +409,7 @@ export default function OnlineEfir() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
@@ -272,11 +426,11 @@ export default function OnlineEfir() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="link"
-                      label="Havolasini kiriting (http bilan boshlanishi shart!)"
+                      label="Havolasi "
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos Havolasini kiriting!",
+                          message: "Iltimos Havolasi!",
                         },
                         {
                           type: "url",

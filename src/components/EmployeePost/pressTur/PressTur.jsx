@@ -23,24 +23,16 @@ const config = {
     {
       type: "object",
       required: true,
-      message: "Please select time!",
+      message: "Iltimos Inputga qiymat kiriting!",
     },
   ],
 };
 
-export default function PressTur() {
+export default function MatbuotAnjumaniJS() {
   // const [showItems, setShowItems] = useState([]);
   const toast = useRef(null);
 
-  // channels
-  const [mediaItems, setMediaItems] = useState([]);
-  const [tvChannalNames, setTvChannalNames] = useState([]);
-  const [radioChannal, setRadioChannal] = useState([]);
-  const [newspaper, setNewspaper] = useState([]);
-  const [webSite, setWebSite] = useState([]);
-  const [messanger, setMessanger] = useState([]);
   const navigate = useNavigate();
-  console.log(mediaItems);
 
   // const token = JSON.parse(localStorage.getItem("token"));
 
@@ -65,55 +57,17 @@ export default function PressTur() {
     }
   );
 
-  const { data, isLoading, error } = useQuery(
-    ["eventMediaGetChannel"],
-    () => oavIV.eventMediaGetChannel("eventMediaGetChannel"),
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
-
-  const { data: dataAll } = useQuery(["eventMediaAll"], () =>
-    oavIV.eventMediaAll()
-  );
-
-  useEffect(() => {
-    if (data && dataAll) {
-      console.log(data);
-      console.log(dataAll);
-      // Ma'lumotlarni o'rnatish
-
-      const media = Array.isArray(data) ? data : [];
-      const tvChananal = Array.isArray(dataAll?.body[0]?.media)
-        ? dataAll?.body[0]?.media
-        : [];
-      const radioChannal = Array.isArray(dataAll?.body[1]?.media)
-        ? dataAll?.body[1]?.media
-        : [];
-      const newspaper = Array.isArray(dataAll?.body[2]?.shows)
-        ? dataAll?.body[2]?.shows
-        : [];
-      const webSite = Array.isArray(dataAll?.body[3]?.shows)
-        ? dataAll?.body[3]?.shows
-        : [];
-      const messanger = Array.isArray(dataAll?.body[4]?.shows)
-        ? dataAll?.body[4]?.shows
-        : [];
-      setMediaItems(media);
-      setTvChannalNames(tvChananal);
-      setRadioChannal(radioChannal);
-      setNewspaper(newspaper);
-      setWebSite(webSite);
-      setMessanger(messanger);
-    }
-  }, [data, dataAll]);
+  const {
+    data: dataAll,
+    isLoading,
+    error,
+  } = useQuery(["eventMediaAll"], () => oavIV.eventMediaAll());
 
   // Submit bosilganda ishlaydigan Funksiya
   const onFinish = (fieldsValue) => {
     const values = {
       ...fieldsValue,
       dateOfEvent: fieldsValue["dateOfEvent"],
-      showedMedia: fieldsValue["showedMedia"],
       type: "Press_tur",
     };
 
@@ -153,94 +107,108 @@ export default function PressTur() {
     addPostMatbuot.mutate(values);
   };
 
-  // Sellect Channel
-  const [itemsValue, setItemsValue] = useState(tvChannalNames);
-  const [nameValue, setNameValue] = useState("");
-  const inputRef_channal = useRef(null);
-  const onNameChange_channal = (event) => {
-    setNameValue(event.target.value);
+  const [items1, setItems1] = useState([]);
+  const [name1, setName1] = useState("");
+  const inputRef1 = useRef(null);
+  const onNameChange1 = (event) => {
+    setName1(event.target.value);
   };
-
-  const addItem = (e) => {
+  const addItem1 = (e) => {
     e.preventDefault();
-    setItemsValue([...itemsValue, nameValue || `New item ${index++}`]);
-    setNameValue("");
+    setItems1([...items1, name1 || `New item ${index++}`]);
+    setName1("");
     setTimeout(() => {
-      inputRef_channal.current?.focus();
-    });
+      inputRef1.current?.focus();
+    }, 0);
   };
 
-  // Radio kanallar nomi uzi kiritadi
-  const [items_radio, setItems_radio] = useState(radioChannal);
-  const [nameValue_radio, setNameValue_radio] = useState("");
-  const inputRef_radio = useRef(null);
-  const onNameChange_radio = (event) => {
-    setNameValue_radio(event.target.value);
+  // Sellect Dastur Nomi
+
+  const [items3, setItems3] = useState([]);
+  const [name3, setName3] = useState("");
+  const inputRef3 = useRef(null);
+  const onNameChange3 = (event) => {
+    setName3(event.target.value);
   };
-  const addItem_radio = (e) => {
+  const addItem3 = (e) => {
     e.preventDefault();
-    setItems_radio([...items_radio, nameValue_radio || `New item ${index++}`]);
-    setNameValue_radio("");
+    setItems3([...items3, name3 || `New item ${index++}`]);
+    setName3("");
     setTimeout(() => {
-      inputRef_radio.current?.focus();
-    });
+      inputRef3.current?.focus();
+    }, 0);
   };
 
-  // newspapers kanallar nomi uzi kiritadi
-  const [items_news, setItems_news] = useState(newspaper);
-  const [nameValue_news, setNameValue_news] = useState("");
-  const inputRef_news = useRef(null);
-  const onNameChange_news = (event) => {
-    setNameValue_news(event.target.value);
+  const [items4, setItems4] = useState([]);
+  const [name4, setName4] = useState("");
+  const inputRef4 = useRef(null);
+  const onNameChange4 = (event) => {
+    setName4(event.target.value);
   };
-  const addItem_news = (e) => {
+  const addItem4 = (e) => {
     e.preventDefault();
-    setItems_news([...items_news, nameValue_news || `New item ${index++}`]);
-    setNameValue_news("");
+    setItems4([...items4, name4 || `New item ${index++}`]);
+    setName4("");
     setTimeout(() => {
-      inputRef_radio.current?.focus();
-    });
+      inputRef4.current?.focus();
+    }, 0);
   };
 
-  // newspapers kanallar nomi uzi kiritadi
-  const [items_messenger, setItems_messenger] = useState(newspaper);
-  const [nameValue_messenger, setNameValue_messenger] = useState("");
-  const inputRef_messenger = useRef(null);
-  const onNameChange_messenger = (event) => {
-    setNameValue_messenger(event.target.value);
+  const [items5, setItems5] = useState([]);
+  const [name5, setName5] = useState("");
+  const inputRef5 = useRef(null);
+  const onNameChange5 = (event) => {
+    setName5(event.target.value);
   };
-  const addItem_messenger = (e) => {
+  const addItem5 = (e) => {
     e.preventDefault();
-    setItems_messenger([
-      ...items_messenger,
-      nameValue_messenger || `New item ${index++}`,
-    ]);
-    setNameValue_messenger("");
+    setItems5([...items5, name5 || `New item ${index++}`]);
+    setName5("");
     setTimeout(() => {
-      inputRef_messenger.current?.focus();
-    });
+      inputRef5.current?.focus();
+    }, 0);
   };
 
-  // website kanallar nomi uzi kiritadi
-  const [items_web_sites, setItems_web_sites] = useState(newspaper);
-  const [nameValue_web_sites, setNameValue_web_sites] = useState("");
-  const inputRef_web_sites = useRef(null);
-  const onNameChange_web_sites = (event) => {
-    setNameValue_web_sites(event.target.value);
+  const [items6, setItems6] = useState([]);
+  const [name6, setName6] = useState("");
+  const inputRef6 = useRef(null);
+  const onNameChange6 = (event) => {
+    setName6(event.target.value);
   };
-  const addItem_web_sites = (e) => {
+  const addItem6 = (e) => {
     e.preventDefault();
-    setItems_web_sites([
-      ...items_web_sites,
-      nameValue_web_sites || `New item ${index++}`,
-    ]);
-    setNameValue_messenger("");
+    setItems6([...items6, name6 || `New item ${index++}`]);
+    setName6("");
     setTimeout(() => {
-      inputRef_web_sites.current?.focus();
-    });
+      inputRef6.current?.focus();
+    }, 0);
   };
 
-  // Success bo'lganda ishlidigan funksiya
+  useEffect(() => {
+    if (dataAll) {
+      // Ma’lumotlarni oʻrnatish
+      Array.isArray(
+        dataAll?.body.map((item) => {
+          if (item.postType === "televediniye") {
+            setItems1(item.media);
+          } else if (item.postType === "radio") {
+            setItems3(item.media);
+          } else if (item.postType === "gazeta") {
+            setItems4(item.shows);
+          } else if (item.postType === "messenger") {
+            setItems5(item.shows);
+          } else if (item.postType === "internet_sites") {
+            // console.log(item);
+            setItems6(item.shows);
+          } else {
+            return "";
+          }
+        })
+      );
+    }
+  }, [dataAll]);
+
+  // Success boʻlganda ishlidigan funksiya
   const showSuccess = () => {
     toast.current.show({
       severity: "success",
@@ -254,7 +222,7 @@ export default function PressTur() {
     toast.current.show({
       severity: "error",
       summary: "Xato",
-      detail: `To'g'ri kiritganingizga e'tibor bering! `,
+      detail: `Toʻg‘ri kiritganingizga e'tibor bering! `,
       life: 0,
     });
   };
@@ -291,7 +259,7 @@ export default function PressTur() {
               <div className={`w-full  `}>
                 <div>
                   <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white md:text-xl">
-                    Matbuot kotibi tomonidan o‘tkazilgan mediyatadbirlar. <br />{" "}
+                    Matbuot kotibi tomonidan o‘tkazilgan mediatadbirlar. <br />{" "}
                     <span className="uppercase">Press tur</span>
                   </h2>
                 </div>
@@ -299,11 +267,11 @@ export default function PressTur() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="eventName"
-                      label="Tadbir Nomi"
+                      label="Tadbir nomi"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos tadbir nomini kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
@@ -314,64 +282,43 @@ export default function PressTur() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="stuffs"
-                      label="Ishchi hodimlarning ro'yhatini kiriting!"
+                      label="Rahbar xodimlarning ishtiroki"
                       rules={[
                         {
                           required: true,
-                          message:
-                            "Iltimos, Ishchi hodimlarning ro'yhatini kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                       style={{
-                        marginBottom: 20,
+                        marginBottom: 0,
                       }}
                     >
                       <Select
                         mode="multiple"
                         style={{
                           width: "100%",
-                          height: 41,
                         }}
-                        placeholder="Please select"
-                        defaultValue={[]}
-                        options={mediaItems?.map((item) => {
-                          let label, value;
-                          if (item === "RECTOR") {
-                            label = "Rektor";
-                            value = "Rektor";
-                          } else if (item === "VICE_RECTOR") {
-                            label = "Prorektor";
-                            value = "Prorektor";
-                          } else if (item === "PRESS_SECRETARY") {
-                            label = "Matbuot kotibi";
-                            value = "Matbuot kotibi";
-                          } else if (item === "HEAD_OF_ADMINISTRATION") {
-                            label = "Boshqarma boshlig‘i";
-                            value = "Boshqarma boshlig‘i";
-                          } else if (item === "HEAD_OF_DIVISION") {
-                            label = "Bo'lim boshlig‘i";
-                            value = "Bo'lim boshlig‘i";
-                          } else if (item === "DEAN") {
-                            label = "Dekan";
-                            value = "Dekan";
-                          } else if (item === "VICE_DEAN") {
-                            label = "Dekan o‘rinbosari";
-                            value = "Dekan o‘rinbosari";
-                          } else if (item === "HEAD_OF_DEPARTMENT") {
-                            label = "Kafedra mudiri";
-                            value = "Kafedra mudiri";
-                          } else if (item === "MINISTER") {
-                            label = "Vazir";
-                            value = "Vazir";
-                          } else if (item === "DEPUTY_MINISTER") {
-                            label = "Vazir o'rin bosari";
-                            value = "Vazir o'rin bosari";
-                          } else {
-                            label = "boshqa";
-                            value = "boshqa";
-                          }
-                          return { label, value };
-                        })}
+                        placeholder="Tegishlisini tanlang"
+                        // defaultValue={[]}
+                        options={[
+                          { label: "Rektor", value: "Rektor" },
+                          { label: "Prorektor", value: "Prorektor" },
+                          { label: "Matbuot kotibi", value: "Matbuot kotibi" },
+                          {
+                            label: "Boshqarma boshlig‘i",
+                            value: "Boshqarma boshlig‘i",
+                          },
+                          {
+                            label: "Boʻlim boshlig‘i",
+                            value: "Boʻlim boshlig‘i",
+                          },
+                          { label: "Dekan", value: "Dekan" },
+                          {
+                            label: "Dekan oʻrinbosari",
+                            value: "Dekan oʻrinbosari",
+                          },
+                          { label: "Kafedra mudiri", value: "Kafedra mudiri" },
+                        ]}
                       />
                     </Form.Item>
                   </div>
@@ -379,9 +326,9 @@ export default function PressTur() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="tv_channels"
-                      label="Telekanal nomi va url manzilini qo'shing!"
+                      label="Telekanal nomi va havolasi"
                       style={{
-                        marginBottom: 20,
+                        marginBottom: 10,
                       }}
                     >
                       <Form.List name="tv_channels">
@@ -408,11 +355,11 @@ export default function PressTur() {
                                   className="col-span-1"
                                 >
                                   <Select
-                                    className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[41px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
-                                    placeholder="tv channal's name"
-                                    dropdownRender={(menu) => (
+                                    className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 text-gray-900 shadow-sm  sm:text-sm sm:leading-6 h-[41px] "
+                                    placeholder="Tegishlisini tanlang"
+                                    dropdownRender={(menu1) => (
                                       <>
-                                        {menu}
+                                        {menu1}
                                         <Divider
                                           style={{
                                             margin: "8px 0",
@@ -424,10 +371,10 @@ export default function PressTur() {
                                           }}
                                         >
                                           <Input
-                                            placeholder="Boshqa bo'lsa kiriting!"
-                                            ref={inputRef_channal}
-                                            value={nameValue}
-                                            onChange={onNameChange_channal}
+                                            placeholder="Boshqa boʻlsa kiriting!"
+                                            ref={inputRef1}
+                                            value={name1}
+                                            onChange={onNameChange1}
                                             onKeyDown={(e) =>
                                               e.stopPropagation()
                                             }
@@ -435,14 +382,14 @@ export default function PressTur() {
                                           <Button
                                             type="text"
                                             icon={<PlusOutlined />}
-                                            onClick={addItem}
+                                            onClick={addItem1}
                                           >
-                                            Qo'shish
+                                            Qoʻshish
                                           </Button>
                                         </Space>
                                       </>
                                     )}
-                                    options={tvChannalNames?.map((item) => ({
+                                    options={items1.map((item) => ({
                                       label: item,
                                       value: item,
                                     }))}
@@ -465,17 +412,15 @@ export default function PressTur() {
                                   className="col-span-1"
                                 >
                                   <Input.TextArea
-                                    placeholder="Url manzilini kiriting!"
+                                    placeholder="havolasi"
                                     autoSize={{ minRows: 1, maxRows: 5 }} // Kursor avtomatik yangi qatorga tushadi
                                     onKeyDown={(e) => {
                                       if (e.shiftKey && e.key === "Enter") {
-                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga o'tkazadi
-                                        e.target.value += "\n"; // Kursorni yangi qatorga o'tkazadi
+                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga oʻtkazadi
+                                        e.target.value += "\n"; // Kursorni yangi qatorga oʻtkazadi
                                       }
                                     }}
-                                    style={{
-                                      height: 41,
-                                    }}
+                                    style={{}}
 
                                     // className="h-[41px] inline-block"
                                   />
@@ -492,9 +437,9 @@ export default function PressTur() {
                                 onClick={() => add()}
                                 block
                                 icon={<PlusOutlined />}
-                                className="py-1.5 h-[41px]"
+                                className="py-2"
                               >
-                                Qo'shish
+                                Qoʻshish
                               </Button>
                             </Form.Item>
                           </>
@@ -507,9 +452,9 @@ export default function PressTur() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="radio_channels"
-                      label="Radio kanal nomi va url manzilini qo'shing!"
+                      label="Radiokanal nomi va havolasi"
                       style={{
-                        marginBottom: 20,
+                        marginBottom: 0,
                       }}
                     >
                       <Form.List name="radio_channels">
@@ -530,17 +475,17 @@ export default function PressTur() {
                                   rules={[
                                     {
                                       required: true,
-                                      message: "Radio kanal nomi!",
+                                      message: "Radiokanal nomi!",
                                     },
                                   ]}
                                   className="col-span-1"
                                 >
                                   <Select
-                                    className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[41px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
-                                    placeholder="radio channal's name"
-                                    dropdownRender={(menu) => (
+                                    className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 text-gray-900 shadow-sm  sm:text-sm sm:leading-6 h-[41px] "
+                                    placeholder="Tegishlisini tanlang"
+                                    dropdownRender={(menu3) => (
                                       <>
-                                        {menu}
+                                        {menu3}
                                         <Divider
                                           style={{
                                             margin: "8px 0",
@@ -552,10 +497,10 @@ export default function PressTur() {
                                           }}
                                         >
                                           <Input
-                                            placeholder="Boshqa bo'lsa kiriting!"
-                                            ref={inputRef_radio}
-                                            value={nameValue_radio}
-                                            onChange={onNameChange_radio}
+                                            placeholder="Boshqa boʻlsa kiriting!"
+                                            ref={inputRef3}
+                                            value={name3}
+                                            onChange={onNameChange3}
                                             onKeyDown={(e) =>
                                               e.stopPropagation()
                                             }
@@ -563,14 +508,14 @@ export default function PressTur() {
                                           <Button
                                             type="text"
                                             icon={<PlusOutlined />}
-                                            onClick={addItem_radio}
+                                            onClick={addItem3}
                                           >
-                                            Qo'shish
+                                            Qoʻshish
                                           </Button>
                                         </Space>
                                       </>
                                     )}
-                                    options={radioChannal?.map((item) => ({
+                                    options={items3.map((item) => ({
                                       label: item,
                                       value: item,
                                     }))}
@@ -593,17 +538,15 @@ export default function PressTur() {
                                   className="col-span-1"
                                 >
                                   <Input.TextArea
-                                    placeholder="Url manzilini kiriting!"
+                                    placeholder="havolasi"
                                     autoSize={{ minRows: 1, maxRows: 5 }} // Kursor avtomatik yangi qatorga tushadi
                                     onKeyDown={(e) => {
                                       if (e.shiftKey && e.key === "Enter") {
-                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga o'tkazadi
-                                        e.target.value += "\n"; // Kursorni yangi qatorga o'tkazadi
+                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga oʻtkazadi
+                                        e.target.value += "\n"; // Kursorni yangi qatorga oʻtkazadi
                                       }
                                     }}
-                                    style={{
-                                      height: 41,
-                                    }}
+                                    style={{}}
 
                                     // className="h-[41px] inline-block"
                                   />
@@ -620,9 +563,9 @@ export default function PressTur() {
                                 onClick={() => add()}
                                 block
                                 icon={<PlusOutlined />}
-                                className="py-1.5 h-[41px]"
+                                className="py-2"
                               >
-                                Qo'shish
+                                Qoʻshish
                               </Button>
                             </Form.Item>
                           </>
@@ -635,9 +578,9 @@ export default function PressTur() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="newspapers"
-                      label="Gazeta, jurnal nomi va url manzilini qo'shing!"
+                      label="Gazeta, jurnal nomi va havolasi"
                       style={{
-                        marginBottom: 20,
+                        marginBottom: 0,
                       }}
                     >
                       <Form.List name="newspapers">
@@ -664,11 +607,11 @@ export default function PressTur() {
                                   className="col-span-1"
                                 >
                                   <Select
-                                    className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[41px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
-                                    placeholder="newspapers name"
-                                    dropdownRender={(menu) => (
+                                    className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 text-gray-900 shadow-sm  sm:text-sm sm:leading-6 h-[41px] "
+                                    placeholder="Tegishlisini tanlang"
+                                    dropdownRender={(menu4) => (
                                       <>
-                                        {menu}
+                                        {menu4}
                                         <Divider
                                           style={{
                                             margin: "8px 0",
@@ -680,10 +623,10 @@ export default function PressTur() {
                                           }}
                                         >
                                           <Input
-                                            placeholder="Boshqa bo'lsa kiriting!"
-                                            ref={inputRef_news}
-                                            value={nameValue_news}
-                                            onChange={onNameChange_news}
+                                            placeholder="Boshqa boʻlsa kiriting!"
+                                            ref={inputRef4}
+                                            value={name4}
+                                            onChange={onNameChange4}
                                             onKeyDown={(e) =>
                                               e.stopPropagation()
                                             }
@@ -691,14 +634,14 @@ export default function PressTur() {
                                           <Button
                                             type="text"
                                             icon={<PlusOutlined />}
-                                            onClick={addItem_news}
+                                            onClick={addItem4}
                                           >
-                                            Qo'shish
+                                            Qoʻshish
                                           </Button>
                                         </Space>
                                       </>
                                     )}
-                                    options={newspaper?.map((item) => ({
+                                    options={items4.map((item) => ({
                                       label: item,
                                       value: item,
                                     }))}
@@ -721,17 +664,15 @@ export default function PressTur() {
                                   className="col-span-1"
                                 >
                                   <Input.TextArea
-                                    placeholder="Url manzilini kiriting!"
+                                    placeholder="havolasi"
                                     autoSize={{ minRows: 1, maxRows: 5 }} // Kursor avtomatik yangi qatorga tushadi
                                     onKeyDown={(e) => {
                                       if (e.shiftKey && e.key === "Enter") {
-                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga o'tkazadi
-                                        e.target.value += "\n"; // Kursorni yangi qatorga o'tkazadi
+                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga oʻtkazadi
+                                        e.target.value += "\n"; // Kursorni yangi qatorga oʻtkazadi
                                       }
                                     }}
-                                    style={{
-                                      height: 41,
-                                    }}
+                                    style={{}}
 
                                     // className="h-[41px] inline-block"
                                   />
@@ -748,9 +689,9 @@ export default function PressTur() {
                                 onClick={() => add()}
                                 block
                                 icon={<PlusOutlined />}
-                                className="py-1.5 h-[41px]"
+                                className="py-2"
                               >
-                                Qo'shish
+                                Qoʻshish
                               </Button>
                             </Form.Item>
                           </>
@@ -763,9 +704,9 @@ export default function PressTur() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="messengers"
-                      label="Ijtimoiy tarmoqlar nomi va url manzilini qo'shing!"
+                      label="Ijtimoiy tarmoqlar nomi va havolasi"
                       style={{
-                        marginBottom: 20,
+                        marginBottom: 0,
                       }}
                     >
                       <Form.List name="messengers">
@@ -792,11 +733,11 @@ export default function PressTur() {
                                   className="col-span-1"
                                 >
                                   <Select
-                                    className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[41px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
-                                    placeholder="messengers name"
-                                    dropdownRender={(menu) => (
+                                    className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 text-gray-900 shadow-sm  sm:text-sm sm:leading-6 h-[41px] "
+                                    placeholder="Tegishlisini tanlang"
+                                    dropdownRender={(menu5) => (
                                       <>
-                                        {menu}
+                                        {menu5}
                                         <Divider
                                           style={{
                                             margin: "8px 0",
@@ -808,10 +749,10 @@ export default function PressTur() {
                                           }}
                                         >
                                           <Input
-                                            placeholder="Boshqa bo'lsa kiriting!"
-                                            ref={inputRef_messenger}
-                                            value={nameValue_messenger}
-                                            onChange={onNameChange_messenger}
+                                            placeholder="Boshqa boʻlsa kiriting!"
+                                            ref={inputRef5}
+                                            value={name5}
+                                            onChange={onNameChange5}
                                             onKeyDown={(e) =>
                                               e.stopPropagation()
                                             }
@@ -819,14 +760,14 @@ export default function PressTur() {
                                           <Button
                                             type="text"
                                             icon={<PlusOutlined />}
-                                            onClick={addItem_messenger}
+                                            onClick={addItem5}
                                           >
-                                            Qo'shish
+                                            Qoʻshish
                                           </Button>
                                         </Space>
                                       </>
                                     )}
-                                    options={messanger?.map((item) => ({
+                                    options={items5.map((item) => ({
                                       label: item,
                                       value: item,
                                     }))}
@@ -849,17 +790,15 @@ export default function PressTur() {
                                   className="col-span-1"
                                 >
                                   <Input.TextArea
-                                    placeholder="Url manzilini kiriting!"
+                                    placeholder="havolasi"
                                     autoSize={{ minRows: 1, maxRows: 5 }} // Kursor avtomatik yangi qatorga tushadi
                                     onKeyDown={(e) => {
                                       if (e.shiftKey && e.key === "Enter") {
-                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga o'tkazadi
-                                        e.target.value += "\n"; // Kursorni yangi qatorga o'tkazadi
+                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga oʻtkazadi
+                                        e.target.value += "\n"; // Kursorni yangi qatorga oʻtkazadi
                                       }
                                     }}
-                                    style={{
-                                      height: 41,
-                                    }}
+                                    style={{}}
 
                                     // className="h-[41px] inline-block"
                                   />
@@ -876,9 +815,9 @@ export default function PressTur() {
                                 onClick={() => add()}
                                 block
                                 icon={<PlusOutlined />}
-                                className="py-1.5 h-[41px]"
+                                className="py-2"
                               >
-                                Qo'shish
+                                Qoʻshish
                               </Button>
                             </Form.Item>
                           </>
@@ -891,9 +830,9 @@ export default function PressTur() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="web_sites"
-                      label="Web sayt nomi va url manzilini qo'shing!"
+                      label="Veb sayt nomi va havolasi"
                       style={{
-                        marginBottom: 20,
+                        marginBottom: 0,
                       }}
                     >
                       <Form.List name="web_sites">
@@ -920,11 +859,11 @@ export default function PressTur() {
                                   className="col-span-1"
                                 >
                                   <Select
-                                    className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[41px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
-                                    placeholder="web site name"
-                                    dropdownRender={(menu) => (
+                                    className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 text-gray-900 shadow-sm  sm:text-sm sm:leading-6 h-[41px] "
+                                    placeholder="Tegishlisini tanlang"
+                                    dropdownRender={(menu6) => (
                                       <>
-                                        {menu}
+                                        {menu6}
                                         <Divider
                                           style={{
                                             margin: "8px 0",
@@ -936,10 +875,10 @@ export default function PressTur() {
                                           }}
                                         >
                                           <Input
-                                            placeholder="Boshqa bo'lsa kiriting!"
-                                            ref={inputRef_web_sites}
-                                            value={nameValue_web_sites}
-                                            onChange={onNameChange_web_sites}
+                                            placeholder="Boshqa boʻlsa kiriting!"
+                                            ref={inputRef6}
+                                            value={name6}
+                                            onChange={onNameChange6}
                                             onKeyDown={(e) =>
                                               e.stopPropagation()
                                             }
@@ -947,14 +886,14 @@ export default function PressTur() {
                                           <Button
                                             type="text"
                                             icon={<PlusOutlined />}
-                                            onClick={addItem_web_sites}
+                                            onClick={addItem6}
                                           >
-                                            Qo'shish
+                                            Qoʻshish
                                           </Button>
                                         </Space>
                                       </>
                                     )}
-                                    options={webSite?.map((item) => ({
+                                    options={items6.map((item) => ({
                                       label: item,
                                       value: item,
                                     }))}
@@ -977,17 +916,15 @@ export default function PressTur() {
                                   className="col-span-1"
                                 >
                                   <Input.TextArea
-                                    placeholder="Url manzilini kiriting!"
+                                    placeholder="havolasi"
                                     autoSize={{ minRows: 1, maxRows: 5 }} // Kursor avtomatik yangi qatorga tushadi
                                     onKeyDown={(e) => {
                                       if (e.shiftKey && e.key === "Enter") {
-                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga o'tkazadi
-                                        e.target.value += "\n"; // Kursorni yangi qatorga o'tkazadi
+                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga oʻtkazadi
+                                        e.target.value += "\n"; // Kursorni yangi qatorga oʻtkazadi
                                       }
                                     }}
-                                    style={{
-                                      height: 41,
-                                    }}
+                                    style={{}}
 
                                     // className="h-[41px] inline-block"
                                   />
@@ -1004,9 +941,9 @@ export default function PressTur() {
                                 onClick={() => add()}
                                 block
                                 icon={<PlusOutlined />}
-                                className="py-1.5 h-[41px]"
+                                className="py-2"
                               >
-                                Qo'shish
+                                Qoʻshish
                               </Button>
                             </Form.Item>
                           </>
@@ -1019,7 +956,7 @@ export default function PressTur() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="dateOfEvent"
-                      label="Chiqqan sanasi va vaqti"
+                      label="Tadbir oʻtkazilgan sanasi va vaqti"
                       {...config}
                     >
                       <DatePicker

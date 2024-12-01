@@ -12,7 +12,7 @@ export default function DetailsSidebar({ next, prev, current, setCurrent }) {
   useEffect(() => {
     const loginEmail = localStorage.getItem("login");
     if (!loginEmail) {
-      navigate("/signup");
+      navigate("/");
     }
   }, [navigate]);
 
@@ -36,7 +36,7 @@ export default function DetailsSidebar({ next, prev, current, setCurrent }) {
             className="text-[18px] font-[500]"
             style={{ fontFamily: "Poppins" }}
           >
-            O‘zbekiston Respublikasi Oliy taʼlim, fan va innovatsiyalar
+            O‘zbekiston Respublikasi <br /> Oliy taʼlim, fan va innovatsiyalar
             vazirligi
           </h2>
           <p className="text-[16px] text-blue-500">{loginEmail?.email}</p>
@@ -49,7 +49,7 @@ export default function DetailsSidebar({ next, prev, current, setCurrent }) {
               onClick={() => handleStepClick(0)}
             >
               <IoPersonAdd className="text-[#4CA852] text-[20px]" />
-              <p className="font-[500] text-black">Shaxsiy malumotlaringiz</p>
+              <p className="font-[500] text-black">Shaxsiy ma’lumotlaringiz</p>
             </li>
             <li
               className={`flex items-center text-[18px] gap-2 py-2 px-4 my-3 ${
@@ -58,13 +58,13 @@ export default function DetailsSidebar({ next, prev, current, setCurrent }) {
               onClick={() => handleStepClick(1)}
             >
               <FaGoogleWallet className="text-[#4CA852] text-[20px] " />
-              <p className="font-[500] text-black">Umumiy malumotlaringiz</p>
+              <p className="font-[500] text-black">Umumiy ma’lumotlaringiz</p>
             </li>
             <li
               className=" flex items-center text-[18px] gap-2 py-2 px-4 my-3 hover:bg-green-100 transition-all duration-150 cursor-pointer rounded-lg"
               onClick={() => {
                 localStorage.removeItem("login");
-                navigate("/signup");
+                navigate("/");
               }}
             >
               <IoLogOutSharp className="text-[#4CA852] text-[20px]" />

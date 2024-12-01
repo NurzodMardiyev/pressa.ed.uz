@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import logo from "../../images/pressa logo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { DarkThemeToggle, Flowbite } from "flowbite-react";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -8,8 +8,19 @@ import { IoCloseSharp } from "react-icons/io5";
 // import { useTranslation } from "react-i18next";
 import "../../App.css";
 import { useEmployeeInfo } from "../../hooks/useEmployeeInfo";
-import { Drawer, Flex, Spin } from "antd";
+import { Drawer, Flex, notification, Spin } from "antd";
 import { BellIcon } from "@heroicons/react/24/outline";
+import axios from "axios";
+import { RiCloseCircleLine } from "react-icons/ri";
+import { RiChatVoiceFill } from "react-icons/ri";
+import { MdPermMedia } from "react-icons/md";
+import { IoSchoolSharp } from "react-icons/io5";
+import { SiMaterialformkdocs } from "react-icons/si";
+import { BsPersonLinesFill } from "react-icons/bs";
+import { FaFacebookMessenger } from "react-icons/fa";
+import { AiFillProject } from "react-icons/ai";
+import { SiLevelsdotfyi } from "react-icons/si";
+import { ip } from "../../ips";
 
 export default function HeaderEmployee() {
   const [selectedLanguage, setSelectedLanguage] = useState("Uz");
@@ -17,8 +28,28 @@ export default function HeaderEmployee() {
   const menuRef = useRef(null);
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const showDrawer = () => {
-    setOpen(true);
+  const loaction = useLocation();
+  const [notifications, setNotifications] = useState([]);
+  const [notif, setNotif] = useState();
+
+  const showDrawer = async () => {
+    try {
+      const { data } = await axios.get(
+        `http://${ip}:8080/api/notification/get-all`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setNotifications(data);
+      console.log(data);
+      setOpen(true);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   };
   const onClose = () => {
     setOpen(false);
@@ -49,6 +80,26 @@ export default function HeaderEmployee() {
     setShow(!show);
   };
 
+  const token = JSON.parse(localStorage.getItem("token"));
+
+  const takeNatificationCount = useCallback(async () => {
+    try {
+      const { data } = await axios.get(
+        `http://${ip}:8080/api/notification/get-count`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setNotif(data);
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }, [token]);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -56,12 +107,36 @@ export default function HeaderEmployee() {
       }
     };
     // refetch();
+    takeNatificationCount();
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [menuRef]);
+  }, [menuRef, notif, notifications, loaction, takeNatificationCount]);
+
+  const base64Image = `data:image/png;base64,${data?.user.base64}`;
+  // console.log(base64Image);
+  const profileImgage = base64Image;
+
+  const deleteNotification = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        `http://${ip}:8080/api/notification/delete-notification?notificationId=${id}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      setNotifications((prev) => prev.filter((k) => k.id !== id));
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
 
   if (isLoading)
     return (
@@ -75,38 +150,119 @@ export default function HeaderEmployee() {
   if (error) {
     navigate("/");
   }
-
-  const base64Image = `data:image/png;base64,${data?.user.base64}`;
-  // console.log(base64Image);
-  const profileImgage = base64Image;
-
   return (
     <div className="dark:bg-gray-800 fixed top-0 bg-slate-100 w-full z-[999] ">
       <div className="header-wrapper container lg:max-w-[2560px] md:max-w-[1600px]  mx-auto flex justify-between py-4 md:px-5  ">
         <div className="logpSection flex gap-6 items-center ">
-          <Link to="/" className="logo h-[30px]  md:h-[40px]">
+          <Link to="/" className="logo h-[50px]  md:">
             <img className="w-full h-full" src={logo} alt="OTFIV logo" />
           </Link>
         </div>
         <div className="loginSection flex items-center">
-          <button
-            type="button"
-            onClick={showDrawer}
-            className="relative rounded-full p-1 text-gray-400 dark:text-white dark:hover:text-white hover:text-gray-800 focus:outline-none focus:ring-0 focus:ring-[#727272] focus:ring-offset-2 mr-3"
-          >
-            <span className="absolute -inset-1.5" />
-            <span className="sr-only">View notifications</span>
-            <BellIcon aria-hidden="true" className="h-6 w-6" />
-          </button>
+          <div className="flex items-center relative">
+            <button
+              type="button"
+              onClick={showDrawer}
+              className="relative rounded-full p-1 text-gray-400 dark:text-white dark:hover:text-white hover:text-gray-800 focus:outline-none focus:ring-0 focus:ring-[#727272] focus:ring-offset-2 mr-3"
+            >
+              <span className="absolute -inset-1.5" />
+              <span className="sr-only">View notifications</span>
+              <BellIcon aria-hidden="true" className="h-6 w-6" />
+            </button>
+            {notif === 0 ? (
+              ""
+            ) : (
+              <span className="flex text-[13px] absolute bottom-[-8px] right-[7px] text-white rounded-full w-[20px] h-[20px] justify-center items-center font-semibold bg-red-500 ">
+                {notif}
+              </span>
+            )}
+          </div>
           <Drawer
-            title="Basic Drawer"
+            title="Xabarlar"
             onClose={onClose}
             open={open}
-            className="dark:bg-gray-700 dark:text-white"
+            className="dark:bg-gray-700 dark:text-white w-full"
           >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            {notifications?.map((item, index) => {
+              let message = "";
+              let icon = "";
+              if (item?.message?.content === "POST") {
+                message = "Faoliyatga doir axborotni yoritilishi";
+                icon = <RiChatVoiceFill />;
+              } else if (item?.message?.content === "MEDIA_EVENT") {
+                message = "Matbuot kotibi tomonidan o‘tkazilgan mediatadbirlar";
+                icon = <MdPermMedia />;
+              } else if (item?.message?.content === "MATERIAL") {
+                message =
+                  "Faoliyatga doir axborotni yetkazishda materiallardan foydalanganligi";
+                icon = <SiMaterialformkdocs />;
+              } else if (item?.message?.content === "ONLINE_BROADCAST") {
+                message =
+                  "Ijtimoiy tarmoqlarda berilgan onlayn efir (ovozli chat) lar soni";
+                icon = <BsPersonLinesFill />;
+              } else if (item?.message?.content === "OFFICIAL_PAGE") {
+                message =
+                  "Ijtimoiy tarmoq va messenjerlardagi OTM sahifalarida obunachilar soni";
+                icon = <FaFacebookMessenger />;
+              } else if (item?.message?.content === "MEDIA_PROJECT") {
+                message =
+                  "Axborot xizmati tomonidan yoʻlga qoʻyilgan medialoyihalar";
+                icon = <AiFillProject />;
+              } else if (item?.message?.content === "COVERAGE") {
+                message =
+                  "OTM faoliyatidagi tadbirlarni OAVida yoritilganlik darajasi";
+                icon = <SiLevelsdotfyi />;
+              } else {
+                message = "";
+                icon = "";
+              }
+
+              const formatDate = (dateArray) => {
+                const [year, month, day, hour, minute] = dateArray;
+                return `${day}/${month}/${year} ${hour}:${minute}`;
+              };
+
+              const formattedDate = formatDate(item?.createdAt);
+
+              return (
+                <div
+                  key={index}
+                  className="relative bg-[#ffe5ee] text-[#fa3e73] px-6 py-4 border-l-2 border-l-[#fa3e73] dark:bg-[#191919] mb-3"
+                >
+                  <div>
+                    <div className="flex gap-2">
+                      <span className="mt-1 font-semibold text-[15px] ">
+                        {icon}
+                      </span>
+                      <div>
+                        <h3 className="font-semibold text-[15px] ">
+                          <span>
+                            {message} posti admin tomonidan oʻchirildi
+                          </span>
+                        </h3>
+                        {item?.message?.reason?.map((i, idx) => (
+                          <p
+                            className="text-[14px] dark:text-slate-300"
+                            key={idx}
+                          >
+                            {i}
+                          </p>
+                        ))}
+                        <span className="mt-3  text-black float-end">
+                          {formattedDate}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <span
+                    className="absolute top-[20px] right-[20px] text-[18px] cursor-pointer"
+                    onClick={() => deleteNotification(item?.id)}
+                  >
+                    <RiCloseCircleLine />
+                  </span>
+                </div>
+              );
+            })}
           </Drawer>
           <div className="darkMode flex items-center">
             <Flowbite>
@@ -117,7 +273,7 @@ export default function HeaderEmployee() {
             <div>
               <MenuButton className="relative flex text-sm focus:outline-none rounded-l-lg md:border-r">
                 <span className="sr-only">Open user menu</span>
-                <div className="flex items-center gap-2 md:px-4 ps-0  md:py-1.5 py-1">
+                <div className="flex items-center gap-2 md:px-4 ps-0  md:py-2 py-1">
                   <img
                     alt=""
                     src={
@@ -143,7 +299,7 @@ export default function HeaderEmployee() {
                     key={lang.title}
                     onClick={() => handleLanguageChange(lang.title)}
                   >
-                    <div className="flex items-center gap-2 px-4 py-1.5 cursor-pointer">
+                    <div className="flex items-center gap-2 px-4 py-2 cursor-pointer">
                       <img alt="" src={lang.flag} className="md:w-7 w-5" />
                       <span className="font-[500] md:text-[14px] text-[12px] dark:text-white ">
                         {lang.title}

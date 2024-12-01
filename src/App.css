@@ -2,13 +2,14 @@
   font-family: "Barlow", sans-serif;
 }
 
-.darkMode > button{
+.darkMode > button {
   padding: 7px !important;
 }
 .darkMode > button:focus {
   outline: none;
-  outline-offset: 1px ;
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  outline-offset: 1px;
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+    calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
 }
 
 /* Responsiv Header */
@@ -17,16 +18,16 @@
   .header-wrapper {
     padding: 8px 10px;
   }
-  .darkMode > button{
+  .darkMode > button {
     padding: 4px !important;
-    
   }
   .darkMode > button:focus {
     outline: none;
-    outline-offset: 1px ;
-    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    outline-offset: 1px;
+    --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+      calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   }
-} 
+}
 
 .p-stepper-nav {
   padding-left: 10px;
@@ -42,18 +43,16 @@
   margin-right: auto !important;
   float: left;
 }
-.dropdownMagister  .p-inputtext {
+.dropdownMagister .p-inputtext {
   padding: 6.8px 10px !important;
   font-size: 14px;
-
 }
-
 
 /* Sidebar */
 .group\/head:first-child .group-first\/head\:first\:rounded-tl-lg:first-child {
   border-top-left-radius: 0;
 }
-.numCul > span{
+.numCul > span {
   padding: 6px;
   border-radius: 50%;
   background-color: rgb(91, 187, 91);
@@ -75,44 +74,79 @@
 .custom-scrollbars__content::-webkit-scrollbar {
   display: none;
 }
-.dark .ant-select-selection-placeholder, .dark  .ant-select-arrow{
-  color: #c6c6c6 !important
+.dark .ant-select-selection-placeholder,
+.dark .ant-select-arrow {
+  color: #c6c6c6 !important;
 }
 .dark .ant-select-selector {
   background-color: #374151 !important;
-  border: 0
+  border: 0;
 }
 .dark .ant-select-dropdown-placement-bottomLeft {
   background-color: #474f5c !important;
 }
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected), .dark :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light .ant-menu-submenu-title,
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light .ant-menu-item:not(.ant-menu-item-selected):not(.ant-menu-submenu-selected):hover {
-
-  color:#f1f1f1;
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light:not(
+    .ant-menu-horizontal
+  )
+  .ant-menu-item:not(.ant-menu-item-selected),
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light
+  .ant-menu-submenu-title,
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light
+  .ant-menu-item:not(.ant-menu-item-selected):not(
+    .ant-menu-submenu-selected
+  ):hover {
+  color: #f1f1f1;
 }
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light .ant-menu-item-selected {
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light
+  .ant-menu-item-selected {
   background-color: #474f5c !important;
-  color: #fff
+  color: #fff;
 }
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light:not(.ant-menu-horizontal) .ant-menu-submenu-title:active {
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light:not(
+    .ant-menu-horizontal
+  )
+  .ant-menu-submenu-title:active {
   background-color: #474f5c !important;
-  color: #fff
+  color: #fff;
 }
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light:not(.ant-menu-horizontal) .ant-menu-item:not(.ant-menu-item-selected):hover {
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light:not(
+    .ant-menu-horizontal
+  )
+  .ant-menu-item:not(.ant-menu-item-selected):hover {
   background-color: #474f5c !important;
 }
-.dark .ant-select-item-option-content, .dark .ant-btn >span , .dark .ant-select-selection-item{
-  color: #fff !important
+.dark .ant-select-item-option-content,
+.dark .ant-btn > span,
+.dark .ant-select-selection-item {
+  color: #fff !important;
 }
-.dark .ant-input , .dark .ant-input::placeholder {
+.dark .ant-input,
+.dark .ant-input::placeholder {
   background-color: #374151;
-  color: #fff !important
+  color: #fff !important;
 }
-.dark .ant-input::placeholder, .dark :where(.css-dev-only-do-not-override-11lehqq).ant-picker-dropdown .ant-picker-cell:hover:not(.ant-picker-cell-selected):not(.ant-picker-cell-range-start):not(.ant-picker-cell-range-end) .ant-picker-cell-inner, 
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-form-item .ant-form-item-label >label {
+.dark .ant-input::placeholder,
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq).ant-picker-dropdown
+  .ant-picker-cell:hover:not(.ant-picker-cell-selected):not(
+    .ant-picker-cell-range-start
+  ):not(.ant-picker-cell-range-end)
+  .ant-picker-cell-inner,
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq).ant-form-item
+  .ant-form-item-label
+  > label {
   color: #c6c6c6 !important;
 }
-.dark .p-connected-overlay-enter-done , .dark .p-datepicker-header, .dark .day{
+.dark .p-connected-overlay-enter-done,
+.dark .p-datepicker-header,
+.dark .day {
   background-color: #374151;
   color: #fff;
 }
@@ -125,106 +159,184 @@
   border: none;
 }
 .ant-select-selector:focus {
-border: 0;
-outline: none;
+  border: 0;
+  outline: none;
 }
 .dark .ant-select-dropdown {
   background-color: #374151;
 }
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
-  
-  background-color: #2d3541 !important; 
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq).ant-select-dropdown
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background-color: #2d3541 !important;
 }
-.dark .react-datepicker, .dark .react-datepicker__time-box , .dark .react-datepicker__day-names, .dark .react-datepicker__day-names , .dark .react-datepicker__month-container, .dark :where(.css-dev-only-do-not-override-11lehqq).ant-btn-default{
+.dark .react-datepicker,
+.dark .react-datepicker__time-box,
+.dark .react-datepicker__day-names,
+.dark .react-datepicker__day-names,
+.dark .react-datepicker__month-container,
+.dark :where(.css-dev-only-do-not-override-11lehqq).ant-btn-default {
   background-color: #374151 !important;
   color: #fff !important;
 }
-.dark .react-datepicker > div, .dark .react-datepicker__time-box > div , .dark .react-datepicker__day-names, .dark .react-datepicker__day-names , .dark .react-datepicker__month-container{
- 
+.dark .react-datepicker > div,
+.dark .react-datepicker__time-box > div,
+.dark .react-datepicker__day-names,
+.dark .react-datepicker__day-names,
+.dark .react-datepicker__month-container {
   color: #fff !important;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-select-multiple .ant-select-selection-overflow  {
+:where(.css-dev-only-do-not-override-11lehqq).ant-select-multiple
+  .ant-select-selection-overflow {
   padding-top: 3px !important;
   padding-bottom: 3px !important;
-} 
-:where(.css-dev-only-do-not-override-11lehqq).ant-menu-inline.ant-menu-root .ant-menu-item >.ant-menu-title-content {
+}
+:where(.css-dev-only-do-not-override-11lehqq).ant-menu-inline.ant-menu-root
+  .ant-menu-item
+  > .ant-menu-title-content {
   font-size: 15px;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-menu-inline.ant-menu-root .ant-menu-submenu-title >.ant-menu-title-content {
+:where(.css-dev-only-do-not-override-11lehqq).ant-menu-inline.ant-menu-root
+  .ant-menu-submenu-title
+  > .ant-menu-title-content {
   font-size: 15px;
   font-weight: 500;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-menu .ant-menu-item .ant-menu-item-icon , :where(.css-dev-only-do-not-override-11lehqq).ant-menu .ant-menu-submenu-title .ant-menu-item-icon{
+:where(.css-dev-only-do-not-override-11lehqq).ant-menu
+  .ant-menu-item
+  .ant-menu-item-icon,
+:where(.css-dev-only-do-not-override-11lehqq).ant-menu
+  .ant-menu-submenu-title
+  .ant-menu-item-icon {
   font-size: 18px;
 }
 
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-table-wrapper .ant-table.ant-table-bordered >.ant-table-container >.ant-table-content >table >thead>tr>th ,
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-table-wrapper .ant-table-tbody .ant-table-row >.ant-table-cell-row-hover {
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq).ant-table-wrapper
+  .ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-content
+  > table
+  > thead
+  > tr
+  > th,
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq).ant-table-wrapper
+  .ant-table-tbody
+  .ant-table-row
+  > .ant-table-cell-row-hover {
   background-color: #374151;
 }
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-table-wrapper .ant-table-tbody >tr >th , .dark :where(.css-dev-only-do-not-override-11lehqq)[class^="ant-table"] [class^="ant-table"], .dark :where(.css-dev-only-do-not-override-11lehqq)[class*=" ant-table"] [class^="ant-table"],
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-pagination .ant-pagination-item, .dark :where(.css-dev-only-do-not-override-11lehqq).ant-pagination .ant-pagination-item > a,
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-picker-outlined, .dark :where(.css-dev-only-do-not-override-11lehqq).ant-picker-dropdown .ant-picker-panel-container {
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq).ant-table-wrapper
+  .ant-table-tbody
+  > tr
+  > th,
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq)[class^="ant-table"]
+  [class^="ant-table"],
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq)[class*=" ant-table"]
+  [class^="ant-table"],
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq).ant-pagination
+  .ant-pagination-item,
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq).ant-pagination
+  .ant-pagination-item
+  > a,
+.dark :where(.css-dev-only-do-not-override-11lehqq).ant-picker-outlined,
+.dark
+  :where(.css-dev-only-do-not-override-11lehqq).ant-picker-dropdown
+  .ant-picker-panel-container {
   background-color: #374151;
   color: #fff !important;
 }
-.dark .televediniya .ant-table-tbody > tr:hover > td {
-  background-color: inherit !important; /* Dark modeda hoverni o'chirish */
+.dark .Televediniye .ant-table-tbody > tr:hover > td {
+  background-color: inherit !important; /* Dark modeda hoverni Oʻchirish */
   /* yoki */
   /* background-color: #333;  Dark mode hover fon rangi */
 }
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-input-outlined.ant-input-status-warning:not(.ant-input-disabled) {
+.dark
+  :where(
+    .css-dev-only-do-not-override-11lehqq
+  ).ant-input-outlined.ant-input-status-warning:not(.ant-input-disabled) {
   background: inherit;
 }
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-input-outlined.ant-input-status-error:not(.ant-input-disabled) {
+.dark
+  :where(
+    .css-dev-only-do-not-override-11lehqq
+  ).ant-input-outlined.ant-input-status-error:not(.ant-input-disabled) {
   background: #374151;
 }
 /* DetailsInfo  */
 :where(.css-dev-only-do-not-override-11lehqq).ant-row {
   display: flex;
   flex-direction: column;
-    justify-content: start;
-    align-items: start;
+  justify-content: start;
+  align-items: start;
 }
 
-:where(.css-dev-only-do-not-override-11lehqq).ant-form-horizontal .ant-form-item-label[class*='-24 ']+.ant-form-item-control  {
+:where(.css-dev-only-do-not-override-11lehqq).ant-form-horizontal
+  .ant-form-item-label[class*="-24 "]
+  + .ant-form-item-control {
   width: 100%;
 }
-[type='text'], [type='number'] {
+[type="text"],
+[type="number"] {
   border-color: #d9d9d9;
   font-family: "Barlow", sans-serif;
   font-size: 14px;
   border-radius: 6px;
 }
-[type='text']:focus , [type='number']:focus{
+[type="text"]:focus,
+[type="number"]:focus {
   outline: 0;
   outline-offset: 0;
   border: 1px solid #1677ff;
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1)
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
+    calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1);
 }
 
-:where(.css-dev-only-do-not-override-11lehqq).ant-steps .ant-steps-item-process .ant-steps-item-icon {
-  background-color: #4CA852;
-    border-color: #4CA852;
+:where(.css-dev-only-do-not-override-11lehqq).ant-steps
+  .ant-steps-item-process
+  .ant-steps-item-icon {
+  background-color: #4ca852;
+  border-color: #4ca852;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-steps .ant-steps-item-finish .ant-steps-item-icon {
+:where(.css-dev-only-do-not-override-11lehqq).ant-steps
+  .ant-steps-item-finish
+  .ant-steps-item-icon {
   background-color: #d9ffdc;
-    border-color: #4CA852;
+  border-color: #4ca852;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-steps .ant-steps-item-finish .ant-steps-item-icon >.ant-steps-icon {
-  color: #4CA852;
+:where(.css-dev-only-do-not-override-11lehqq).ant-steps
+  .ant-steps-item-finish
+  .ant-steps-item-icon
+  > .ant-steps-icon {
+  color: #4ca852;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-steps .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title::after {
-  background-color: #4CA852;
+:where(.css-dev-only-do-not-override-11lehqq).ant-steps
+  .ant-steps-item-finish
+  > .ant-steps-item-container
+  > .ant-steps-item-content
+  > .ant-steps-item-title::after {
+  background-color: #4ca852;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover  {
-  color: #4CA852;
-    border-color: #4CA852;
+:where(.css-dev-only-do-not-override-11lehqq).ant-btn-default:not(
+    :disabled
+  ):not(.ant-btn-disabled):hover {
+  color: #4ca852;
+  border-color: #4ca852;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-form-horizontal .ant-form-item-control {
+:where(.css-dev-only-do-not-override-11lehqq).ant-form-horizontal
+  .ant-form-item-control {
   flex: 1 0;
   width: 100%;
+}
+.ant-drawer-content-wrapper {
+  width: 25% !important;
 }
 .ant-form-item-control-input-content textarea {
   min-height: 41px !important;
@@ -238,13 +350,111 @@ outline: none;
   width: 100%;
   display: flex;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-radio-button-wrapper:first-child, :where(.css-dev-only-do-not-override-11lehqq).ant-radio-button-wrapper:last-child {
+:where(
+    .css-dev-only-do-not-override-11lehqq
+  ).ant-radio-button-wrapper:first-child,
+:where(
+    .css-dev-only-do-not-override-11lehqq
+  ).ant-radio-button-wrapper:last-child {
   height: 41px;
   width: 50%;
   display: flex;
   justify-content: center;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-radio-button-wrapper:first-child span, :where(.css-dev-only-do-not-override-11lehqq).ant-radio-button-wrapper:last-child span{
-  padding-top:  4px;
-  
+:where(
+    .css-dev-only-do-not-override-11lehqq
+  ).ant-radio-button-wrapper:first-child
+  span,
+:where(
+    .css-dev-only-do-not-override-11lehqq
+  ).ant-radio-button-wrapper:last-child
+  span {
+  padding-top: 4px;
+}
+.ant-select-selection-overflow-item-suffix {
+  padding: 6.5px;
+}
+:where(.css-dev-only-do-not-override-11lehqq).ant-picker .ant-picker-input {
+  padding: 1px;
+}
+:where(.css-dev-only-do-not-override-11lehqq).ant-btn {
+  padding: 19.5px 30px !important;
+}
+
+/* ---------------------------- */
+
+.active {
+  background-color: #333;
+}
+.barChartRanking canvas {
+  height: 500px !important;
+}
+
+.dark .ant-table-tbody,
+.dark .ant-table-tbody:hover,
+.dark .ant-table-thead {
+  background-color: #4b5563 !important;
+  color: #fff;
+}
+.dark .ant-table-thead,
+.dark table,
+.dark thead .ant-table-cell,
+.dark table,
+.dark thead .ant-table-column-title,
+.dark table,
+.dark thead .ant-table-cell {
+  background-color: #4b5563 !important;
+  color: #fff !important;
+}
+.dark .ant-table-cell-row-hover {
+  background-color: #6b7280 !important;
+}
+.dark .ant-pagination-item {
+  background-color: #6b7280 !important;
+  color: #fff !important;
+}
+.dark .anticon-search,
+.dark .ant-pagination-item-active,
+.dark .anticon.anticon-right,
+.dark .anticon.anticon-left {
+  color: #fff !important;
+}
+.dark .ant-table-filter-dropdown {
+  background-color: #6b7280 !important;
+  color: #fff !important;
+}
+.dark .ant-input.css-dev-only-do-not-override-11lehqq {
+  background-color: #374151 !important;
+  color: #fff !important;
+}
+.dark .ant-btn.css-dev-only-do-not-override-11lehqq.ant-btn-default.ant-btn-sm {
+  background-color: #4b5563 !important;
+  color: #fff !important;
+}
+.ant-pagination-options {
+  display: none !important;
+}
+.dark
+  :where(
+    .css-dev-only-do-not-override-11lehqq
+  ).ant-table-wrapper.ant-table-filter-trigger:hover {
+  background: #4b5563 !important;
+}
+
+@media (max-width: 450px) {
+  .barChartRanking .chartjs-render-monitor {
+    font-size: 10px !important;
+  }
+  .rankingtable {
+    max-width: 380px !important;
+  }
+}
+
+@media (max-width: 370px) {
+  .barChartRanking .chartjs-render-monitor {
+    font-size: 10px !important;
+  }
+  .rankingtable {
+    max-width: 300px !important;
+  }
 }

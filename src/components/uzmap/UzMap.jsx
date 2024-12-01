@@ -7,7 +7,7 @@ const UzMap = () => {
   const regionData = {
     toshkent: "Toshkent viloyati: 3 mln aholisi bor.",
     andijon: "Andijon viloyati: 2 mln aholisi bor.",
-    // Boshqa viloyatlar uchun ma'lumotlar
+    // Boshqa viloyatlar uchun ma’lumotlar
   };
 
   const handleMouseEnter = (region) => {
@@ -180,10 +180,10 @@ const UzMap = () => {
           onMouseLeave={handleMouseLeave}
         />
 
-        {/* Boshqa viloyatlar uchun path'larni qo'shing */}
+        {/* Boshqa viloyatlar uchun path'larni qoʻshing */}
       </svg>
 
-      {/* Viloyat ustiga kursor borganida chiqadigan ma'lumot */}
+      {/* Viloyat ustiga kursor borganida chiqadigan ma’lumot */}
       {hoveredRegion && (
         <div
           style={{

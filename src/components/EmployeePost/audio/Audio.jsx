@@ -13,7 +13,7 @@ const config = {
     {
       type: "object",
       required: true,
-      message: "Please select time!",
+      message: "Iltimos Inputga qiymat kiriting!",
     },
   ],
 };
@@ -68,7 +68,8 @@ export default function Audio() {
   };
   // Submit bosilganda ishlaydigan Funksiya
 
-  const elon = [
+  // Sellect Dastur Nomi
+  const [items1, setItems1] = useState([
     "Televediniye",
     "Radio",
     "Gazeta/jurnallar",
@@ -77,9 +78,7 @@ export default function Audio() {
     "Instagram",
     "Youtube",
     "Facebook",
-  ];
-  // Sellect Dastur Nomi
-  const [items1, setItems1] = useState([]);
+  ]);
   const [name1, setName1] = useState("");
   const inputRef1 = useRef(null);
   const onNameChange1 = (event) => {
@@ -147,24 +146,24 @@ export default function Audio() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos material mavzusini kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
-                      <Input className="py-1.5" />
+                      <Input className="py-2" />
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="publishDate"
-                      label="E'lon qilingan sanasi"
+                      label="E’lon qilingan sanasi"
                       {...config}
                       className=""
                     >
                       <DatePicker
                         //showTime={{ format: "HH:mm" }} // Sekundsiz faqat soat va daqiqa
                         format="YYYY-MM-DD" // Umumiy format, sana + vaqt
-                        className="w-full py-1.5"
+                        className="w-full py-2"
                       />
                     </Form.Item>
                   </div>
@@ -172,17 +171,17 @@ export default function Audio() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="massMedia"
-                      label="E'lon qilingan OAV/Ijtimoiy tarmoq turi"
+                      label="E’lon qilingan OAV/Ijtimoiy tarmoq turi"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
                       <Select
-                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[40px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
-                        placeholder="custom dropdown render"
+                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0  text-gray-900 shadow-sm  sm:text-sm sm:leading-6 h-[41px]"
+                        placeholder="Tegishlisini tanlang"
                         dropdownRender={(menu) => (
                           <>
                             {menu}
@@ -197,7 +196,7 @@ export default function Audio() {
                               }}
                             >
                               <Input
-                                placeholder="Boshqa bo'lsa kiriting!"
+                                placeholder="Boshqa boʻlsa kiriting!"
                                 ref={inputRef1}
                                 value={name1}
                                 onChange={onNameChange1}
@@ -208,12 +207,12 @@ export default function Audio() {
                                 icon={<PlusOutlined />}
                                 onClick={addItem1}
                               >
-                                Qo'shish
+                                Qoʻshish
                               </Button>
                             </Space>
                           </>
                         )}
-                        options={elon?.map((item) => ({
+                        options={items1?.map((item) => ({
                           label: item,
                           value: item,
                         }))}
@@ -228,21 +227,21 @@ export default function Audio() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
-                      <Input className="py-1.5" />
+                      <Input className="py-2" />
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="link"
-                      label="Havolasini kiriting (http bilan boshlanishi shart!)"
+                      label="Havolasi "
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos Havolasini kiriting!",
+                          message: "Iltimos Havolasi!",
                         },
                         {
                           type: "url",
@@ -250,7 +249,7 @@ export default function Audio() {
                         },
                       ]}
                     >
-                      <Input placeholder="https://kun.uz" className="py-1.5" />
+                      <Input placeholder="https://kun.uz" className="py-2" />
                     </Form.Item>
                   </div>
                 </div>

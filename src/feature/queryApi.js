@@ -1,6 +1,7 @@
 import axios from "axios";
+import { ip } from "../ips";
 
-const IP = "10.10.3.181";
+const IP = ip;
 const api = `http://${IP}:8080/api`;
 
 // Tokenni har safar olish uchun
@@ -41,7 +42,6 @@ export const oavIV = {
     }
   },
   detailInfo: async (infoDetails) => {
-    console.log(infoDetails);
     try {
       const token = getToken();
 
@@ -130,6 +130,7 @@ export const oavIV = {
 
       return data;
     } catch (error) {
+      window.location.href = "/error";
       throw new Error(error.message);
     }
   },
@@ -202,7 +203,7 @@ export const oavIV = {
     }
   },
 
-  // Online Efirlar uchun so'rov
+  // Online Efirlar uchun soʻrov
   online_event: async (post) => {
     try {
       const token = getToken();
@@ -223,7 +224,7 @@ export const oavIV = {
     }
   },
 
-  // Medialoyihalar uchun so'rov
+  // Medialoyihalar uchun soʻrov
   media_event: async (post) => {
     try {
       const token = getToken();
@@ -240,11 +241,27 @@ export const oavIV = {
     }
   },
 
-  // Medialoyihalar uchun so'rov
+  // Medialoyihalar uchun soʻrov
   lavelIllumination: async (post) => {
     try {
       const token = getToken();
       const { data } = await axios.post(`${api}/coverage/add`, post, {
+        headers: {
+          Authorization: `${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  foreign: async (post) => {
+    try {
+      const token = getToken();
+      const { data } = await axios.post(`${api}/foreign-oav/create`, post, {
         headers: {
           Authorization: `${token}`,
           "Content-Type": "application/json",
@@ -268,6 +285,7 @@ export const oavIV = {
         },
       });
 
+      console.log(data);
       return data;
     } catch (error) {
       throw new Error(error.message);
@@ -380,6 +398,23 @@ export const oavIV = {
     }
   },
 
+  getTypeForeign: async () => {
+    //botta type beriladi
+    try {
+      const token = getToken();
+      const { data } = await axios.get(`${api}/foreign-oav/get-all`, {
+        headers: {
+          Authorization: `${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
   // material hamma postlarni chiqarish
   getTypeMaterial: async () => {
     //botta type beriladi
@@ -458,6 +493,22 @@ export const oavIV = {
     try {
       const token = getToken();
       const { data } = await axios.get(`${api}/coverage/get-all`, {
+        headers: {
+          Authorization: `${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  getEmpoyeeId: async () => {
+    //botta type beriladi
+    try {
+      const token = getToken();
+      const { data } = await axios.get(`${api}/employee/id`, {
         headers: {
           Authorization: `${token}`,
           "Content-Type": "application/json",
@@ -610,6 +661,27 @@ export const oavIV = {
     }
   },
 
+  deleteForeign: async (id) => {
+    //botta type beriladi
+    try {
+      const token = getToken();
+      const { data } = await axios.delete(
+        `${api}/foreign-oav/delete-foreign-oav?foreignId=${id}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("ishl");
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
   // Trashbox korzinka uchun
   getTrash: async () => {
     //botta type beriladi
@@ -645,7 +717,7 @@ export const oavIV = {
     }
   },
 
-  // Superadmin admin qo'shishi
+  // Superadmin admin qoʻshishi
   addAdmin: async (value) => {
     try {
       const token = getToken();
@@ -662,7 +734,7 @@ export const oavIV = {
     }
   },
 
-  // Forget Password code uchun so'rov
+  // Forget Password code uchun soʻrov
   forgetPassword: async (value) => {
     try {
       const token = getToken();
@@ -682,7 +754,7 @@ export const oavIV = {
     }
   },
 
-  // Forget Password code uchun so'rov
+  // Forget Password code uchun soʻrov
   rePassword: async (value) => {
     try {
       const token = getToken();
@@ -761,7 +833,7 @@ export const oavIV = {
       const { data } = await axios.get(`${api}/excel/export-employees`, {
         headers: {
           Authorization: `${token}`,
-          "Content-Type": "application/json",
+          "Content-Type": "application/octet-stream",
         },
       });
 
@@ -771,7 +843,7 @@ export const oavIV = {
     }
   },
 
-  // O'chirilgan post ni qayta tiklash uchun
+  // oʻchirilgan post ni qayta tiklash uchun
   getPostReload: async (id) => {
     try {
       const token = getToken();
@@ -788,7 +860,7 @@ export const oavIV = {
     }
   },
 
-  // O'chirilgan Media Event ni qayta tiklash uchun
+  // oʻchirilgan Media Event ni qayta tiklash uchun
   getMediaEventReload: async (id) => {
     try {
       const token = getToken();
@@ -808,7 +880,7 @@ export const oavIV = {
     }
   },
 
-  // O'chirilgan Material ni qayta tiklash uchun
+  // oʻchirilgan Material ni qayta tiklash uchun
   getMaterialReload: async (id) => {
     try {
       const token = getToken();
@@ -847,7 +919,25 @@ export const oavIV = {
     }
   },
 
-  // O'chirilgan Material ni qayta tiklash uchun
+  getForeignReload: async (id) => {
+    try {
+      const token = getToken();
+      const { data } = await axios.get(
+        `${api}/foreign-oav/recovered?foreignId=${id}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  // oʻchirilgan Material ni qayta tiklash uchun
   getOnlineReload: async (id) => {
     try {
       const token = getToken();
@@ -1038,7 +1128,26 @@ export const oavIV = {
       throw new Error(error.message);
     }
   },
-  // Postlarni superadmin o'chiraolishi uchun
+  deleteForeigntoTrash: async (id) => {
+    //botta type beriladi
+    try {
+      const token = getToken();
+      const { data } = await axios.delete(
+        `${api}/foreign-oav/absolute-delete?foreignId=${id}`,
+        {
+          headers: {
+            Authorization: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  // Postlarni superadmin oʻchiraolishi uchun
   deletePostSuperAdmin: async (obj) => {
     //botta type beriladi
     try {
@@ -1053,6 +1162,212 @@ export const oavIV = {
           },
         }
       );
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  // Postlarni top 5taligi ubiver hisobida
+  topPostsForStat: async () => {
+    try {
+      const { data } = await axios.get(`${api}/public/get-top-five`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  mapPublicData: async () => {
+    try {
+      const { data } = await axios.get(
+        `${api}/public/universities-by-province`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  universByProvince: async (id) => {
+    try {
+      const { data } = await axios.get(
+        `${api}/public/top-universities-by-province?province=${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  getGenderData: async () => {
+    try {
+      const { data } = await axios.get(`${api}/public/genders-by-region`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  allGenderData: async () => {
+    try {
+      const { data } = await axios.get(`${api}/public/genders-by-republic`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  uniqueUniverPostsData: async (id) => {
+    try {
+      const { data } = await axios.get(
+        `${api}/public/university-posts-count?organizationId=${id}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  dataForQuoter: async () => {
+    try {
+      const { data } = await axios.get(`${api}/public/get-top-quoter`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  ranking: async () => {
+    try {
+      const { data } = await axios.get(
+        `${api}/public/universities-rating-by-posts`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  rankingTopUniver: async () => {
+    try {
+      const { data } = await axios.get(`${api}/public/top-last-month-posts`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  allOAVData: async () => {
+    try {
+      const { data } = await axios.get(`${api}/public/get-posts-by-type`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  allMediaData: async () => {
+    try {
+      const { data } = await axios.get(`${api}/public/get-mediaEvent-count`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+  allMaterialaData: async () => {
+    try {
+      const { data } = await axios.get(`${api}/public/get-material-count`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  allOnlineStatData: async () => {
+    try {
+      const { data } = await axios.get(`${api}/public/get-broadcast-count`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return data;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  allForeignStatData: async () => {
+    try {
+      const { data } = await axios.get(`${api}/public/get-foreign-count`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       return data;
     } catch (error) {

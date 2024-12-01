@@ -22,7 +22,7 @@ const config = {
     {
       type: "object",
       required: true,
-      message: "Please select time!",
+      message: "Iltimos Inputga qiymat kiriting!",
     },
   ],
 };
@@ -68,10 +68,16 @@ export default function LevelIllumination() {
     fieldsValue.mediaLinks.forEach((item) => {
       formattedTvChannels[item.key] = item.value; // { textValue1: textValue2 }
     });
+
+    const massMedia = fieldsValue.massMedia.join(", ");
+    const publishType = fieldsValue.publishType.join(", ");
+
     const values = {
       ...fieldsValue,
       mediaLinks: formattedTvChannels,
       publishedDate: fieldsValue["publishedDate"].format("YYYY-MM-DD"),
+      massMedia: massMedia,
+      publishType: publishType,
     };
     console.log("Received values of form: ", values);
     addLavel.mutate(values);
@@ -98,56 +104,6 @@ export default function LevelIllumination() {
     }, 0);
   };
 
-  // Sellect Dastur Nomi
-  const [items1, setItems1] = useState([
-    "Reportaj",
-    "Ko‘rsatuv",
-    "Tok-shou",
-    "Intervyu",
-    "Podkast",
-    "Maqola",
-    "Videorolik",
-    "Xabar",
-  ]);
-  const [name1, setName1] = useState("");
-  const inputRef1 = useRef(null);
-  const onNameChange1 = (event) => {
-    setName1(event.target.value);
-  };
-  const addItem1 = (e) => {
-    e.preventDefault();
-    setItems1([...items1, name1 || `New item ${index++}`]);
-    setName1("");
-    setTimeout(() => {
-      inputRef1.current?.focus();
-    }, 0);
-  };
-
-  // Sellect Dastur Nomi
-  const [items2, setItems2] = useState([
-    "Televideniye",
-    "Radio",
-    "Gazeta/jurnallar",
-    "Internet saytlari",
-    "Telegram",
-    "Instagram",
-    "Youtube",
-    "Facebook",
-  ]);
-  const [name2, setName2] = useState("");
-  const inputRef2 = useRef(null);
-  const onNameChange2 = (event) => {
-    setName2(event.target.value);
-  };
-  const addItem2 = (e) => {
-    e.preventDefault();
-    setItems2([...items2, name2 || `New item ${index++}`]);
-    setName1("");
-    setTimeout(() => {
-      inputRef2.current?.focus();
-    }, 0);
-  };
-
   const showSuccess = () => {
     toast.current.show({
       severity: "success",
@@ -161,12 +117,10 @@ export default function LevelIllumination() {
     toast.current.show({
       severity: "error",
       summary: "Xato",
-      detail: `To'g'ri kiritganingizga e'tibor bering! `,
+      detail: `Toʻg‘ri kiritganingizga e'tibor bering! `,
       life: 0,
     });
   };
-
-  // End step commands
 
   return (
     <div>
@@ -187,10 +141,18 @@ export default function LevelIllumination() {
               {/* form input group step1 */}
               <div className={`w-full  `}>
                 <div>
-                  <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white md:text-xl">
-                    OTM faoliyatidagi turli tadbirlarni ommaviy axborot
-                    vositalari orqali yoritilganlik darajasi
-                  </h2>
+                  {location.pathname === "/levelIllumination" ? (
+                    <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white md:text-xl">
+                      OTM faoliyatidagi turli tadbir (media reja)larni ommaviy
+                      axborot vositalari orqali <br /> yoritilganlik darajasi
+                    </h2>
+                  ) : (
+                    <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white md:text-xl">
+                      Vazirlik faoliyatidagi turli tadbir (media reja)larni
+                      ommaviy axborot vositalari orqali <br /> yoritilganlik
+                      darajasi
+                    </h2>
+                  )}
                 </div>
                 <div className="md:mt-5 grid grid-cols-1 gap-x-6 md:gap-y-2 sm:gap-y-2 sm:grid-cols-6 ">
                   <div className="sm:col-span-3">
@@ -200,11 +162,11 @@ export default function LevelIllumination() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
-                      <Input className="py-1.5" />
+                      <Input className="py-2" />
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">
@@ -214,13 +176,13 @@ export default function LevelIllumination() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
                       <Select
-                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[37px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
-                        placeholder="custom dropdown render"
+                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[41px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
+                        placeholder="Tegishlisini tanlang"
                         dropdownRender={(menu) => (
                           <>
                             {menu}
@@ -235,7 +197,7 @@ export default function LevelIllumination() {
                               }}
                             >
                               <Input
-                                placeholder="Boshqa bo'lsa kiriting!"
+                                placeholder="Boshqa boʻlsa kiriting!"
                                 ref={inputRef}
                                 value={name}
                                 onChange={onNameChange}
@@ -246,7 +208,7 @@ export default function LevelIllumination() {
                                 icon={<PlusOutlined />}
                                 onClick={addItem}
                               >
-                                Qo'shish
+                                Qoʻshish
                               </Button>
                             </Space>
                           </>
@@ -265,106 +227,115 @@ export default function LevelIllumination() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
                       <Select
-                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[37px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
-                        placeholder="custom dropdown render"
-                        dropdownRender={(menu1) => (
-                          <>
-                            {menu1}
-                            <Divider
-                              style={{
-                                margin: "8px 0",
-                              }}
-                            />
-                            <Space
-                              style={{
-                                padding: "0 8px 4px",
-                              }}
-                            >
-                              <Input
-                                placeholder="Please enter item"
-                                ref={inputRef1}
-                                value={name1}
-                                onChange={onNameChange1}
-                                onKeyDown={(e) => e.stopPropagation()}
-                              />
-                              <Button
-                                type="text"
-                                icon={<PlusOutlined />}
-                                onClick={addItem1}
-                              >
-                                Add item
-                              </Button>
-                            </Space>
-                          </>
-                        )}
-                        options={items1.map((item) => ({
-                          label: item,
-                          value: item,
-                        }))}
+                        mode="multiple"
+                        style={{
+                          width: "100%",
+                        }}
+                        placeholder="Tegishlisini tanlang"
+                        // defaultValue={[]}
+                        options={[
+                          {
+                            label: "Reportaj",
+                            value: "Reportaj",
+                          },
+                          {
+                            label: "Ko‘rsatuv",
+                            value: "Ko‘rsatuv",
+                          },
+                          {
+                            label: "Tok-shou",
+                            value: "Tok-shou",
+                          },
+                          {
+                            label: "Intervyu",
+                            value: "Intervyu",
+                          },
+                          {
+                            label: "Podkast",
+                            value: "Podkast",
+                          },
+                          {
+                            label: "Maqola",
+                            value: "Maqola",
+                          },
+                          {
+                            label: "Videorolik",
+                            value: "Videorolik",
+                          },
+                          {
+                            label: "Xabar",
+                            value: "Xabar",
+                          },
+                        ]}
                       />
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="massMedia"
-                      label="E'lon qilingan OAV/Ijtimoiy tarmoq turi"
+                      label="E’lon qilingan OAV/Ijtimoiy tarmoq turi"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
                       <Select
-                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[37px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
-                        placeholder="custom dropdown render"
-                        dropdownRender={(menu2) => (
-                          <>
-                            {menu2}
-                            <Divider
-                              style={{
-                                margin: "8px 0",
-                              }}
-                            />
-                            <Space
-                              style={{
-                                padding: "0 8px 4px",
-                              }}
-                            >
-                              <Input
-                                placeholder="Please enter item"
-                                ref={inputRef2}
-                                value={name2}
-                                onChange={onNameChange2}
-                                onKeyDown={(e) => e.stopPropagation()}
-                              />
-                              <Button
-                                type="text"
-                                icon={<PlusOutlined />}
-                                onClick={addItem2}
-                              >
-                                Add item
-                              </Button>
-                            </Space>
-                          </>
-                        )}
-                        options={items2.map((item) => ({
-                          label: item,
-                          value: item,
-                        }))}
+                        mode="multiple"
+                        style={{
+                          width: "100%",
+                        }}
+                        placeholder="Tegishlisini tanlang"
+                        // defaultValue={[]}
+                        options={[
+                          {
+                            label: "Televideniye",
+                            value: "Televideniye",
+                          },
+                          {
+                            label: "Radio",
+                            value: "Radio",
+                          },
+                          {
+                            label: "Gazeta/jurnallar",
+                            value: "Gazeta/jurnallar",
+                          },
+                          {
+                            label: "Internet saytlari",
+                            value: "Internet saytlari",
+                          },
+                          {
+                            label: "Telegram",
+                            value: "Telegram",
+                          },
+                          {
+                            label: "Instagram",
+                            value: "Instagram",
+                          },
+                          {
+                            label: "Youtube",
+                            value: "Youtube",
+                          },
+                          {
+                            label: "Facebook",
+                            value: "Facebook",
+                          },
+                        ]}
                       />
                     </Form.Item>
                   </div>
+
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="mediaLinks"
-                      label="Yoritilgan OAV nomi va linki!"
-                      style={{ marginBottom: 20 }}
+                      label="Yoritilgan OAV nomi va havolasii!"
+                      style={{ marginBottom: 0 }}
                       rules={[
                         {
                           required: true,
@@ -398,8 +369,8 @@ export default function LevelIllumination() {
                                     autoSize={{ minRows: 1, maxRows: 5 }} // Kursor avtomatik yangi qatorga tushadi
                                     onKeyDown={(e) => {
                                       if (e.shiftKey && e.key === "Enter") {
-                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga o'tkazadi
-                                        e.target.value += "\n"; // Kursorni yangi qatorga o'tkazadi
+                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga oʻtkazadi
+                                        e.target.value += "\n"; // Kursorni yangi qatorga oʻtkazadi
                                       }
                                     }}
                                     style={{ height: 41 }}
@@ -421,12 +392,12 @@ export default function LevelIllumination() {
                                   className="col-span-1"
                                 >
                                   <Input.TextArea
-                                    placeholder="Url manzilini kiriting!"
+                                    placeholder="havolasi"
                                     autoSize={{ minRows: 1, maxRows: 5 }} // Kursor avtomatik yangi qatorga tushadi
                                     onKeyDown={(e) => {
                                       if (e.shiftKey && e.key === "Enter") {
-                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga o'tkazadi
-                                        e.target.value += "\n"; // Kursorni yangi qatorga o'tkazadi
+                                        e.preventDefault(); // Bu "shift + enter" ni ushlab qoladi, lekin kursorni yangi qatorga oʻtkazadi
+                                        e.target.value += "\n"; // Kursorni yangi qatorga oʻtkazadi
                                       }
                                     }}
                                     style={{ height: 41 }}
@@ -443,9 +414,9 @@ export default function LevelIllumination() {
                                 onClick={() => add()}
                                 block
                                 icon={<PlusOutlined />}
-                                className="py-1.5 h-[41px]"
+                                className="py-2"
                               >
-                                Qo'shish
+                                Qoʻshish
                               </Button>
                             </Form.Item>
                           </>
@@ -457,7 +428,7 @@ export default function LevelIllumination() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="publishedDate"
-                      label="yaratilgan sanasi"
+                      label="Yoritilgan sanasi"
                       {...config}
                       className=""
                     >

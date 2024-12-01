@@ -67,7 +67,7 @@ const items = [
       {
         key: "/superadminpanel/foreign",
         label:
-          "Xorijiy ommaviy axborot vositalarida OTM faoliyatiga doir e'lon qilingan materiallar soni",
+          "Xorijiy ommaviy axborot vositalarida OTM faoliyatiga doir E’lon qilingan materiallar soni",
         icon: <IoSchoolSharp />,
       },
       {
@@ -89,13 +89,13 @@ const items = [
       },
       {
         key: "/superadminpanel/mediaprojects",
-        label: "Axborot xizmati tomonidan yo'lga qo'yilgan medialoyihalar",
+        label: "Axborot xizmati tomonidan yoʻlga qoʻyilgan medialoyihalar",
         icon: <AiFillProject />,
       },
       {
         key: "/superadminpanel/levelIllumination",
         label:
-          "OTM faoliyatidagi turli tadbirlarni ommaviy axborot vositalari orqali yoritilganlik darajasi",
+          "Vazirlik faoliyatidagi turli tadbir (media reja)larni ommaviy axborot vositalari orqali yoritilganlik darajasi",
         icon: <SiLevelsdotfyi />,
       },
     ],
@@ -109,12 +109,12 @@ const items = [
 
   {
     key: "/superadminpanel/addemployees",
-    label: "Xodim Qo'shish",
+    label: "Xodim Qoʻshish",
     icon: <IoPersonAddSharp />,
   },
   {
     key: "/superadminpanel/korzinka",
-    label: "Karzinka",
+    label: "Savat",
     icon: <FaTrashAlt />,
   },
 ];
@@ -136,7 +136,7 @@ const SuperSideBar = () => {
         selectedKeys={[location.pathname]}
         mode="inline"
         items={items}
-        className="bg-slate-100 dark:bg-gray-800 dark:text-white pt-20 md:w-[330px] h-[100vh] fixed overflow-y-scroll z-[99]"
+        className="bg-slate-100 dark:bg-gray-800 dark:text-white pt-24 md:w-[330px] h-[100vh] fixed overflow-y-scroll z-[9]"
       />
       <style jsx="true">{`
         ::-webkit-scrollbar {

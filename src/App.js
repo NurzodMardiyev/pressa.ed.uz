@@ -1,10 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import MainLayout from "./layouts/MainLayout";
-import LandingPage from "./components/main/LandingPage";
 import Profile from "./components/profile/Profile";
 import AuthSignUp from "./components/kirish/AuthSignUp";
-import UzMap from "./components/uzmap/UzMap";
 
 // Prime React
 import "primereact/resources/themes/lara-light-blue/theme.css"; // Theme
@@ -32,8 +30,6 @@ import Korzinka from "./components/karzinka/Korzinka";
 import Organization from "./components/EmployeePost/organization/Organization";
 import AllEmployeers from "./pages/superAdminPanel/AllEmployeers";
 import AddEmployees from "./pages/superAdminPanel/AddEmployees";
-import AdminKorzinka from "./pages/superAdminPanel/AdminKorzinka";
-import AdminDashboard from "./pages/superAdminPanel/AdminDashboard";
 import MediaProjects from "./components/EmployeePost/mediaProjects/MediaProjects";
 import LevelIllumination from "./components/EmployeePost/levelIllumination/LevelIllumination";
 import NotFountPage from "./pages/notfound/NotFountPage";
@@ -47,61 +43,94 @@ import MessengersJSAdmin from "./components/EmployeePost/messengers/messangerJSA
 import MatbuotAnjumaniJSAdmin from "./components/EmployeePost/matbuotAnjumani/MatbuotAnjumaniAdmin";
 import BrifingAdmin from "./components/EmployeePost/brifing/BrifingAdmin";
 import PressTurAdmin from "./components/EmployeePost/pressTur/PressTurAdmin";
+import ProtectedRoute from "./security/ProtectedRoute";
+import RoleBasedRoute from "./security/RoleBasedRoute";
+import Error from "./pages/serverError/Error";
+import Foreign from "./components/EmployeePost/foriegn/Foreign";
+import LandingPage from "./pages/userPage/main/LandingPage";
+import EditProfile from "./components/profile/EditProfile";
 function App() {
+  const token = localStorage.getItem("token");
+  const userRole = localStorage.getItem("role");
   return (
     <div className="App">
       <Routes>
-        <Route path="" element={<AuthSignUp />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/login" element={<AuthSignUp />} />
         <Route path="/detailsinfo" element={<DetailsInfo />} />
         <Route path="/forgetpassword" element={<ForgetPassword />} />
         <Route path="/repassword" element={<RePassword />} />
         <Route path="/superadminpanel" element={<SuperAdmin />}>
-          <Route path="allemployees" element={<AllEmployeers />} />
-          <Route path="televediniye" element={<TelevediniyeAdmin />} />
-          <Route path="radio" element={<RadioTVAdmin />} />
-          <Route path="internet_sites" element={<InternetSitesJSAdmin />} />
-          <Route path="oav" element={<OAVjsAdmin />} />
-          <Route path="messenger" element={<MessengersJSAdmin />} />
-          <Route path="onlayn_efir" element={<OnlineEfir />} />
-          <Route path="matbuot_anjumani" element={<MatbuotAnjumaniJSAdmin />} />
-          <Route path="brifing" element={<BrifingAdmin />} />
-          <Route path="press_tur" element={<PressTurAdmin />} />
-          <Route path="infografika" element={<Infografika />} />
-          <Route path="audio" element={<Audio />} />
-          <Route path="video" element={<Video />} />
-          <Route path="telegram" element={<Telegram />} />
-          <Route path="organization" element={<Organization />} />
-          <Route path="mediaprojects" element={<MediaProjects />} />
-          <Route path="levelIllumination" element={<LevelIllumination />} />
-          <Route path="addemployees" element={<AddEmployees />} />
-          <Route path="korzinka" element={<Korzinka />} />
-          <Route path="dashboard" element={<BoshSahifa />} />
+          <Route
+            element={
+              <RoleBasedRoute
+                token={token}
+                allowedRole="ROLE_ADMIN"
+                userRole={userRole}
+              />
+            }
+          >
+            <Route path="allemployees" element={<AllEmployeers />} />
+            <Route path="foreign" element={<Foreign />} />
+            <Route path="televediniye" element={<TelevediniyeAdmin />} />
+            <Route path="radio" element={<RadioTVAdmin />} />
+            <Route path="internet_sites" element={<InternetSitesJSAdmin />} />
+            <Route path="oav" element={<OAVjsAdmin />} />
+            <Route path="messenger" element={<MessengersJSAdmin />} />
+            <Route path="onlayn_efir" element={<OnlineEfir />} />
+            <Route
+              path="matbuot_anjumani"
+              element={<MatbuotAnjumaniJSAdmin />}
+            />
+            <Route path="brifing" element={<BrifingAdmin />} />
+            <Route path="press_tur" element={<PressTurAdmin />} />
+            <Route path="infografika" element={<Infografika />} />
+            <Route path="audio" element={<Audio />} />
+            <Route path="video" element={<Video />} />
+            <Route path="telegram" element={<Telegram />} />
+            <Route path="organization" element={<Organization />} />
+            <Route path="mediaprojects" element={<MediaProjects />} />
+            <Route path="levelIllumination" element={<LevelIllumination />} />
+            <Route path="addemployees" element={<AddEmployees />} />
+            <Route path="korzinka" element={<Korzinka />} />
+            <Route path="dashboard" element={<BoshSahifa />} />
+          </Route>
         </Route>
         <Route path="/" element={<EmployeePanel />}>
-          <Route path="/televediniye" element={<Televediniye1 />} />
-          <Route path="/radio" element={<RadioTV />} />
-          <Route path="/internet_sites" element={<InternetSitesJS />} />
-          <Route path="/oav" element={<OAVjs />} />
-          <Route path="/messenger" element={<MessengersJS />} />
-          <Route path="/matbuot_anjumani" element={<MatbuotAnjumaniJS />} />
-          <Route path="/brifing" element={<Brifing />} />
-          <Route path="/press_tur" element={<PressTur />} />
-          <Route path="/infografika" element={<Infografika />} />
-          <Route path="/audio" element={<Audio />} />
-          <Route path="/video" element={<Video />} />
-          <Route path="/onlayn_efir" element={<OnlineEfir />} />
-          <Route path="/dashboard" element={<BoshSahifa />} />
-          <Route path="/telegram" element={<Telegram />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/organization" element={<Organization />} />
-          <Route path="/mediaprojects" element={<MediaProjects />} />
-          <Route path="/levelIllumination" element={<LevelIllumination />} />
-          <Route path="/trashbox" element={<Korzinka />} />
-        </Route>
-        <Route path="/" element={<MainLayout />}>
-          <Route path="statistics" element={<LandingPage />} />
+          <Route
+            element={
+              <RoleBasedRoute
+                token={token}
+                allowedRole="ROLE_EMPLOYEE"
+                userRole={userRole}
+              />
+            }
+          >
+            <Route path="/televediniye" element={<Televediniye1 />} />
+            <Route path="/radio" element={<RadioTV />} />
+            <Route path="/foreign" element={<Foreign />} />
+            <Route path="/internet_sites" element={<InternetSitesJS />} />
+            <Route path="/oav" element={<OAVjs />} />
+            <Route path="/messenger" element={<MessengersJS />} />
+            <Route path="/matbuot_anjumani" element={<MatbuotAnjumaniJS />} />
+            <Route path="/brifing" element={<Brifing />} />
+            <Route path="/press_tur" element={<PressTur />} />
+            <Route path="/infografika" element={<Infografika />} />
+            <Route path="/audio" element={<Audio />} />
+            <Route path="/video" element={<Video />} />
+            <Route path="/onlayn_efir" element={<OnlineEfir />} />
+            <Route path="/dashboard" element={<BoshSahifa />} />
+            <Route path="/telegram" element={<Telegram />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/organization" element={<Organization />} />
+            <Route path="/mediaprojects" element={<MediaProjects />} />
+            <Route path="/levelIllumination" element={<LevelIllumination />} />
+            <Route path="/trashbox" element={<Korzinka />} />
+            <Route path="/editprofile" element={<EditProfile />} />
+          </Route>
         </Route>
         <Route path="*" element={<NotFountPage />} />
+        <Route path="/error" element={<Error />} />
       </Routes>
     </div>
   );

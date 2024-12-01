@@ -59,7 +59,7 @@ export default function Organization() {
     toast.current.show({
       severity: "error",
       summary: "Xato",
-      detail: `To'g'ri kiritganingizga e'tibor bering! `,
+      detail: `Toʻg‘ri kiritganingizga e'tibor bering! `,
       life: 0,
     });
   };
@@ -93,11 +93,11 @@ export default function Organization() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="allEmployeesAmount"
-                      label="OTMda rasman faoliyat yuritadiganlar soni jami (barchasi, asosiy va o'rindoshlar soni)"
+                      label="Xodim, pedagog, doktorant, magistr, bakalavrning jami soni (asosiy va oʻrindoshlar soni)"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
@@ -112,7 +112,7 @@ export default function Organization() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
@@ -123,11 +123,11 @@ export default function Organization() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="professorTeachersAmount"
-                      label="Professor-o'qituvchilar soni jami (asosiy, o'rindosh)"
+                      label="Professor-oʻqituvchilar soni jami (asosiy, oʻrindosh)"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
@@ -138,11 +138,11 @@ export default function Organization() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="allStudentsAmount"
-                      label="Talabalar soni jami (kunduzgi, sirtqi, kechki, masofaviy, magister, doktorant)"
+                      label="Talabalar soni jami (kunduzgi, sirtqi, kechki, masofaviy, doktorant, magistr, bakalavr)"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >

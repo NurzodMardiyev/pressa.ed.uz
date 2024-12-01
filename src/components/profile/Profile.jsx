@@ -4,8 +4,9 @@ import { useEmployeeInfo } from "../../hooks/useEmployeeInfo";
 import { Button, Flex, message, Modal, Spin, Upload } from "antd";
 import { Link } from "react-router-dom";
 import { UploadOutlined } from "@ant-design/icons";
+import { ip } from "../../ips";
 
-const IP = "10.10.3.181";
+const IP = ip;
 
 export default function Profile() {
   const { data, isLoading, isError } = useEmployeeInfo();
@@ -22,7 +23,7 @@ export default function Profile() {
       // Millisekund qiymatini tekshirish
       const milliseconds = createdAt[6] > 1000 ? 0 : createdAt[6];
 
-      // createdAt ni Date formatiga o'zgartirish
+      // createdAt ni Date formatiga oʻzgartirish
       const createdDate = new Date(
         createdAt[0], // Yil
         createdAt[1] - 1, // Oy (0-indeksli)
@@ -30,7 +31,7 @@ export default function Profile() {
         createdAt[3], // Soat
         createdAt[4], // Minut
         createdAt[5], // Sekund
-        milliseconds // Millisekund (katta bo'lsa, e'tiborsiz qoldiriladi)
+        milliseconds // Millisekund (katta boʻlsa, e'tiborsiz qoldiriladi)
       );
 
       const now = new Date();
@@ -112,7 +113,7 @@ export default function Profile() {
               className="object-cover w-full rounded-full  h-full"
             />
             <Modal
-              title="Profil rasmingizni o'zgartiring!"
+              title="Profil rasmingizni oʻzgartiring!"
               open={isModalOpen}
               onOk={handleOk}
               onCancel={handleCancel}
@@ -122,7 +123,7 @@ export default function Profile() {
                 listType="picture"
                 beforeUpload={beforeUpload} // Uploaddan oldin JPG yoki PNG formatini tekshirish
                 headers={{
-                  Authorization: `${token}`, // Headerlarda tokenni qo'shamiz
+                  Authorization: `${token}`, // Headerlarda tokenni qoʻshamiz
                 }}
                 enctype="multipart/form-data"
                 name="photo"
@@ -131,7 +132,10 @@ export default function Profile() {
                   if (info.file.status === "done") {
                     message.success(`${info.file.name} yuklandi.`);
                     setUpdateImg(true);
-                    console.log("Yuklash tugadi:", info.file.response);
+                    console.log(
+                      "Muvaffaqqiyatli yuklandi:",
+                      info.file.response
+                    );
                   } else if (info.file.status === "error") {
                     message.error(`${info.file.name} yuklanmadi.`);
                     setUpdateImg(false);
@@ -149,7 +153,7 @@ export default function Profile() {
                   <Button
                     type="bg-[#73d13d]"
                     icon={<UploadOutlined />}
-                    className="w-full bg-inherit h-[41px] text-[#333] border border-[#D9D9D9] hover:text-[#4CA852] hover:border-[#4CA852]"
+                    className="w-full bg-inherit text-[#333] border border-[#D9D9D9] hover:text-[#4CA852] hover:border-[#4CA852]"
                   >
                     Yuklash
                   </Button>
@@ -182,7 +186,7 @@ export default function Profile() {
             </div>
             <div className="flex-1 mt-4">
               <span className="mb-2 text-[14px] inline-block">
-                Tug'ilgan sana
+                Tug‘ilgan sana
               </span>
               <p className="px-4 py-2 bg-[#F9F9F9] dark:bg-gray-700 rounded-md font-semibold">
                 {birthday}
@@ -201,11 +205,11 @@ export default function Profile() {
         <div className="flex-1 mb-6">
           <div className="profile_right flex-1 border rounded-xl">
             <div className="flex flex-col py-6 px-6">
-              <h2 className="text-xl font-semibold">Umumiy ma'lumotlar</h2>
+              <h2 className="text-xl font-semibold">Umumiy ma’lumotlar</h2>
 
               <div className="mt-4">
                 <span className="mb-2 text-[14px] inline-block">
-                  Ilmiy darajangizni qo'shing!
+                  Ilmiy darajangizni qoʻshing!
                 </span>
                 <p className="px-4 py-3 bg-[#F9F9F9] dark:bg-gray-700 rounded-md font-semibold ">
                   {/* data?.speciality.specialities */}
@@ -258,7 +262,7 @@ export default function Profile() {
               </div>
               <div className="mt-4">
                 <span className="mb-2 text-[14px] inline-block">
-                  AOKAdan attestatsiyadan o'tganligi (agar ha bo'lsa qachon,
+                  AOKAdan attestatsiyadan oʻtganligi (agar ha boʻlsa qachon,
                   guvohnoma raqami)
                 </span>
                 <p className="px-4 py-3 bg-[#F9F9F9] dark:bg-gray-700 rounded-md font-semibold ">
@@ -276,7 +280,7 @@ export default function Profile() {
               </div>
               <div className="mt-4">
                 <span className="mb-2 text-[14px] inline-block">
-                  Shtatdagi o'rni
+                  Shtatdagi oʻrni
                 </span>
                 <p className="px-4 py-3 bg-[#F9F9F9] dark:bg-gray-700 rounded-md font-semibold ">
                   <span>
@@ -294,7 +298,7 @@ export default function Profile() {
               </div>
               <div className="mt-4">
                 <span className="mb-2 text-[14px] inline-block">
-                  Rektorning axborot siyosati masalalari bo'yicha maslahatchisi
+                  Rektorning axborot siyosati masalalari boʻyicha maslahatchisi
                   etib belgilangan (Asos hujjat raqami)
                 </span>
                 <p className="px-4 py-3 bg-[#F9F9F9] dark:bg-gray-700 rounded-md font-semibold ">
@@ -303,7 +307,7 @@ export default function Profile() {
               </div>
               <div className="mt-4">
                 <span className="mb-2 text-[14px] inline-block">
-                  Matbuot kotibining kasbiy va qo'shimcha kompetentsiyasi (siz
+                  Matbuot kotibining kasbiy va qoʻshimcha kompetentsiyasi (siz
                   nima qilasiz)
                 </span>
                 <p className="px-4 py-3 bg-[#F9F9F9] dark:bg-gray-700 rounded-md font-semibold ">
@@ -312,8 +316,8 @@ export default function Profile() {
               </div>
               <div className="mt-4">
                 <span className="mb-2 text-[14px] inline-block">
-                  Matbuot bo'limi uchun alohida xona ajratilganligi (ha/yo'q
-                  bo'lsa qaysi bo'lim bilan birga o'tiradi)
+                  Matbuot boʻlimi uchun alohida xona ajratilganligi (ha/yoʻq
+                  boʻlsa qaysi boʻlim bilan birga oʻtiradi)
                 </span>
                 <p className="px-4 py-3 bg-[#F9F9F9] dark:bg-gray-700 rounded-md font-semibold ">
                   {data?.details.room}
@@ -321,8 +325,8 @@ export default function Profile() {
               </div>
               <div className="mt-4">
                 <span className="mb-2 text-[14px] inline-block">
-                  Oxirgi bir yillik oylik maoshining o'rtacha miqdori (UzASBO
-                  tizimi yoki my.gov.uz orqali olingan ma'lumot fayl shaklida
+                  Oxirgi bir yillik oylik maoshining oʻrtacha miqdori (UzASBO
+                  tizimi yoki my.gov.uz orqali olingan ma’lumot fayl shaklida
                   taqdim etiladi)
                 </span>
                 <p className="px-4 py-3 bg-[#F9F9F9] dark:bg-gray-700 rounded-md font-semibold ">
@@ -331,8 +335,8 @@ export default function Profile() {
               </div>
               <div className="mt-4">
                 <span className="mb-2 text-[14px] inline-block">
-                  Alohida Matbuot/axborot xizmati bo'limi tashkil etilganligi
-                  (bo'lsa unda nechta shtat bor yoki nechta boshqa bo'limdan
+                  Alohida Matbuot/axborot xizmati boʻlimi tashkil etilganligi
+                  (boʻlsa unda nechta shtat bor yoki nechta boshqa boʻlimdan
                   jalb qilingan)
                 </span>
                 <p className="px-4 py-3 bg-[#F9F9F9] dark:bg-gray-700 rounded-md font-semibold ">
@@ -350,8 +354,8 @@ export default function Profile() {
               </div>
               <div className="mt-4">
                 <span className="mb-2 text-[14px] inline-block">
-                  Moddiy-texnik bazasining holati (telefon: bor/yo'q; televizor:
-                  bor/yo'q;)
+                  Moddiy-texnik bazasining holati (telefon: bor/yoʻq; televizor:
+                  bor/yoʻq;)
                 </span>
                 <p className="px-4 py-3 bg-[#F9F9F9] dark:bg-gray-700 rounded-md font-semibold ">
                   {data?.details.resource}
@@ -361,10 +365,10 @@ export default function Profile() {
           </div>
           <div>
             <Link
-              to="/detailsinfo"
+              to="/editprofile"
               className="px-8 py-2 rounded bg-green-400 text-white float-right my-4"
             >
-              O'zgartirish
+              oʻzgartirish
             </Link>
           </div>
         </div>

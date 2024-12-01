@@ -11,12 +11,12 @@ import gif from "../../images/empty trash.gif";
 const sharedOnCell = () => {};
 const columns = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
   {
-    title: "Ko'rsatuvda qatnashgan OTM vakili F.I.O",
+    title: "Koʻrsatuvda qatnashgan OTM vakili F.I.O",
     dataIndex: "fio",
     onCell: sharedOnCell,
   },
@@ -26,7 +26,7 @@ const columns = [
     onCell: sharedOnCell,
   },
   {
-    title: "TV nomi",
+    title: "OAV nomi",
     dataIndex: "tvName",
     onCell: sharedOnCell,
   },
@@ -36,7 +36,7 @@ const columns = [
     onCell: sharedOnCell,
   },
   {
-    title: "Chiqqan sanasi va vaqti",
+    title: "Tadbir oʻtkazilgan sanasi va vaqti",
     dataIndex: "date",
     onCell: sharedOnCell,
   },
@@ -46,7 +46,7 @@ const columns = [
     onCell: sharedOnCell,
   },
   {
-    title: "Havolasi (http bilan boshlanishi shart!)",
+    title: "Havolasi ",
     dataIndex: "link",
     onCell: sharedOnCell,
   },
@@ -56,7 +56,7 @@ const columns = [
     onCell: sharedOnCell,
   },
   {
-    title: "Harakat",
+    title: "Oʻchirish",
     dataIndex: "action",
     onCell: sharedOnCell,
   },
@@ -64,7 +64,7 @@ const columns = [
 
 const columnsMedia = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
@@ -79,7 +79,7 @@ const columnsMedia = [
     onCell: sharedOnCell,
   },
   {
-    title: "Ishchilar Ro'yhati",
+    title: "OTM rahbar xodimlarining ishtiroki",
     dataIndex: "stuffs",
     onCell: sharedOnCell,
   },
@@ -109,7 +109,7 @@ const columnsMedia = [
     onCell: sharedOnCell,
   },
   {
-    title: "Harakat",
+    title: "Oʻchirish",
     dataIndex: "action",
     onCell: sharedOnCell,
   },
@@ -117,7 +117,7 @@ const columnsMedia = [
 
 const columnsmaterial = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
@@ -132,12 +132,12 @@ const columnsmaterial = [
     onCell: sharedOnCell,
   },
   {
-    title: " E'lon qilingan OAV/Ijtimoiy tarmoq turi",
+    title: " E’lon qilingan OAV/Ijtimoiy tarmoq turi",
     dataIndex: "massMedia",
     onCell: sharedOnCell,
   },
   {
-    title: "E'lon qilingan sanasi",
+    title: "E’lon qilingan sanasi",
     dataIndex: "publishDate",
     onCell: sharedOnCell,
   },
@@ -157,7 +157,7 @@ const columnsmaterial = [
     onCell: sharedOnCell,
   },
   {
-    title: "Harakat",
+    title: "Oʻchirish",
     dataIndex: "action",
     onCell: sharedOnCell,
   },
@@ -165,7 +165,7 @@ const columnsmaterial = [
 
 const columnsOfficial = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
@@ -195,7 +195,7 @@ const columnsOfficial = [
     onCell: sharedOnCell,
   },
   {
-    title: "Harakat",
+    title: "Oʻchirish",
     dataIndex: "action",
     onCell: sharedOnCell,
   },
@@ -203,7 +203,7 @@ const columnsOfficial = [
 
 const columnsOnline = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
@@ -213,7 +213,7 @@ const columnsOnline = [
     onCell: sharedOnCell,
   },
   {
-    title: "O'tkazilgan sanasi",
+    title: "oʻtkazilgan sanasi",
     dataIndex: "date",
     onCell: sharedOnCell,
   },
@@ -243,7 +243,7 @@ const columnsOnline = [
     onCell: sharedOnCell,
   },
   {
-    title: "Harakat",
+    title: "Oʻchirish",
     dataIndex: "action",
     onCell: sharedOnCell,
   },
@@ -251,7 +251,7 @@ const columnsOnline = [
 
 const columnsMediaProjetcs = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
@@ -261,12 +261,12 @@ const columnsMediaProjetcs = [
     onCell: sharedOnCell,
   },
   {
-    title: "Loyiha tavfsifi",
+    title: "Loyiha tavsifi",
     dataIndex: "description",
     onCell: sharedOnCell,
   },
   {
-    title: "E'lon qilingan OAV/Ijtimoiy tarmoq turi",
+    title: "E’lon qilingan OAV/Ijtimoiy tarmoq turi",
     dataIndex: "tarmoqTuri",
     onCell: sharedOnCell,
   },
@@ -286,14 +286,14 @@ const columnsMediaProjetcs = [
     onCell: sharedOnCell,
   },
   {
-    title: "Harakat",
+    title: "Oʻchirish",
     dataIndex: "action",
     onCell: sharedOnCell,
   },
 ];
 const columnsCoverage = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
@@ -313,17 +313,17 @@ const columnsCoverage = [
     onCell: sharedOnCell,
   },
   {
-    title: "E'lon qilingan OAV/Ijtimoiy tarmoq turi",
+    title: "E’lon qilingan OAV/Ijtimoiy tarmoq turi",
     dataIndex: "type",
     onCell: sharedOnCell,
   },
   {
-    title: "Yoritilgan OAV nomi va linki!",
+    title: "Yoritilgan OAV nomi va havolasii!",
     dataIndex: "link",
     onCell: sharedOnCell,
   },
   {
-    title: "Yaratilgan sanasi",
+    title: "Yoritilgan sanasi",
     dataIndex: "publishDate",
     onCell: sharedOnCell,
   },
@@ -334,7 +334,50 @@ const columnsCoverage = [
     onCell: sharedOnCell,
   },
   {
-    title: "Harakat",
+    title: "Oʻchirish",
+    dataIndex: "action",
+    onCell: sharedOnCell,
+  },
+];
+const columnsForeign = [
+  {
+    title: "T/r",
+    dataIndex: "key",
+    rowScope: "row",
+  },
+  {
+    title: "Tadbir nomi",
+    dataIndex: "title",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Yoritish shakli",
+    dataIndex: "yoritShakli",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "E’lon qilingan OAV/Ijtimoiy tarmoq turi",
+    dataIndex: "type",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Yoritilgan OAV nomi va havolasi",
+    dataIndex: "link",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Yoritilgan sanasi",
+    dataIndex: "publishDate",
+    onCell: sharedOnCell,
+  },
+
+  {
+    title: "Tiklash",
+    dataIndex: "reload",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Oʻchirish",
     dataIndex: "action",
     onCell: sharedOnCell,
   },
@@ -426,8 +469,18 @@ export default function Korzinka() {
       console.log("error");
     },
   });
+  const reLoadForeign = useMutation(oavIV.getForeignReload, {
+    onSuccess: () => {
+      console.log("success");
+      queryClient.invalidateQueries();
+      console.log("delete ketti");
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
 
-  // Postni o'chirish uchun backendga so'rov Yuborish
+  // Postni Oʻchirish uchun backendga soʻrov Yuborish
   const deletePost = useMutation(oavIV.deletePosttoTrash, {
     onSuccess: () => {
       queryClient.invalidateQueries();
@@ -438,7 +491,7 @@ export default function Korzinka() {
     },
   });
 
-  // MediaEventni o'chirish uchun backendga so'rov Yuborish
+  // MediaEventni Oʻchirish uchun backendga soʻrov Yuborish
   const deleteMediaEvent = useMutation(oavIV.deleteMediaEventtoTrash, {
     onSuccess: () => {
       queryClient.invalidateQueries();
@@ -449,7 +502,7 @@ export default function Korzinka() {
     },
   });
 
-  // Materialni o'chirish uchun backendga so'rov Yuborish
+  // Materialni Oʻchirish uchun backendga soʻrov Yuborish
   const deleteMaterial = useMutation(oavIV.deleteMaterialtoTrash, {
     onSuccess: () => {
       queryClient.invalidateQueries();
@@ -459,7 +512,7 @@ export default function Korzinka() {
       console.log("error");
     },
   });
-  // Materialni o'chirish uchun backendga so'rov Yuborish
+  // Materialni Oʻchirish uchun backendga soʻrov Yuborish
   const deleteOnline = useMutation(oavIV.deleteOnlinetoTrash, {
     onSuccess: () => {
       queryClient.invalidateQueries();
@@ -470,7 +523,7 @@ export default function Korzinka() {
     },
   });
 
-  // Officialni o'chirish uchun backendga so'rov Yuborish
+  // Officialni Oʻchirish uchun backendga soʻrov Yuborish
   const deleteOfficial = useMutation(oavIV.deleteOfficialtoTrash, {
     onSuccess: () => {
       queryClient.invalidateQueries();
@@ -481,7 +534,7 @@ export default function Korzinka() {
     },
   });
 
-  // MediaProjectsni o'chirish uchun backendga so'rov Yuborish
+  // MediaProjectsni Oʻchirish uchun backendga soʻrov Yuborish
   const deleteMediaProjects = useMutation(oavIV.deleteMediaProjectstoTrash, {
     onSuccess: () => {
       queryClient.invalidateQueries();
@@ -492,8 +545,19 @@ export default function Korzinka() {
     },
   });
 
-  // MediaProjectsni o'chirish uchun backendga so'rov Yuborish
+  // MediaProjectsni Oʻchirish uchun backendga soʻrov Yuborish
   const deleteCoverages = useMutation(oavIV.deleteCoveragestoTrash, {
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+      console.log("delete ketti");
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
+
+  // MediaProjectsni Oʻchirish uchun backendga soʻrov Yuborish
+  const deleteForeign = useMutation(oavIV.deleteForeigntoTrash, {
     onSuccess: () => {
       queryClient.invalidateQueries();
       console.log("delete ketti");
@@ -550,6 +614,13 @@ export default function Korzinka() {
   const handleDeleteCoverages = (id) => {
     deleteCoverages.mutate(id);
   };
+
+  const handleReLoadForeign = (id) => {
+    reLoadForeign.mutate(id);
+  };
+  const handleDeleteForeign = (id) => {
+    deleteForeign.mutate(id);
+  };
   const { data: trashData } = useGetTrashes();
   let trashPosts = [];
   let trashMaterial = [];
@@ -558,6 +629,7 @@ export default function Korzinka() {
   let trashOfficial = [];
   let trashMediaProjects = [];
   let trashCoverages = [];
+  let trashForeign = [];
 
   if (trashData) {
     Object.entries(trashData).forEach(([key, value]) => {
@@ -575,34 +647,22 @@ export default function Korzinka() {
         trashMediaProjects = value;
       } else if (key === "COVERAGES") {
         trashCoverages = value;
+      } else if (key === "FOREIGN_MATERIAL") {
+        trashForeign = value;
       }
     });
   } else {
     console.log("yoq");
   }
 
-  // console.log(trashPosts);
-
   const dataTable = trashPosts
     ? trashPosts?.map((item, index) => {
-        let type = ""; // Mahalliy o'zgaruvchi sifatida ishlatamiz
-        if (item.postType === "TV_CHANNEL") {
-          type = "Televediniya";
-        } else if (item.postType === "RADIO_CHANNEL") {
-          type = "Radio";
-        } else if (item.postType === "MESSENGER") {
-          type = "Ijtimoiy tarmoq va messengerlar";
-        } else if (item.postType === "WEB_SITE") {
-          type = "Internet saytlari";
-        } else {
-          type = "Ommaviy axborot vositalari";
-        }
         return {
           key: index + 1,
           fio: `${item.showedUser}`,
           type: (
             <div className="px-3 py-1 bg-[#E6EEDD] border border-[#5CA53C] text-[#5CA53C] rounded">
-              {type}
+              {item.postType}
             </div>
           ),
           tvName: item.media,
@@ -614,8 +674,8 @@ export default function Korzinka() {
           link: item.link,
           reload: (
             <Popconfirm
-              title={`${type}ga tegishli post`}
-              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              title={`${item.postType}ga tegishli post`}
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
               onConfirm={() => handleReLoadPost(item.id)}
@@ -627,8 +687,8 @@ export default function Korzinka() {
           ),
           action: (
             <Popconfirm
-              title={`${type}ga tegishli post`}
-              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              title={`${item.postType}ga tegishli post`}
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
               onConfirm={() => handleDeletePost(item.id)}
@@ -641,7 +701,7 @@ export default function Korzinka() {
     : [];
   const dataTableMedia = trashMediaEvent
     ? trashMediaEvent?.map((item, index) => {
-        let type = ""; // Mahalliy o'zgaruvchi sifatida ishlatamiz
+        let type = ""; // Mahalliy oʻzgaruvchi sifatida ishlatamiz
         if (item.mediaEventType === "PRESS_CONFERENCE") {
           type = "Matbuot anjumani";
         } else if (item.mediaEventType === "BRIFING") {
@@ -667,7 +727,7 @@ export default function Korzinka() {
           reload: (
             <Popconfirm
               title={`${type}ga tegishli post`}
-              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
               onConfirm={() => handleReLoadMediaEvent(item.id)}
@@ -680,7 +740,7 @@ export default function Korzinka() {
           action: (
             <Popconfirm
               title={`${type}ga tegishli post`}
-              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
               onConfirm={() => handleDeleteMediaEvent(item.id)}
@@ -692,9 +752,52 @@ export default function Korzinka() {
       })
     : [];
 
+  const dataForeign = trashForeign
+    ? trashForeign?.map((item, index) => {
+        return {
+          key: index + 1,
+          title: `${item.title}`,
+          yoritShakli: item.illumination,
+          type: item.typeMediaSocial,
+          link: item.mediaNameAndLink
+            ? Object.entries(item.mediaNameAndLink).map(([name, url]) => (
+                <div key={name}>
+                  <span>{name}</span>: <Link to={url}>`{url}`</Link>
+                </div>
+              ))
+            : "",
+          publishDate: item.publishedDate,
+          reload: (
+            <Popconfirm
+              title={`ga tegishli post`}
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
+              okText="Yes"
+              cancelText="No"
+              onConfirm={() => handleReLoadForeign(item.id)}
+            >
+              <Button className="border-green-500 text-green-500">
+                <FiRefreshCw />
+              </Button>
+            </Popconfirm>
+          ),
+          action: (
+            <Popconfirm
+              title={`ga tegishli post`}
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
+              okText="Yes"
+              cancelText="No"
+              onConfirm={() => handleDeleteForeign(item.id)}
+            >
+              <Button danger> Delete</Button>
+            </Popconfirm>
+          ),
+        };
+      })
+    : [];
+
   const dataMaterial = trashMaterial
     ? trashMaterial?.map((item, index) => {
-        let type = ""; // Mahalliy o'zgaruvchi sifatida ishlatamiz
+        let type = ""; // Mahalliy oʻzgaruvchi sifatida ishlatamiz
         if (item.materialType === "VIDEO") {
           type = "Video";
         } else if (item.materialType === "INFOGRAPHIC") {
@@ -721,7 +824,7 @@ export default function Korzinka() {
           reload: (
             <Popconfirm
               title={`${type}ga tegishli post`}
-              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
               onConfirm={() => handleReLoadMaterial(item.id)}
@@ -734,7 +837,7 @@ export default function Korzinka() {
           action: (
             <Popconfirm
               title={`${type}ga tegishli post`}
-              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
               onConfirm={() => handleDeleteMaterial(item.id)}
@@ -794,7 +897,7 @@ export default function Korzinka() {
           reload: (
             <Popconfirm
               title={`ga tegishli post`}
-              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
               onConfirm={() => handleReLoadOfficial(item.id)}
@@ -807,7 +910,7 @@ export default function Korzinka() {
           action: (
             <Popconfirm
               title={`ga tegishli post`}
-              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
               onConfirm={() => handleDeleteOfficial(item.id)}
@@ -835,7 +938,7 @@ export default function Korzinka() {
           reload: (
             <Popconfirm
               title={`ga tegishli post`}
-              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
               onConfirm={() => handleReLoadOnline(item.id)}
@@ -848,7 +951,7 @@ export default function Korzinka() {
           action: (
             <Popconfirm
               title={`ga tegishli post`}
-              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
               onConfirm={() => handleDeleteOnline(item.id)}
@@ -875,7 +978,7 @@ export default function Korzinka() {
           reload: (
             <Popconfirm
               title={`ga tegishli post`}
-              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
               onConfirm={() => handleReLoadMediaProjects(item.id)}
@@ -888,7 +991,7 @@ export default function Korzinka() {
           action: (
             <Popconfirm
               title={`ga tegishli post`}
-              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
               onConfirm={() => handleDeleteMediaProjects(item.id)}
@@ -919,7 +1022,7 @@ export default function Korzinka() {
           reload: (
             <Popconfirm
               title={`ga tegishli post`}
-              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
               onConfirm={() => handleReLoadCoverages(item.id)}
@@ -932,7 +1035,7 @@ export default function Korzinka() {
           action: (
             <Popconfirm
               title={`ga tegishli post`}
-              description="Haqiqatdan ham o'chirmoqchimisiz?"
+              description="Haqiqatdan ham oʻchirmoqchimisiz?"
               okText="Yes"
               cancelText="No"
               onConfirm={() => handleDeleteCoverages(item.id)}
@@ -951,7 +1054,8 @@ export default function Korzinka() {
     trashOnline?.length < 1 &&
     trashOfficial?.length < 1 &&
     trashMediaProjects?.length < 1 &&
-    trashCoverages?.length < 1
+    trashCoverages?.length < 1 &&
+    trashForeign?.length < 1
   ) {
     return (
       <div>
@@ -976,7 +1080,7 @@ export default function Korzinka() {
               </h2>
             </div>
             <div>
-              <div className="televediniya">
+              <div className="Televediniye">
                 <Table
                   columns={columns}
                   dataSource={dataTable}
@@ -995,12 +1099,12 @@ export default function Korzinka() {
             <div className="mb-3">
               <h2 className="text-[20px]  dark:text-white">
                 <span className="font-[500] mr-2">
-                  Matbuot kotibi tomonidan o‘tkazilgan mediyatadbirlar.
+                  Matbuot kotibi tomonidan o‘tkazilgan mediatadbirlar.
                 </span>
               </h2>
             </div>
             <div>
-              <div className="televediniya">
+              <div className="Televediniye">
                 <Table
                   columns={columnsMedia}
                   dataSource={dataTableMedia}
@@ -1025,10 +1129,35 @@ export default function Korzinka() {
               </h2>
             </div>
             <div>
-              <div className="televediniya">
+              <div className="Televediniye">
                 <Table
                   columns={columnsmaterial}
                   dataSource={dataMaterial}
+                  bordered
+                  rowClassName=" dark:bg-inherit"
+                />
+              </div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+
+        {trashForeign.length > 0 ? (
+          <div>
+            <div className="mb-3">
+              <h2 className="text-[20px]  dark:text-white">
+                <span className="font-[500] mr-2">
+                  Xorijiy OAVlarida OTM faoliyatiga doir E’lon qilingan
+                  materiallar
+                </span>
+              </h2>
+            </div>
+            <div>
+              <div className="Televediniye">
+                <Table
+                  columns={columnsForeign}
+                  dataSource={dataForeign}
                   bordered
                   rowClassName=" dark:bg-inherit"
                 />
@@ -1050,7 +1179,7 @@ export default function Korzinka() {
               </h2>
             </div>
             <div>
-              <div className="televediniya z-[] relative">
+              <div className="Televediniye z-[] relative">
                 <Table
                   columns={columnsOnline}
                   dataSource={dataOnline}
@@ -1076,7 +1205,7 @@ export default function Korzinka() {
               </h2>
             </div>
             <div>
-              <div className="televediniya z-[] relative">
+              <div className="Televediniye z-[] relative">
                 <Table
                   columns={columnsOfficial}
                   dataSource={dataOfficial}
@@ -1097,12 +1226,12 @@ export default function Korzinka() {
             <div className="mb-3">
               <h2 className="text-[20px]  dark:text-white">
                 <span className="font-[500] mr-2">
-                  Axborot xizmati tomonidan yo'lga qo'yilgan medialoyihalar
+                  Axborot xizmati tomonidan yoʻlga qoʻyilgan medialoyihalar
                 </span>
               </h2>
             </div>
             <div>
-              <div className="televediniya z-[] relative">
+              <div className="Televediniye z-[] relative">
                 <Table
                   columns={columnsMediaProjetcs}
                   dataSource={dataMediaProjects}
@@ -1129,7 +1258,7 @@ export default function Korzinka() {
               </h2>
             </div>
             <div>
-              <div className="televediniya z-[] relative">
+              <div className="Televediniye z-[] relative">
                 <Table
                   columns={columnsCoverage}
                   dataSource={dataCoverage}

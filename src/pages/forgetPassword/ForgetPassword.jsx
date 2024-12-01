@@ -50,7 +50,7 @@ export default function ForgetPassword() {
     toast.current.show({
       severity: "error",
       summary: "Xato kiritdingiz",
-      detail: `Bunday foydalanuvchi bo'lishi mumkin! `,
+      detail: `Bunday foydalanuvchi boʻlishi mumkin! `,
       life: 0,
     });
   };
@@ -69,14 +69,14 @@ export default function ForgetPassword() {
             Parolingizni Unutdingizmi
           </h2>
           <p className="text-[14px]">
-            Agar sizda account mavjud bo'lsa{" "}
+            Agar sizda account mavjud boʻlsa{" "}
             <Link
-              to="/signup"
+              to="/"
               className="text-blue-600 hover:text-blue-800 border-b border-b-blue-700"
             >
               Kirish
             </Link>{" "}
-            ga o'ting!
+            ga oʻting!
           </p>
         </div>
         <div>
@@ -92,7 +92,7 @@ export default function ForgetPassword() {
               rules={[
                 {
                   required: true,
-                  message: "Iltimos qiymat kiriting!",
+                  message: "Iltimos Inputga qiymat kiriting!",
                 },
               ]}
               className="mb-[10px] mt-3"
@@ -104,7 +104,7 @@ export default function ForgetPassword() {
             <Button
               type="primary"
               htmlType="submit"
-              className="w-full rounded-none bg-gray-800 py-2 hover:bg-gray-900 h-[40px] mt-2"
+              className="w-full rounded-none bg-gray-800 py-2 hover:bg-gray-900  mt-2"
             >
               Yuborish
             </Button>

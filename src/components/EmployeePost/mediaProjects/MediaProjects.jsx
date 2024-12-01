@@ -120,7 +120,7 @@ export default function MediaProjects() {
     toast.current.show({
       severity: "error",
       summary: "Xato",
-      detail: `To'g'ri kiritganingizga e'tibor bering! `,
+      detail: `Toʻg‘ri kiritganingizga e'tibor bering! `,
       life: 0,
     });
   };
@@ -147,7 +147,7 @@ export default function MediaProjects() {
               <div className={`w-full  `}>
                 <div>
                   <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white md:text-xl">
-                    Axborot xizmati tomonidan yo'lga qo'yilgan medialoyihalar
+                    Axborot xizmati tomonidan yoʻlga qoʻyilgan medialoyihalar
                   </h2>
                 </div>
                 <div className="md:mt-5 grid grid-cols-1 gap-x-6 md:gap-y-2 sm:gap-y-2 sm:grid-cols-6 ">
@@ -158,41 +158,41 @@ export default function MediaProjects() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
-                      <Input className="py-1.5" />
+                      <Input className="py-2" />
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="description"
-                      label="Loyiha tavfsifi"
+                      label="Loyiha tavsifi"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
-                      <Input className="py-1.5" />
+                      <Input className="py-2" />
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="massMedia"
-                      label="E'lon qilingan OAV/Ijtimoiy tarmoq turi"
+                      label="Loyiha platformasi"
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos TV nomini kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
                       <Select
-                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[37px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
-                        placeholder="custom dropdown render"
+                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[41px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
+                        placeholder="Tegishlisini tanlang"
                         dropdownRender={(menu) => (
                           <>
                             {menu}
@@ -207,7 +207,7 @@ export default function MediaProjects() {
                               }}
                             >
                               <Input
-                                placeholder="Boshqa bo'lsa kiriting!"
+                                placeholder="Boshqa boʻlsa kiriting!"
                                 ref={inputRef}
                                 value={name}
                                 onChange={onNameChange}
@@ -218,7 +218,7 @@ export default function MediaProjects() {
                                 icon={<PlusOutlined />}
                                 onClick={addItem}
                               >
-                                Qo'shish
+                                Qoʻshish
                               </Button>
                             </Space>
                           </>
@@ -237,13 +237,13 @@ export default function MediaProjects() {
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos qiymat kiriting!",
+                          message: "Iltimos Inputga qiymat kiriting!",
                         },
                       ]}
                     >
                       <Select
-                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[37px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
-                        placeholder="custom dropdown render"
+                        className="sm:col-span-3  dark:bg-gray-700 dark:text-white dark:ring-0 block w-full rounded-md border-0 py-0 h-[41px] text-gray-900 shadow-sm  sm:text-sm sm:leading-6 "
+                        placeholder="Tegishlisini tanlang"
                         dropdownRender={(menu1) => (
                           <>
                             {menu1}
@@ -258,7 +258,7 @@ export default function MediaProjects() {
                               }}
                             >
                               <Input
-                                placeholder="Please enter item"
+                                placeholder="Bu yerga kiriting"
                                 ref={inputRef1}
                                 value={name1}
                                 onChange={onNameChange1}
@@ -269,7 +269,7 @@ export default function MediaProjects() {
                                 icon={<PlusOutlined />}
                                 onClick={addItem1}
                               >
-                                Add item
+                                Qoʻshish
                               </Button>
                             </Space>
                           </>
@@ -284,11 +284,11 @@ export default function MediaProjects() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="link"
-                      label="Havolasini kiriting (http bilan boshlanishi shart!)"
+                      label="Havolasi "
                       rules={[
                         {
                           required: true,
-                          message: "Iltimos Havolasini kiriting!",
+                          message: "Iltimos Havolasi!",
                         },
                         {
                           type: "url",

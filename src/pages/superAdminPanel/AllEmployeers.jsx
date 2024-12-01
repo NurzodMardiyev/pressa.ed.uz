@@ -16,17 +16,21 @@ import { oavIV } from "../../feature/queryApi";
 import { Link } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
 import gif from "../../images/ezgif-2-4f3658adc3-ezgif.com-gif-maker.gif";
+import SockJS from "sockjs-client";
+import { Stomp } from "@stomp/stompjs";
+import { ip } from "../../ips";
+import { IoMdSearch } from "react-icons/io";
 const sharedOnCell = () => {};
 
 // columnslar infoniki
 const columns = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
   {
-    title: "Ko'rsatuvda qatnashgan OTM vakili F.I.O",
+    title: "Matbuot kotibining F.I.O",
     dataIndex: "fio",
     onCell: sharedOnCell,
   },
@@ -45,14 +49,10 @@ const columns = [
     dataIndex: "phoneNumber",
     onCell: sharedOnCell,
   },
+
   {
-    title: "Xabar",
-    dataIndex: "notification",
-    onCell: sharedOnCell,
-  },
-  {
-    title: "Harakat",
-    dataIndex: "action",
+    title: "oʻrtacha ish haqqi",
+    dataIndex: "salary",
     onCell: sharedOnCell,
   },
   {
@@ -69,7 +69,7 @@ const columns = [
 
 const columnsOneEmployee = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
@@ -120,37 +120,37 @@ const columnsOneEmployee = [
     onCell: sharedOnCell,
   },
   {
-    title: "Shtatdagi o'rni",
+    title: "Shtatdagi oʻrni",
     dataIndex: "shtat",
     onCell: sharedOnCell,
   },
   {
     title:
-      "Rektorning axborot siyosati masalalari bo'yicha maslahatchisi etib belgilangan (Asos hujjat raqami)",
+      "Rektorning axborot siyosati masalalari boʻyicha maslahatchisi etib belgilangan (Asos hujjat raqami)",
     dataIndex: "hujjat_raqami",
     onCell: sharedOnCell,
   },
   {
     title:
-      "Matbuot kotibining kasbiy va qo'shimcha kompetentsiyasi (siz nima qilasiz)",
+      "Matbuot kotibining kasbiy va qoʻshimcha kompetentsiyasi (siz nima qilasiz)",
     dataIndex: "qushimcha_kom",
     onCell: sharedOnCell,
   },
   {
     title:
-      "Matbuot bo'limi uchun alohida xona ajratilganligi (ha/yo'q bo'lsa qaysi bo'lim bilan birga o'tiradi)",
+      "Matbuot boʻlimi uchun alohida xona ajratilganligi (ha/yoʻq boʻlsa qaysi boʻlim bilan birga oʻtiradi)",
     dataIndex: "alohidaHona",
     onCell: sharedOnCell,
   },
   {
     title:
-      "Oxirgi bir yillik oylik maoshining o'rtacha miqdori (UzASBO tizimi yoki my.gov.uz orqali olingan ma'lumot fayl shaklida taqdim etiladi)",
+      "Oxirgi bir yillik oylik maoshining oʻrtacha miqdori (UzASBO tizimi yoki my.gov.uz orqali olingan ma’lumot fayl shaklida taqdim etiladi)",
     dataIndex: "urtacha_oylik",
     onCell: sharedOnCell,
   },
   {
     title:
-      "Alohida Matbuot/axborot xizmati bo'limi tashkil etilganligi (bo'lsa unda nechta shtat bor yoki nechta boshqa bo'limdan jalb qilingan)",
+      "Alohida Matbuot/axborot xizmati boʻlimi tashkil etilganligi (boʻlsa unda nechta shtat bor yoki nechta boshqa boʻlimdan jalb qilingan)",
     dataIndex: "axborot_xizmati",
     onCell: sharedOnCell,
   },
@@ -162,7 +162,7 @@ const columnsOneEmployee = [
   },
   {
     title:
-      "Moddiy-texnik bazasining holati  (kamera soni va uning nomi, modeli;// telefon: bor/yo'q; televizor: bor/yo'q; kompyuter jamlamasi soni va nechtasi hujjat bilan ishlash uchun, nechtasi montaj uchun; Qo'shimcha izoh)",
+      "Moddiy-texnik bazasining holati  (kamera soni va uning nomi, modeli;// telefon: bor/yoʻq; televizor: bor/yoʻq; kompyuter jamlamasi soni va nechtasi hujjat bilan ishlash uchun, nechtasi montaj uchun; Qoʻshimcha izoh)",
     dataIndex: "moddiyTexnik",
     onCell: sharedOnCell,
   },
@@ -171,12 +171,12 @@ const columnsOneEmployee = [
 // columnslar postlarniki
 const columnsPosts = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
   {
-    title: "Ko'rsatuvda qatnashgan OTM vakili F.I.O",
+    title: "Koʻrsatuvda qatnashgan OTM vakili F.I.O",
     dataIndex: "fio",
     onCell: sharedOnCell,
   },
@@ -186,7 +186,7 @@ const columnsPosts = [
     onCell: sharedOnCell,
   },
   {
-    title: "TV nomi",
+    title: "OAV nomi",
     dataIndex: "tvName",
     onCell: sharedOnCell,
   },
@@ -196,7 +196,7 @@ const columnsPosts = [
     onCell: sharedOnCell,
   },
   {
-    title: "Chiqqan sanasi va vaqti",
+    title: "Tadbir oʻtkazilgan sanasi va vaqti",
     dataIndex: "date",
     onCell: sharedOnCell,
   },
@@ -206,12 +206,12 @@ const columnsPosts = [
     onCell: sharedOnCell,
   },
   {
-    title: "Havolasi (http bilan boshlanishi shart!)",
+    title: "Havolasi ",
     dataIndex: "link",
     onCell: sharedOnCell,
   },
   {
-    title: "Harakat",
+    title: "Oʻchirish",
     dataIndex: "action",
     onCell: sharedOnCell,
   },
@@ -219,7 +219,7 @@ const columnsPosts = [
 
 const columnsMedia = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
@@ -234,7 +234,7 @@ const columnsMedia = [
     onCell: sharedOnCell,
   },
   {
-    title: "Ishchilar Ro'yhati",
+    title: "OTM rahbar xodimlarining ishtiroki",
     dataIndex: "stuffs",
     onCell: sharedOnCell,
   },
@@ -259,7 +259,7 @@ const columnsMedia = [
     onCell: sharedOnCell,
   },
   {
-    title: "Harakat",
+    title: "Oʻchirish",
     dataIndex: "action",
     onCell: sharedOnCell,
   },
@@ -267,7 +267,7 @@ const columnsMedia = [
 
 const columnsmaterial = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
@@ -282,12 +282,12 @@ const columnsmaterial = [
     onCell: sharedOnCell,
   },
   {
-    title: " E'lon qilingan OAV/Ijtimoiy tarmoq turi",
+    title: " E’lon qilingan OAV/Ijtimoiy tarmoq turi",
     dataIndex: "massMedia",
     onCell: sharedOnCell,
   },
   {
-    title: "E'lon qilingan sanasi",
+    title: "E’lon qilingan sanasi",
     dataIndex: "publishDate",
     onCell: sharedOnCell,
   },
@@ -302,7 +302,7 @@ const columnsmaterial = [
     onCell: sharedOnCell,
   },
   {
-    title: "Harakat",
+    title: "Oʻchirish",
     dataIndex: "action",
     onCell: sharedOnCell,
   },
@@ -310,7 +310,7 @@ const columnsmaterial = [
 
 const columnsOfficial = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
@@ -335,7 +335,7 @@ const columnsOfficial = [
     onCell: sharedOnCell,
   },
   {
-    title: "Harakat",
+    title: "Oʻchirish",
     dataIndex: "action",
     onCell: sharedOnCell,
   },
@@ -343,7 +343,7 @@ const columnsOfficial = [
 
 const columnsOnline = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
@@ -353,7 +353,7 @@ const columnsOnline = [
     onCell: sharedOnCell,
   },
   {
-    title: "O'tkazilgan sanasi",
+    title: "oʻtkazilgan sanasi",
     dataIndex: "date",
     onCell: sharedOnCell,
   },
@@ -378,7 +378,7 @@ const columnsOnline = [
     onCell: sharedOnCell,
   },
   {
-    title: "Harakat",
+    title: "Oʻchirish",
     dataIndex: "action",
     onCell: sharedOnCell,
   },
@@ -386,7 +386,7 @@ const columnsOnline = [
 
 const columnsMediaProjetcs = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
@@ -396,12 +396,12 @@ const columnsMediaProjetcs = [
     onCell: sharedOnCell,
   },
   {
-    title: "Loyiha tavfsifi",
+    title: "Loyiha tavsifi",
     dataIndex: "description",
     onCell: sharedOnCell,
   },
   {
-    title: "E'lon qilingan OAV/Ijtimoiy tarmoq turi",
+    title: "E’lon qilingan OAV/Ijtimoiy tarmoq turi",
     dataIndex: "tarmoqTuri",
     onCell: sharedOnCell,
   },
@@ -416,7 +416,7 @@ const columnsMediaProjetcs = [
     onCell: sharedOnCell,
   },
   {
-    title: "Harakat",
+    title: "Oʻchirish",
     dataIndex: "action",
     onCell: sharedOnCell,
   },
@@ -424,7 +424,7 @@ const columnsMediaProjetcs = [
 
 const columnsCoverage = [
   {
-    title: "No",
+    title: "T/r",
     dataIndex: "key",
     rowScope: "row",
   },
@@ -444,22 +444,60 @@ const columnsCoverage = [
     onCell: sharedOnCell,
   },
   {
-    title: "E'lon qilingan OAV/Ijtimoiy tarmoq turi",
+    title: "E’lon qilingan OAV/Ijtimoiy tarmoq turi",
     dataIndex: "type",
     onCell: sharedOnCell,
   },
   {
-    title: "Yoritilgan OAV nomi va linki!",
+    title: "Yoritilgan OAV nomi va havolasii!",
     dataIndex: "link",
     onCell: sharedOnCell,
   },
   {
-    title: "Yaratilgan sanasi",
+    title: "Yoritilgan sanasi",
     dataIndex: "publishDate",
     onCell: sharedOnCell,
   },
   {
-    title: "Harakat",
+    title: "Oʻchirish",
+    dataIndex: "action",
+    onCell: sharedOnCell,
+  },
+];
+
+const columnsForeign = [
+  {
+    title: "T/r",
+    dataIndex: "key",
+    rowScope: "row",
+  },
+  {
+    title: "Tadbir nomi",
+    dataIndex: "title",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Yoritish shakli",
+    dataIndex: "yoritShakli",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "E’lon qilingan OAV/Ijtimoiy tarmoq turi",
+    dataIndex: "type",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Yoritilgan OAV nomi va havolasi",
+    dataIndex: "link",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Yoritilgan sanasi",
+    dataIndex: "publishDate",
+    onCell: sharedOnCell,
+  },
+  {
+    title: "Oʻchirish",
     dataIndex: "action",
     onCell: sharedOnCell,
   },
@@ -474,6 +512,7 @@ export default function AllEmployeers() {
   const [dataOneEmployee, setDataOneEmployee] = useState([]);
   const [postsData, setPostsData] = useState([]);
   const [coveragesData, setCoveragesData] = useState([]);
+  const [foreignData, setForeignData] = useState([]);
   const [materialsData, setMaterialsData] = useState([]);
   const [media_eventData, setMedia_eventData] = useState([]);
   const [online_broadcastData, setOnline_broadcastData] = useState([]);
@@ -569,6 +608,8 @@ export default function AllEmployeers() {
             setOnline_broadcastData(data);
           } else if (key === "OFFICIAL_PAGE") {
             setOfficial_pageData(data);
+          } else if (key === "FOREIGN_MATERIAL") {
+            setForeignData(data);
           }
         });
         setLoading1(false);
@@ -591,6 +632,27 @@ export default function AllEmployeers() {
         successMessage(response.message.content, response.message.reason);
         setModelDelete(false);
         setPostsData((prevPostData) =>
+          prevPostData.filter((item) => item.id !== modalIDKEY.id)
+        );
+        setMedia_eventData((prevPostData) =>
+          prevPostData.filter((item) => item.id !== modalIDKEY.id)
+        );
+        setMaterialsData((prevPostData) =>
+          prevPostData.filter((item) => item.id !== modalIDKEY.id)
+        );
+        setCoveragesData((prevPostData) =>
+          prevPostData.filter((item) => item.id !== modalIDKEY.id)
+        );
+        setOfficial_pageData((prevPostData) =>
+          prevPostData.filter((item) => item.id !== modalIDKEY.id)
+        );
+        setMedia_ProjectsData((prevPostData) =>
+          prevPostData.filter((item) => item.id !== modalIDKEY.id)
+        );
+        setOnline_broadcastData((prevPostData) =>
+          prevPostData.filter((item) => item.id !== modalIDKEY.id)
+        );
+        setForeignData((prevPostData) =>
           prevPostData.filter((item) => item.id !== modalIDKEY.id)
         );
         queryClient.invalidateQueries();
@@ -616,55 +678,166 @@ export default function AllEmployeers() {
 
   const handleOpenModelDelete = (id, key) => {
     showModalDelete(id, key);
+    // const socked = new SockJS("https:/10.10.3.233:8080/ws");
+    // const client = Stomp.over(socked);
+
+    // client.connect({}, () => {
+    //   client.subscribe("/topic/notification", (message) => {
+    //     const recievedMessage = JSON.parse(message.body);
+    //     setMessages((prev) => [...prev, recievedMessage]);
+    //   });
+    // });
   };
 
-  const dataTable = data?.map((item, index) => {
-    return {
-      key: 1 + index,
-      fio: item.fullName,
+  const [search, setSearch] = useState(null);
 
-      email: (
-        <div className="flex justify-between items-center">
-          <p>{item.email}</p>
-        </div>
-      ),
-      password: (
-        <div className="flex justify-between items-center">
-          <p>{item.organizationName}</p>
-        </div>
-      ),
-      phoneNumber: item.phone,
-      notification: (
-        <button
-          onClick={() => showModal(1)}
-          className="border p-3 py-2 rounded border-green-400 text-green-400"
-        >
-          <MdModeEdit />
-        </button>
-      ),
-      action: (
-        <button className=" transition-all duration-150 bg-[#FFF2E8] px-2 py-1 rounded-md text-[#E06E4D] hover:text-red-400 border border-[#E06E4D]">
-          O'chirish
-        </button>
-      ),
-      info: (
-        <button
-          className=" transition-all duration-150 bg-[#f0e8ff] px-2 py-1 rounded-md text-[#553fff] hover:text-blue-400 border border-[#553fff]"
-          onClick={() => handletakeInfo(item.id)}
-        >
-          Info
-        </button>
-      ),
-      post: (
-        <button
-          className=" transition-all duration-150 bg-[#ffad3274] px-2 py-1 rounded-md text-[#000000] hover:text-blue-400 border border-[#553fff]"
-          onClick={() => handletakePosts(item.employeeId)}
-        >
-          Postlar
-        </button>
-      ),
-    };
-  });
+  // Search Employee
+  const searchEmployee = (e) => {
+    const query = e.target.value.toLowerCase();
+
+    const searchResult = data?.filter((item) =>
+      item.fullName.toLowerCase().includes(query)
+    );
+
+    setSearch(searchResult);
+  };
+
+  const handletakeSalary = async (id) => {
+    try {
+      const response = await fetch(
+        `http://${ip}:8080/api/employee/download-salary?userId=${id}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Faylni yuklab olishda xatolik yuz berdi");
+      }
+
+      // Faylni blob formatida olish
+      const blob = await response.blob();
+
+      // Fayl turi va nomini aniqlash
+      const contentDisposition = response.headers.get("Content-Disposition");
+      let filename = "downloaded_file";
+
+      if (contentDisposition && contentDisposition.includes("filename=")) {
+        filename = contentDisposition.split("filename=")[1].replace(/"/g, ""); // Fayl nomini olish
+      } else if (response.headers.get("Content-Type")) {
+        // Fayl nomi kengaytmasini `Content-Type` asosida aniqlash
+        const fileType = response.headers.get("Content-Type").split("/")[1];
+        filename = `downloaded_file.${fileType}`;
+      }
+
+      // Faylni yuklash
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", filename); // dinamik nom bilan yuklash
+      document.body.appendChild(link);
+      link.click(); // yuklashni boshlash
+      window.URL.revokeObjectURL(url); // URLni tozalash
+      link.remove(); // elementni tozalash
+    } catch (error) {
+      console.error("Xatolik:", error);
+    }
+  };
+
+  const dataTable =
+    search === null
+      ? data?.map((item, index) => {
+          return {
+            key: 1 + index,
+            fio: item.fullName,
+
+            email: (
+              <div className="flex justify-between items-center">
+                <p>{item.email}</p>
+              </div>
+            ),
+            password: (
+              <div className="flex justify-between items-center">
+                <p>{item.organizationName}</p>
+              </div>
+            ),
+            phoneNumber: item.phone,
+            salary: (
+              <button
+                className=" transition-all duration-150 bg-[#ceffc586] px-2 py-1 rounded-md text-[#000000] hover:text-gray-900 border border-[#000000]"
+                onClick={() => handletakeSalary(item.id)}
+              >
+                Yuklash
+              </button>
+            ),
+            info: (
+              <button
+                className=" transition-all duration-150 bg-[#f0e8ff] px-2 py-1 rounded-md text-[#553fff] hover:text-blue-400 border border-[#553fff]"
+                onClick={() => handletakeInfo(item.id)}
+              >
+                Info
+              </button>
+            ),
+            post: (
+              <button
+                className=" transition-all duration-150 bg-[#ffad3274] px-2 py-1 rounded-md text-[#000000] hover:text-blue-400 border border-[#553fff]"
+                onClick={() => handletakePosts(item.employeeId)}
+              >
+                Postlar
+              </button>
+            ),
+          };
+        })
+      : search?.map((item, index) => {
+          return {
+            key: 1 + index,
+            fio: item.fullName,
+
+            email: (
+              <div className="flex justify-between items-center">
+                <p>{item.email}</p>
+              </div>
+            ),
+            password: (
+              <div className="flex justify-between items-center">
+                <p>{item.organizationName}</p>
+              </div>
+            ),
+            phoneNumber: item.phone,
+            notification: (
+              <button
+                onClick={() => showModal(1)}
+                className="border p-3 py-2 rounded border-green-400 text-green-400"
+              >
+                <MdModeEdit />
+              </button>
+            ),
+            action: (
+              <button className=" transition-all duration-150 bg-[#FFF2E8] px-2 py-1 rounded-md text-[#E06E4D] hover:text-red-400 border border-[#E06E4D]">
+                Oʻchirish
+              </button>
+            ),
+            info: (
+              <button
+                className=" transition-all duration-150 bg-[#f0e8ff] px-2 py-1 rounded-md text-[#553fff] hover:text-blue-400 border border-[#553fff]"
+                onClick={() => handletakeInfo(item.id)}
+              >
+                Info
+              </button>
+            ),
+            post: (
+              <button
+                className=" transition-all duration-150 bg-[#ffad3274] px-2 py-1 rounded-md text-[#000000] hover:text-blue-400 border border-[#553fff]"
+                onClick={() => handletakePosts(item.employeeId)}
+              >
+                Postlar
+              </button>
+            ),
+          };
+        });
 
   const base64Image = `data:image/png;base64,${dataOneEmployee?.user?.base64}`;
 
@@ -714,24 +887,12 @@ export default function AllEmployeers() {
   // Postlarni table uchun datalar
 
   const dataTablePosts = postsData?.map((item, index) => {
-    let type = ""; // Mahalliy o'zgaruvchi sifatida ishlatamiz
-    if (item.postType === "TV_CHANNEL") {
-      type = "Televediniya";
-    } else if (item.postType === "RADIO_CHANNEL") {
-      type = "Radio";
-    } else if (item.postType === "MESSENGER") {
-      type = "Ijtimoiy tarmoq va messengerlar";
-    } else if (item.postType === "WEB_SITE") {
-      type = "Internet saytlari";
-    } else {
-      type = "Ommaviy axborot vositalari";
-    }
     return {
       key: index + 1,
       fio: `${item.showedUser}`,
       type: (
         <div className="px-3 py-1 bg-[#E6EEDD] border border-[#5CA53C] text-[#5CA53C] rounded">
-          {type}
+          {item.postType}
         </div>
       ),
       tvName: item.media,
@@ -743,8 +904,8 @@ export default function AllEmployeers() {
       link: <Link to={item.link}>{item.link}</Link>,
       action: (
         <Popconfirm
-          title={`${type}ga tegishli post`}
-          description="Haqiqatdan ham o'chirmoqchimisiz?"
+          title={`${item.postType}ga tegishli post`}
+          description="Haqiqatdan ham oʻchirmoqchimisiz?"
           okText="Yes"
           cancelText="No"
           onConfirm={() => handleOpenModelDelete(item.id, "POSTS")}
@@ -758,7 +919,7 @@ export default function AllEmployeers() {
   });
 
   const dataTableMedia = media_eventData?.map((item, index) => {
-    let type = ""; // Mahalliy o'zgaruvchi sifatida ishlatamiz
+    let type = ""; // Mahalliy oʻzgaruvchi sifatida ishlatamiz
     if (item.mediaEventType === "PRESS_CONFERENCE") {
       type = "Matbuot anjumani";
     } else if (item.mediaEventType === "BRIEFING") {
@@ -808,10 +969,10 @@ export default function AllEmployeers() {
       action: (
         <Popconfirm
           title={`${type}ga tegishli post`}
-          description="Haqiqatdan ham o'chirmoqchimisiz?"
+          description="Haqiqatdan ham oʻchirmoqchimisiz?"
           okText="Yes"
           cancelText="No"
-          // onConfirm={() => handleDeleteMediaEvent(item.id)}
+          onConfirm={() => handleOpenModelDelete(item.id, "MEDIA_EVENT")}
         >
           <Button danger>
             {" "}
@@ -823,7 +984,7 @@ export default function AllEmployeers() {
   });
 
   const dataMaterial = materialsData?.map((item, index) => {
-    let type = ""; // Mahalliy o'zgaruvchi sifatida ishlatamiz
+    let type = ""; // Mahalliy oʻzgaruvchi sifatida ishlatamiz
     if (item.materialType === "VIDEO") {
       type = "Video";
     } else if (item.materialType === "INFOGRAPHIC") {
@@ -850,10 +1011,10 @@ export default function AllEmployeers() {
       action: (
         <Popconfirm
           title={`${type}ga tegishli post`}
-          description="Haqiqatdan ham o'chirmoqchimisiz?"
+          description="Haqiqatdan ham oʻchirmoqchimisiz?"
           okText="Yes"
           cancelText="No"
-          // onConfirm={() => handleDeleteMaterial(item.id)}
+          onConfirm={() => handleOpenModelDelete(item.id, "MATERIALS")}
         >
           <Button danger>
             {" "}
@@ -872,17 +1033,19 @@ export default function AllEmployeers() {
       key: index + 1,
       title: `${item.title}`,
       date: publishDate,
-      participation: item.stuff,
+      participation: item.stuff.map((i, index) => (
+        <span key={index}>{i}, </span>
+      )),
       mesengerTitle: item.messenger,
       amountAttand: item.numberOfPeople,
       link: <Link to={`${item.link}`}> {item.link}</Link>,
       action: (
         <Popconfirm
           title={`ga tegishli post`}
-          description="Haqiqatdan ham o'chirmoqchimisiz?"
+          description="Haqiqatdan ham oʻchirmoqchimisiz?"
           okText="Yes"
           cancelText="No"
-          // onConfirm={() => handleDeleteOnline(item.id)}
+          onConfirm={() => handleOpenModelDelete(item.id, "ONLINE_BROADCAST")}
         >
           <Button danger>
             {" "}
@@ -934,10 +1097,10 @@ export default function AllEmployeers() {
       action: (
         <Popconfirm
           title={`ga tegishli post`}
-          description="Haqiqatdan ham o'chirmoqchimisiz?"
+          description="Haqiqatdan ham oʻchirmoqchimisiz?"
           okText="Yes"
           cancelText="No"
-          // onConfirm={() => handleDeleteofficail(item.id)}
+          onConfirm={() => handleOpenModelDelete(item.id, "OFFICIAL_PAGE")}
         >
           <Button danger>
             {" "}
@@ -959,10 +1122,10 @@ export default function AllEmployeers() {
       action: (
         <Popconfirm
           title={`ga tegishli post`}
-          description="Haqiqatdan ham o'chirmoqchimisiz?"
+          description="Haqiqatdan ham oʻchirmoqchimisiz?"
           okText="Yes"
           cancelText="No"
-          // onConfirm={() => handleDeleteMediaProjects(item.id)}
+          onConfirm={() => handleOpenModelDelete(item.id, "MEDIA_PROJECTS")}
         >
           <Button danger>
             {" "}
@@ -991,10 +1154,10 @@ export default function AllEmployeers() {
       action: (
         <Popconfirm
           title={`ga tegishli post`}
-          description="Haqiqatdan ham o'chirmoqchimisiz?"
+          description="Haqiqatdan ham oʻchirmoqchimisiz?"
           okText="Yes"
           cancelText="No"
-          // onConfirm={() => handleDeleteCoverage(item.id)}
+          onConfirm={() => handleOpenModelDelete(item.id, "COVERAGES")}
         >
           <Button danger>
             {" "}
@@ -1005,38 +1168,289 @@ export default function AllEmployeers() {
     };
   });
 
-  // Excel
-  const getEmployeeExcel = useMutation(
-    () =>
-      oavIV.getEmployeeExcel(
-        {}, // agar kerak bo'lsa values yuboring
-        {
-          headers: { Authorization: `${token}` },
-          responseType: "blob", // bu yerda faylni blob shaklida olishni ta'minlaymiz
-        }
+  const dataForeign = foreignData?.map((item, index) => {
+    return {
+      key: index + 1,
+      title: `${item.title}`,
+      yoritShakli: item.illumination,
+      type: item.typeMediaSocial,
+      link: item.mediaNameAndLink
+        ? Object.entries(item.mediaNameAndLink).map(([name, url]) => (
+            <div key={name}>
+              <span>{name}</span>: <Link to={url}>`{url}`</Link>
+            </div>
+          ))
+        : "",
+      publishDate: item.publishedDate,
+      action: (
+        <Popconfirm
+          title={`ga tegishli post`}
+          description="Haqiqatdan ham oʻchirmoqchimisiz?"
+          okText="Yes"
+          cancelText="No"
+          onConfirm={() => handleOpenModelDelete(item.id, "FOREIGN_MATERIAL")}
+        >
+          <Button danger>
+            {" "}
+            <FaTrashAlt />
+          </Button>
+        </Popconfirm>
       ),
-    {
-      onSuccess: (response) => {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "employee_data.xlsx"); // fayl nomi
-        document.body.appendChild(link);
-        link.click(); // yuklashni boshlash
-        link.remove(); // elementni tozalash
-      },
-      onError: (error) => {
-        console.log(error);
-      },
-    }
-  );
+    };
+  });
 
-  const handleGetEmployeeExcel = () => {
-    getEmployeeExcel.mutate();
+  // Excel All Employees
+  const handleGetEmployeeExcel = async () => {
+    try {
+      const response = await fetch(
+        `http://${ip}:8080/api/excel/export-employees`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Faylni yuklab olishda xatolik yuz berdi");
+      }
+
+      // Faylni blob formatida olish
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "employees.xlsx"); // yuklanayotgan fayl nomi
+      document.body.appendChild(link);
+      link.click(); // yuklashni boshlash
+      window.URL.revokeObjectURL(url); // URLni tozalash
+      link.remove(); // elementni tozalash
+    } catch (error) {
+      console.error("Xatolik:", error);
+    }
+  };
+
+  // Excel Postlar
+  const handlePostDownloadExcel = async (id) => {
+    try {
+      const response = await fetch(
+        `http://${ip}:8080/api/excel/export-employee-posts?employeeId=${id}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Faylni yuklab olishda xatolik yuz berdi");
+      }
+
+      // Faylni blob formatida olish
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "Employee_posts.xlsx"); // yuklanayotgan fayl nomi
+      document.body.appendChild(link);
+      link.click(); // yuklashni boshlash
+      window.URL.revokeObjectURL(url); // URLni tozalash
+      link.remove(); // elementni tozalash
+    } catch (error) {
+      console.error("Xatolik:", error);
+    }
+  };
+
+  const handleMediaEventDownloadExcel = async (id) => {
+    try {
+      const response = await fetch(
+        `http://${ip}:8080/api/excel/export-employee-media-events?employeeId=${id}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Faylni yuklab olishda xatolik yuz berdi");
+      }
+
+      // Faylni blob formatida olish
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "MediaEvents.xlsx"); // yuklanayotgan fayl nomi
+      document.body.appendChild(link);
+      link.click(); // yuklashni boshlash
+      window.URL.revokeObjectURL(url); // URLni tozalash
+      link.remove(); // elementni tozalash
+    } catch (error) {
+      console.error("Xatolik:", error);
+    }
+  };
+
+  const handleMaterialDownloadExcel = async (id) => {
+    try {
+      const response = await fetch(
+        `http://${ip}:8080/api/excel/export-employee-materials?employeeId=${id}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Faylni yuklab olishda xatolik yuz berdi");
+      }
+
+      // Faylni blob formatida olish
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "Materials.xlsx"); // yuklanayotgan fayl nomi
+      document.body.appendChild(link);
+      link.click(); // yuklashni boshlash
+      window.URL.revokeObjectURL(url); // URLni tozalash
+      link.remove(); // elementni tozalash
+    } catch (error) {
+      console.error("Xatolik:", error);
+    }
+  };
+
+  const handleOnlineDownloadExcel = async (id) => {
+    try {
+      const response = await fetch(
+        `http://${ip}:8080/api/excel/export-employee-broadcasts?employeeId=${id}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Faylni yuklab olishda xatolik yuz berdi");
+      }
+
+      // Faylni blob formatida olish
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "Broadcasts.xlsx"); // yuklanayotgan fayl nomi
+      document.body.appendChild(link);
+      link.click(); // yuklashni boshlash
+      window.URL.revokeObjectURL(url); // URLni tozalash
+      link.remove(); // elementni tozalash
+    } catch (error) {
+      console.error("Xatolik:", error);
+    }
+  };
+
+  const handleMediaProjectDownloadExcel = async (id) => {
+    try {
+      const response = await fetch(
+        `http://${ip}:8080/api/excel/export-employee-media-projects?employeeId=${id}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Faylni yuklab olishda xatolik yuz berdi");
+      }
+
+      // Faylni blob formatida olish
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "MediaProjects.xlsx"); // yuklanayotgan fayl nomi
+      document.body.appendChild(link);
+      link.click(); // yuklashni boshlash
+      window.URL.revokeObjectURL(url); // URLni tozalash
+      link.remove(); // elementni tozalash
+    } catch (error) {
+      console.error("Xatolik:", error);
+    }
+  };
+
+  const handleCoverageDownloadExcel = async (id) => {
+    try {
+      const response = await fetch(
+        `http://${ip}:8080/api/excel/export-employee-coverages?employeeId=${id}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Faylni yuklab olishda xatolik yuz berdi");
+      }
+
+      // Faylni blob formatida olish
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "Coverage.xlsx"); // yuklanayotgan fayl nomi
+      document.body.appendChild(link);
+      link.click(); // yuklashni boshlash
+      window.URL.revokeObjectURL(url); // URLni tozalash
+      link.remove(); // elementni tozalash
+    } catch (error) {
+      console.error("Xatolik:", error);
+    }
+  };
+
+  const handleForeignDownloadExcel = async (id) => {
+    try {
+      const response = await fetch(
+        `http://${ip}:8080/api/excel/export-employee-foreign-material?employeeId=${id}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Faylni yuklab olishda xatolik yuz berdi");
+      }
+
+      // Faylni blob formatida olish
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "Foreign.xlsx"); // yuklanayotgan fayl nomi
+      document.body.appendChild(link);
+      link.click(); // yuklashni boshlash
+      window.URL.revokeObjectURL(url); // URLni tozalash
+      link.remove(); // elementni tozalash
+    } catch (error) {
+      console.error("Xatolik:", error);
+    }
   };
 
   const onFinishDelete = (values) => {
-    // Yig'ilgan checkbox qiymatlarini ko'rish
+    // Yig‘ilgan checkbox qiymatlarini koʻrish
     const fieldsValue = {
       reasons: values.renasans,
       postId: modalIDKEY.id,
@@ -1051,18 +1465,36 @@ export default function AllEmployeers() {
     <div>
       <div className=" md:me-[20px] me-[10px]  flex-1 overflow-x-scroll">
         <div className="pb-16 container lg:max-w-[2560px] md:max-w-[1600px]  mx-auto  mt-4">
-          {/* Televediniya */}
+          {/* Televediniye */}
           {contextHolder}
           <div className="mb-3 flex justify-between w-full items-center">
             <h2 className="text-[30px]  dark:text-white">
               <span className="font-[500] mr-2">Barcha Xodimlar</span>
             </h2>
-            <button
-              className="bg-green-600 text-white px-6 py-2 rounded"
-              onClick={handleGetEmployeeExcel}
-            >
-              Excel
-            </button>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center">
+                <input
+                  type="text"
+                  onChange={searchEmployee}
+                  className="dark:bg-gray-600 dark:text-white"
+                  style={{
+                    borderRadius: "0px",
+                    borderTopLeftRadius: "5px",
+                    borderBottomLeftRadius: "5px",
+                    height: "36px",
+                  }}
+                />
+                <button className="h-[36px] px-4 bg-blue-400 rounded-r-[5px] text-white">
+                  <IoMdSearch />
+                </button>
+              </div>
+              <button
+                className="bg-green-600 text-white px-6 py-2 rounded"
+                onClick={handleGetEmployeeExcel}
+              >
+                Excel
+              </button>
+            </div>
           </div>
           <div>
             <Modal
@@ -1098,7 +1530,7 @@ export default function AllEmployeers() {
             </Modal>
 
             <Modal
-              title={<p>Xodim ma'lumotlari</p>}
+              title={<p>Xodim ma’lumotlari</p>}
               open={open}
               onCancel={() => setOpen(false)}
               footer={null}
@@ -1112,7 +1544,7 @@ export default function AllEmployeers() {
               ) : Object.keys(dataTableOneEmployee).length > 0 ? (
                 <div style={{ overflowX: "auto" }}>
                   {" "}
-                  {/* Jadvalning kengligi katta bo'lsa, gorizontal skroll qo'shish */}
+                  {/* Jadvalning kengligi katta boʻlsa, gorizontal skroll qoʻshish */}
                   <Table
                     columns={columnsOneEmployee}
                     dataSource={dataTableOneEmployee}
@@ -1128,7 +1560,7 @@ export default function AllEmployeers() {
 
             {/* Postlar va tadborlar uchun modal */}
             <Modal
-              title={<p>Xodimning qo'ygan postlari</p>}
+              title={<p>Xodimning qoʻygan postlari</p>}
               open={open1}
               onCancel={() => setOpen1(false)}
               footer={null}
@@ -1145,10 +1577,11 @@ export default function AllEmployeers() {
                 online_broadcastData?.length > 0 ||
                 official_pageData?.length > 0 ||
                 media_ProjectsData?.length > 0 ||
-                coveragesData?.length > 0 ? (
+                coveragesData?.length > 0 ||
+                foreignData?.length > 0 ? (
                 <div style={{ overflowX: "auto" }}>
                   {" "}
-                  {/* Jadvalning kengligi katta bo'lsa, gorizontal skroll qo'shish */}
+                  {/* Jadvalning kengligi katta boʻlsa, gorizontal skroll qoʻshish */}
                   <Modal
                     title="Basic Modal"
                     open={modelDelete}
@@ -1163,19 +1596,35 @@ export default function AllEmployeers() {
                     >
                       <Form.Item name="renasans">
                         <Checkbox.Group>
-                          <Checkbox value="link1">Link 1</Checkbox>
-                          <Checkbox value="link2">Link 2</Checkbox>
-                          <Checkbox value="link3">Link 3</Checkbox>
+                          <Checkbox value="Kiritilgan link xato">
+                            Kiritilgan link xato
+                          </Checkbox>
+                          <Checkbox value="Ma’lumot eskiligi tufayli">
+                            Ma’lumot eskiligi tufayli
+                          </Checkbox>
+                          <Checkbox value="Imloviy xatolar mavjud">
+                            Imloviy xatolar mavjud
+                          </Checkbox>
                         </Checkbox.Group>
                       </Form.Item>
                     </Form>
                   </Modal>
                   {postsData?.length > 0 ? (
                     <div className="border-t pt-3">
-                      <h3 className="text-[15px] font-semibold mb-2">
-                        Faoliyatga doir axborotni OAV, Internet saytlar va
-                        ijtimoiy tarmoqlar orqali yoritilishi
-                      </h3>
+                      <div className="flex justify-between items-center mb-1">
+                        <h3 className="text-[15px] font-semibold mb-2">
+                          Faoliyatga doir axborotni OAV, Internet saytlar va
+                          ijtimoiy tarmoqlar orqali yoritilishi
+                        </h3>
+                        <button
+                          className="bg-green-500 text-white px-4 py-1 rounded"
+                          onClick={() =>
+                            handlePostDownloadExcel(postsData[0].employee?.id)
+                          }
+                        >
+                          Excel
+                        </button>
+                      </div>
                       <Table
                         columns={columnsPosts}
                         dataSource={dataTablePosts}
@@ -1189,9 +1638,21 @@ export default function AllEmployeers() {
                   )}
                   {media_eventData?.length > 0 ? (
                     <div>
-                      <h3 className="text-[15px] font-semibold mb-2">
-                        Matbuot kotibi tomonidan o‘tkazilgan mediyatadbirlar.
-                      </h3>
+                      <div className="flex justify-between items-center mb-1">
+                        <h3 className="text-[15px] font-semibold mb-2">
+                          Matbuot kotibi tomonidan o‘tkazilgan mediatadbirlar.
+                        </h3>
+                        <button
+                          className="bg-green-500 text-white px-4 py-1 rounded"
+                          onClick={() =>
+                            handleMediaEventDownloadExcel(
+                              media_eventData[0].employee?.id
+                            )
+                          }
+                        >
+                          Excel
+                        </button>
+                      </div>
                       <Table
                         columns={columnsMedia}
                         dataSource={dataTableMedia}
@@ -1205,10 +1666,22 @@ export default function AllEmployeers() {
                   )}
                   {materialsData?.length > 0 ? (
                     <div>
-                      <h3 className="text-[15px] font-semibold mb-2">
-                        Faoliyatga doir axborotni yetkazib berishda akustik va
-                        vizual materiallardan foydalanganligi
-                      </h3>
+                      <div className="flex justify-between items-center mb-1">
+                        <h3 className="text-[15px] font-semibold mb-2">
+                          Faoliyatga doir axborotni yetkazib berishda akustik va
+                          vizual materiallardan foydalanganligi
+                        </h3>
+                        <button
+                          className="bg-green-500 text-white px-4 py-1 rounded"
+                          onClick={() =>
+                            handleMaterialDownloadExcel(
+                              materialsData[0].employee?.id
+                            )
+                          }
+                        >
+                          Excel
+                        </button>
+                      </div>
                       <Table
                         columns={columnsmaterial}
                         dataSource={dataMaterial}
@@ -1222,10 +1695,22 @@ export default function AllEmployeers() {
                   )}
                   {online_broadcastData?.length > 0 ? (
                     <div>
-                      <h3 className="text-[15px] font-semibold mb-2">
-                        Ijtimoiy tarmoqlarda berilgan onlayn efir (ovozli chat)
-                        lar soni
-                      </h3>
+                      <div className="flex justify-between items-center mb-1">
+                        <h3 className="text-[15px] font-semibold mb-2">
+                          Ijtimoiy tarmoqlarda berilgan onlayn efir (ovozli
+                          chat) lar soni
+                        </h3>
+                        <button
+                          className="bg-green-500 text-white px-4 py-1 rounded"
+                          onClick={() =>
+                            handleOnlineDownloadExcel(
+                              online_broadcastData[0].employee?.id
+                            )
+                          }
+                        >
+                          Excel
+                        </button>
+                      </div>
                       <Table
                         columns={columnsOnline}
                         dataSource={dataOnline}
@@ -1243,6 +1728,7 @@ export default function AllEmployeers() {
                         Ijtimoiy tarmoq va messenjerlardagi OTM rasmiy
                         sahifalarida obunachilar soni
                       </h3>
+
                       <Table
                         columns={columnsOfficial}
                         dataSource={dataOfficial}
@@ -1256,10 +1742,22 @@ export default function AllEmployeers() {
                   )}
                   {media_ProjectsData?.length > 0 ? (
                     <div>
-                      <h3 className="text-[15px] font-semibold mb-2">
-                        Axborot xizmati tomonidan yo'lga qo'yilgan
-                        medialoyihalar
-                      </h3>
+                      <div className="flex justify-between items-center mb-1">
+                        <h3 className="text-[15px] font-semibold mb-2">
+                          Axborot xizmati tomonidan yoʻlga qoʻyilgan
+                          medialoyihalar
+                        </h3>
+                        <button
+                          className="bg-green-500 text-white px-4 py-1 rounded"
+                          onClick={() =>
+                            handleMediaProjectDownloadExcel(
+                              media_ProjectsData[0].employee?.id
+                            )
+                          }
+                        >
+                          Excel
+                        </button>
+                      </div>
                       <Table
                         columns={columnsMediaProjetcs}
                         dataSource={dataMediaProjects}
@@ -1273,13 +1771,54 @@ export default function AllEmployeers() {
                   )}
                   {coveragesData?.length > 0 ? (
                     <div>
-                      <h3 className="text-[15px] font-semibold mb-2">
-                        OTM faoliyatidagi turli tadbirlarni ommaviy axborot
-                        vositalari orqali yoritilganlik darajasi
-                      </h3>
+                      <div className="flex justify-between items-center mb-1">
+                        <h3 className="text-[15px] font-semibold mb-2">
+                          OTM faoliyatidagi turli tadbirlarni ommaviy axborot
+                          vositalari orqali yoritilganlik darajasi
+                        </h3>
+                        <button
+                          className="bg-green-500 text-white px-4 py-1 rounded"
+                          onClick={() =>
+                            handleCoverageDownloadExcel(
+                              coveragesData[0].employee?.id
+                            )
+                          }
+                        >
+                          Excel
+                        </button>
+                      </div>
                       <Table
                         columns={columnsCoverage}
                         dataSource={dataCoverage}
+                        bordered
+                        rowClassName=" dark:bg-inherit"
+                        className="z-0"
+                      />
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  {foreignData?.length > 0 ? (
+                    <div>
+                      <div className="flex justify-between items-center mb-1">
+                        <h3 className="text-[15px] font-semibold mb-2">
+                          Xorijiy OAVlarida OTM faoliyatiga doir E’lon qilingan
+                          materiallar
+                        </h3>
+                        <button
+                          className="bg-green-500 text-white px-4 py-1 rounded"
+                          onClick={() =>
+                            handleForeignDownloadExcel(
+                              foreignData[0].employee?.id
+                            )
+                          }
+                        >
+                          Excel
+                        </button>
+                      </div>
+                      <Table
+                        columns={columnsForeign}
+                        dataSource={dataForeign}
                         bordered
                         rowClassName=" dark:bg-inherit"
                         className="z-0"

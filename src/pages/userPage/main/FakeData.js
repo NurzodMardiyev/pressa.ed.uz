@@ -11,8 +11,8 @@ export const LineGraphData = {
       },
       tooltip: {
         enabled: true, // Tooltiplarni yoqish
-        mode: "index", // Bir nechta datasetlar uchun index bo'yicha
-        intersect: false, // Kursordan o'tkazganda barcha yaqin nuqtalar ko'rsatiladi
+        mode: "index", // Bir nechta datasetlar uchun index bo‘yicha
+        intersect: false, // Kursordan o‘tkazganda barcha yaqin nuqtalar ko‘rsatiladi
       },
     },
     elements: {
@@ -39,31 +39,47 @@ export const LineGraphData = {
     },
   },
   data: {
-    labels: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
+    labels: ["1-chorak", "2-chorak", "3-chorak", "4-chorak"],
     datasets: [
       {
-        label: "Steps by Nurzod",
-        data: [3000, 5000, 4500, 6000, 8000, 7000, 9000],
+        label: "Televediniye",
+        data: [10, 60, 45, 60],
         borderColor: "rgba(75, 192, 192, 1)",
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         tension: 0.4, // Chiziqlarni yumshoqroq qilish (spline)
-        fill: true, // Chiziq ostidagi maydonni to'ldirish
+        fill: true, // Chiziq ostidagi maydonni to‘ldirish
       },
       {
-        label: "Steps by Abbos",
-        data: [3000, 5000, 5500, 8000, 8000, 9000, 10000],
+        label: "Radio",
+        data: [0, 50, 55, 80],
         borderColor: "rgba(75, 192, 0, 1)",
         backgroundColor: "rgba(75, 192, 0, 0.2)",
         tension: 0.4, // Chiziqlarni yumshoqroq qilish (spline)
-        fill: true, // Chiziq ostidagi maydonni to'ldirish
+        fill: true, // Chiziq ostidagi maydonni to‘ldirish
+      },
+      {
+        label: "Gazeta va Jurnal",
+        data: [7, 50, 35, 70],
+        borderColor: "#F0BC3D",
+        backgroundColor: "#F0DEB2",
+        tension: 0.4, // Chiziqlarni yumshoqroq qilish (spline)
+        fill: true, // Chiziq ostidagi maydonni to‘ldirish
+      },
+      {
+        label: "Internet Saytlar",
+        data: [5, 30, 35, 40],
+        borderColor: "#8C00FF",
+        backgroundColor: "#F0DEFF",
+        tension: 0.4, // Chiziqlarni yumshoqroq qilish (spline)
+        fill: true, // Chiziq ostidagi maydonni to‘ldirish
+      },
+      {
+        label: "Messenjerlar",
+        data: [10, 50, 25, 30],
+        borderColor: "#F02800",
+        backgroundColor: "rgba(94,16,0,.2)",
+        tension: 0.4, // Chiziqlarni yumshoqroq qilish (spline)
+        fill: true, // Chiziq ostidagi maydonni to‘ldirish
       },
     ],
   },
@@ -97,9 +113,31 @@ export const BarGraphData = {
 };
 
 export const PieGraphData = {
-  options: { cutout: "70%" },
+  options: {
+    cutout: "70%",
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: "Gender Distribution",
+        color: "#333", // Title rangini o‘rnatish
+        font: {
+          size: 18, // Title shrift o‘lchamini belgilash
+          family: "Arial", // Title shrift turini o‘zgartirish
+          weight: "bold", // Title shrift uslubini o‘zgartirish
+        },
+        padding: {
+          top: 10,
+          bottom: 20,
+        },
+      },
+      legend: {
+        position: "top",
+      },
+    },
+  },
   data: {
-    labels: ["A", "B", "C", "D"],
+    labels: ["Erkak", "Ayol"],
     datasets: [
       {
         label: "Sample Data",

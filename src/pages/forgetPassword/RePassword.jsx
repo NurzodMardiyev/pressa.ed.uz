@@ -56,7 +56,7 @@ export default function RePassword() {
     toast.current.show({
       severity: "error",
       summary: "Xato kiritdingiz",
-      detail: `Bunday foydalanuvchi bo'lishi mumkin! `,
+      detail: `Bunday foydalanuvchi boʻlishi mumkin! `,
       life: 0,
     });
   };
@@ -88,7 +88,7 @@ export default function RePassword() {
               rules={[
                 {
                   required: true,
-                  message: "Iltimos qiymat kiriting!",
+                  message: "Iltimos Inputga qiymat kiriting!",
                 },
               ]}
               className="mb-[10px] flex flex-col"
@@ -102,7 +102,7 @@ export default function RePassword() {
               rules={[
                 {
                   required: true,
-                  message: "Iltimos qiymat kiriting!",
+                  message: "Iltimos Inputga qiymat kiriting!",
                 },
               ]}
               className="mb-[10px] flex flex-col"
@@ -113,7 +113,7 @@ export default function RePassword() {
             <Button
               type="primary"
               htmlType="submit"
-              className="w-full rounded-none bg-gray-800 py-2 hover:bg-gray-900 h-[40px]"
+              className="w-full rounded-none bg-gray-800 py-2 hover:bg-gray-900 "
             >
               Yuborish
             </Button>
