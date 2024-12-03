@@ -47,7 +47,7 @@ export default function InternetSitesJSAdmin() {
         queryClient.invalidateQueries();
         showSuccess();
         setTimeout(() => {
-          navigate("/superadminpanel/dashboard");
+          navigate("/superadminpanel/internet_sites_dashboard");
         });
         // reset();
       },

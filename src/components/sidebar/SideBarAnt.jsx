@@ -25,42 +25,32 @@ const items = [
       "Faoliyatga doir axborotni OAV, Internet saytlar va ijtimoiy tarmoqlar orqali yoritilishi",
     icon: <RiChatVoiceFill />,
     children: [
-      { key: "/televediniye", label: "Televedeniye" },
-      { key: "/radio", label: "Radio" },
-      { key: "/oav", label: "Bosma OAV (gazeta va jurnallar)" },
-      { key: "/internet_sites", label: "Internet saytlari" },
-      { key: "/messenger", label: "Ijtimoiy tarmoq va messenjerlar" },
-    ],
-  },
-  {
-    key: "sub4",
-    label: "Matbuot kotibi tomonidan o‘tkazilgan mediatadbirlar",
-    icon: <MdPermMedia />,
-    children: [
-      { key: "/matbuot_anjumani", label: "Matbuot anjumani" },
-      { key: "/brifing", label: "Brifing" },
-      { key: "/press_tur", label: "Press tur" },
+      { key: "/televediniye_dashboard", label: "Televedeniye" },
+      { key: "/radio_dashboard", label: "Radio" },
+      { key: "/oav_dashboard", label: "Bosma OAV (gazeta va jurnallar)" },
+      { key: "/internet_sites_dashboard", label: "Internet saytlari" },
+      { key: "/messenger_dashboard", label: "Ijtimoiy tarmoq va messenjerlar" },
     ],
   },
 
   {
-    key: "/foreign",
+    key: "/matbuot_dashboard",
+    label: "Matbuot kotibi tomonidan o‘tkazilgan mediatadbirlar",
+    icon: <MdPermMedia />,
+  },
+  {
+    key: "/foreign_dashboard",
     label: "Xorijiy OAVlarida OTM faoliyatiga doir E’lon qilingan materiallar",
     icon: <IoSchoolSharp />,
   },
   {
-    key: "sub5",
+    key: "/infografika_dashboard",
     label:
       "Faoliyatga doir axborotni yetkazib berishda akustik va vizual materiallardan foydalanganligi",
     icon: <SiMaterialformkdocs />,
-    children: [
-      { key: "/infografika", label: "Infografika" },
-      { key: "/audio", label: "Audio" },
-      { key: "/video", label: "Video" },
-    ],
   },
   {
-    key: "/onlayn_efir",
+    key: "/onlayn_efir_dashboard",
     label: "Ijtimoiy tarmoqlarda berilgan onlayn efir (ovozli chat)lar soni",
     icon: <BsPersonLinesFill />,
   },
@@ -70,20 +60,20 @@ const items = [
       "Ijtimoiy tarmoq va messenjerlardagi OTM rasmiy sahifalarida obunachilar soni.",
     icon: <FaFacebookMessenger />,
     children: [
-      { key: "/telegram", label: "Ijtimoiy tarmoqlar" },
+      { key: "/telegram_dashboard", label: "Ijtimoiy tarmoqlar" },
       { key: "/organization", label: "Xodimlar" },
     ],
   },
 
   {
-    key: "/mediaprojects",
+    key: "/mediaprojects_dashboard",
     label: "Axborot xizmati tomonidan yoʻlga qoʻyilgan medialoyihalar",
     icon: <AiFillProject />,
   },
   {
-    key: "/levelIllumination",
+    key: "/levelIllumination_dashboard",
     label:
-      "Vazirlik faoliyatidagi turli tadbir (media reja)larni ommaviy axborot vositalari orqali yoritilganlik darajasi",
+      "OTM faoliyatidagi turli tadbir (media reja)larni ommaviy axborot vositalari orqali yoritilganlik darajasi",
     icon: <SiLevelsdotfyi />,
   },
   {

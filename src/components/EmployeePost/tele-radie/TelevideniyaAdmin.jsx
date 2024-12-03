@@ -47,7 +47,7 @@ export default function TelevediniyeAdmin() {
       onSuccess: () => {
         queryClient.invalidateQueries();
         setTimeout(() => {
-          navigate("/superadminpanel/dashboard");
+          navigate("/superadminpanel/televediniye_dashboard");
         }, 300);
         showSuccess();
       },
@@ -88,7 +88,6 @@ export default function TelevediniyeAdmin() {
       showedMedia: fieldsValue["showedMedia"],
       type: "televediniye",
     };
-    console.log("Received values of form: ", values);
     addPost.mutate(values);
   };
   // Submit bosilganda ishlaydigan Funksiya

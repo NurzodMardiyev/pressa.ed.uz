@@ -35,65 +35,56 @@ const items = [
           "Faoliyatga doir axborotni OAV, Internet saytlar va ijtimoiy tarmoqlar orqali yoritilishi",
         icon: <RiChatVoiceFill />,
         children: [
-          { key: "/superadminpanel/televediniye", label: "Telvideniye" },
-          { key: "/superadminpanel/radio", label: "Radio" },
           {
-            key: "/superadminpanel/oav",
+            key: "/superadminpanel/televediniye_dashboard",
+            label: "Telvideniye",
+          },
+          { key: "/superadminpanel/radio_dashboard", label: "Radio" },
+          {
+            key: "/superadminpanel/oav_dashboard",
             label: "Bosma OAV (gazeta va jurnallar)",
           },
           {
-            key: "/superadminpanel/internet_sites",
+            key: "/superadminpanel/internet_sites_dashboard",
             label: "Internet saytlari",
           },
           {
-            key: "/superadminpanel/messenger",
+            key: "/superadminpanel/messenger_dashboard",
             label: "Ijtimoiy tarmoq va messenjerlar",
           },
         ],
       },
+
       {
-        key: "sub4",
+        key: "/superadminpanel/matbuot_anjumani_dashboard",
         label: "Matbuot kotibi tomonidan o‘tkazilgan mediatadbirlar",
         icon: <MdPermMedia />,
-        children: [
-          {
-            key: "/superadminpanel/matbuot_anjumani",
-            label: "Matbuot anjumani",
-          },
-          { key: "/superadminpanel/brifing", label: "Brifing" },
-          { key: "/superadminpanel/press_tur", label: "Press tur" },
-        ],
       },
       {
-        key: "/superadminpanel/foreign",
+        key: "/superadminpanel/foreign_dashboard",
         label:
           "Xorijiy ommaviy axborot vositalarida OTM faoliyatiga doir E’lon qilingan materiallar soni",
         icon: <IoSchoolSharp />,
       },
       {
-        key: "sub5",
+        key: "/superadminpanel/infografika_dashboard",
         label:
           "Faoliyatga doir axborotni yetkazib berishda akustik va vizual materiallardan foydalanganligi",
         icon: <SiMaterialformkdocs />,
-        children: [
-          { key: "/superadminpanel/infografika", label: "Infografika" },
-          { key: "/superadminpanel/audio", label: "Audio" },
-          { key: "/superadminpanel/video", label: "Video" },
-        ],
       },
       {
-        key: "/superadminpanel/onlayn_efir",
+        key: "/superadminpanel/onlayn_efir_dashboard",
         label:
           "Ijtimoiy tarmoqlarda berilgan onlayn efir (ovozli chat)lar soni",
         icon: <BsPersonLinesFill />,
       },
       {
-        key: "/superadminpanel/mediaprojects",
+        key: "/superadminpanel/mediaprojects_dashboard",
         label: "Axborot xizmati tomonidan yoʻlga qoʻyilgan medialoyihalar",
         icon: <AiFillProject />,
       },
       {
-        key: "/superadminpanel/levelIllumination",
+        key: "/superadminpanel/levelIllumination_dashboard",
         label:
           "Vazirlik faoliyatidagi turli tadbir (media reja)larni ommaviy axborot vositalari orqali yoritilganlik darajasi",
         icon: <SiLevelsdotfyi />,

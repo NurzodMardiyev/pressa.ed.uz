@@ -48,7 +48,7 @@ export default function OAVjsAdmin() {
         showSuccess();
         // reset();
         setTimeout(() => {
-          navigate("/superadminpanel/dashboard");
+          navigate("/superadminpanel/oav_dashboard");
         }, 300);
       },
       onError: () => {

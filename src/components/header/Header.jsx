@@ -51,8 +51,8 @@ export default function Header() {
   }, [menuRef]);
 
   return (
-    <div className="dark:bg-gray-800  bg-slate-100 w-full z-[99] flex  fixed">
-      <div className="header-wrapper container lg:max-w-[2560px] md:max-w-[1600px] shadow-md  mx-auto flex justify-between py-4 md:px-5 max-w-[768px] ">
+    <div className="dark:bg-gray-800  bg-slate-100 w-full z-[99] flex fixed">
+      <div className="header-wrapper container lg:max-w-[2560px] md:max-w-[1600px] shadow-md  mx-auto flex justify-between py-4 md:px-5 w-full ]">
         <div className="logpSection flex gap-6 items-center ">
           <Link to="/" className="logo md:h-[50px]  h-[40px]">
             <img className="w-full h-full" src={logo} alt="OTFIV logo" />

@@ -47,11 +47,11 @@ export default function Foreign() {
         showSuccess();
         if (location.pathname === "/superadminpanel/foreign") {
           setTimeout(() => {
-            navigate("/superadminpanel/dashboard");
+            navigate("/superadminpanel/foreign_dashboard");
           }, 300);
         } else {
           setTimeout(() => {
-            navigate("/dashboard");
+            navigate("/foreign_dashboard");
           }, 300);
         }
       },

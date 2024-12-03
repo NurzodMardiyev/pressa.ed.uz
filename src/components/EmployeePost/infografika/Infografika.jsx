@@ -23,6 +23,7 @@ export default function Televediniye1() {
   const toast = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const { Option } = Select;
 
   // const token = JSON.parse(localStorage.getItem("token"));
 
@@ -40,11 +41,11 @@ export default function Televediniye1() {
         // reset();
         if (location.pathname === "/superadminpanel/infografika") {
           setTimeout(() => {
-            navigate("/superadminpanel/dashboard");
+            navigate("/superadminpanel/infografika_dashboard");
           }, 300);
         } else {
           setTimeout(() => {
-            navigate("/dashboard");
+            navigate("/infografika_dashboard");
           }, 300);
         }
       },
@@ -60,7 +61,6 @@ export default function Televediniye1() {
     const values = {
       ...fieldsValue,
       publishDate: fieldsValue["publishDate"],
-      materialType: "Infografika",
     };
     console.log("Received values of form: ", values);
     addPostInfografika.mutate(values);
@@ -134,7 +134,6 @@ export default function Televediniye1() {
                   <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white md:text-xl">
                     Faoliyatga doir axborotni yetkazib berishda akustik va
                     vizual materiallardan foydalanganligi <br />{" "}
-                    <span className="uppercase">infografika</span>
                   </h2>
                 </div>
                 <div className="md:mt-5 grid grid-cols-1 gap-x-6 md:gap-y-2 sm:gap-y-2 sm:grid-cols-6 ">
@@ -150,6 +149,27 @@ export default function Televediniye1() {
                       ]}
                     >
                       <Input className="py-2" />
+                    </Form.Item>
+                  </div>
+                  <div className="sm:col-span-3">
+                    <Form.Item
+                      name="materialType"
+                      label="Material turi "
+                      rules={[
+                        {
+                          required: true,
+                          message: "Iltimos Inputga qiymat kiriting!",
+                        },
+                      ]}
+                    >
+                      <Select
+                        placeholder="Tegishlisini tanlang"
+                        className="h-[41px]"
+                      >
+                        <Option value="Infografika">Infografika</Option>
+                        <Option value="Audio">Audio</Option>
+                        <Option value="Video">Video</Option>
+                      </Select>
                     </Form.Item>
                   </div>
                   <div className="sm:col-span-3">

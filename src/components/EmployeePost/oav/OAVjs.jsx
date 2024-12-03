@@ -48,7 +48,7 @@ export default function OAVjs() {
         showSuccess();
         // reset();
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/oav_dashboard");
         }, 300);
       },
       onError: () => {

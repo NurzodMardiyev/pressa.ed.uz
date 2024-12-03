@@ -10,7 +10,7 @@ export default function Organization() {
   // const queryClient = useQueryClient();
   const toast = useRef(null);
   const navigate = useNavigate();
-
+  const [form] = Form.useForm();
   // const token = JSON.parse(localStorage.getItem("token"));
 
   const queryClient = useQueryClient();
@@ -28,6 +28,7 @@ export default function Organization() {
         // setTimeout(() => {
         //   navigate("/dashboard");
         // }, 300);
+        form.resetFields();
       },
       onError: () => {
         showError();
@@ -41,7 +42,6 @@ export default function Organization() {
     const values = {
       ...fieldsValue,
     };
-    console.log("Received values of form: ", values);
     organization.mutate(values);
   };
   // Submit bosilganda ishlaydigan Funksiya
@@ -72,6 +72,7 @@ export default function Organization() {
         <div className=" w-full">
           <div className="container w-[95%] mx-auto  ">
             <Form
+              form={form}
               name="time_related_controls"
               // {...formItemLayout}
               onFinish={onFinish}

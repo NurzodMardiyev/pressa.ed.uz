@@ -152,7 +152,7 @@ export default function HeaderEmployee() {
   }
   return (
     <div className="dark:bg-gray-800 fixed top-0 bg-slate-100 w-full z-[999] ">
-      <div className="header-wrapper container lg:max-w-[2560px] md:max-w-[1600px]  mx-auto flex justify-between py-4 md:px-5  ">
+      <div className="header-wrapper container lg:max-w-[2560px] md:max-w-[1600px]  mx-auto flex justify-between py-4 md:px-5  w-full">
         <div className="logpSection flex gap-6 items-center ">
           <Link to="/" className="logo h-[50px]  md:">
             <img className="w-full h-full" src={logo} alt="OTFIV logo" />

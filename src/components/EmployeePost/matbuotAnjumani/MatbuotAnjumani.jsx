@@ -31,14 +31,8 @@ const config = {
 export default function MatbuotAnjumaniJS() {
   // const [showItems, setShowItems] = useState([]);
   const toast = useRef(null);
-
+  const { Option } = Select;
   // channels
-  const [mediaItems, setMediaItems] = useState([]);
-  const [tvChannalNames, setTvChannalNames] = useState([]);
-  const [radioChannal, setRadioChannal] = useState([]);
-  const [newspaper, setNewspaper] = useState([]);
-  const [webSite, setWebSite] = useState([]);
-  const [messanger, setMessanger] = useState([]);
   const navigate = useNavigate();
 
   // const token = JSON.parse(localStorage.getItem("token"));
@@ -54,7 +48,7 @@ export default function MatbuotAnjumaniJS() {
         showSuccess();
         // reset();
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/matbuot_dashboard");
         }, 300);
       },
       onError: () => {
@@ -83,7 +77,6 @@ export default function MatbuotAnjumaniJS() {
     const values = {
       ...fieldsValue,
       dateOfEvent: fieldsValue["dateOfEvent"],
-      type: "Matbuot_anjumani",
     };
 
     if (values.tv_channels) {
@@ -286,7 +279,6 @@ export default function MatbuotAnjumaniJS() {
                 <div>
                   <h2 className="text-base font-semibold leading-7 text-gray-900 dark:text-white md:text-xl">
                     Matbuot kotibi tomonidan o‘tkazilgan mediatadbirlar. <br />{" "}
-                    <span className="uppercase">Matbuot anjumani</span>
                   </h2>
                 </div>
                 <div className="md:mt-5 grid grid-cols-1 gap-x-6 md:gap-y-2 sm:gap-y-2 sm:grid-cols-6 ">
@@ -302,6 +294,30 @@ export default function MatbuotAnjumaniJS() {
                       ]}
                     >
                       <Input className="py-2" />
+                    </Form.Item>
+                  </div>
+
+                  <div className="sm:col-span-3">
+                    <Form.Item
+                      name="type"
+                      label="Tadbir turi "
+                      rules={[
+                        {
+                          required: true,
+                          message: "Iltimos Inputga qiymat kiriting!",
+                        },
+                      ]}
+                    >
+                      <Select
+                        placeholder="Tegishlisini tanlang"
+                        className="h-[41px]"
+                      >
+                        <Option value="Matbuot_anjumani">
+                          Matbuot anjumani
+                        </Option>
+                        <Option value="Brifing">Brifing</Option>
+                        <Option value="Press_tur">Press tur</Option>
+                      </Select>
                     </Form.Item>
                   </div>
 

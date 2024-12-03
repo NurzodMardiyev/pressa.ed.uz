@@ -48,7 +48,7 @@ export default function RadioTVAdmin() {
         queryClient.invalidateQueries();
         showSuccess();
         setTimeout(() => {
-          navigate("/superadminpanel/dashboard");
+          navigate("/superadminpanel/radio_dashboard");
         }, 300);
         // reset();
       },

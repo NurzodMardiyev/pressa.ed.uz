@@ -25,7 +25,7 @@ export default function Telegram() {
         queryClient.invalidateQueries();
         showSuccess();
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/telegram_dashboard");
         }, 300);
       },
       onError: () => {

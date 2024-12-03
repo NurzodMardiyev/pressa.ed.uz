@@ -48,7 +48,7 @@ export default function RadioTV() {
         queryClient.invalidateQueries();
         showSuccess();
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/radio_dashboard");
         }, 300);
         // reset();
       },

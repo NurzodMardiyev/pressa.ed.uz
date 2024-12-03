@@ -39,11 +39,11 @@ export default function OnlineEfir() {
         showSuccess();
         if (location.pathname === "/superadminpanel/onlayn_efir") {
           setTimeout(() => {
-            navigate("/superadminpanel/dashboard");
+            navigate("/superadminpanel/onlayn_efir_dashboard");
           }, 300);
         } else {
           setTimeout(() => {
-            navigate("/dashboard");
+            navigate("/onlayn_efir_dashboard");
           }, 300);
         }
       },
@@ -59,7 +59,6 @@ export default function OnlineEfir() {
     const values = {
       ...fieldsValue,
       publishDate: fieldsValue["publishDate"],
-      materialType: "Video",
     };
     console.log(values);
     onlineEent.mutate(values);
@@ -182,7 +181,7 @@ export default function OnlineEfir() {
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="eventDate"
-                      label="oʻtkazilgan sanasi"
+                      label="Oʻtkazilgan sanasi"
                       {...config}
                       className=""
                     >

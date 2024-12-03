@@ -48,7 +48,7 @@ export default function MessengersJSAdmin() {
         showSuccess();
         // reset();
         setTimeout(() => {
-          navigate("/superadminpanel/dashboard");
+          navigate("/superadminpanel/messenger_dashboard");
         }, 300);
       },
       onError: () => {

@@ -36,11 +36,11 @@ export default function MediaProjects() {
         showSuccess();
         if (location.pathname === "/superadminpanel/mediaprojects") {
           setTimeout(() => {
-            navigate("/superadminpanel/dashboard");
+            navigate("/superadminpanel/mediaprojects_dashboard");
           }, 300);
         } else {
           setTimeout(() => {
-            navigate("/dashboard");
+            navigate("/mediaprojects_dashboard");
           }, 300);
         }
       },

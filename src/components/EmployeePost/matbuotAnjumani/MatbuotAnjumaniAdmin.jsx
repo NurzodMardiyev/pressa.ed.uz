@@ -32,6 +32,7 @@ export default function MatbuotAnjumaniJS() {
   // const [showItems, setShowItems] = useState([]);
   const toast = useRef(null);
 
+  const { Option } = Select;
   // channels
 
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ export default function MatbuotAnjumaniJS() {
         showSuccess();
         // reset();
         setTimeout(() => {
-          navigate("/superadminpanel/dashboard");
+          navigate("/superadminpanel/matbuot_anjumani_dashboard");
         }, 300);
       },
       onError: () => {
@@ -70,7 +71,6 @@ export default function MatbuotAnjumaniJS() {
     const values = {
       ...fieldsValue,
       dateOfEvent: fieldsValue["dateOfEvent"],
-      type: "Matbuot_anjumani",
     };
 
     if (values.tv_channels) {
@@ -282,6 +282,29 @@ export default function MatbuotAnjumaniJS() {
                     </Form.Item>
                   </div>
 
+                  <div className="sm:col-span-3">
+                    <Form.Item
+                      name="type"
+                      label="Tadbir turi "
+                      rules={[
+                        {
+                          required: true,
+                          message: "Iltimos Inputga qiymat kiriting!",
+                        },
+                      ]}
+                    >
+                      <Select
+                        placeholder="Tegishlisini tanlang"
+                        className="h-[41px]"
+                      >
+                        <Option value="Matbuot_anjumani">
+                          Matbuot anjumani
+                        </Option>
+                        <Option value="Brifing">Brifing</Option>
+                        <Option value="Press_tur">Press tur</Option>
+                      </Select>
+                    </Form.Item>
+                  </div>
                   <div className="sm:col-span-3">
                     <Form.Item
                       name="stuffs"

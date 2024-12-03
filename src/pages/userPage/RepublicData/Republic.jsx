@@ -70,8 +70,6 @@ export default function Republic() {
     totalMedia += item.mediaEventCount;
   });
 
-  console.log(onlineBroadcast);
-
   let labelsMaterial = [];
   let datasMaterial = [];
   let totalMaterial = 0;

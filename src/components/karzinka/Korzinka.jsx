@@ -956,10 +956,7 @@ export default function Korzinka() {
               cancelText="No"
               onConfirm={() => handleDeleteOnline(item.id)}
             >
-              <Button danger>
-                {" "}
-                <FaTrashAlt />
-              </Button>
+              <Button danger> Delete</Button>
             </Popconfirm>
           ),
         };

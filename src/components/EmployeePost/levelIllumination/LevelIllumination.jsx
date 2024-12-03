@@ -47,11 +47,11 @@ export default function LevelIllumination() {
         showSuccess();
         if (location.pathname === "/superadminpanel/levelIllumination") {
           setTimeout(() => {
-            navigate("/superadminpanel/dashboard");
+            navigate("/superadminpanel/levelIllumination_dashboard");
           }, 300);
         } else {
           setTimeout(() => {
-            navigate("/dashboard");
+            navigate("/levelIllumination_dashboard");
           }, 300);
         }
       },

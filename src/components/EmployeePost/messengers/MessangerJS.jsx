@@ -48,7 +48,7 @@ export default function MessengersJS() {
         showSuccess();
         // reset();
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/messenger_dashboard");
         }, 300);
       },
       onError: () => {

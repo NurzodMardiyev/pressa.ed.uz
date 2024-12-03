@@ -334,7 +334,6 @@ export default function LandingPage() {
 
   // State
   const [currentItems, setCurrentItems] = useState([]);
-  // console.log(currentItems);
   const [currentPage, setCurrentPage] = useState(1);
 
   // `universByRegion` yoki sahifa raqami o‘zgarganda `currentItems` yangilash
@@ -430,7 +429,7 @@ export default function LandingPage() {
         <div className="header-wrapper container md:max-w-10xl flex flex-col justify-center  mx-auto  py-10 md:px-5 px-5 lg:mx-auto">
           <div className="my-3 text-center flex justify-center">
             <h2
-              className="md:text-[22px] text-[20px] font-semibold max-w-[520px]"
+              className="md:text-[22px] text-[20px] font-semibold max-w-[520px] dark:text-white"
               style={{ fontFamily: "Roboto" }}
             >
               Matbuot kotiblari tomonidan qo‘yilgan postlarning umumiy soni

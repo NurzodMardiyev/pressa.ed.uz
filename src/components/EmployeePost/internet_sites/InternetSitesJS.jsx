@@ -48,7 +48,7 @@ export default function InternetSitesJS() {
         showSuccess();
         // reset();
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/internet_sites_dashboard");
         }, 300);
       },
       onError: () => {

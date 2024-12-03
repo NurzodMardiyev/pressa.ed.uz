@@ -48,7 +48,7 @@ export default function Televediniye1() {
         queryClient.invalidateQueries();
         showSuccess();
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/televediniye_dashboard");
         }, 300);
       },
       onError: () => {
@@ -65,7 +65,6 @@ export default function Televediniye1() {
       refetchOnWindowFocus: false,
     }
   );
-  console.log(data);
 
   useEffect(() => {
     if (data) {
