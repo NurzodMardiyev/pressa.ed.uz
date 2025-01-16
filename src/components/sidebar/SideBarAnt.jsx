@@ -15,11 +15,6 @@ import "../../App.css";
 
 const items = [
   {
-    key: "/dashboard",
-    label: "Bosh Sahifa",
-    icon: <MdDashboard />,
-  },
-  {
     key: "sub2",
     label:
       "Faoliyatga doir axborotni OAV, Internet saytlar va ijtimoiy tarmoqlar orqali yoritilishi",

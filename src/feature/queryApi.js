@@ -33,7 +33,7 @@ export const oavIV = {
       if (data === false) {
         window.location.href = "/detailsinfo";
       } else {
-        window.location.href = "/dashboard";
+        window.location.href = "/televediniye_dashboard";
       }
 
       return data;

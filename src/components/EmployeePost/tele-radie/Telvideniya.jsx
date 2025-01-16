@@ -405,6 +405,7 @@ export default function Televediniye1() {
                         <Option value="Respublika">Respublika</Option>
                         <Option value="Hududiy">Hududiy</Option>
                         <Option value="Xorijiy">Xorijiy</Option>
+                        <Option value="Otm">OTM</Option>
                       </Select>
                     </Form.Item>
                   </div>
