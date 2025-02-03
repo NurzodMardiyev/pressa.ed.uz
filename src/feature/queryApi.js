@@ -194,6 +194,7 @@ export const oavIV = {
         headers: {
           Authorization: `${token}`,
           "Content-Type": "application/json",
+          mode: "no-cors",
         },
       });
 
