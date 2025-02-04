@@ -1,1 +1,1 @@
-export const ip = "https://pressa.e-edu.uz/api/";
+export const ip = "https://pressa.e-edu.uz/api";
