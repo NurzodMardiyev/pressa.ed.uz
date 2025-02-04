@@ -1,8 +1,7 @@
 import axios from "axios";
 import { ip } from "../ips";
 
-const IP = ip;
-const api = `http://${IP}:8080/api`;
+const api = ip;
 
 // Tokenni har safar olish uchun
 const getToken = () => {
