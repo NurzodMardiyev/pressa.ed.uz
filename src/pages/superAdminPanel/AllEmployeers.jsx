@@ -705,7 +705,7 @@ export default function AllEmployeers() {
   const handletakeSalary = async (id) => {
     try {
       const response = await fetch(
-        `http://${ip}:8080/api/employee/download-salary?userId=${id}`,
+        `${ip}/employee/download-salary?userId=${id}`,
         {
           method: "GET",
           headers: {
@@ -1202,15 +1202,12 @@ export default function AllEmployeers() {
   // Excel All Employees
   const handleGetEmployeeExcel = async () => {
     try {
-      const response = await fetch(
-        `http://${ip}:8080/api/excel/export-employees`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: `${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${ip}/excel/export-employees`, {
+        method: "GET",
+        headers: {
+          Authorization: `${token}`,
+        },
+      });
 
       if (!response.ok) {
         throw new Error("Faylni yuklab olishda xatolik yuz berdi");
@@ -1235,7 +1232,7 @@ export default function AllEmployeers() {
   const handlePostDownloadExcel = async (id) => {
     try {
       const response = await fetch(
-        `http://${ip}:8080/api/excel/export-employee-posts?employeeId=${id}`,
+        `${ip}/excel/export-employee-posts?employeeId=${id}`,
         {
           method: "GET",
           headers: {
@@ -1266,7 +1263,7 @@ export default function AllEmployeers() {
   const handleMediaEventDownloadExcel = async (id) => {
     try {
       const response = await fetch(
-        `http://${ip}:8080/api/excel/export-employee-media-events?employeeId=${id}`,
+        `${ip}/excel/export-employee-media-events?employeeId=${id}`,
         {
           method: "GET",
           headers: {
@@ -1297,7 +1294,7 @@ export default function AllEmployeers() {
   const handleMaterialDownloadExcel = async (id) => {
     try {
       const response = await fetch(
-        `http://${ip}:8080/api/excel/export-employee-materials?employeeId=${id}`,
+        `${ip}/excel/export-employee-materials?employeeId=${id}`,
         {
           method: "GET",
           headers: {
@@ -1328,7 +1325,7 @@ export default function AllEmployeers() {
   const handleOnlineDownloadExcel = async (id) => {
     try {
       const response = await fetch(
-        `http://${ip}:8080/api/excel/export-employee-broadcasts?employeeId=${id}`,
+        `${ip}/excel/export-employee-broadcasts?employeeId=${id}`,
         {
           method: "GET",
           headers: {
@@ -1359,7 +1356,7 @@ export default function AllEmployeers() {
   const handleMediaProjectDownloadExcel = async (id) => {
     try {
       const response = await fetch(
-        `http://${ip}:8080/api/excel/export-employee-media-projects?employeeId=${id}`,
+        `${ip}/excel/export-employee-media-projects?employeeId=${id}`,
         {
           method: "GET",
           headers: {
@@ -1390,7 +1387,7 @@ export default function AllEmployeers() {
   const handleCoverageDownloadExcel = async (id) => {
     try {
       const response = await fetch(
-        `http://${ip}:8080/api/excel/export-employee-coverages?employeeId=${id}`,
+        `${ip}/excel/export-employee-coverages?employeeId=${id}`,
         {
           method: "GET",
           headers: {
@@ -1421,7 +1418,7 @@ export default function AllEmployeers() {
   const handleForeignDownloadExcel = async (id) => {
     try {
       const response = await fetch(
-        `http://${ip}:8080/api/excel/export-employee-foreign-material?employeeId=${id}`,
+        `${ip}/excel/export-employee-foreign-material?employeeId=${id}`,
         {
           method: "GET",
           headers: {

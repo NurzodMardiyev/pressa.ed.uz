@@ -161,7 +161,7 @@ export default function ForeignDashboard() {
     let baseUrl = "";
 
     if (typePost === "foreign") {
-      baseUrl = `http://${ip}:8080/api/excel/export-employee-foreign-material?employeeId=${employeeId}`;
+      baseUrl = `${ip}/excel/export-employee-foreign-material?employeeId=${employeeId}`;
       typeName = "Foreign";
     }
 

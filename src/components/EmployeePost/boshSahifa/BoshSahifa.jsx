@@ -1094,32 +1094,32 @@ export default function BoshSahifa() {
   const token = JSON.parse(localStorage.getItem("token"));
 
   const handleDownloadPosts = async (typePost) => {
-    let baseUrl = `http://${ip}:8080/api/excel/export-employee-posts?employeeId=${employeeId}`;
+    let baseUrl = `${ip}/excel/export-employee-posts?employeeId=${employeeId}`;
     let typeName = "";
 
     if (typePost === "post") {
-      baseUrl = `http://${ip}:8080/api/excel/export-employee-posts?employeeId=${employeeId}`;
+      baseUrl = `${ip}/excel/export-employee-posts?employeeId=${employeeId}`;
       typeName = "Posts";
     } else if (typePost === "event") {
-      baseUrl = `http://${ip}:8080/api/excel/export-employee-media-events?employeeId=${employeeId}`;
+      baseUrl = `${ip}/excel/export-employee-media-events?employeeId=${employeeId}`;
       typeName = "MediaEvent";
     } else if (typePost === "material") {
-      baseUrl = `http://${ip}:8080/api/excel/export-employee-materials?employeeId=${employeeId}`;
+      baseUrl = `${ip}/excel/export-employee-materials?employeeId=${employeeId}`;
       typeName = "Materials";
     } else if (typePost === "foreign") {
-      baseUrl = `http://${ip}:8080/api/excel/export-employee-foreign-material?employeeId=${employeeId}`;
+      baseUrl = `${ip}/excel/export-employee-foreign-material?employeeId=${employeeId}`;
       typeName = "Foreign";
     } else if (typePost === "online") {
-      baseUrl = `http://${ip}:8080/api/excel/export-employee-broadcasts?employeeId=${employeeId}`;
+      baseUrl = `${ip}/excel/export-employee-broadcasts?employeeId=${employeeId}`;
       typeName = "OnlineBroadcasts";
     } else if (typePost === "project") {
-      baseUrl = `http://${ip}:8080/api/excel/export-employee-media-projects?employeeId=${employeeId}`;
+      baseUrl = `${ip}/excel/export-employee-media-projects?employeeId=${employeeId}`;
       typeName = "MediaProjects";
     } else if (typePost === "coverage") {
-      baseUrl = `http://${ip}:8080/api/excel/export-employee-coverages?employeeId=${employeeId}`;
+      baseUrl = `${ip}/excel/export-employee-coverages?employeeId=${employeeId}`;
       typeName = "Coverages";
     } else if (typePost === "admin") {
-      baseUrl = `http://${ip}:8080/api/excel/export-admin-posts`;
+      baseUrl = `${ip}/excel/export-admin-posts`;
       typeName = "AdminExcel";
     }
 

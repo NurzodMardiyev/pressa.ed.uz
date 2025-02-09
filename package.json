@@ -2,7 +2,6 @@
   "name": "vazirlik",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://10.10.3.157:8080",
   "dependencies": {
     "@ant-design/icons": "^5.4.0",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",

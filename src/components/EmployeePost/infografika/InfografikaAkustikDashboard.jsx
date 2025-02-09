@@ -173,7 +173,7 @@ export default function InfografikaAkustikDashboard() {
     let baseUrl = "";
 
     if (typePost === "material") {
-      baseUrl = `http://${ip}:8080/api/excel/export-employee-materials?employeeId=${employeeId}`;
+      baseUrl = `${ip}/excel/export-employee-materials?employeeId=${employeeId}`;
       typeName = "Materials";
     }
 

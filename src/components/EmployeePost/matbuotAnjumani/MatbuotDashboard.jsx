@@ -251,7 +251,7 @@ export default function MatbuotDashboard() {
     let baseUrl = "";
 
     if (typePost === "event") {
-      baseUrl = `http://${ip}:8080/api/excel/export-employee-media-events?employeeId=${employeeId}`;
+      baseUrl = `${ip}/excel/export-employee-media-events?employeeId=${employeeId}`;
       typeName = "MediaEvent";
     }
 

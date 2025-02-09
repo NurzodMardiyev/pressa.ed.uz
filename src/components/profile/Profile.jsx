@@ -119,7 +119,7 @@ export default function Profile() {
               onCancel={handleCancel}
             >
               <Upload
-                action={`http://${IP}:8080/api/employee/settings/upload-photo`}
+                action={`${ip}/employee/settings/upload-photo`}
                 listType="picture"
                 beforeUpload={beforeUpload} // Uploaddan oldin JPG yoki PNG formatini tekshirish
                 headers={{

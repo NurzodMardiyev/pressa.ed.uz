@@ -152,7 +152,7 @@ export default function MediaProjectsDashboard() {
     let baseUrl = "";
 
     if (typePost === "project") {
-      baseUrl = `http://${ip}:8080/api/excel/export-employee-media-projects?employeeId=${employeeId}`;
+      baseUrl = `${ip}/excel/export-employee-media-projects?employeeId=${employeeId}`;
       typeName = "MediaProjects";
     }
 

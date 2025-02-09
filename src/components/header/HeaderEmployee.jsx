@@ -34,15 +34,12 @@ export default function HeaderEmployee() {
 
   const showDrawer = async () => {
     try {
-      const { data } = await axios.get(
-        `http://${ip}:8080/api/notification/get-all`,
-        {
-          headers: {
-            Authorization: `${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const { data } = await axios.get(`${ip}/notification/get-all`, {
+        headers: {
+          Authorization: `${token}`,
+          "Content-Type": "application/json",
+        },
+      });
       setNotifications(data);
       console.log(data);
       setOpen(true);
@@ -84,15 +81,12 @@ export default function HeaderEmployee() {
 
   const takeNatificationCount = useCallback(async () => {
     try {
-      const { data } = await axios.get(
-        `http://${ip}:8080/api/notification/get-count`,
-        {
-          headers: {
-            Authorization: `${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const { data } = await axios.get(`${ip}/notification/get-count`, {
+        headers: {
+          Authorization: `${token}`,
+          "Content-Type": "application/json",
+        },
+      });
       setNotif(data);
       return data;
     } catch (error) {
@@ -122,7 +116,7 @@ export default function HeaderEmployee() {
   const deleteNotification = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://${ip}:8080/api/notification/delete-notification?notificationId=${id}`,
+        `${ip}/notification/delete-notification?notificationId=${id}`,
         {
           headers: {
             Authorization: `${token}`,

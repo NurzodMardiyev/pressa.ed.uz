@@ -161,7 +161,7 @@ export default function OnlineEfirDashboard() {
     let baseUrl = "";
 
     if (typePost === "online") {
-      baseUrl = `http://${ip}:8080/api/excel/export-employee-broadcasts?employeeId=${employeeId}`;
+      baseUrl = `${ip}/excel/export-employee-broadcasts?employeeId=${employeeId}`;
       typeName = "OnlineBroadcasts";
     }
 

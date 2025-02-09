@@ -168,7 +168,7 @@ export default function LevelIlluminationDashboard() {
     let baseUrl = "";
 
     if (typePost === "coverage") {
-      baseUrl = `http://${ip}:8080/api/excel/export-employee-coverages?employeeId=${employeeId}`;
+      baseUrl = `${ip}/excel/export-employee-coverages?employeeId=${employeeId}`;
       typeName = "Coverages";
     }
 

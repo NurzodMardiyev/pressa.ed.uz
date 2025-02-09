@@ -215,7 +215,7 @@ export default function RadioTvDashboad() {
     let baseUrl = "";
 
     if (typePost === "post") {
-      baseUrl = `http://${ip}:8080/api/excel/export-employee-posts?employeeId=${employeeId}`;
+      baseUrl = `${ip}/excel/export-employee-posts?employeeId=${employeeId}`;
       typeName = "Posts";
     }
 
