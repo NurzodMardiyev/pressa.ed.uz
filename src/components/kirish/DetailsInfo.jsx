@@ -26,8 +26,6 @@ import { Toast } from "primereact/toast";
 import { ip } from "../../ips";
 let index = 0;
 
-const IP = ip;
-
 const config = {
   rules: [
     {
@@ -510,7 +508,7 @@ export default function DetailsInfo() {
 
                   <div className="sm:col-span-3">
                     <Upload
-                      action={`http://${IP}:8080/api/employee/settings/upload-photo`}
+                      action={`${ip}/employee/settings/upload-photo`}
                       listType="picture"
                       beforeUpload={beforeUpload} // Uploaddan oldin JPG yoki PNG formatini tekshirish
                       headers={{
@@ -1046,7 +1044,7 @@ export default function DetailsInfo() {
                     >
                       <div className="flex gap-1 ">
                         <Upload
-                          action={`http://${IP}:8080/api/employee/average-salary-upload`}
+                          action={`${ip}/employee/average-salary-upload`}
                           headers={{
                             Authorization: `${token}`, // Headerlarda tokenni qoʻshamiz
                           }}
