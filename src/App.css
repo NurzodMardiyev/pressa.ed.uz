@@ -87,14 +87,17 @@
   background-color: #474f5c !important;
 }
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light:not(
     .ant-menu-horizontal
   )
   .ant-menu-item:not(.ant-menu-item-selected),
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light
   .ant-menu-submenu-title,
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light
   .ant-menu-item:not(.ant-menu-item-selected):not(
     .ant-menu-submenu-selected
@@ -102,12 +105,14 @@
   color: #f1f1f1 !important;
 }
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light
   .ant-menu-item-selected {
   background-color: #474f5c !important;
   color: #fff !important;
 }
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light:not(
     .ant-menu-horizontal
   )
@@ -116,6 +121,7 @@
   color: #fff !important;
 }
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq).ant-menu-light:not(
     .ant-menu-horizontal
   )
@@ -134,12 +140,14 @@
 }
 .dark .ant-input::placeholder,
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq).ant-picker-dropdown
   .ant-picker-cell:hover:not(.ant-picker-cell-selected):not(
     .ant-picker-cell-range-start
   ):not(.ant-picker-cell-range-end)
   .ant-picker-cell-inner,
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq).ant-form-item
   .ant-form-item-label
   > label {
@@ -157,7 +165,7 @@
 .ant-select-selector {
   margin: 0 auto !important;
   width: 99% !important;
-  border: none !important;
+  border: none;
 }
 .ant-select-selector:focus {
   border: 0 !important;
@@ -167,6 +175,7 @@
   background-color: #374151 !important;
 }
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq).ant-select-dropdown
   .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
   background-color: #2d3541 !important;
@@ -176,7 +185,7 @@
 .dark .react-datepicker__day-names,
 .dark .react-datepicker__day-names,
 .dark .react-datepicker__month-container,
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-btn-default {
+.dark .App :where(.css-dev-only-do-not-override-11lehqq).ant-btn-default {
   background-color: #374151 !important;
   color: #fff !important;
 }
@@ -187,32 +196,45 @@
 .dark .react-datepicker__month-container {
   color: #fff !important;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-select-multiple
+.App
+  :where(.css-dev-only-do-not-override-11lehqq).ant-select-multiple
   .ant-select-selection-overflow {
   padding-top: 3px !important;
   padding-bottom: 3px !important;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-menu-inline.ant-menu-root
+.App
+  :where(.css-dev-only-do-not-override-11lehqq).ant-menu-inline.ant-menu-root
   .ant-menu-item
   > .ant-menu-title-content {
   font-size: 15px !important;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-menu-inline.ant-menu-root
+.App
+  :where(.css-dev-only-do-not-override-11lehqq).ant-menu-inline.ant-menu-root
   .ant-menu-submenu-title
   > .ant-menu-title-content {
   font-size: 15px !important;
   font-weight: 500 !important;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-menu
+.App
+  :where(.css-dev-only-do-not-override-11lehqq).ant-menu
   .ant-menu-item
   .ant-menu-item-icon,
-:where(.css-dev-only-do-not-override-11lehqq).ant-menu
+.App
+  :where(.css-dev-only-do-not-override-11lehqq).ant-menu
   .ant-menu-submenu-title
   .ant-menu-item-icon {
   font-size: 18px !important;
 }
+.App :where(.css-dev-only-do-not-override-11lehqq).ant-btn.ant-btn-block {
+  height: 41px !important;
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq).ant-table-wrapper
   .ant-table.ant-table-bordered
   > .ant-table-container
@@ -222,6 +244,7 @@
   > tr
   > th,
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq).ant-table-wrapper
   .ant-table-tbody
   .ant-table-row
@@ -229,25 +252,31 @@
   background-color: #374151 !important;
 }
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq).ant-table-wrapper
   .ant-table-tbody
   > tr
   > th,
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq)[class^="ant-table"]
   [class^="ant-table"],
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq)[class*=" ant-table"]
   [class^="ant-table"],
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq).ant-pagination
   .ant-pagination-item,
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq).ant-pagination
   .ant-pagination-item
   > a,
-.dark :where(.css-dev-only-do-not-override-11lehqq).ant-picker-outlined,
+.dark .App :where(.css-dev-only-do-not-override-11lehqq).ant-picker-outlined,
 .dark
+  .App
   :where(.css-dev-only-do-not-override-11lehqq).ant-picker-dropdown
   .ant-picker-panel-container {
   background-color: #374151 !important;
@@ -259,26 +288,29 @@
   /* background-color: #333;  Dark mode hover fon rangi */
 }
 .dark
+  .App
   :where(
     .css-dev-only-do-not-override-11lehqq
   ).ant-input-outlined.ant-input-status-warning:not(.ant-input-disabled) {
   background: inherit !important;
 }
 .dark
+  .App
   :where(
     .css-dev-only-do-not-override-11lehqq
   ).ant-input-outlined.ant-input-status-error:not(.ant-input-disabled) {
   background: #374151 !important;
 }
 /* DetailsInfo  */
-:where(.css-dev-only-do-not-override-11lehqq).ant-row {
+.App :where(.css-dev-only-do-not-override-11lehqq).ant-row {
   display: flex !important;
   flex-direction: column !important;
   justify-content: start !important;
   align-items: start !important;
 }
 
-:where(.css-dev-only-do-not-override-11lehqq).ant-form-horizontal
+.App
+  :where(.css-dev-only-do-not-override-11lehqq).ant-form-horizontal
   .ant-form-item-label[class*="-24 "]
   + .ant-form-item-control {
   width: 100% !important;
@@ -300,38 +332,44 @@
   box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1) !important;
 }
 
-:where(.css-dev-only-do-not-override-11lehqq).ant-steps
+.App
+  :where(.css-dev-only-do-not-override-11lehqq).ant-steps
   .ant-steps-item-process
   .ant-steps-item-icon {
   background-color: #4ca852 !important;
   border-color: #4ca852 !important;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-steps
+.App
+  :where(.css-dev-only-do-not-override-11lehqq).ant-steps
   .ant-steps-item-finish
   .ant-steps-item-icon {
   background-color: #d9ffdc !important;
   border-color: #4ca852 !important;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-steps
+.App
+  :where(.css-dev-only-do-not-override-11lehqq).ant-steps
   .ant-steps-item-finish
   .ant-steps-item-icon
   > .ant-steps-icon {
   color: #4ca852 !important;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-steps
+.App
+  :where(.css-dev-only-do-not-override-11lehqq).ant-steps
   .ant-steps-item-finish
   > .ant-steps-item-container
   > .ant-steps-item-content
   > .ant-steps-item-title::after {
   background-color: #4ca852 !important;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-btn-default:not(
+.App
+  :where(.css-dev-only-do-not-override-11lehqq).ant-btn-default:not(
     :disabled
   ):not(.ant-btn-disabled):hover {
   color: #4ca852 !important;
   border-color: #4ca852 !important;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-form-horizontal
+.App
+  :where(.css-dev-only-do-not-override-11lehqq).ant-form-horizontal
   .ant-form-item-control {
   flex: 1 0 !important;
   width: 100% !important;
@@ -344,17 +382,21 @@
   padding-top: 7px !important;
 }
 /* #d9d9d9  box-shadow: 0 0 0 2px rgba(5, 145, 255, 0.1) */
-:where(.css-dev-only-do-not-override-11lehqq).ant-upload-wrapper .ant-upload {
+.App
+  :where(.css-dev-only-do-not-override-11lehqq).ant-upload-wrapper
+  .ant-upload {
   width: 100% !important;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-radio-group {
+.App :where(.css-dev-only-do-not-override-11lehqq).ant-radio-group {
   width: 100% !important;
   display: flex !important;
 }
-:where(
+.App
+  :where(
     .css-dev-only-do-not-override-11lehqq
   ).ant-radio-button-wrapper:first-child,
-:where(
+.App
+  :where(
     .css-dev-only-do-not-override-11lehqq
   ).ant-radio-button-wrapper:last-child {
   height: 41px !important;
@@ -362,11 +404,13 @@
   display: flex !important;
   justify-content: center !important;
 }
-:where(
+.App
+  :where(
     .css-dev-only-do-not-override-11lehqq
   ).ant-radio-button-wrapper:first-child
   span,
-:where(
+.App
+  :where(
     .css-dev-only-do-not-override-11lehqq
   ).ant-radio-button-wrapper:last-child
   span {
@@ -375,11 +419,14 @@
 .ant-select-selection-overflow-item-suffix {
   padding: 6.5px !important;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-picker .ant-picker-input {
+.App
+  :where(.css-dev-only-do-not-override-11lehqq).ant-picker
+  .ant-picker-input {
   padding: 1px !important;
 }
-:where(.css-dev-only-do-not-override-11lehqq).ant-btn {
+.App :where(.css-dev-only-do-not-override-11lehqq).ant-btn {
   padding: 19.5px 30px !important;
+  height: 41px !important;
 }
 
 /* ---------------------------- */
@@ -436,6 +483,7 @@
   display: none !important;
 }
 .dark
+  .App
   :where(
     .css-dev-only-do-not-override-11lehqq
   ).ant-table-wrapper.ant-table-filter-trigger:hover {
