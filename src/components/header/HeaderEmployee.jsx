@@ -135,9 +135,7 @@ export default function HeaderEmployee() {
   if (isLoading)
     return (
       <div className="absolute w-full h-[100vh] top-0 left-0 flex items-center justify-center">
-        <Flex>
-          <Spin size="large" />
-        </Flex>
+        <Flex>{/* <Spin size="large" /> */}</Flex>
       </div>
     );
 
@@ -145,7 +143,7 @@ export default function HeaderEmployee() {
     navigate("/");
   }
   return (
-    <div className="dark:bg-gray-800 fixed top-0 bg-slate-100 w-full z-[999] ">
+    <div className="dark:bg-gray-800 fixed top-0 bg-slate-100 w-full z-[999] shadow-md">
       <div className="header-wrapper container lg:max-w-[2560px] md:max-w-[1600px]  mx-auto flex justify-between py-4 md:px-5  w-full">
         <div className="logpSection flex gap-6 items-center ">
           <Link to="/" className="logo h-[50px]  md:">
@@ -259,9 +257,7 @@ export default function HeaderEmployee() {
             })}
           </Drawer>
           <div className="darkMode flex items-center">
-            <Flowbite>
-              <DarkThemeToggle />
-            </Flowbite>
+            <Flowbite>{/* <DarkThemeToggle /> */}</Flowbite>
           </div>
           <Menu as="div" className="relative md:ml-0 md:mr-4  mx-3">
             <div>

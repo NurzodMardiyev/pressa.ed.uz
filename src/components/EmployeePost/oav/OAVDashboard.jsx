@@ -36,9 +36,8 @@ export default function OAVDashboard() {
       rowScope: "row",
     },
     {
-      title: locationRole
-        ? "Koʻrsatuvda qatnashgan vazirlik vakilining F.I.O"
-        : "Koʻrsatuvda qatnashgan OTM vakilining F.I.O",
+      title:
+        "Bosma OAVda E’lon qilingan material muallifi/ishtirokchisining F.I.O",
       dataIndex: "fio",
       onCell: sharedOnCell,
     },
@@ -53,17 +52,12 @@ export default function OAVDashboard() {
       onCell: sharedOnCell,
     },
     {
-      title: "OAV nomi",
-      dataIndex: "tvName",
-      onCell: sharedOnCell,
-    },
-    {
-      title: "Dastur nomi",
+      title: "Gazeta/Jurnal nomi",
       dataIndex: "appName",
       onCell: sharedOnCell,
     },
     {
-      title: "Tadbir oʻtkazilgan sanasi va vaqti",
+      title: "E’lon qilingan sanasi",
       dataIndex: "date",
       onCell: sharedOnCell,
     },
