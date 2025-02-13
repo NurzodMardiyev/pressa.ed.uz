@@ -496,6 +496,7 @@ export default function DetailsInfo() {
                                 block
                                 icon={<PlusOutlined />}
                                 className="py-2"
+                                style={{ heigth: "41px", width: "100%" }}
                               >
                                 Qoʻshish
                               </Button>
@@ -541,6 +542,7 @@ export default function DetailsInfo() {
                           type="bg-[#73d13d]"
                           icon={<UploadOutlined />}
                           className="w-full bg-inherit text-[#333] border border-[#D9D9D9] hover:text-[#4CA852] hover:border-[#4CA852]"
+                          style={{ heigth: "41px", width: "100%" }}
                         >
                           Yuklash
                         </Button>
@@ -727,12 +729,13 @@ export default function DetailsInfo() {
                                 />
                               </Space>
                             ))}
-                            <Form.Item>
+                            <Form.Item className="col-span-1">
                               <Radio.Group
                                 block
                                 options={optionsAOKA}
                                 optionType="button"
                                 buttonStyle="solid"
+                                style={{ height: 41, width: "100%" }}
                                 onChange={(e) => {
                                   setRadioValue(e.target.value); // Radio qiymatini saqlab qoʻyamiz
                                   if (e.target.value === "ha") {
