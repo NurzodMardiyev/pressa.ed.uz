@@ -88,9 +88,9 @@ export default function DetailsInfo() {
       return false;
     }
 
-    const isLt2M = file.size / 1024 / 1024 < 2; // 2MB dan katta fayllarni yuklashni oldini olish
+    const isLt2M = file.size / 1024 / 1024 < 1; // 2MB dan katta fayllarni yuklashni oldini olish
     if (!isLt2M) {
-      message.error("Rasm hajmi 2MB dan oshmasligi kerak!");
+      message.error("Rasm hajmi 1MB dan oshmasligi kerak!");
       return false;
     }
 

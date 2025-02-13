@@ -1042,6 +1042,11 @@ export default function EditProfile() {
                           headers={{
                             Authorization: `${token}`, // Headerlarda tokenni qoʻshamiz
                           }}
+                          style={{
+                            width: "50%",
+                            height: "39px",
+                            padding: "4px auto",
+                          }}
                           name="averageSalaryFile"
                           className="w-1/2"
                           onChange={(info) => {
