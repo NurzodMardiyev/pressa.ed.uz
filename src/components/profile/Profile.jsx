@@ -194,7 +194,7 @@ export default function Profile() {
             </div>
             <div className="flex-1 mt-4">
               <span className="mb-2 text-[14px] inline-block">
-                Tashash shahri
+                Yashash shahri
               </span>
               <p className="px-4 py-2 bg-[#F9F9F9] dark:bg-gray-700 rounded-md font-semibold">
                 {data?.user?.organization?.province}
@@ -368,7 +368,7 @@ export default function Profile() {
               to="/editprofile"
               className="px-8 py-2 rounded bg-green-400 text-white float-right my-4"
             >
-              oʻzgartirish
+              Oʻzgartirish
             </Link>
           </div>
         </div>
