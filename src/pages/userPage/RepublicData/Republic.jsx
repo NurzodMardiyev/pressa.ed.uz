@@ -4,24 +4,8 @@ import { Doughnut } from "react-chartjs-2";
 import { contextOAIV } from "../../../context/ContextApi";
 
 // Ma’lumotlar
-const data = {
-  labels: ["Data 1", "Data 2", "Data 3", "Data 4", "Data 5"], // Kesim nomlari
-  datasets: [
-    {
-      data: [300, 50, 100, 80, 70], // Har bir kesim qiymati
-      backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50", "#FF9F40"], // Ranglar
-      hoverBackgroundColor: [
-        "#FF6384",
-        "#36A2EB",
-        "#FFCE56",
-        "#4CAF50",
-        "#FF9F40",
-      ],
-    },
-  ],
-};
+
 // o‘rtadagi umumiy qiymatni chiqarish
-const total = 343;
 
 export default function Republic() {
   const {
@@ -275,7 +259,7 @@ export default function Republic() {
       <div className="md:col-span-3 col-span-1">
         <div
           style={{
-            width: "104.5%",
+            width: "105%",
             margin: "0 auto",
             position: "relative",
           }}

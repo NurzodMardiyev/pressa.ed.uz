@@ -543,6 +543,7 @@ export default function DetailsInfo() {
                           icon={<UploadOutlined />}
                           className="w-full bg-inherit text-[#333] border border-[#D9D9D9] hover:text-[#4CA852] hover:border-[#4CA852]"
                           style={{ heigth: "41px", width: "100%" }}
+                          block
                         >
                           Yuklash
                         </Button>
