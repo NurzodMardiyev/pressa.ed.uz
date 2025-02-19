@@ -346,7 +346,7 @@ export default function HeaderEmployee() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
                       >
-                        Your Profile
+                        Sizning hisobingiz
                       </Link>
                     </MenuItem>
                     <MenuItem>
@@ -354,7 +354,7 @@ export default function HeaderEmployee() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
                       >
-                        Settings
+                        Sozlamalar
                       </Link>
                     </MenuItem>
                     <MenuItem>
@@ -362,7 +362,7 @@ export default function HeaderEmployee() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100"
                       >
-                        Sign out
+                        Chiqish
                       </Link>
                     </MenuItem>
                   </MenuItems>
@@ -393,7 +393,7 @@ export default function HeaderEmployee() {
                     to="/profile"
                     className="block px-4 py-2 text-sm dark:text-white hover:dark:bg-gray-700 text-gray-700 data-[focus]:bg-gray-100 dark:data-[focus]:bg-gray-700"
                   >
-                    Your Profile
+                    Sizning hisobingiz
                   </Link>
                 </MenuItem>
                 <MenuItem>
@@ -401,15 +401,15 @@ export default function HeaderEmployee() {
                     href="#"
                     className="block px-4 py-2 text-sm dark:text-white hover:dark:bg-gray-700 text-gray-700 data-[focus]:bg-gray-100 dark:data-[focus]:bg-gray-700"
                   >
-                    Settings
+                    Sozlamalar
                   </Link>
                 </MenuItem>
                 <MenuItem>
                   <Link
                     href="#"
-                    className="block px-4 py-2 text-sm dark:text-white hover:dark:bg-gray-700 text-gray-700 data-[focus]:bg-gray-100 dark:data-[focus]:bg-gray-700"
+                    className="block px-4 text-red-500 py-2 text-sm dark:text-white hover:dark:bg-gray-700  data-[focus]:bg-gray-100 dark:data-[focus]:bg-gray-700"
                   >
-                    Sign out
+                    Chiqish
                   </Link>
                 </MenuItem>
               </MenuItems>
