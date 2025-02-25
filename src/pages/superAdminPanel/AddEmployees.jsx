@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Button, Divider, Flex, Form, Input, Select, Space, Spin } from "antd";
+import React, { useRef } from "react";
+import { Button, Form, Input } from "antd";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { oavIV } from "../../feature/queryApi";
-import { PlusOutlined } from "@ant-design/icons";
 import { Toast } from "primereact/toast";
 
 export default function AddEmployees() {

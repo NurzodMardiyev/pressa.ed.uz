@@ -66,7 +66,7 @@ export default function AuthSignUp() {
             userRole.forEach((item) => {
               localStorage.setItem("role", item.authority);
               if (item.authority === "ROLE_ADMIN") {
-                navigate("/superadminpanel/dashboard");
+                navigate("/superadminpanel/televediniye_dashboard");
               } else if (item.authority === "ROLE_EMPLOYEE") {
                 setTimeout(() => {
                   const token = JSON.parse(localStorage.getItem("token"));

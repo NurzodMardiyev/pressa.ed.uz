@@ -9,7 +9,6 @@ import "primereact/resources/primereact.min.css"; // PrimeReact
 import "primeicons/primeicons.css"; // icon
 import EmployeePanel from "./pages/employee/EmployeePanel";
 // import Televediniye from "./components/EmployeePost/tele-radie/Teleradio";
-import BoshSahifa from "./components/EmployeePost/boshSahifa/BoshSahifa";
 import DetailsInfo from "./components/kirish/DetailsInfo";
 import Televediniye1 from "./components/EmployeePost/tele-radie/Telvideniya";
 import Infografika from "./components/EmployeePost/infografika/Infografika";
@@ -36,7 +35,6 @@ import OAVjsAdmin from "./components/EmployeePost/oav/OAVjsAdmin";
 import InternetSitesJSAdmin from "./components/EmployeePost/internet_sites/InternetSitesJSAdmin";
 import MessengersJSAdmin from "./components/EmployeePost/messengers/messangerJSAdmin";
 import MatbuotAnjumaniJSAdmin from "./components/EmployeePost/matbuotAnjumani/MatbuotAnjumaniAdmin";
-import ProtectedRoute from "./security/ProtectedRoute";
 import RoleBasedRoute from "./security/RoleBasedRoute";
 import Error from "./pages/serverError/Error";
 import Foreign from "./components/EmployeePost/foriegn/Foreign";
@@ -130,7 +128,6 @@ function App() {
             />
             <Route path="addemployees" element={<AddEmployees />} />
             <Route path="korzinka" element={<Korzinka />} />
-            <Route path="dashboard" element={<BoshSahifa />} />
           </Route>
         </Route>
         <Route path="/" element={<EmployeePanel />}>
@@ -176,7 +173,6 @@ function App() {
               path="/onlayn_efir_dashboard"
               element={<OnlineEfirDashboard />}
             />
-            <Route path="/dashboard" element={<BoshSahifa />} />
             <Route path="/telegram" element={<Telegram />} />
             <Route path="/telegram_dashboard" element={<TelegramDashboard />} />
             <Route path="/profile" element={<Profile />} />

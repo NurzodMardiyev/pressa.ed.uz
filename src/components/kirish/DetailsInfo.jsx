@@ -400,6 +400,7 @@ export default function DetailsInfo() {
                         <Option value="Xorazm">Xorazm</Option>
                         <Option value="Buxoro">Buxoro</Option>
                         <Option value="Navoiy">Navoiy</Option>
+                        <Option value="Sirdaryo">Sirdaryo</Option>
                         <Option value="Qoraqalpogiston">
                           Qoraqalpog‘iston respublikasi
                         </Option>
