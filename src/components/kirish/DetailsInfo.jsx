@@ -388,7 +388,10 @@ export default function DetailsInfo() {
                         className="h-[41px]"
                       >
                         <Option value="Toshkent" className="">
-                          Toshkent
+                          Toshkent shahri
+                        </Option>
+                        <Option value="Toshkent viloyati" className="">
+                          Toshkent viloyati
                         </Option>
                         <Option value="Samarqand">Samarqand</Option>
                         <Option value="Jizzax">Jizzax</Option>

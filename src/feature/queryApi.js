@@ -59,7 +59,7 @@ export const oavIV = {
         }
       );
 
-      window.location.href = "/dashboard";
+      window.location.href = "/televediniye_dashboard";
 
       return data;
     } catch (error) {

@@ -382,7 +382,10 @@ export default function EditProfile() {
                         className="h-[41px]"
                       >
                         <Option value="Toshkent" className="">
-                          Toshkent
+                          Toshkent shahri
+                        </Option>
+                        <Option value="Toshkent viloyati">
+                          Toshkent viloyati
                         </Option>
                         <Option value="Samarqand">Samarqand</Option>
                         <Option value="Jizzax">Jizzax</Option>
@@ -394,6 +397,7 @@ export default function EditProfile() {
                         <Option value="Xorazm">Xorazm</Option>
                         <Option value="Buxoro">Buxoro</Option>
                         <Option value="Navoiy">Navoiy</Option>
+                        <Option value="Sirdaryo">Sirdaryo</Option>
                         <Option value="Qoraqalpogiston">
                           Qoraqalpog‘iston respublikasi
                         </Option>
