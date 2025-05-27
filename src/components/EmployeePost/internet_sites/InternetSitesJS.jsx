@@ -244,6 +244,7 @@ export default function InternetSitesJS() {
                             </Space>
                           </>
                         )}
+                        showSearch
                         options={items2.map((item) => ({
                           label: item,
                           value: item,
@@ -295,6 +296,7 @@ export default function InternetSitesJS() {
                             </Space>
                           </>
                         )}
+                        showSearch
                         options={items1.map((item) => ({
                           label: item,
                           value: item,

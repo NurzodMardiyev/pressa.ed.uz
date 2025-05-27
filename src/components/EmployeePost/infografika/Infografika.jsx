@@ -231,6 +231,7 @@ export default function Televediniye1() {
                             </Space>
                           </>
                         )}
+                        showSearch
                         options={items1?.map((item) => ({
                           label: item,
                           value: item,

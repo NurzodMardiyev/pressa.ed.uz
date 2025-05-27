@@ -223,6 +223,7 @@ export default function MediaProjects() {
                             </Space>
                           </>
                         )}
+                        showSearch
                         options={items.map((item) => ({
                           label: item,
                           value: item,
@@ -274,6 +275,7 @@ export default function MediaProjects() {
                             </Space>
                           </>
                         )}
+                        showSearch
                         options={items1.map((item) => ({
                           label: item,
                           value: item,

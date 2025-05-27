@@ -213,6 +213,7 @@ export default function LevelIllumination() {
                             </Space>
                           </>
                         )}
+                        showSearch
                         options={items.map((item) => ({
                           label: item,
                           value: item,
@@ -293,6 +294,7 @@ export default function LevelIllumination() {
                         }}
                         placeholder="Tegishlisini tanlang"
                         // defaultValue={[]}
+                        showSearch
                         options={[
                           {
                             label: "Televideniye",

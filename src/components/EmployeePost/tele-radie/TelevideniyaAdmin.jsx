@@ -171,6 +171,11 @@ export default function TelevediniyeAdmin() {
   const onNameChange2 = (event) => {
     setName2(event.target.value);
   };
+
+  const onSearch = (value) => {
+    console.log("search:", value);
+  };
+
   const addItem2 = (e) => {
     e.preventDefault();
     setItems2([...items2, name2 || `New item ${index++}`]);
@@ -275,6 +280,7 @@ export default function TelevediniyeAdmin() {
                             </Space>
                           </>
                         )}
+                        showSearch
                         options={items2.map((item) => ({
                           label: item,
                           value: item,
@@ -326,6 +332,7 @@ export default function TelevediniyeAdmin() {
                             </Space>
                           </>
                         )}
+                        showSearch
                         options={items.map((item) => ({
                           label: item,
                           value: item,
@@ -377,6 +384,7 @@ export default function TelevediniyeAdmin() {
                             </Space>
                           </>
                         )}
+                        showSearch
                         options={items1.map((item) => ({
                           label: item,
                           value: item,

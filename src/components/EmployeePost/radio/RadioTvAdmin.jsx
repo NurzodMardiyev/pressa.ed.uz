@@ -278,6 +278,7 @@ export default function RadioTVAdmin() {
                             </Space>
                           </>
                         )}
+                        showSearch
                         options={items2.map((item) => ({
                           label: item,
                           value: item,
@@ -329,6 +330,7 @@ export default function RadioTVAdmin() {
                             </Space>
                           </>
                         )}
+                        showSearch
                         options={items.map((item) => ({
                           label: item,
                           value: item,
@@ -380,6 +382,7 @@ export default function RadioTVAdmin() {
                             </Space>
                           </>
                         )}
+                        showSearch
                         options={items1.map((item) => ({
                           label: item,
                           value: item,

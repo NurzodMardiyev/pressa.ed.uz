@@ -261,6 +261,7 @@ export default function MessengersJSAdmin() {
                             </Space>
                           </>
                         )}
+                        showSearch
                         options={items2.map((item) => ({
                           label: item,
                           value: item,

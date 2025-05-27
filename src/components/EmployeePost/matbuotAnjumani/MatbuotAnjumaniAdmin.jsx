@@ -484,6 +484,7 @@ export default function MatbuotAnjumaniJS() {
                                         </Space>
                                       </>
                                     )}
+                                    showSearch
                                     options={items1.map((item) => ({
                                       label: item,
                                       value: item,
@@ -610,6 +611,7 @@ export default function MatbuotAnjumaniJS() {
                                         </Space>
                                       </>
                                     )}
+                                    showSearch
                                     options={items3.map((item) => ({
                                       label: item,
                                       value: item,
@@ -736,6 +738,7 @@ export default function MatbuotAnjumaniJS() {
                                         </Space>
                                       </>
                                     )}
+                                    showSearch
                                     options={items4.map((item) => ({
                                       label: item,
                                       value: item,
@@ -862,6 +865,7 @@ export default function MatbuotAnjumaniJS() {
                                         </Space>
                                       </>
                                     )}
+                                    showSearch
                                     options={items5.map((item) => ({
                                       label: item,
                                       value: item,
@@ -988,6 +992,7 @@ export default function MatbuotAnjumaniJS() {
                                         </Space>
                                       </>
                                     )}
+                                    showSearch
                                     options={items6.map((item) => ({
                                       label: item,
                                       value: item,
